@@ -1,0 +1,434 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Parallel Reduction 3D - The CubeCL Book 🧊</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The CubeCL Book 🧊</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="parallel-reduction-3d"><a class="header" href="#parallel-reduction-3d">Parallel reduction 3D</a></h1>
+<p>The purpose of this example is to demonstrate how to perform a parallel reduction operation on a 3D tensor using CubeCL. The reduction will sum the elements along the last dimension (depth) of the tensor, resulting in a 2D tensor.</p>
+<h2 id="a-first-try"><a class="header" href="#a-first-try">A first try</a></h2>
+<p>We will start with a simple implementation of a parallel reduction on a 3D tensor. The goal is to reduce the tensor along the last dimension (depth) by summing the elements. This will result in a 2D tensor where each element is the sum of the corresponding elements in the depth dimension.</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::marker::PhantomData;
+</span><span class="boring">
+</span><span class="boring">use cubecl::benchmark::{Benchmark, TimingMethod};
+</span><span class="boring">use cubecl::{future, prelude::*};
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+</span><span class="boring">    input_shape: Vec&lt;usize&gt;,
+</span><span class="boring">    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+</span><span class="boring">    _f: PhantomData&lt;F&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">const LINE_SIZE: u32 = 4;
+</span><span class="boring">
+</span><span class="boring">impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+</span><span class="boring">    type Input = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">    type Output = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">
+</span><span class="boring">    fn prepare(&amp;self) -&gt; Self::Input {
+</span><span class="boring">        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn name(&amp;self) -&gt; String {
+</span><span class="boring">        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn sync(&amp;self) {
+</span><span class="boring">        future::block_on(self.client.sync())
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+
+        unsafe {
+            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+                &amp;self.client,
+                CubeCount::Static(1, 1, 1),
+                CubeDim::new(self.input_shape[0] as u32, self.input_shape[1] as u32, 1),
+                input.into_tensor_arg(LINE_SIZE as u8),
+                output.into_tensor_arg(LINE_SIZE as u8),
+            );
+        }
+
+        output
+    }
+}
+
+// Note the addition of the [Line] struct inside the tensor to guarantee that the data is contiguous and can be parallelized.
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;Line&lt;F&gt;&gt;, output: &amp;mut Tensor&lt;Line&lt;F&gt;&gt;) {
+    let mut acc = Line::new(F::new(0.0f32)); // A [Line] is also necessary here
+    for i in 0..input.shape(2) / LINE_SIZE {
+        acc = acc + input[UNIT_POS_X * input.stride(0) + UNIT_POS_Y * input.stride(1) + i];
+    }
+    output[UNIT_POS_X * input.stride(0) + UNIT_POS_Y] = acc;
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(&amp;device);
+</span><span class="boring">
+</span><span class="boring">    let bench1 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 256, 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">    let bench2 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 64, 4096],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for bench in [bench1, bench2] {
+</span><span class="boring">        println!("{}", bench.name());
+</span><span class="boring">        println!("{}", bench.run(TimingMethod::System));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<p>Let's try to run this code.</p>
+<pre><code>wgpu error: Validation Error
+
+Caused by:
+  In Device::create_compute_pipeline, label = 'reduce_matrix_f32'
+    Error matching shader requirements against the pipeline
+      Shader entry point's workgroup size [64, 256, 1] (16384 total invocations) must be less or equal to the per-dimension limit [1024, 1024, 1024] and the total invocation limit 1024
+</code></pre>
+<p>What happened? The error message indicates that the workgroup size exceeds the limits imposed by the WebGPU backend. The total number of invocations (64 * 256 * 1 = 16384) exceeds the maximum allowed invocations per workgroup, which is 1024. In other words, the CubeDim size is too large for the GPU to handle. We needs to find another way to parallelize the reduction operation without exceeding the limits.</p>
+<h2 id="a-better-approach"><a class="header" href="#a-better-approach">A better approach</a></h2>
+<p>To address the issue, we will parallelize with the <code>CUBE_COUNT</code> and <code>CUBE_POS</code> variables, which will allow us to launch multiple invocation in parallel without exceeding the limits of the <code>CUBE_DIM</code>. The <code>CUBE_COUNT</code> variable will determine how many invocation we will launch, and the <code>CUBE_POS</code> variable will determine the position of each invocation in the 3D tensor.</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::marker::PhantomData;
+</span><span class="boring">
+</span><span class="boring">use cubecl::benchmark::{Benchmark, TimingMethod};
+</span><span class="boring">use cubecl::{future, prelude::*};
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+</span><span class="boring">    input_shape: Vec&lt;usize&gt;,
+</span><span class="boring">    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+</span><span class="boring">    _f: PhantomData&lt;F&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">const LINE_SIZE: u32 = 4;
+</span><span class="boring">
+</span><span class="boring">impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+</span><span class="boring">    type Input = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">    type Output = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">
+</span><span class="boring">    fn prepare(&amp;self) -&gt; Self::Input {
+</span><span class="boring">        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn name(&amp;self) -&gt; String {
+</span><span class="boring">        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn sync(&amp;self) {
+</span><span class="boring">        future::block_on(self.client.sync())
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+
+        unsafe {
+            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+                &amp;self.client,
+                CubeCount::Static(self.input_shape[0] as u32, 1, 1),
+                CubeDim::new(self.input_shape[1] as u32, 1, 1),
+                input.into_tensor_arg(LINE_SIZE as u8),
+                output.into_tensor_arg(LINE_SIZE as u8),
+            );
+        }
+
+        output
+    }
+}
+
+// Note the addition of the [Line] struct inside the tensor to guarantee that the data is contiguous and can be parallelized.
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;Line&lt;F&gt;&gt;, output: &amp;mut Tensor&lt;Line&lt;F&gt;&gt;) {
+    let mut acc = Line::new(F::new(0.0f32)); // A [Line] is also necessary here
+    for i in 0..input.shape(2) / LINE_SIZE {
+        acc = acc + input[CUBE_POS_X * input.stride(0) + UNIT_POS_X * input.stride(1) + i];
+    }
+    output[CUBE_POS_X * output.stride(0) + UNIT_POS_X] = acc;
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(&amp;device);
+</span><span class="boring">
+</span><span class="boring">    let bench1 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 256, 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">    let bench2 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 64, 4096],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for bench in [bench1, bench2] {
+</span><span class="boring">        println!("{}", bench.name());
+</span><span class="boring">        println!("{}", bench.run(TimingMethod::System));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<p>Now, let's run the code again.</p>
+<pre><code>wgpu&lt;wgsl&gt;-reduction-[64, 256, 1024]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        1.483ms
+  Variance    27.000ns
+  Median      1.535ms
+  Min         1.239ms
+  Max         1.808ms
+―――――――――――――――――――――――――
+wgpu&lt;wgsl&gt;-reduction-[64, 64, 4096]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        924.409µs
+  Variance    189.000ns
+  Median      945.270µs
+  Min         600.110µs
+  Max         2.098ms
+―――――――――――――――――――――――――
+</code></pre>
+<p>It runs and it is fast! The reduction operation is now parallelized across multiple invocations, and we can see that the performance is significantly improved compared to the previous implementation. The results show that the reduction operation is efficient and can handle larger tensors without exceeding the GPU limits. It's also almost the same speed as the 2D reduction, even if there's even more elements to reduce. This is because the reduction is now parallelized across multiple cubes and hyper-cubes, allowing the GPU to process the data more efficiently. See the <a href="parallel_reduction.html">parallel reduction</a> if you need a refresher on the different parallelization level used in CubeCL. It is also worth noting that the performance and optimal <code>CUBE_COUNT</code> and <code>CUBE_DIM</code> values may vary depending on the GPU architecture and the specific workload. You may need to experiment with different values to find the best configuration for your use case.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="vectorized_reduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="examples.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="vectorized_reduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="examples.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

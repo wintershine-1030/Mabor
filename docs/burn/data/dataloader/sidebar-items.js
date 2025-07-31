@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Message"],"mod":["batcher","split"],"struct":["BatchDataLoader","DataLoaderBuilder","DatasetIterator","FixBatchStrategy","MultiThreadDataLoader","Progress"],"trait":["BatchStrategy","DataLoader","DataLoaderIterator","Dataset"]};

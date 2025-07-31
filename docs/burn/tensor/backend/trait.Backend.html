@@ -1,0 +1,573 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description"
+        content="This trait defines all types and functions needed for a backend to be used with burn.">
+    <title>Backend in mabor::tensor::backend - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Backend</a></h2>
+                <h3><a href="#">Sections</a></h3>
+                <ul class="block top-toc">
+                    <li><a href="#design" title="Design">Design</a>
+                        <ul>
+                            <li><a href="#eager-mode" title="Eager Mode">Eager Mode</a></li>
+                            <li><a href="#multi-threaded" title="Multi-Threaded">Multi-Threaded</a></li>
+                            <li><a href="#mutable-api" title="Mutable API">Mutable API</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#documentation" title="Documentation">Documentation</a></li>
+                </ul>
+                <h3><a href="#required-associated-types">Required Associated Types</a></h3>
+                <ul class="block">
+                    <li><a href="#associatedtype.BoolElem" title="BoolElem">BoolElem</a></li>
+                    <li><a href="#associatedtype.BoolTensorPrimitive"
+                            title="BoolTensorPrimitive">BoolTensorPrimitive</a></li>
+                    <li><a href="#associatedtype.Device" title="Device">Device</a></li>
+                    <li><a href="#associatedtype.FloatElem" title="FloatElem">FloatElem</a></li>
+                    <li><a href="#associatedtype.FloatTensorPrimitive"
+                            title="FloatTensorPrimitive">FloatTensorPrimitive</a></li>
+                    <li><a href="#associatedtype.IntElem" title="IntElem">IntElem</a></li>
+                    <li><a href="#associatedtype.IntTensorPrimitive" title="IntTensorPrimitive">IntTensorPrimitive</a>
+                    </li>
+                    <li><a href="#associatedtype.QuantizedEncoding" title="QuantizedEncoding">QuantizedEncoding</a></li>
+                    <li><a href="#associatedtype.QuantizedTensorPrimitive"
+                            title="QuantizedTensorPrimitive">QuantizedTensorPrimitive</a></li>
+                </ul>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.name" title="name">name</a></li>
+                    <li><a href="#tymethod.seed" title="seed">seed</a></li>
+                </ul>
+                <h3><a href="#provided-methods">Provided Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#method.ad_enabled" title="ad_enabled">ad_enabled</a></li>
+                    <li><a href="#method.sync" title="sync">sync</a></li>
+                </ul>
+                <h3><a href="#foreign-impls">Implementations on Foreign Types</a></h3>
+                <ul class="block">
+                    <li><a href="#impl-Backend-for-NdArray%3CE,+I,+Q%3E" title="NdArray&#60;E, I, Q&#62;">NdArray&#60;E,
+                            I, Q&#62;</a></li>
+                </ul>
+                <h3><a href="#dyn-compatibility">Dyn Compatibility</a></h3>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>tensor::<wbr>backend</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">tensor</a>::<wbr><a href="index.html">backend</a></div>
+                    <h1>Trait <span class="trait">Backend</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait Backend:
+    <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>
+    + <a class="trait" href="../ops/trait.FloatTensorOps.html" title="trait burn::tensor::ops::FloatTensorOps">FloatTensorOps</a>&lt;Self&gt;
+    + <a class="trait" href="../ops/trait.BoolTensorOps.html" title="trait burn::tensor::ops::BoolTensorOps">BoolTensorOps</a>&lt;Self&gt;
+    + <a class="trait" href="../ops/trait.IntTensorOps.html" title="trait burn::tensor::ops::IntTensorOps">IntTensorOps</a>&lt;Self&gt;
+    + <a class="trait" href="../ops/trait.ModuleOps.html" title="trait burn::tensor::ops::ModuleOps">ModuleOps</a>&lt;Self&gt;
+    + <a class="trait" href="../ops/trait.ActivationOps.html" title="trait burn::tensor::ops::ActivationOps">ActivationOps</a>&lt;Self&gt;
+    + <a class="trait" href="../ops/trait.QTensorOps.html" title="trait burn::tensor::ops::QTensorOps">QTensorOps</a>&lt;Self&gt;
+    + <a class="trait" href="../ops/trait.TransactionOps.html" title="trait burn::tensor::ops::TransactionOps">TransactionOps</a>&lt;Self&gt;
+    + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>
+    + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/default/trait.Default.html" title="trait core::default::Default">Default</a>
+    + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a>
+    + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a>
+    + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a>
+    + 'static {
+    type <a href="#associatedtype.Device" class="associatedtype">Device</a>: <a class="trait" href="trait.DeviceOps.html" title="trait burn::tensor::backend::DeviceOps">DeviceOps</a>;
+    type <a href="#associatedtype.FloatTensorPrimitive" class="associatedtype">FloatTensorPrimitive</a>: <a class="trait" href="../trait.TensorMetadata.html" title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + 'static;
+    type <a href="#associatedtype.FloatElem" class="associatedtype">FloatElem</a>: <a class="trait" href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>;
+    type <a href="#associatedtype.IntTensorPrimitive" class="associatedtype">IntTensorPrimitive</a>: <a class="trait" href="../trait.TensorMetadata.html" title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + 'static;
+    type <a href="#associatedtype.IntElem" class="associatedtype">IntElem</a>: <a class="trait" href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>;
+    type <a href="#associatedtype.BoolTensorPrimitive" class="associatedtype">BoolTensorPrimitive</a>: <a class="trait" href="../trait.TensorMetadata.html" title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + 'static;
+    type <a href="#associatedtype.BoolElem" class="associatedtype">BoolElem</a>: <a class="trait" href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>;
+    type <a href="#associatedtype.QuantizedTensorPrimitive" class="associatedtype">QuantizedTensorPrimitive</a>: <a class="trait" href="../trait.TensorMetadata.html" title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + <a class="trait" href="../quantization/trait.QTensorPrimitive.html" title="trait burn::tensor::quantization::QTensorPrimitive">QTensorPrimitive</a> + 'static;
+    type <a href="#associatedtype.QuantizedEncoding" class="associatedtype">QuantizedEncoding</a>: <a class="trait" href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>;
+
+    // Required methods
+    fn <a href="#tymethod.name" class="fn">name</a>(device: &amp;Self::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.seed" class="fn">seed</a>(seed: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.u64.html">u64</a>);
+
+    // Provided methods
+    fn <a href="#method.ad_enabled" class="fn">ad_enabled</a>() -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.sync" class="fn">sync</a>(_device: &amp;Self::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>) { ... }
+}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>This trait defines all types and functions needed for a backend to be used with burn.</p>
+                        <h3 id="design"><a class="doc-anchor" href="#design">§</a>Design</h3>
+                        <p>This trait aims to be as unopinionated as possible and allows implementations to define
+                            their own types and patterns. Therefore, there are few pre-defined abstractions baked
+                            into this trait.</p>
+                        <p>Backends must define their own tensor types for each data type: <code>float</code>,
+                            <code>int</code>, and <code>bool</code>.
+                            Since we minimize assumptions, we chose to separate these types, as they are used in
+                            different contexts. However, some backends may have a generic tensor type that is used
+                            for all data types.</p>
+                        <h4 id="eager-mode"><a class="doc-anchor" href="#eager-mode">§</a>Eager Mode</h4>
+                        <p>Because burn supports dynamic graphs, the backend trait is designed around kernel
+                            implementations that can be called without any mutable context or graph. This may not be
+                            ideal for backends that want to configure their computational graphs and execute them
+                            multiple times.</p>
+                        <p>To implement this kind of backend, channels could be used to communicate with a backend
+                            server thread to build the computation graphs and re-execute the ones that are repeated,
+                            with some form of cache. Once that pattern has matured, a graph mode backend trait could
+                            be extracted from it, allowing other backends of the same kind to be quickly integrated
+                            with burn. This pattern could also be used to create an operation fusion trait, which
+                            allows backends to define what kind of graph structures can be fused into one operation.</p>
+                        <h4 id="multi-threaded"><a class="doc-anchor" href="#multi-threaded">§</a>Multi-Threaded</h4>
+                        <p>Backend tensor types are all <code>Clone</code> + <code>Send</code>, which allows them to be
+                            safely
+                            sent between threads. It is recommended to wrap tensors with <a
+                                href="https://doc.rust-lang.org/1.88.0/alloc/sync/struct.Arc.html"
+                                title="struct alloc::sync::Arc">Arc</a>,
+                            which avoids copying the tensor’s buffer. Note that it is still possible to mutate and
+                            reuse tensors’ buffer without locking; see the next section on the Mutable API.</p>
+                        <h4 id="mutable-api"><a class="doc-anchor" href="#mutable-api">§</a>Mutable API</h4>
+                        <p>There is no mutable or inplace operation API to implement, but that does not mean that
+                            backends cannot support them. Using <a
+                                href="https://doc.rust-lang.org/1.88.0/alloc/sync/struct.Arc.html#method.try_unwrap"
+                                title="associated function alloc::sync::Arc::try_unwrap">try_unwrap</a> and
+                            <a href="https://doc.rust-lang.org/1.88.0/alloc/sync/struct.Arc.html#method.get_mut"
+                                title="associated function alloc::sync::Arc::get_mut">get_mut</a> allows backends to
+                            have access to an owned or mutable
+                            reference to their tensor buffer data structure if the tensor is not shared. In that case,
+                            backends can dispatch to their owned inplace operations for better performance.
+                        </p>
+                        <h3 id="documentation"><a class="doc-anchor" href="#documentation">§</a>Documentation</h3>
+                        <p>Most of the documentation for each function can be found on the user API <a
+                                href="../struct.Tensor.html" title="struct burn::tensor::Tensor">tensor struct</a>.
+                            For modules, public functions are often created, which can be used by <code>burn-core</code>
+                            modules.</p>
+                    </div>
+                </details>
+                <h2 id="required-associated-types" class="section-header">Required Associated Types<a
+                        href="#required-associated-types" class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.Device" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.Device"
+                                        class="associatedtype">Device</a>: <a class="trait" href="trait.DeviceOps.html"
+                                        title="trait burn::tensor::backend::DeviceOps">DeviceOps</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Device type.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.FloatTensorPrimitive" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.FloatTensorPrimitive"
+                                        class="associatedtype">FloatTensorPrimitive</a>: <a class="trait"
+                                        href="../trait.TensorMetadata.html"
+                                        title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + 'static</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tensor primitive to be used for all float operations.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.FloatElem" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.FloatElem"
+                                        class="associatedtype">FloatElem</a>: <a class="trait"
+                                        href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Default float element type.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.IntTensorPrimitive" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.IntTensorPrimitive"
+                                        class="associatedtype">IntTensorPrimitive</a>: <a class="trait"
+                                        href="../trait.TensorMetadata.html"
+                                        title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + 'static</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tensor primitive to be used for all int operations.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.IntElem" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.IntElem"
+                                        class="associatedtype">IntElem</a>: <a class="trait"
+                                        href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Int element type.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.BoolTensorPrimitive" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.BoolTensorPrimitive"
+                                        class="associatedtype">BoolTensorPrimitive</a>: <a class="trait"
+                                        href="../trait.TensorMetadata.html"
+                                        title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + 'static</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tensor primitive to be used for all bool operations.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.BoolElem" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.BoolElem"
+                                        class="associatedtype">BoolElem</a>: <a class="trait"
+                                        href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tensor primitive to be used for all bool operations.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.QuantizedTensorPrimitive" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.QuantizedTensorPrimitive"
+                                        class="associatedtype">QuantizedTensorPrimitive</a>: <a class="trait"
+                                        href="../trait.TensorMetadata.html"
+                                        title="trait burn::tensor::TensorMetadata">TensorMetadata</a> + <a class="trait"
+                                        href="../quantization/trait.QTensorPrimitive.html"
+                                        title="trait burn::tensor::quantization::QTensorPrimitive">QTensorPrimitive</a>
+                                    + 'static</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tensor primitive to be used for all quantized operations.</p>
+                        </div>
+                    </details>
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.QuantizedEncoding" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.QuantizedEncoding"
+                                        class="associatedtype">QuantizedEncoding</a>: <a class="trait"
+                                        href="../trait.Element.html" title="trait burn::tensor::Element">Element</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Quantized tensor encoding type.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.name" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.name" class="fn">name</a>(device:
+                                    &amp;Self::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>) -&gt; <a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/alloc/string/struct.String.html"
+                                        title="struct alloc::string::String">String</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Name of the backend.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.seed" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.seed" class="fn">seed</a>(seed: <a
+                                        class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.u64.html">u64</a>)</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Seed the backend.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.ad_enabled" class="method">
+                                <h4 class="code-header">fn <a href="#method.ad_enabled" class="fn">ad_enabled</a>()
+                                    -&gt; <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>If autodiff is enabled.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.sync" class="method">
+                                <h4 class="code-header">fn <a href="#method.sync" class="fn">sync</a>(_device:
+                                    &amp;Self::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>)</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Sync the backend, ensure that all computation are finished.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="dyn-compatibility" class="section-header">Dyn Compatibility<a href="#dyn-compatibility"
+                        class="anchor">§</a></h2>
+                <div class="dyn-compatibility-info">
+                    <p>This trait is <b>not</b> <a
+                            href="https://doc.rust-lang.org/1.88.0/reference/items/traits.html#dyn-compatibility">dyn
+                            compatible</a>.</p>
+                    <p><i>In older versions of Rust, dyn compatibility was called "object safety", so this trait is not
+                            object safe.</i></p>
+                </div>
+                <h2 id="foreign-impls" class="section-header">Implementations on Foreign Types<a href="#foreign-impls"
+                        class="anchor">§</a></h2>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-Backend-for-NdArray%3CE,+I,+Q%3E" class="impl"><a
+                                href="#impl-Backend-for-NdArray%3CE,+I,+Q%3E" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;E, I, Q&gt; <a class="trait"
+                                    href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a> for NdArray&lt;E, I, Q&gt;<div
+                                    class="where">where
+                                    E: FloatNdArrayElement,
+                                    I: IntNdArrayElement,
+                                    Q: QuantElement,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="associatedtype.Device-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.Device-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.Device"
+                                    class="associatedtype">Device</a> = NdArrayDevice</h4>
+                        </section>
+                        <section id="associatedtype.FloatTensorPrimitive-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.FloatTensorPrimitive-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.FloatTensorPrimitive"
+                                    class="associatedtype">FloatTensorPrimitive</a> = NdArrayTensorFloat</h4>
+                        </section>
+                        <section id="associatedtype.FloatElem-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.FloatElem-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.FloatElem"
+                                    class="associatedtype">FloatElem</a> = E</h4>
+                        </section>
+                        <section id="associatedtype.IntTensorPrimitive-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.IntTensorPrimitive-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.IntTensorPrimitive"
+                                    class="associatedtype">IntTensorPrimitive</a> = NdArrayTensor&lt;I&gt;</h4>
+                        </section>
+                        <section id="associatedtype.IntElem-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.IntElem-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.IntElem"
+                                    class="associatedtype">IntElem</a> = I</h4>
+                        </section>
+                        <section id="associatedtype.BoolTensorPrimitive-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.BoolTensorPrimitive-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.BoolTensorPrimitive"
+                                    class="associatedtype">BoolTensorPrimitive</a> = NdArrayTensor&lt;<a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="associatedtype.BoolElem-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.BoolElem-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.BoolElem"
+                                    class="associatedtype">BoolElem</a> = <a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a></h4>
+                        </section>
+                        <section id="associatedtype.QuantizedTensorPrimitive-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.QuantizedTensorPrimitive-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.QuantizedTensorPrimitive"
+                                    class="associatedtype">QuantizedTensorPrimitive</a> = NdArrayQTensor&lt;Q&gt;</h4>
+                        </section>
+                        <section id="associatedtype.QuantizedEncoding-1" class="associatedtype trait-impl"><a
+                                href="#associatedtype.QuantizedEncoding-1" class="anchor">§</a>
+                            <h4 class="code-header">type <a href="#associatedtype.QuantizedEncoding"
+                                    class="associatedtype">QuantizedEncoding</a> = Q</h4>
+                        </section>
+                        <section id="method.ad_enabled-1" class="method trait-impl"><a href="#method.ad_enabled-1"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#method.ad_enabled" class="fn">ad_enabled</a>() -&gt; <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a></h4>
+                        </section>
+                        <section id="method.name" class="method trait-impl"><a href="#method.name" class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.name" class="fn">name</a>(_device:
+                                &amp;&lt;NdArray&lt;E, I, Q&gt; as <a class="trait"
+                                    href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                    href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                    title="type burn::prelude::Backend::Device">Device</a>) -&gt; <a class="struct"
+                                    href="https://doc.rust-lang.org/1.88.0/alloc/string/struct.String.html"
+                                    title="struct alloc::string::String">String</a></h4>
+                        </section>
+                        <section id="method.seed" class="method trait-impl"><a href="#method.seed" class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.seed" class="fn">seed</a>(seed: <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.u64.html">u64</a>)</h4>
+                        </section>
+                    </div>
+                </details>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Backend-for-Autodiff%3CB,+C%3E" class="impl"><a
+                                    href="#impl-Backend-for-Autodiff%3CB,+C%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B, C&gt; <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a> for <a class="struct"
+                                        href="../../backend/struct.Autodiff.html"
+                                        title="struct burn::backend::Autodiff">Autodiff</a>&lt;B, C&gt;<div
+                                        class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,
+                                        C: CheckpointStrategy,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Device-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Device-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Device"
+                                        class="associatedtype">Device</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a></h4>
+                            </section>
+                            <section id="associatedtype.FloatTensorPrimitive-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.FloatTensorPrimitive-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.FloatTensorPrimitive"
+                                        class="associatedtype">FloatTensorPrimitive</a> = AutodiffTensor&lt;B&gt;</h4>
+                            </section>
+                            <section id="associatedtype.FloatElem-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.FloatElem-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.FloatElem"
+                                        class="associatedtype">FloatElem</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.FloatElem"
+                                        title="type burn::prelude::Backend::FloatElem">FloatElem</a></h4>
+                            </section>
+                            <section id="associatedtype.IntTensorPrimitive-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.IntTensorPrimitive-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.IntTensorPrimitive"
+                                        class="associatedtype">IntTensorPrimitive</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.IntTensorPrimitive"
+                                        title="type burn::prelude::Backend::IntTensorPrimitive">IntTensorPrimitive</a>
+                                </h4>
+                            </section>
+                            <section id="associatedtype.IntElem-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.IntElem-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.IntElem"
+                                        class="associatedtype">IntElem</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.IntElem"
+                                        title="type burn::prelude::Backend::IntElem">IntElem</a></h4>
+                            </section>
+                            <section id="associatedtype.BoolTensorPrimitive-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.BoolTensorPrimitive-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.BoolTensorPrimitive"
+                                        class="associatedtype">BoolTensorPrimitive</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                            <section id="associatedtype.BoolElem-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.BoolElem-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.BoolElem"
+                                        class="associatedtype">BoolElem</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolElem"
+                                        title="type burn::prelude::Backend::BoolElem">BoolElem</a></h4>
+                            </section>
+                            <section id="associatedtype.QuantizedTensorPrimitive-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.QuantizedTensorPrimitive-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.QuantizedTensorPrimitive"
+                                        class="associatedtype">QuantizedTensorPrimitive</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.QuantizedTensorPrimitive"
+                                        title="type burn::prelude::Backend::QuantizedTensorPrimitive">QuantizedTensorPrimitive</a>
+                                </h4>
+                            </section>
+                            <section id="associatedtype.QuantizedEncoding-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.QuantizedEncoding-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.QuantizedEncoding"
+                                        class="associatedtype">QuantizedEncoding</a> = &lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.QuantizedEncoding"
+                                        title="type burn::prelude::Backend::QuantizedEncoding">QuantizedEncoding</a>
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                </div>
+                <script src="../../../trait.impl/burn_tensor/tensor/backend/base/trait.Backend.js"
+                    data-ignore-extern-crates="burn_ndarray,burn_autodiff" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

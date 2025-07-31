@@ -1,0 +1,825 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="
+Mabor provides key components that serve as the building blocks of the framework and your deep learning projects.
+The first entry in the Building Blocks series explores the dataset and batcher traits, and how they fit into Mabor's
+data loading process.
+">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building Blocks #1: Dataset &#38; Data Loading">
+  <meta property="og:description" content="
+Mabor provides key components that serve as the building blocks of the framework and your deep learning projects.
+The first entry in the Building Blocks series explores the dataset and batcher traits, and how they fit into Mabor's
+data loading process.
+">
+  <meta property="og:author" content="Guillaume Lagrange">
+  <meta property="og:image" content="/_astro/banner.BBxlDYG0_Z2np9si.webp">
+  <meta property="article:published_time" content="2024-08-30T18:00:00.000Z">
+  <link rel="sitemap" href="../../sitemap-index.xml">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <meta name="generator" content="Astro v5.10.1">
+  <link rel="canonical" href="../../index.htm">
+  <title>Building Blocks #1: Dataset &amp; Data Loading</title>
+  <script
+    type="module">try { const t = window._paq = window._paq || []; t.push(["trackPageView"]), t.push(["enableLinkTracking"]), function () { t.push(["setTrackerUrl", "https://burndev.matomo.cloud/" + "matomo.php"]), t.push(["setSiteId", "1"]); const o = document, e = o.createElement("script"), c = o.getElementsByTagName("script")[0]; e.async = !0, e.src = "https://cdn.matomo.cloud/burndev.matomo.cloud/matomo.js", c?.parentNode?.insertBefore(e, c) }() } catch { }</script>
+  <script type="text/partytown" src="../../gtag/js?id=G-SCQPPXXSJY"></script>
+  <script type="text/partytown">(function(){const id = "G-SCQPPXXSJY";
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag("config", id);
+  })();</script>
+  <link rel="stylesheet" href="../../_astro/_blog_.DvB2Xm2x.css">
+  <link rel="stylesheet" href="../../_astro/_blog_.CLbeXEfv.css">
+  <script>!(function (w, p, f, c) { if (!window.crossOriginIsolated && !navigator.serviceWorker) return; c = w[p] = Object.assign(w[p] || {}, { "lib": "/~partytown/", "debug": false }); c[f] = (c[f] || []).concat(["dataLayer.push"]) })(window, 'partytown', 'forward');/* Partytown 0.11.1 - MIT QwikDev */
+    const t = { preserveBehavior: !1 }, e = e => { if ("string" == typeof e) return [e, t]; const [n, r = t] = e; return [n, { ...t, ...r }] }, n = Object.freeze((t => { const e = new Set; let n = []; do { Object.getOwnPropertyNames(n).forEach((t => { "function" == typeof n[t] && e.add(t) })) } while ((n = Object.getPrototypeOf(n)) !== Object.prototype); return Array.from(e) })()); !function (t, r, o, i, a, s, c, l, d, p, u = t, f) { function h() { f || (f = 1, "/" == (c = (s.lib || "/~partytown/") + (s.debug ? "debug/" : ""))[0] && (d = r.querySelectorAll('script[type="text/partytown"]'), i != t ? i.dispatchEvent(new CustomEvent("pt1", { detail: t })) : (l = setTimeout(v, (null == s ? void 0 : s.fallbackTimeout) || 1e4), r.addEventListener("pt0", w), a ? y(1) : o.serviceWorker ? o.serviceWorker.register(c + (s.swPath || "partytown-sw.js"), { scope: c }).then((function (t) { t.active ? y() : t.installing && t.installing.addEventListener("statechange", (function (t) { "activated" == t.target.state && y() })) }), console.error) : v()))) } function y(e) { p = r.createElement(e ? "script" : "iframe"), t._pttab = Date.now(), e || (p.style.display = "block", p.style.width = "0", p.style.height = "0", p.style.border = "0", p.style.visibility = "hidden", p.setAttribute("aria-hidden", !0)), p.src = c + "partytown-" + (e ? "atomics.js?v=0.11.1" : "sandbox-sw.html?" + t._pttab), r.querySelector(s.sandboxParent || "body").appendChild(p) } function v(n, o) { for (w(), i == t && (s.forward || []).map((function (n) { const [r] = e(n); delete t[r.split(".")[0]] })), n = 0; n < d.length; n++)(o = r.createElement("script")).innerHTML = d[n].innerHTML, o.nonce = s.nonce, r.head.appendChild(o); p && p.parentNode.removeChild(p) } function w() { clearTimeout(l) } s = t.partytown || {}, i == t && (s.forward || []).map((function (r) { const [o, { preserveBehavior: i }] = e(r); u = t, o.split(".").map((function (e, r, o) { var a; u = u[o[r]] = r + 1 < o.length ? u[o[r]] || (a = o[r + 1], n.includes(a) ? [] : {}) : (() => { let e = null; if (i) { const { methodOrProperty: n, thisObject: r } = ((t, e) => { let n = t; for (let t = 0; t < e.length - 1; t += 1)n = n[e[t]]; return { thisObject: n, methodOrProperty: e.length > 0 ? n[e[e.length - 1]] : void 0 } })(t, o); "function" == typeof n && (e = (...t) => n.apply(r, ...t)) } return function () { let n; return e && (n = e(arguments)), (t._ptf = t._ptf || []).push(o, arguments), n } })() })) })), "complete" == r.readyState ? h() : (t.addEventListener("DOMContentLoaded", h), t.addEventListener("load", h)) }(window, document, navigator, top, window.crossOriginIsolated);; (e => { e.addEventListener("astro:before-swap", e => { let r = document.body.querySelector("iframe[src*='/~partytown/']"); if (r) e.newDocument.body.append(r) }) })(document);</script>
+</head>
+
+<body
+  class="flex flex-col text-primary-content default:sections:mx-auto [&#38;>nav]:order-last default:sections:max-w-[1500px] bg-[#0D1117]">
+  <script type="module" src="../../_astro/Layout.astro_astro_type_script_index_0_lang.W5886xPT.js"></script>
+  <style>
+    astro-island,
+    astro-slot,
+    astro-static-slot {
+      display: contents
+    }
+  </style>
+  <script>(() => { var e = async t => { await (await t())() }; (self.Astro || (self.Astro = {})).load = e; window.dispatchEvent(new Event("astro:load")); })();</script>
+  <script>(() => { var A = Object.defineProperty; var g = (i, o, a) => o in i ? A(i, o, { enumerable: !0, configurable: !0, writable: !0, value: a }) : i[o] = a; var d = (i, o, a) => g(i, typeof o != "symbol" ? o + "" : o, a); { let i = { 0: t => m(t), 1: t => a(t), 2: t => new RegExp(t), 3: t => new Date(t), 4: t => new Map(a(t)), 5: t => new Set(a(t)), 6: t => BigInt(t), 7: t => new URL(t), 8: t => new Uint8Array(t), 9: t => new Uint16Array(t), 10: t => new Uint32Array(t), 11: t => 1 / 0 * t }, o = t => { let [l, e] = t; return l in i ? i[l](e) : void 0 }, a = t => t.map(o), m = t => typeof t != "object" || t === null ? t : Object.fromEntries(Object.entries(t).map(([l, e]) => [l, o(e)])); class y extends HTMLElement { constructor() { super(...arguments); d(this, "Component"); d(this, "hydrator"); d(this, "hydrate", async () => { var b; if (!this.hydrator || !this.isConnected) return; let e = (b = this.parentElement) == null ? void 0 : b.closest("astro-island[ssr]"); if (e) { e.addEventListener("astro:hydrate", this.hydrate, { once: !0 }); return } let c = this.querySelectorAll("astro-slot"), n = {}, h = this.querySelectorAll("template[data-astro-template]"); for (let r of h) { let s = r.closest(this.tagName); s != null && s.isSameNode(this) && (n[r.getAttribute("data-astro-template") || "default"] = r.innerHTML, r.remove()) } for (let r of c) { let s = r.closest(this.tagName); s != null && s.isSameNode(this) && (n[r.getAttribute("name") || "default"] = r.innerHTML) } let p; try { p = this.hasAttribute("props") ? m(JSON.parse(this.getAttribute("props"))) : {} } catch (r) { let s = this.getAttribute("component-url") || "<unknown>", v = this.getAttribute("component-export"); throw v && (s += ` (export ${v})`), console.error(`[hydrate] Error parsing props for component ${s}`, this.getAttribute("props"), r), r } let u; await this.hydrator(this)(this.Component, p, n, { client: this.getAttribute("client") }), this.removeAttribute("ssr"), this.dispatchEvent(new CustomEvent("astro:hydrate")) }); d(this, "unmount", () => { this.isConnected || this.dispatchEvent(new CustomEvent("astro:unmount")) }) } disconnectedCallback() { document.removeEventListener("astro:after-swap", this.unmount), document.addEventListener("astro:after-swap", this.unmount, { once: !0 }) } connectedCallback() { if (!this.hasAttribute("await-children") || document.readyState === "interactive" || document.readyState === "complete") this.childrenConnectedCallback(); else { let e = () => { document.removeEventListener("DOMContentLoaded", e), c.disconnect(), this.childrenConnectedCallback() }, c = new MutationObserver(() => { var n; ((n = this.lastChild) == null ? void 0 : n.nodeType) === Node.COMMENT_NODE && this.lastChild.nodeValue === "astro:end" && (this.lastChild.remove(), e()) }); c.observe(this, { childList: !0 }), document.addEventListener("DOMContentLoaded", e) } } async childrenConnectedCallback() { let e = this.getAttribute("before-hydration-url"); e && await import(e), this.start() } async start() { let e = JSON.parse(this.getAttribute("opts")), c = this.getAttribute("client"); if (Astro[c] === void 0) { window.addEventListener(`astro:${c}`, () => this.start(), { once: !0 }); return } try { await Astro[c](async () => { let n = this.getAttribute("renderer-url"), [h, { default: p }] = await Promise.all([import(this.getAttribute("component-url")), n ? import(n) : () => () => { }]), u = this.getAttribute("component-export") || "default"; if (!u.includes(".")) this.Component = h[u]; else { this.Component = h; for (let f of u.split(".")) this.Component = this.Component[f] } return this.hydrator = p, this.hydrate }, e, this) } catch (n) { console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`, n) } } attributeChangedCallback() { this.hydrate() } } d(y, "observedAttributes", ["props"]), customElements.get("astro-island") || customElements.define("astro-island", y) } })();</script>
+  <script>window._$HY || (e => { let t = e => e && e.hasAttribute && (e.hasAttribute("data-hk") ? e : t(e.host && e.host.nodeType ? e.host : e.parentNode));["click", "input"].forEach((o => document.addEventListener(o, (o => { if (!e.events) return; let s = t(o.composedPath && o.composedPath()[0] || o.target); s && !e.completed.has(s) && e.events.push([s, o]) })))) })(_$HY = { events: [], completed: new WeakSet, r: {}, fe() { } });</script>
+  <!--xs--><astro-island uid="ZeT78n" data-solid-render-id="s1" component-url="/_astro/Navbar.xVaj7tQm.js"
+    component-export="Navbar" renderer-url="/_astro/client.C-0b9Jot.js"
+    props="{&quot;links&quot;:[0,{&quot;home&quot;:[0,{&quot;href&quot;:[0,&quot;/&quot;],&quot;title&quot;:[0,&quot;Home&quot;]}],&quot;getStarted&quot;:[0,{&quot;href&quot;:[0,&quot;/get-started&quot;],&quot;title&quot;:[0,&quot;Get Started&quot;],&quot;description&quot;:[0,&quot;Begin your journey&quot;]}],&quot;learn&quot;:[0,{&quot;href&quot;:[0,&quot;/learn&quot;],&quot;title&quot;:[0,&quot;Learn&quot;]}],&quot;blog&quot;:[0,{&quot;href&quot;:[0,&quot;/blog&quot;],&quot;title&quot;:[0,&quot;Blog&quot;]}],&quot;benchmarks&quot;:[0,{&quot;href&quot;:[0,&quot;/benchmarks/community-benchmarks&quot;],&quot;title&quot;:[0,&quot;Benchmarks&quot;]}]}]}"
+    ssr="" client="load" opts="{&quot;name&quot;:&quot;Navbar&quot;,&quot;value&quot;:true}" await-children="">
+    <nav data-hk="s10000"
+      class="fixed left-1/2 top-[10px] z-30 h-[70px] w-[90%] max-w-[1200px] -translate-x-1/2 rounded-[100px] border border-white/10 bg-[#1E212A99] px-[30px] py-[20px] text-center shadow-[0px_10px_15px_3px_#5865F21A] backdrop-blur-2xl">
+      <div class="flex flex-1 items-center justify-between gap-4">
+        <div class="flex">
+          <details class="group block hover:cursor-pointer lg:invisible lg:hidden" id="navbar-menu">
+            <summary class="list-none px-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 20 21"
+                class="inline-block h-7 w-8 stroke-current group-open:hidden">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                </path>
+              </svg></summary>
+            <div
+              class="absolute left-[-10%] top-[-16px] h-[calc(100vh+16px)] w-[110vw] bg-[#1E212A99]/95 backdrop-blur-2xl">
+              <div class="pt-10 pl-[calc(10%+30px)]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewbox="0 0 24 24" class="h-7 w-8 stroke-current group-open:block">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg></div>
+              <ul class="mt-6 flex-col justify-evenly whitespace-nowrap">
+                <li data-hk="s100010" class="border-white p-4 text-3xl"><a data-hk="s1000110" title="Home"
+                    href="../../index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a>
+                </li>
+                <li data-hk="s100012" class="border-white p-4 text-3xl"><a data-hk="s1000130" title="Get Started"
+                    href="../../get-started/index.htm" aria-description="Begin your journey"
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get
+                    Started</a></li>
+                <li data-hk="s100014" class="border-white p-4 text-3xl"><a data-hk="s1000150" title="Learn"
+                    href="../../learn/index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a>
+                </li>
+                <li data-hk="s100016" class="border-white p-4 text-3xl"><a data-hk="s1000170" title="Blog"
+                    href="../index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a>
+                </li>
+                <li data-hk="s100018" class="border-white p-4 text-3xl"><a data-hk="s1000190" title="Benchmarks"
+                    href="../../benchmarks/community-benchmarks/index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a>
+                </li>
+              </ul>
+            </div>
+          </details>
+          <div class="hidden lg:block"><astro-slot name="left">
+              <div> <img src="../../_astro/burn-flame-white.D0NuVaYR_Z1ywDjw.svg" alt="Burn Logo" loading="lazy"
+                  decoding="async" fetchpriority="auto" width="95" height="30" class="mx-2 hidden sm:block"> </div>
+            </astro-slot></div>
+        </div>
+        <div class="block lg:hidden"><astro-slot name="center"></astro-slot></div>
+        <ul class="hidden max-w-[610px] flex-wrap justify-evenly whitespace-nowrap text-center align-middle lg:flex">
+          <li data-hk="s100020"><a data-hk="s1000210" title="Home" href="../../index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a>
+          </li>
+          <li data-hk="s100022"><a data-hk="s1000230" title="Get Started" href="../../get-started/index.htm"
+              aria-description="Begin your journey"
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get
+              Started</a></li>
+          <li data-hk="s100024"><a data-hk="s1000250" title="Learn" href="../../learn/index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a>
+          </li>
+          <li data-hk="s100026"><a data-hk="s1000270" title="Blog" href="../index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a>
+          </li>
+          <li data-hk="s100028"><a data-hk="s1000290" title="Benchmarks"
+              href="../../benchmarks/community-benchmarks/index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a>
+          </li>
+        </ul><!--$--><astro-slot name="right">
+          <div class="flex flex-row gap-2 pr-3"> <a href="https://github.com/tracel-ai/burn" class="h-[30px]"> <svg
+                fill="currentColor" width="30" height="30" viewbox="0 0 16 16">
+                <path
+                  d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8">
+                </path>
+              </svg> </a> <a href="https://x.com/yourprofile" target="_blank" aria-label="X (Twitter)">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 120 120" fill="none">
+    <rect width="120" height="120" rx="24" fill="black"/>
+    <path d="M81.6 31.2H68.88L58.08 45.36 47.28 31.2H34.56l17.28 22.8L34 88.8h12.72l10.56-13.92 10.56 13.92h12.72L62.4 54l19.2-22.8zM66.96 75.12l-8.88-11.76-8.88 11.76h-3.12L58.08 58.8l11.04 16.32h-2.16z" fill="white"/>
+  </svg>
+</a>
+</div>
+        </astro-slot><!--/-->
+      </div>
+    </nav><!--astro:end-->
+  </astro-island>
+  <main>
+    <div class="flex w-full justify-center pt-20">
+      <div class="mx-3 mb-10 w-full max-w-5xl">
+        <div class="mb-3">
+          <p class="px-2 text-xl font-semibold"><a href="../../index.htm"
+              class="hover:text-[#edc567]">home</a><span><span> · </span><a href="../index.htm"
+                class="hover:text-[#edc567]">blog</a></span><span><span> · </span><a href="index.htm"
+                class="hover:text-[#edc567]">building-blocks-dataset</a></span></p>
+        </div>
+        <article class="blog rounded-lg bg-white/5 pt-4">
+          <div>
+            <h1 class="!text-[30px] sm:!text-[48px] font-bold !leading-normal px-3 sm:px-8">Building Blocks #1: Dataset
+              &amp; Data Loading</h1>
+            <div class="px-3 pb-4 sm:px-8"><img class="mr-3 h-48 w-full rounded-lg object-cover object-top"
+                src="../../_astro/banner.BBxlDYG0_Z2np9si.webp"
+                alt="Building blocks digital art generated by stable diffusion."></div>
+            <div class="flex px-3 sm:px-8">
+              <div class="flex">
+                <div class="i-mdi-clipboard-text-clock size-5"></div><span class="px-2 font-normal">Fri, Aug 30,
+                  2024</span>
+              </div><!--$--><a class="flex pl-2" href="https://x.com/lagguill" target="_blank">
+                <div class="i-mdi-account-edit size-5"></div><span class="px-2 font-normal">Guillaume Lagrange</span>
+              </a><!--/-->
+            </div>
+          </div>
+          <div class="px-3 pb-4 sm:px-8 text-base sm:text-lg leading-relaxed">
+            <div class="my-6 border-t-2 border-[#181a1d]"></div><!--$-->
+            <div>
+              <h2>Introduction</h2>
+              <p>
+                Building a deep learning model to tackle a particular task involves several steps. Whether
+                the objective is to classify images, translating texts or predicting a continuous
+                variable, the typical machine learning or deep learning process remains the same. Given a
+                data source specific to the problem at hand, a deep learning algorithm automatically
+                discovers useful representations from raw data to perform the defined objective. To tackle
+                this problem, we need a few things: a source of training data (i.e., dataset), a model to
+                train and a way to estimate the parameters of the model so that it will give good
+                precitions, which is encapsulated by the training loop. This simplified process is
+                illustrated in the figure below, where the last step is to deploy the trained model to
+                perform predictions on new data.
+              </p>
+              <div class="flex justify-center pt-4 pb-8">
+                <div class="w-full">
+                  <div class="flex justify-center"> <span class="w-full text-center text-xl" .="">
+                      High-Level Process of Building a Deep Learning Model
+                    </span> </div> <img class="bg-primary p-2 rounded-xl w-full"
+                    src="../../_astro/deep-learning-process.DxbmMArN_u2fn3.webp">
+                </div>
+              </div>
+              <p>
+                In order to achieve this, Mabor provides key components that serve as the building blocks
+                of the framework and your future projects. In this series, we'll provide an overview of
+                these components and draw parallels with the help of the example from our basic workflow
+                guide<span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-1">1</a><!--/-->]</span>. The guide trains a simple
+                convolutional neural network to recognize handwritten digits using the MNIST dataset<span
+                  class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-2">2</a><!--/-->]</span>.
+              </p>
+              <p>For the first part of this series, we will cover data loading with Mabor.</p>
+              <h2>Dataset & Data Loading</h2>
+              <p>
+                At its core, a dataset is a collection of data typically related to a specific analysis or
+                processing task. The data modality can vary depending on the task, but most datasets
+                primarily consist of images, texts, audio or videos.
+              </p>
+              <p>
+                As mentioned earlier, this data source represents an integral part of machine learning to
+                successfully train a model. Thus, it is essential to provide a convenient and performant
+                API to handle your data. Since this process varies wildly from one problem to another, it
+                is defined as a trait that should be implemented on your type. The dataset trait is quite
+                simple:
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#F78C6C">pub</span><span style="color:#C792EA"> trait</span><span style="color:#FFCB6B"> Dataset</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">I</span><span style="color:#89DDFF">>:</span><span style="color:#FFCB6B"> Send</span><span style="color:#89DDFF"> +</span><span style="color:#FFCB6B"> Sync</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> get</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> index</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Option</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">I</span><span style="color:#89DDFF">>;</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> len</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span></code></pre>
+              </div>
+              <p>
+                The trait assumes a fixed-length set of items that can be randomly accessed in constant
+                time. Mabor also provides transformations that can be applied lazily to modify one or
+                multiple datasets, such as the <code>MapperDataset</code> transformation which is used later
+                in this post. More details are available in the book<span class="reference px-1">[<!--$--><a
+                    class="hover:text-[#69b8e1]" href="#reference-3">3</a><!--/-->]</span>.
+              </p>
+              <p>
+                During training, the dataset is used to access the data samples and, for most use cases in
+                supervised learning, their corresponding ground-truth labels. The <code>Dataset</code> trait
+                implementation is responsible to retrieve the data from its source, usually some sort of data
+                storage. At this point, the dataset could be naively iterated over to provide the model a single
+                sample to process at a time, but this is not very efficient.
+              </p>
+              <p>
+                Instead, we collect multiple samples that the model can process as a <i>batch</i> to fully
+                leverage modern hardware (e.g., GPUs - which have impressing parallel processing capabilities).
+                Since each data sample in the dataset can be collected independently, the data loading is typically
+                done in parallel to further speed things up. In this case, we parallelize the data loading
+                using a multi-threaded <code>BatchDataLoader</code> to obtain a sequence of items from the
+                <code>Dataset</code> implementation. Finally, the sequence of items is combined into a batched
+                multidimensional array (i.e., tensor<span class="reference px-1">[<!--$--><a
+                    class="hover:text-[#69b8e1]" href="#reference-4">4</a><!--/-->]</span>) that can
+                be used as input to a model with the <code>Batcher</code> trait implementation. Other tensor
+                operations can be performed during this step to prepare the batch data, as we will demonstrate
+                in the following section. The process is illustrated in the figure below for the MNIST dataset,
+                which we'll see in the next section.
+              </p>
+              <div class="flex justify-center pt-4 pb-8">
+                <div class="w-full">
+                  <div class="flex justify-center"> <span class="w-full text-center text-xl" .=""> Mabor Data Loading
+                      Process </span> </div> <img class="bg-primary p-2 rounded-xl w-full"
+                    src="../../_astro/dataloading.xoR2oFCb_1TyI8H.webp">
+                </div>
+              </div>
+              <h2>Leading By Example</h2>
+              <p>
+                Now that we have a high-level map of the data loading components in Mabor, let's see how we
+                can define the data loading process for the MNIST dataset. Although we have conveniently
+                implemented the
+                <code>MnistDataset</code><span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-5">5</a><!--/-->]</span>
+                used in the guide, we'll go over its implementation to demonstrate how the <code>Dataset</code> and
+                <code>Batcher</code>
+                traits are used.
+              </p>
+              <details>
+                <summary> Make sure you have all the required imports to follow along. </summary>
+                <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                  <pre class="astro-code material-theme-darker"
+                    style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0"
+                    data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#F78C6C">use</span><span style="color:#FFCB6B"> std</span><span style="color:#89DDFF">::{</span></span>
+<span class="line"><span style="color:#FFCB6B">    fs</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">create_dir_all</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> File</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#FFCB6B">    io</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">Read</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Seek</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> SeekFrom</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#FFCB6B">    path</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">Path</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> PathBuf</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F78C6C">use</span><span style="color:#FFCB6B"> mabor</span><span style="color:#89DDFF">::{</span></span>
+<span class="line"><span style="color:#FFCB6B">    backend</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">wgpu</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">WgpuDevice</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Wgpu</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#FFCB6B">    data</span><span style="color:#89DDFF">::{</span></span>
+<span class="line"><span style="color:#FFCB6B">        dataloader</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">batcher</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">Batcher</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> DataLoaderBuilder</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#FFCB6B">        dataset</span><span style="color:#89DDFF">::{</span></span>
+<span class="line"><span style="color:#FFCB6B">            transform</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">Mapper</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> MapperDataset</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#FFCB6B">            Dataset</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> InMemDataset</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        },</span></span>
+<span class="line"><span style="color:#89DDFF">    },</span></span>
+<span class="line"><span style="color:#FFCB6B">    tensor</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">backend</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">Backend</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Int</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> TensorData</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">};</span></span>
+<span class="line"><span style="color:#F78C6C">use</span><span style="color:#FFCB6B"> mabor_common</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">network</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">downloader</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">download_file_as_bytes</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F78C6C">use</span><span style="color:#FFCB6B"> flate2</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">read</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">GzDecoder</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F78C6C">use</span><span style="color:#FFCB6B"> serde</span><span style="color:#89DDFF">::{</span><span style="color:#FFCB6B">Deserialize</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Serialize</span><span style="color:#89DDFF">};</span></span></code></pre>
+                </div>
+                Additionally, your <code>Cargo.toml</code> should look like this.
+                <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                  <pre class="astro-code material-theme-darker"
+                    style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0"
+                    data-language="toml"><code><span class="line"></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#FFCB6B">package</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#EEFFFF">name </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">building_blocks_dataset</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#EEFFFF">version </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">0.1.0</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#EEFFFF">edition </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">2021</span><span style="color:#89DDFF">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#FFCB6B">dependencies</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#EEFFFF">mabor </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span><span style="color:#EEFFFF"> version </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">0.14.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> features </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">dataset</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">wgpu</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> }</span></span>
+<span class="line"><span style="color:#EEFFFF">mabor-common </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span><span style="color:#EEFFFF"> version </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">0.14.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> features </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">network</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> }</span></span>
+<span class="line"><span style="color:#EEFFFF">serde </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span><span style="color:#EEFFFF"> version </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">1.0.206</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> features </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">derive</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> }</span></span>
+<span class="line"><span style="color:#EEFFFF">dirs </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">5.0.1</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#EEFFFF">flate2 </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">1.0.31</span><span style="color:#89DDFF">"</span></span></code></pre>
+                </div>
+              </details><br>
+              <p>
+                The MNIST dataset of handwritten digits has a training set of 60,000 examples and a test
+                set of 10,000 examples. A single item in the dataset is represented by a 28 × 28 pixels
+                black-and-white image (stored as raw bytes) with its corresponding label (a digit between
+                0 and 9). When loading the data from its source, a single item can be represented by the
+                <code>MnistItemRaw</code> struct.
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#89DDFF">#[</span><span style="color:#EEFFFF">derive</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">Deserialize</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Debug</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Clone</span><span style="color:#89DDFF">)]</span></span>
+<span class="line"><span style="color:#C792EA">struct</span><span style="color:#FFCB6B"> MnistItemRaw</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#EEFFFF"> image_bytes</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">>,</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#EEFFFF"> label</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> u8</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre>
+              </div>
+              <p>
+                With single-channel images of such low resolution, the entire training and test sets can
+                be loaded in memory at once. Therefore, we leverage the already existing <code>InMemDataset</code><span
+                  class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-6">6</a><!--/-->]</span> to retrieve the raw images and labels
+                data. At this point, the image data is still just a bunch of bytes, but we want to retrieve
+                the <i>structured</i> image data in its intended form. For that, we can define a
+                <code>MapperDataset</code> that transforms the raw image bytes to a 2D array image (which we convert to
+                float while
+                we're at it).
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#EEFFFF"> WIDTH</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF"> =</span><span style="color:#F78C6C"> 28</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#EEFFFF"> HEIGHT</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF"> =</span><span style="color:#F78C6C"> 28</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">/// MNIST item.</span></span>
+<span class="line"><span style="color:#89DDFF">#[</span><span style="color:#EEFFFF">derive</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">Deserialize</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Serialize</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Debug</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Clone</span><span style="color:#89DDFF">)]</span></span>
+<span class="line"><span style="color:#F78C6C">pub</span><span style="color:#C792EA"> struct</span><span style="color:#FFCB6B"> MnistItem</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Image as a 2D array of floats.</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#EEFFFF"> image</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [[</span><span style="color:#FFCB6B">f32</span><span style="color:#89DDFF">;</span><span style="color:#EEFFFF"> WIDTH</span><span style="color:#89DDFF">];</span><span style="color:#EEFFFF"> HEIGHT</span><span style="color:#89DDFF">],</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Label of the image.</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#EEFFFF"> label</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> u8</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">struct</span><span style="color:#FFCB6B"> BytesToImage</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F78C6C">impl</span><span style="color:#FFCB6B"> Mapper</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">MnistItemRaw</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> MnistItem</span><span style="color:#89DDFF">></span><span style="color:#89DDFF;font-style:italic"> for</span><span style="color:#FFCB6B"> BytesToImage</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Convert a raw MNIST item (image bytes) to a MNIST item (2D array image).</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> map</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> item</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">MnistItemRaw</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> MnistItem</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Ensure the image dimensions are correct.</span></span>
+<span class="line"><span style="color:#82AAFF">        debug_assert_eq!</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">item</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">image_bytes</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">len</span><span style="color:#89DDFF">(),</span><span style="color:#EEFFFF"> WIDTH </span><span style="color:#89DDFF">*</span><span style="color:#EEFFFF"> HEIGHT</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Convert the image to a 2D array of floats.</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> image_array </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [[</span><span style="color:#F78C6C">0</span><span style="color:#FFCB6B">f32</span><span style="color:#89DDFF">;</span><span style="color:#EEFFFF"> WIDTH</span><span style="color:#89DDFF">];</span><span style="color:#EEFFFF"> HEIGHT</span><span style="color:#89DDFF">];</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">        for</span><span style="color:#89DDFF"> (</span><span style="color:#EEFFFF">i</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> pixel</span><span style="color:#89DDFF">)</span><span style="color:#F78C6C"> in</span><span style="color:#EEFFFF"> item</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">image_bytes</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">iter</span><span style="color:#89DDFF">().</span><span style="color:#82AAFF">enumerate</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C792EA">            let</span><span style="color:#EEFFFF"> x </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> i </span><span style="color:#89DDFF">%</span><span style="color:#EEFFFF"> WIDTH</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">            let</span><span style="color:#EEFFFF"> y </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> i </span><span style="color:#89DDFF">/</span><span style="color:#EEFFFF"> HEIGHT</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#EEFFFF">            image_array</span><span style="color:#89DDFF">[</span><span style="color:#EEFFFF">y</span><span style="color:#89DDFF">][</span><span style="color:#EEFFFF">x</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> *</span><span style="color:#EEFFFF">pixel </span><span style="color:#F78C6C">as</span><span style="color:#FFCB6B"> f32</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFCB6B">        MnistItem</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">            image</span><span style="color:#89DDFF">:</span><span style="color:#EEFFFF"> image_array</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#EEFFFF">            label</span><span style="color:#89DDFF">:</span><span style="color:#EEFFFF"> item</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">label</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">type</span><span style="color:#FFCB6B"> MappedDataset</span><span style="color:#89DDFF"> =</span><span style="color:#FFCB6B"> MapperDataset</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">InMemDataset</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">MnistItemRaw</span><span style="color:#89DDFF">>,</span><span style="color:#FFCB6B"> BytesToImage</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> MnistItemRaw</span><span style="color:#89DDFF">>;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">/// The MNIST dataset.</span></span>
+<span class="line"><span style="color:#F78C6C">pub</span><span style="color:#C792EA"> struct</span><span style="color:#FFCB6B"> MnistDataset</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">    dataset</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> MappedDataset</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre>
+              </div>
+              <p>
+                To construct the <code>MnistDataset</code>, the data source must be parsed into the
+                expected <code>MappedDataset</code>
+                type. We automatically download the data files from the web and parse the files to retrieve
+                the images and labels. The code is included for completeness, but just know that each image
+                is retrieved as a list of bytes and each digit label as an 8-bit unsigned integer. Thus, we
+                have a <code>Vec&lt;Vec&lt;u8&gt;&gt;</code> to represent <code>images</code> and a
+                <code>Vec&lt;u8&gt;</code> to represent <code>labels</code>. Since both the train and test
+                sets use the same file format, we can separate the functionality to load the <code>train()</code> and
+                <code>test()</code> dataset.
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">// CVDF mirror of http://yann.lecun.com/exdb/mnist/</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#EEFFFF"> URL</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">https://storage.googleapis.com/cvdf-datasets/mnist/</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#EEFFFF"> TRAIN_IMAGES</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">train-images-idx3-ubyte</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#EEFFFF"> TRAIN_LABELS</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">train-labels-idx1-ubyte</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#EEFFFF"> TEST_IMAGES</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">t10k-images-idx3-ubyte</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">const</span><span style="color:#EEFFFF"> TEST_LABELS</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">t10k-labels-idx1-ubyte</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F78C6C">impl</span><span style="color:#FFCB6B"> MnistDataset</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Creates a new train dataset.</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#F78C6C"> fn</span><span style="color:#82AAFF"> train</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> -></span><span style="color:#EEFFFF"> Self </span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#EEFFFF">        Self</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">new</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">train</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Creates a new test dataset.</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#F78C6C"> fn</span><span style="color:#82AAFF"> test</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> -></span><span style="color:#EEFFFF"> Self </span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#EEFFFF">        Self</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">new</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">test</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> new</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">split</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#EEFFFF"> Self </span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Download dataset</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> root </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">download</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">split</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Parse data as vector of images bytes and vector of labels</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> images </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">read_images</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">root</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> split</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> labels </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">read_labels</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">root</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> split</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Collect as vector of MnistItemRaw</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> items</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#EEFFFF">_</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> =</span><span style="color:#EEFFFF"> images</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">into_iter</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">zip</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">labels</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">map</span><span style="color:#89DDFF">(|(</span><span style="color:#EEFFFF">image_bytes</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> label</span><span style="color:#89DDFF">)|</span><span style="color:#FFCB6B"> MnistItemRaw</span><span style="color:#89DDFF"> {</span><span style="color:#EEFFFF"> image_bytes</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> label </span><span style="color:#89DDFF">})</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">collect</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> dataset </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> InMemDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">new</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">items</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> dataset </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> MapperDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">new</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">dataset</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> BytesToImage</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#EEFFFF">        Self </span><span style="color:#89DDFF">{</span><span style="color:#EEFFFF"> dataset </span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Read images at the provided path for the specified split.</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Each image is a vector of bytes.</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> read_images</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">P</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> AsRef</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">Path</span><span style="color:#89DDFF">>>(</span><span style="color:#EEFFFF">root</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">P</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> split</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">>></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> file_name </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF;font-style:italic"> if</span><span style="color:#EEFFFF"> split </span><span style="color:#89DDFF">==</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">train</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">            TRAIN_IMAGES</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span><span style="color:#89DDFF;font-style:italic"> else</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">            TEST_IMAGES</span></span>
+<span class="line"><span style="color:#89DDFF">        };</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> file_name </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> root</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">as_ref</span><span style="color:#89DDFF">().</span><span style="color:#82AAFF">join</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">file_name</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Read number of images from 16-byte header metadata</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> f </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> File</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">open</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">file_name</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> buf </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [</span><span style="color:#F78C6C">0</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">;</span><span style="color:#F78C6C"> 4</span><span style="color:#89DDFF">];</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> _ </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">seek</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">SeekFrom</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">Start</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">4</span><span style="color:#89DDFF">)).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#EEFFFF">        f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">read_exact</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#C792EA">mut</span><span style="color:#EEFFFF"> buf</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Should be able to read image file header</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> size </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> u32</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">from_be_bytes</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">buf</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> buf_images</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> =</span><span style="color:#82AAFF"> vec!</span><span style="color:#89DDFF">[</span><span style="color:#F78C6C">0</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">;</span><span style="color:#EEFFFF"> WIDTH </span><span style="color:#89DDFF">*</span><span style="color:#EEFFFF"> HEIGHT </span><span style="color:#89DDFF">*</span><span style="color:#89DDFF"> (</span><span style="color:#EEFFFF">size </span><span style="color:#F78C6C">as</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">)];</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> _ </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">seek</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">SeekFrom</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">Start</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">16</span><span style="color:#89DDFF">)).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#EEFFFF">        f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">read_exact</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#C792EA">mut</span><span style="color:#EEFFFF"> buf_images</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Should be able to read image file header</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#EEFFFF">        buf_images</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">chunks</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">WIDTH </span><span style="color:#89DDFF">*</span><span style="color:#EEFFFF"> HEIGHT</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">map</span><span style="color:#89DDFF">(|</span><span style="color:#EEFFFF">chunk</span><span style="color:#89DDFF">|</span><span style="color:#EEFFFF"> chunk</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">to_vec</span><span style="color:#89DDFF">())</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">collect</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Read labels at the provided path for the specified split.</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> read_labels</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">P</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> AsRef</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">Path</span><span style="color:#89DDFF">>>(</span><span style="color:#EEFFFF">root</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">P</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> split</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> file_name </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF;font-style:italic"> if</span><span style="color:#EEFFFF"> split </span><span style="color:#89DDFF">==</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">train</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">            TRAIN_LABELS</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span><span style="color:#89DDFF;font-style:italic"> else</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">            TEST_LABELS</span></span>
+<span class="line"><span style="color:#89DDFF">        };</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> file_name </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> root</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">as_ref</span><span style="color:#89DDFF">().</span><span style="color:#82AAFF">join</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">file_name</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Read number of labels from 8-byte header metadata</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> f </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> File</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">open</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">file_name</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> buf </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [</span><span style="color:#F78C6C">0</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">;</span><span style="color:#F78C6C"> 4</span><span style="color:#89DDFF">];</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> _ </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">seek</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">SeekFrom</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">Start</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">4</span><span style="color:#89DDFF">)).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#EEFFFF">        f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">read_exact</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#C792EA">mut</span><span style="color:#EEFFFF"> buf</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Should be able to read label file header</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> size </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> u32</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">from_be_bytes</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">buf</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> buf_labels</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> =</span><span style="color:#82AAFF"> vec!</span><span style="color:#89DDFF">[</span><span style="color:#F78C6C">0</span><span style="color:#FFCB6B">u8</span><span style="color:#89DDFF">;</span><span style="color:#EEFFFF"> size </span><span style="color:#F78C6C">as</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">];</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> _ </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">seek</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">SeekFrom</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">Start</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">8</span><span style="color:#89DDFF">)).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#EEFFFF">        f</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">read_exact</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#C792EA">mut</span><span style="color:#EEFFFF"> buf_labels</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Should be able to read labels from file</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#EEFFFF">        buf_labels</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Download the MNIST dataset files from the web.</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Panics if the download cannot be completed or the content</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// of the file cannot be written to disk.</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> download</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">split</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> PathBuf</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Dataset files are stored un the mabor-dataset cache directory</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> cache_dir </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> dirs</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">home_dir</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Could not get home directory</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">join</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">.cache</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">join</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">mabor-dataset</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> split_dir </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> cache_dir</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">join</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">mnist</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">join</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">split</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">        if</span><span style="color:#89DDFF"> !</span><span style="color:#EEFFFF">split_dir</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">exists</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">            create_dir_all</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">split_dir</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Failed to create base directory</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Download split files</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">        match</span><span style="color:#EEFFFF"> split </span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#89DDFF">            "</span><span style="color:#C3E88D">train</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#FFCB6B">                MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">download_file</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">TRAIN_IMAGES</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#EEFFFF">split_dir</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#FFCB6B">                MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">download_file</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">TRAIN_LABELS</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#EEFFFF">split_dir</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#89DDFF">            }</span></span>
+<span class="line"><span style="color:#89DDFF">            "</span><span style="color:#C3E88D">test</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> =></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#FFCB6B">                MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">download_file</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">TEST_IMAGES</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#EEFFFF">split_dir</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#FFCB6B">                MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">download_file</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">TEST_LABELS</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#EEFFFF">split_dir</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#89DDFF">            }</span></span>
+<span class="line"><span style="color:#EEFFFF">            _ </span><span style="color:#89DDFF">=></span><span style="color:#82AAFF"> panic!</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Invalid split specified </span><span style="color:#89DDFF">{}"</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> split</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#89DDFF">        };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#EEFFFF">        split_dir</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// Download a file from the MNIST dataset URL to the destination directory.</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">    /// File download progress is reported with the help of a [progress bar](indicatif).</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> download_file</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">P</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> AsRef</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">Path</span><span style="color:#89DDFF">>>(</span><span style="color:#EEFFFF">name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">str</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> dest_dir</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#FFCB6B">P</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> PathBuf</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">        // Output file name</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> file_name </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> dest_dir</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">as_ref</span><span style="color:#89DDFF">().</span><span style="color:#82AAFF">join</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">name</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">        if</span><span style="color:#89DDFF"> !</span><span style="color:#EEFFFF">file_name</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">exists</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#545454;font-style:italic">            // Download gzip file</span></span>
+<span class="line"><span style="color:#C792EA">            let</span><span style="color:#EEFFFF"> bytes </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> download_file_as_bytes</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#82AAFF">format!</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"{</span><span style="color:#C3E88D">URL</span><span style="color:#89DDFF">}{</span><span style="color:#C3E88D">name</span><span style="color:#89DDFF">}</span><span style="color:#C3E88D">.gz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">),</span><span style="color:#EEFFFF"> name</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">            // Create file to write the downloaded content to</span></span>
+<span class="line"><span style="color:#C792EA">            let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> output_file </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> File</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">create</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">file_name</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">            // Decode gzip file content and write to disk</span></span>
+<span class="line"><span style="color:#C792EA">            let</span><span style="color:#C792EA"> mut</span><span style="color:#EEFFFF"> gz_buffer </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> GzDecoder</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">new</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">bytes</span><span style="color:#89DDFF">[..]);</span></span>
+<span class="line"><span style="color:#FFCB6B">            std</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">io</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">copy</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#C792EA">mut</span><span style="color:#EEFFFF"> gz_buffer</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#C792EA">mut</span><span style="color:#EEFFFF"> output_file</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#EEFFFF">        file_name</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre>
+              </div>
+              <p>
+                As mentioned earlier, the <code>MnistDataset</code> simply wraps a <code>MapperDataset</code> instance
+                with
+                <code>InMemDataset</code>. This makes the <code>Dataset</code> trait implementation quite
+                straightforward.
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#F78C6C">impl</span><span style="color:#FFCB6B"> Dataset</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">MnistItem</span><span style="color:#89DDFF">></span><span style="color:#89DDFF;font-style:italic"> for</span><span style="color:#FFCB6B"> MnistDataset</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> get</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> index</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Option</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">MnistItem</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">        self</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">dataset</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">get</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">index</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> len</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">        self</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">dataset</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">len</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre>
+              </div>
+              <p>
+                The only thing missing now is the <code>Batcher</code>. We'll define the <code>MnistBatcher</code> with
+                the device on which the tensor should be sent before being passed to the model. Note
+                that the device is an associative type of the <code>Backend</code> trait since not all backends
+                expose the same devices.
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#89DDFF">#[</span><span style="color:#EEFFFF">derive</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">Clone</span><span style="color:#89DDFF">)]</span></span>
+<span class="line"><span style="color:#F78C6C">pub</span><span style="color:#C792EA"> struct</span><span style="color:#FFCB6B"> MnistBatcher</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">    device</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> B</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">Device</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F78C6C">impl</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">></span><span style="color:#FFCB6B"> MnistBatcher</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#F78C6C"> fn</span><span style="color:#82AAFF"> new</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">device</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> B</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">Device</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#EEFFFF"> Self </span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#EEFFFF">        Self </span><span style="color:#89DDFF">{</span><span style="color:#EEFFFF"> device </span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre>
+              </div>
+              <p>
+                Next, we need to actually implement the batching logic. The <code>batch(items)</code> method
+                takes a list of
+                <code>MnistItem</code> retrieved by the dataloader as input and returns a batch containing
+                the images in the form of a 3D tensor, along with the targets tensor that contains the indices
+                of the correct digit class.
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#89DDFF">#[</span><span style="color:#EEFFFF">derive</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">Clone</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Debug</span><span style="color:#89DDFF">)]</span></span>
+<span class="line"><span style="color:#F78C6C">pub</span><span style="color:#C792EA"> struct</span><span style="color:#FFCB6B"> MnistBatch</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#EEFFFF"> images</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> 3</span><span style="color:#89DDFF">>,</span></span>
+<span class="line"><span style="color:#F78C6C">    pub</span><span style="color:#EEFFFF"> targets</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> 1</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Int</span><span style="color:#89DDFF">>,</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F78C6C">impl</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">></span><span style="color:#FFCB6B"> Batcher</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">MnistItem</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> MnistBatch</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">>></span><span style="color:#89DDFF;font-style:italic"> for</span><span style="color:#FFCB6B"> MnistBatcher</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#F78C6C">    fn</span><span style="color:#82AAFF"> batch</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> items</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Vec</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">MnistItem</span><span style="color:#89DDFF">>)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> MnistBatch</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> images </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> items                                               </span><span style="color:#545454;font-style:italic">// take items Vec&#x3C;MnistItem></span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">iter</span><span style="color:#89DDFF">()</span><span style="color:#545454;font-style:italic">                                                      // create an iterator over it</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">map</span><span style="color:#89DDFF">(|</span><span style="color:#EEFFFF">item</span><span style="color:#89DDFF">|</span><span style="color:#FFCB6B"> TensorData</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">from</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">item</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">image</span><span style="color:#89DDFF">))</span><span style="color:#545454;font-style:italic">                    // for each item, convert the image to float32 data struct</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">map</span><span style="color:#89DDFF">(|</span><span style="color:#EEFFFF">data</span><span style="color:#89DDFF">|</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">::&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 2</span><span style="color:#89DDFF">>::</span><span style="color:#82AAFF">from_data</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">data</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">device</span><span style="color:#89DDFF">))</span><span style="color:#545454;font-style:italic">   // for each data struct, create a tensor on the device</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">map</span><span style="color:#89DDFF">(|</span><span style="color:#EEFFFF">tensor</span><span style="color:#89DDFF">|</span><span style="color:#EEFFFF"> tensor</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">reshape</span><span style="color:#89DDFF">([</span><span style="color:#F78C6C">1</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> HEIGHT</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> WIDTH</span><span style="color:#89DDFF">]))</span><span style="color:#545454;font-style:italic">            // for each tensor, reshape to the image dimensions [C, H, W]</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">map</span><span style="color:#89DDFF">(|</span><span style="color:#EEFFFF">tensor</span><span style="color:#89DDFF">|</span><span style="color:#89DDFF"> ((</span><span style="color:#EEFFFF">tensor </span><span style="color:#89DDFF">/</span><span style="color:#F78C6C"> 255</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -</span><span style="color:#F78C6C"> 0</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">1307</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> /</span><span style="color:#F78C6C"> 0</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">3081</span><span style="color:#89DDFF">)</span><span style="color:#545454;font-style:italic">            // for each image tensor, apply normalization</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">collect</span><span style="color:#89DDFF">();</span><span style="color:#545454;font-style:italic">                                                  // collect the values into a new vector of tensors</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> targets </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> items</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">iter</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">map</span><span style="color:#89DDFF">(|</span><span style="color:#EEFFFF">item</span><span style="color:#89DDFF">|</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#FFCB6B">                Tensor</span><span style="color:#89DDFF">::&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 1</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Int</span><span style="color:#89DDFF">>::</span><span style="color:#82AAFF">from_data</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">TensorData</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">from</span><span style="color:#89DDFF">([</span><span style="color:#EEFFFF">item</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">label </span><span style="color:#F78C6C">as</span><span style="color:#FFCB6B"> i32</span><span style="color:#89DDFF">]),</span><span style="color:#89DDFF"> &#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">device</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">            })</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#82AAFF">collect</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> images </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">cat</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">images</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 0</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">to_device</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">device</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C792EA">        let</span><span style="color:#EEFFFF"> targets </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">cat</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">targets</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 0</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">to_device</span><span style="color:#89DDFF">(&#x26;</span><span style="color:#EEFFFF">self</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">device</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFCB6B">        MnistBatch</span><span style="color:#89DDFF"> {</span><span style="color:#EEFFFF"> images</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> targets </span><span style="color:#89DDFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre>
+              </div>
+              <p>
+                To achieve this, we parse the image array into a <code>TensorData</code> struct provided by
+                Mabor to encapsulate tensor storage information without being specific for a backend. The image
+                is then reshaped to the image dimensions <code>[1, HEIGHT, WIDTH]</code> with a single channel
+                and normalized according to the MNIST dataset statistics. Each vector of images and targets
+                are then concatenated and the <code>MnistBatch</code> is returned.
+              </p>
+              <p>
+                At this point, we now have everything in place to load the MNIST data for our application.
+                If you want to test it out, you can use the <code>DataLoaderBuilder</code> with the
+                <code>MnistDataset</code> and <code>MnistBatcher</code>
+                we just defined to iterate over the batches.
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#F78C6C">pub</span><span style="color:#F78C6C"> fn</span><span style="color:#82AAFF"> main</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C792EA">    type</span><span style="color:#FFCB6B"> MyBackend</span><span style="color:#89DDFF"> =</span><span style="color:#FFCB6B"> Wgpu</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">f32</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> i32</span><span style="color:#89DDFF">>;</span></span>
+<span class="line"><span style="color:#C792EA">    let</span><span style="color:#EEFFFF"> batch_size </span><span style="color:#89DDFF">=</span><span style="color:#F78C6C"> 32</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">    let</span><span style="color:#EEFFFF"> num_workers </span><span style="color:#89DDFF">=</span><span style="color:#F78C6C"> 4</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    // Create a default Wgpu device</span></span>
+<span class="line"><span style="color:#C792EA">    let</span><span style="color:#EEFFFF"> device </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> WgpuDevice</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">default</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    // Create a data loader for the MNIST test data</span></span>
+<span class="line"><span style="color:#C792EA">    let</span><span style="color:#EEFFFF"> batcher </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> MnistBatcher</span><span style="color:#89DDFF">::&#x3C;</span><span style="color:#FFCB6B">MyBackend</span><span style="color:#89DDFF">>::</span><span style="color:#82AAFF">new</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">device</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C792EA">    let</span><span style="color:#EEFFFF"> dataloader </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> DataLoaderBuilder</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">new</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">batcher</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#82AAFF">batch_size</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">batch_size</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#82AAFF">num_workers</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">num_workers</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#82AAFF">build</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">MnistDataset</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">test</span><span style="color:#89DDFF">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#545454;font-style:italic">    // Iterate over the MNIST test data batches</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">    for</span><span style="color:#89DDFF"> (</span><span style="color:#EEFFFF">iteration</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> batch</span><span style="color:#89DDFF">)</span><span style="color:#F78C6C"> in</span><span style="color:#EEFFFF"> dataloader</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">iter</span><span style="color:#89DDFF">().</span><span style="color:#82AAFF">enumerate</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#82AAFF">        println!</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#89DDFF">            "</span><span style="color:#C3E88D">[Iteration </span><span style="color:#89DDFF">{}</span><span style="color:#C3E88D">] Images </span><span style="color:#89DDFF">{</span><span style="color:#C3E88D">:?</span><span style="color:#89DDFF">}</span><span style="color:#C3E88D"> | Targets </span><span style="color:#89DDFF">{</span><span style="color:#C3E88D">:?</span><span style="color:#89DDFF">}"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#EEFFFF">            iteration</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#EEFFFF">            batch</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">images</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">dims</span><span style="color:#89DDFF">(),</span></span>
+<span class="line"><span style="color:#EEFFFF">            batch</span><span style="color:#89DDFF">.</span><span style="color:#EEFFFF">targets</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">dims</span><span style="color:#89DDFF">(),</span></span>
+<span class="line"><span style="color:#89DDFF">        );</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre>
+              </div>
+              <p>This completes our tour of Mabor's data loading components.</p>
+              <p>Stay tuned for the next posts in this series!</p>
+            </div> <!--/--><!--$-->
+            <div>
+              <h2>References</h2><!--$-->
+              <div>
+                <div id="reference-1"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://burn.dev/book/basic-workflow/index.html"
+                      target="_blank">1</a>]</span><span class="font-light font-serif">[The Mabor Book] Basic Workflow:
+                    From Training to Inference</span></div>
+                <div id="reference-2"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://yann.lecun.com/exdb/mnist/"
+                      target="_blank">2</a>]</span><span class="font-light font-serif">THE MNIST DATABASE of handwritten
+                    digits</span></div>
+                <div id="reference-3"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://burn.dev/book/building-blocks/dataset.html#transformation"
+                      target="_blank">3</a>]</span><span class="font-light font-serif">[The Mabor Book] Dataset
+                    Transformation</span></div>
+                <div id="reference-4"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://en.wikipedia.org/wiki/Tensor_(machine_learning)" target="_blank">4</a>]</span><span
+                    class="font-light font-serif">Tensor (machine learning)</span></div>
+                <div id="reference-5"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://github.com/tracel-ai/burn/blob/main/crates/burn-dataset/src/vision/mnist.rs"
+                      target="_blank">5</a>]</span><span class="font-light font-serif">[Mabor GitHub]
+                    MnistDataset</span></div>
+                <div id="reference-6"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://burn.dev/book/building-blocks/dataset.html#storage"
+                      target="_blank">6</a>]</span><span class="font-light font-serif">[The Mabor Book] Dataset
+                    Storage</span></div>
+              </div><!--/-->
+            </div><!--/-->
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <dialog
+    class="items-center text-balance rounded-2xl border bg-transparent p-8 text-center backdrop-blur-md backdrop:bg-black/70 max-sm:mx-6 overflow-hidden"
+    id="stay-connected-dialog">
+    <h2 class="text-v2h2">Join the mailing list</h2>
+    <p class="py-4 font-mono text-body"> Join our community! We&#39;d love to keep you in the loop with our newsletter.
+    </p>
+    <script>(() => { var a = (s, i, o) => { let r = async () => { await (await s())() }, t = typeof i.value == "object" ? i.value : void 0, c = { rootMargin: t == null ? void 0 : t.rootMargin }, n = new IntersectionObserver(e => { for (let l of e) if (l.isIntersecting) { n.disconnect(), r(); break } }, c); for (let e of o.children) n.observe(e) }; (self.Astro || (self.Astro = {})).visible = a; window.dispatchEvent(new Event("astro:visible")); })();</script>
+    <astro-island uid="Z1fPhRT" data-solid-render-id="s0" component-url="/_astro/EmailCollector.BqSZQ7nP.js"
+      component-export="EmailCollector" renderer-url="/_astro/client.C-0b9Jot.js"
+      props="{&quot;website&quot;:[0,&quot;burn&quot;],&quot;inputId&quot;:[0,&quot;stay-connected&quot;],&quot;title&quot;:[0,&quot;Stay connected&quot;],&quot;submitTitle&quot;:[0,&quot;submit email&quot;],&quot;inputLabel&quot;:[0,&quot;email address&quot;],&quot;placeholder&quot;:[0,&quot;your em@il&quot;],&quot;bgAlt&quot;:[0,&quot;stay connected background&quot;],&quot;subscribed&quot;:[0,&quot;subscribed&quot;],&quot;unsubscribed&quot;:[0,&quot;unsubscribed&quot;],&quot;firebaseConfig&quot;:[0,{&quot;apiKey&quot;:[0,&quot;AIzaSyDtXjGAc35AxrqEa8Fdmz3E1sKIX7MfgzU&quot;],&quot;authDomain&quot;:[0,&quot;tracel-website.firebaseapp.com&quot;],&quot;projectId&quot;:[0,&quot;tracel-website&quot;],&quot;storageBucket&quot;:[0,&quot;tracel-website.appspot.com&quot;],&quot;messagingSenderId&quot;:[0,&quot;278977725843&quot;],&quot;appId&quot;:[0,&quot;1:278977725843:web:be459a460a35c455cb9466&quot;]}]}"
+      ssr="" client="visible" opts="{&quot;name&quot;:&quot;EmailCollector&quot;,&quot;value&quot;:true}"
+      await-children="">
+      <form data-hk="s00000" name="stay-connected"><span class="flex items-center rounded-lg gap-2">
+          <div class="relative w-full"><input
+              class="w-full h-12 flex-1 rounded-md bg-black/20 pl-2 pr-6 text-xs transition-border-duration-700 placeholder:text-primary-content/40 focus:outline-2 border border-primary-content"
+              id="stay-connected" placeholder="your em@il" name="email" autocomplete="email" type="email"
+              aria-label="email address" required=""><output class="absolute right-5 top-1/2 -translate-y-1/2"
+              name="subscribeStatus" for="stay-connected"><svg width="16px" viewbox="2 -11 9 10"
+                xmlns="http://www.w3.org/2000/svg">
+                <title>unsubscribed</title><text x="0" y="0" class="fill-green-700"></text>
+              </svg></output></div><button class="primary-button rounded-md px-2 text-xl h-12 w-20 border border-white"
+            title="submit email" type="submit">⇥</button>
+        </span></form><!--astro:end-->
+    </astro-island>
+    <form class="absolute right-0 top-0" method="dialog"> <button class="rounded-md p-4" title="dismiss">
+        ✕
+      </button> </form>
+  </dialog>
+  <script>(function () {
+      const id = "stay-connected";
+
+      /* eslint-env browser */
+      const setupModal = () => {
+        if (location.hash === `#${id}`) {
+          const dialog = document.getElementById(`${id}-dialog`);
+          dialog.addEventListener(
+            "close",
+            () => {
+              history.pushState(
+                "",
+                document.title,
+                window.location.pathname + window.location.search,
+              );
+            },
+            { once: true },
+          );
+
+          dialog.addEventListener("click", (e) => {
+            const dialogDimensions = dialog.getBoundingClientRect();
+            if (
+              e.clientX < dialogDimensions.left ||
+              e.clientX > dialogDimensions.right ||
+              e.clientY < dialogDimensions.top ||
+              e.clientY > dialogDimensions.bottom
+            ) {
+              dialog.close();
+            }
+          });
+
+          dialog.showModal();
+        }
+      };
+
+      document.addEventListener("readystatechange", (e) => {
+        if (e.target.readyState === "interactive") {
+          setupModal();
+          window.addEventListener("popstate", setupModal);
+        }
+      });
+    })();</script>
+  <div class="flex w-full flex-col items-center gap-8 py-10 text-mid">
+    <div class="w-full max-w-[1360px] px-8 md:px-20">
+      <div
+        class="grid w-full grid-cols-1 gap-8 md:gap-20 [@media(min-width:400px)]:grid-cols-2 [@media(min-width:768px)]:grid-cols-4">
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Resources</h3> <a href="../../index.htm"
+            class="text-body text-grey-accent hover:text-light"> Home </a><a href="../../get-started/index.htm"
+            class="text-body text-grey-accent hover:text-light"> Get Started </a><a
+            href="../../benchmarks/community-benchmarks/index.htm" class="text-body text-grey-accent hover:text-light">
+            Benchmarks </a><a href="../index.htm" class="text-body text-grey-accent hover:text-light"> Blog </a><a
+            href="../../learn/index.htm" class="text-body text-grey-accent hover:text-light"> Learn </a><a
+            href="../../docs/burn/index.htm" class="text-body text-grey-accent hover:text-light"> Docs </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Community</h3> <a href="https://github.com/tracel-ai/burn"
+            class="text-body text-grey-accent hover:text-light"> Github </a><a href="https://discord.gg/uPEBbYYDB6"
+            class="text-body text-grey-accent hover:text-light"> Discord </a><a href="#stay-connected"
+            class="text-body text-grey-accent hover:text-light"> Mailing list </a><a href="https://tracel.ai"
+            class="text-body text-grey-accent hover:text-light"> Tracel </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Projects</h3> <a href="https://crates.io/crates/burn"
+            class="text-body text-grey-accent hover:text-light"> Mabor Crate </a><a
+            href="https://github.com/tracel-ai/burn" class="text-body text-grey-accent hover:text-light"> Mabor GitHub
+          </a><a href="https://crates.io/crates/cubecl" class="text-body text-grey-accent hover:text-light"> CubeCL
+            Crate </a><a href="https://github.com/tracel-ai/cubecl" class="text-body text-grey-accent hover:text-light">
+            CubeCL GitHub </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Company</h3> <a href="https://tracel.ai/"
+            class="text-body text-grey-accent hover:text-light"> Tracel AI </a><a
+            href="https://www.linkedin.com/company/tracel-technologies"
+            class="text-body text-grey-accent hover:text-light"> LinkedIn </a><a href="https://x.com/tracel_ai"
+            class="text-body text-grey-accent hover:text-light"> X </a>
+        </div>
+      </div>
+    </div>
+    <p class="mt-6 text-center font-mono text-b2 text-mid md:flex"> Copyright 2025 © Mabor | Tracel Inc. All rights
+      reserved. Design by Perdomo </p>
+  </div>
+</body>
+
+</html>

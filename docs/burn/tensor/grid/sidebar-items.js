@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["GridIndexing","GridSparsity","IndexPos"],"fn":["meshgrid","meshgrid_stack"],"struct":["GridOptions"]};

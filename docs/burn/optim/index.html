@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Optimizer module.">
+    <title>mabor::optim - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="mabor"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="mabor" data-themes="mabor" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module optim</a></h2>
+                <h3><a href="#modules">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#modules" title="Modules">Modules</a></li>
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2 class="in-crate"><a href="../index.html">In crate mabor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a></div>
+                    <h1>Module <span>optim</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Optimizer module.</p>
+                    </div>
+                </details>
+                <h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="mod" href="adaptor/index.html" title="mod mabor::optim::adaptor">adaptor</a></dt>
+                    <dd>Adaptor module for optimizers.</dd>
+                    <dt><a class="mod" href="decay/index.html" title="mod mabor::optim::decay">decay</a></dt>
+                    <dd>Weight decay module for optimizers.</dd>
+                    <dt><a class="mod" href="momentum/index.html" title="mod mabor::optim::momentum">momentum</a></dt>
+                    <dd>Momentum module for optimizers.</dd>
+                    <dt><a class="mod" href="record/index.html" title="mod mabor::optim::record">record</a></dt>
+                    <dd>Record module for optimizers.</dd>
+                </dl>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.AdaGrad.html" title="struct mabor::optim::AdaGrad">AdaGrad</a>
+                    </dt>
+                    <dd>AdaGrad optimizer</dd>
+                    <dt><a class="struct" href="struct.AdaGradConfig.html"
+                            title="struct mabor::optim::AdaGradConfig">AdaGrad<wbr>Config</a></dt>
+                    <dd>AdaGrad configuration.</dd>
+                    <dt><a class="struct" href="struct.AdaGradState.html"
+                            title="struct mabor::optim::AdaGradState">AdaGrad<wbr>State</a></dt>
+                    <dd>AdaGrad state.</dd>
+                    <dt><a class="struct" href="struct.AdaGradStateItem.html"
+                            title="struct mabor::optim::AdaGradStateItem">AdaGrad<wbr>State<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Adam.html" title="struct mabor::optim::Adam">Adam</a></dt>
+                    <dd>Adam optimizer as described in the paper <a href="https://arxiv.org/pdf/1412.6980.pdf">Adam: A
+                            Method for Stochastic Optimization</a>.</dd>
+                    <dt><a class="struct" href="struct.AdamConfig.html"
+                            title="struct mabor::optim::AdamConfig">Adam<wbr>Config</a></dt>
+                    <dd>Adam configuration.</dd>
+                    <dt><a class="struct" href="struct.AdamState.html"
+                            title="struct mabor::optim::AdamState">Adam<wbr>State</a></dt>
+                    <dd>Adam state.</dd>
+                    <dt><a class="struct" href="struct.AdamStateItem.html"
+                            title="struct mabor::optim::AdamStateItem">Adam<wbr>State<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.AdamW.html" title="struct mabor::optim::AdamW">AdamW</a></dt>
+                    <dd>AdamW optimizer as described in the paper <a href="https://arxiv.org/abs/1711.05101">Decoupled
+                            Weight Decay Regularization, Loshchilov and Hutter, 2019</a>.</dd>
+                    <dt><a class="struct" href="struct.AdamWConfig.html"
+                            title="struct mabor::optim::AdamWConfig">AdamW<wbr>Config</a></dt>
+                    <dd>AdamW configuration.</dd>
+                    <dt><a class="struct" href="struct.AdamWState.html"
+                            title="struct mabor::optim::AdamWState">AdamW<wbr>State</a></dt>
+                    <dd>AdamW state.</dd>
+                    <dt><a class="struct" href="struct.AdamWStateItem.html"
+                            title="struct mabor::optim::AdamWStateItem">AdamW<wbr>State<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.AdaptiveMomentumState.html"
+                            title="struct mabor::optim::AdaptiveMomentumState">Adaptive<wbr>Momentum<wbr>State</a></dt>
+                    <dd>Adaptive momentum state.</dd>
+                    <dt><a class="struct" href="struct.AdaptiveMomentumStateItem.html"
+                            title="struct mabor::optim::AdaptiveMomentumStateItem">Adaptive<wbr>Momentum<wbr>State<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.CenteredState.html"
+                            title="struct mabor::optim::CenteredState">Centered<wbr>State</a></dt>
+                    <dd><a href="struct.CenteredState.html" title="struct mabor::optim::CenteredState">CenteredState</a>
+                        is to store and pass optimizer step params.</dd>
+                    <dt><a class="struct" href="struct.CenteredStateItem.html"
+                            title="struct mabor::optim::CenteredStateItem">Centered<wbr>State<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.GradientsAccumulator.html"
+                            title="struct mabor::optim::GradientsAccumulator">Gradients<wbr>Accumulator</a></dt>
+                    <dd>Accumulate gradients into a single <a
+                            href="../tensor/backend/trait.AutodiffBackend.html#associatedtype.Gradients"
+                            title="associated type mabor::tensor::backend::AutodiffBackend::Gradients">Gradients</a>
+                        object.</dd>
+                    <dt><a class="struct" href="struct.GradientsParams.html"
+                            title="struct mabor::optim::GradientsParams">Gradients<wbr>Params</a></dt>
+                    <dd>Data type that contains gradients for parameters.</dd>
+                    <dt><a class="struct" href="struct.LrDecayState.html"
+                            title="struct mabor::optim::LrDecayState">LrDecay<wbr>State</a></dt>
+                    <dd>Learning rate decay state (also includes sum state).</dd>
+                    <dt><a class="struct" href="struct.LrDecayStateItem.html"
+                            title="struct mabor::optim::LrDecayStateItem">LrDecay<wbr>State<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.RmsProp.html" title="struct mabor::optim::RmsProp">RmsProp</a>
+                    </dt>
+                    <dd>Optimizer that implements stochastic gradient descent with momentum.
+                        The optimizer can be configured with <a href="struct.RmsPropConfig.html"
+                            title="struct mabor::optim::RmsPropConfig">RmsPropConfig</a>.</dd>
+                    <dt><a class="struct" href="struct.RmsPropConfig.html"
+                            title="struct mabor::optim::RmsPropConfig">RmsProp<wbr>Config</a></dt>
+                    <dd>Configuration to create the <a href="struct.RmsProp.html"
+                            title="struct mabor::optim::RmsProp">RmsProp</a> optimizer.</dd>
+                    <dt><a class="struct" href="struct.RmsPropMomentum.html"
+                            title="struct mabor::optim::RmsPropMomentum">RmsProp<wbr>Momentum</a></dt>
+                    <dd><a href="struct.RmsPropMomentum.html"
+                            title="struct mabor::optim::RmsPropMomentum">RmsPropMomentum</a> is to store config status
+                        for optimizer.
+                        (, which is stored in <a href="struct.RmsProp.html"
+                            title="struct mabor::optim::RmsProp">optimizer</a> itself and not passed in during
+                        <code>step()</code> calculation)</dd>
+                    <dt><a class="struct" href="struct.RmsPropMomentumState.html"
+                            title="struct mabor::optim::RmsPropMomentumState">RmsProp<wbr>Momentum<wbr>State</a></dt>
+                    <dd><a href="struct.RmsPropMomentumState.html"
+                            title="struct mabor::optim::RmsPropMomentumState">RmsPropMomentumState</a> is to store and
+                        pass optimizer step params.</dd>
+                    <dt><a class="struct" href="struct.RmsPropMomentumStateItem.html"
+                            title="struct mabor::optim::RmsPropMomentumStateItem">RmsProp<wbr>Momentum<wbr>State<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.RmsPropState.html"
+                            title="struct mabor::optim::RmsPropState">RmsProp<wbr>State</a></dt>
+                    <dd>State of <a href="struct.RmsProp.html" title="struct mabor::optim::RmsProp">RmsProp</a></dd>
+                    <dt><a class="struct" href="struct.RmsPropStateItem.html"
+                            title="struct mabor::optim::RmsPropStateItem">RmsProp<wbr>State<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Sgd.html" title="struct mabor::optim::Sgd">Sgd</a></dt>
+                    <dd>Optimizer that implements stochastic gradient descent with momentum.</dd>
+                    <dt><a class="struct" href="struct.SgdConfig.html"
+                            title="struct mabor::optim::SgdConfig">SgdConfig</a></dt>
+                    <dd>Configuration to create the <a href="struct.Sgd.html" title="struct mabor::optim::Sgd">Sgd</a>
+                        optimizer.</dd>
+                    <dt><a class="struct" href="struct.SgdState.html" title="struct mabor::optim::SgdState">SgdState</a>
+                    </dt>
+                    <dd>State of <a href="struct.Sgd.html" title="struct mabor::optim::Sgd">Sgd</a>.</dd>
+                    <dt><a class="struct" href="struct.SgdStateItem.html"
+                            title="struct mabor::optim::SgdStateItem">SgdState<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.SquareAvgState.html"
+                            title="struct mabor::optim::SquareAvgState">Square<wbr>AvgState</a></dt>
+                    <dd><a href="struct.SquareAvgState.html"
+                            title="struct mabor::optim::SquareAvgState">SquareAvgState</a> is to store and pass optimizer
+                        step params.</dd>
+                    <dt><a class="struct" href="struct.SquareAvgStateItem.html"
+                            title="struct mabor::optim::SquareAvgStateItem">Square<wbr>AvgState<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.Optimizer.html" title="trait mabor::optim::Optimizer">Optimizer</a>
+                    </dt>
+                    <dd>General trait to optimize <a href="../module/trait.AutodiffModule.html"
+                            title="trait mabor::module::AutodiffModule">module</a>.</dd>
+                    <dt><a class="trait" href="trait.SimpleOptimizer.html"
+                            title="trait mabor::optim::SimpleOptimizer">Simple<wbr>Optimizer</a></dt>
+                    <dd>Simple optimizer is an opinionated trait to simplify the process of implementing an
+                        optimizer.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

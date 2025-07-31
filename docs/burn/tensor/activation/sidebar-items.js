@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["gelu","hard_sigmoid","leaky_relu","log_sigmoid","log_softmax","mish","prelu","quiet_softmax","relu","sigmoid","silu","softmax","softmin","softplus","tanh"]};

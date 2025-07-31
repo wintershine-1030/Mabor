@@ -1,0 +1,1506 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Default display settings for a module.">
+    <title>ModuleDisplayDefault in mabor::module - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module<wbr>Display<wbr>Default</a></h2>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.content" title="content">content</a></li>
+                </ul>
+                <h3><a href="#provided-methods">Provided Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#method.num_params" title="num_params">num_params</a></li>
+                </ul>
+                <h3><a href="#foreign-impls">Implementations on Foreign Types</a></h3>
+                <ul class="block">
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1)" title="(L0, L1)">(L0, L1)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2)" title="(L0, L1, L2)">(L0, L1, L2)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3)" title="(L0, L1, L2, L3)">(L0, L1, L2,
+                            L3)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4)" title="(L0, L1, L2, L3, L4)">(L0,
+                            L1, L2, L3, L4)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5)"
+                            title="(L0, L1, L2, L3, L4, L5)">(L0, L1, L2, L3, L4, L5)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6)"
+                            title="(L0, L1, L2, L3, L4, L5, L6)">(L0, L1, L2, L3, L4, L5, L6)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7)"
+                            title="(L0, L1, L2, L3, L4, L5, L6, L7)">(L0, L1, L2, L3, L4, L5, L6, L7)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7,+L8)"
+                            title="(L0, L1, L2, L3, L4, L5, L6, L7, L8)">(L0, L1, L2, L3, L4, L5, L6, L7, L8)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7,+L8,+L9)"
+                            title="(L0, L1, L2, L3, L4, L5, L6, L7, L8, L9)">(L0, L1, L2, L3, L4, L5, L6, L7, L8,
+                            L9)</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-Option%3CT%3E"
+                            title="Option&#60;T&#62;">Option&#60;T&#62;</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-PhantomData%3CB%3E"
+                            title="PhantomData&#60;B&#62;">PhantomData&#60;B&#62;</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-String" title="String">String</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-Vec%3CT%3E" title="Vec&#60;T&#62;">Vec&#60;T&#62;</a>
+                    </li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-%5BT;+N%5D" title="[T; N]">[T; N]</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-bool" title="bool">bool</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-f32" title="f32">f32</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-f64" title="f64">f64</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-i8" title="i8">i8</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-i16" title="i16">i16</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-i32" title="i32">i32</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-i64" title="i64">i64</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-isize" title="isize">isize</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-str" title="str">str</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-u8" title="u8">u8</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-u16" title="u16">u16</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-u32" title="u32">u32</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-u64" title="u64">u64</a></li>
+                    <li><a href="#impl-ModuleDisplayDefault-for-usize" title="usize">usize</a></li>
+                </ul>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>module</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a>::<wbr><a
+                            href="index.html">module</a></div>
+                    <h1>Trait <span class="trait">ModuleDisplayDefault</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait ModuleDisplayDefault {
+    // Required method
+    fn <a href="#tymethod.content" class="fn">content</a>(&amp;self, _content: <a class="struct" href="struct.Content.html" title="struct burn::module::Content">Content</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;;
+
+    // Provided method
+    fn <a href="#method.num_params" class="fn">num_params</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a> { ... }
+}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Default display settings for a module.</p>
+                    </div>
+                </details>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.content" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                    _content: <a class="struct" href="struct.Content.html"
+                                        title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                        href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                        title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                        href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Attributes of the module used for display purposes.</p>
+                            <h5 id="arguments"><a class="doc-anchor" href="#arguments">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>_content</code> - The content object that contains display settings and
+                                    attributes.</li>
+                            </ul>
+                            <h5 id="returns"><a class="doc-anchor" href="#returns">§</a>Returns</h5>
+                            <p>An optional content object containing the display attributes.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.num_params" class="method">
+                                <h4 class="code-header">fn <a href="#method.num_params"
+                                        class="fn">num_params</a>(&amp;self) -&gt; <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Gets the number of the parameters of the module.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="foreign-impls" class="section-header">Implementations on Foreign Types<a href="#foreign-impls"
+                        class="anchor">§</a></h2>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-bool" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-bool" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content" class="method trait-impl"><a href="#method.content"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-f32" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-f32" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.f32.html">f32</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-1" class="method trait-impl"><a href="#method.content-1"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-f64" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-f64" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.f64.html">f64</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-2" class="method trait-impl"><a href="#method.content-2"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-i8" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-i8" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.i8.html">i8</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-3" class="method trait-impl"><a href="#method.content-3"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-i16" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-i16" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.i16.html">i16</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-4" class="method trait-impl"><a href="#method.content-4"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-i32" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-i32" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.i32.html">i32</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-5" class="method trait-impl"><a href="#method.content-5"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-i64" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-i64" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.i64.html">i64</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-6" class="method trait-impl"><a href="#method.content-6"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-isize" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-isize" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.isize.html">isize</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-7" class="method trait-impl"><a href="#method.content-7"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-str" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-str" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.str.html">str</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-8" class="method trait-impl"><a href="#method.content-8"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-u8" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-u8" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.u8.html">u8</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-9" class="method trait-impl"><a href="#method.content-9"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-u16" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-u16" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.u16.html">u16</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-10" class="method trait-impl"><a href="#method.content-10"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-u32" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-u32" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.u32.html">u32</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-11" class="method trait-impl"><a href="#method.content-11"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-u64" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-u64" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.u64.html">u64</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-12" class="method trait-impl"><a href="#method.content-12"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-usize" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-usize" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-13" class="method trait-impl"><a href="#method.content-13"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-String" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-String" class="anchor">§</a>
+                            <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="struct"
+                                    href="https://doc.rust-lang.org/1.88.0/alloc/string/struct.String.html"
+                                    title="struct alloc::string::String">String</a></h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-14" class="method trait-impl"><a href="#method.content-14"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-PhantomData%3CB%3E" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-PhantomData%3CB%3E" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;B&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="struct"
+                                    href="https://doc.rust-lang.org/1.88.0/core/marker/struct.PhantomData.html"
+                                    title="struct core::marker::PhantomData">PhantomData</a>&lt;B&gt;<div class="where">
+                                    where
+                                    B: <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-15" class="method trait-impl"><a href="#method.content-15"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1)" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-16" class="method trait-impl"><a href="#method.content-16"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2)" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-17" class="method trait-impl"><a href="#method.content-17"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3)" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2, L3&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2,
+                                    L3)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L3: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-18" class="method trait-impl"><a href="#method.content-18"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4)" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2, L3, L4&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2, L3,
+                                    L4)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L3: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L4: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-19" class="method trait-impl"><a href="#method.content-19"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5)" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2, L3, L4, L5&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2, L3,
+                                    L4, L5)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L3: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L4: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L5: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-20" class="method trait-impl"><a href="#method.content-20"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6)" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2, L3, L4, L5, L6&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2, L3,
+                                    L4, L5, L6)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L3: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L4: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L5: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L6: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-21" class="method trait-impl"><a href="#method.content-21"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7)"
+                                class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2, L3, L4, L5, L6, L7&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2, L3,
+                                    L4, L5, L6, L7)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L3: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L4: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L5: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L6: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L7: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-22" class="method trait-impl"><a href="#method.content-22"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7,+L8)" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7,+L8)"
+                                class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2, L3, L4, L5, L6, L7, L8&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2, L3,
+                                    L4, L5, L6, L7, L8)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L3: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L4: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L5: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L6: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L7: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L8: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-23" class="method trait-impl"><a href="#method.content-23"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7,+L8,+L9)"
+                            class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-(L0,+L1,+L2,+L3,+L4,+L5,+L6,+L7,+L8,+L9)"
+                                class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;L0, L1, L2, L3, L4, L5, L6, L7, L8, L9&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(L0, L1, L2, L3,
+                                    L4, L5, L6, L7, L8, L9)</a>
+                                <div class="where">where
+                                    L0: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L1: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L2: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L3: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L4: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L5: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L6: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L7: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L8: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,
+                                    L9: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-24" class="method trait-impl"><a href="#method.content-24"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-Option%3CT%3E" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-Option%3CT%3E" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;T&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="enum" href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;T&gt;<div class="where">where
+                                    T: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-25" class="method trait-impl"><a href="#method.content-25"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-Vec%3CT%3E" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-Vec%3CT%3E" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;T&gt; <a class="trait"
+                                    href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html"
+                                    title="struct alloc::vec::Vec">Vec</a>&lt;T&gt;<div class="where">where
+                                    T: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-26" class="method trait-impl"><a href="#method.content-26"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-ModuleDisplayDefault-for-%5BT;+N%5D" class="impl"><a
+                                href="#impl-ModuleDisplayDefault-for-%5BT;+N%5D" class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;const N: <a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>, T&gt; <a
+                                    class="trait" href="trait.ModuleDisplayDefault.html"
+                                    title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.array.html">[T; N]</a>
+                                <div class="where">where
+                                    T: <a class="trait" href="trait.ModuleDisplay.html"
+                                        title="trait burn::module::ModuleDisplay">ModuleDisplay</a>,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.content-27" class="method trait-impl"><a href="#method.content-27"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.content" class="fn">content</a>(&amp;self,
+                                content: <a class="struct" href="struct.Content.html"
+                                    title="struct burn::module::Content">Content</a>) -&gt; <a class="enum"
+                                    href="https://doc.rust-lang.org/1.88.0/core/option/enum.Option.html"
+                                    title="enum core::option::Option">Option</a>&lt;<a class="struct"
+                                    href="struct.Content.html" title="struct burn::module::Content">Content</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <section id="impl-ModuleDisplayDefault-for-Interpolate1d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Interpolate1d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/interpolate/struct.Interpolate1d.html"
+                                title="struct burn::nn::interpolate::Interpolate1d">Interpolate1d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Interpolate2d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Interpolate2d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/interpolate/struct.Interpolate2d.html"
+                                title="struct burn::nn::interpolate::Interpolate2d">Interpolate2d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-CosineEmbeddingLoss" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-CosineEmbeddingLoss" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/loss/struct.CosineEmbeddingLoss.html"
+                                title="struct burn::nn::loss::CosineEmbeddingLoss">CosineEmbeddingLoss</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-HuberLoss" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-HuberLoss" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/loss/struct.HuberLoss.html"
+                                title="struct burn::nn::loss::HuberLoss">HuberLoss</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-MseLoss" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-MseLoss" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/loss/struct.MseLoss.html"
+                                title="struct burn::nn::loss::MseLoss">MseLoss</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-PoissonNllLoss" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-PoissonNllLoss" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/loss/struct.PoissonNllLoss.html"
+                                title="struct burn::nn::loss::PoissonNllLoss">PoissonNllLoss</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-AdaptiveAvgPool1d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-AdaptiveAvgPool1d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/pool/struct.AdaptiveAvgPool1d.html"
+                                title="struct burn::nn::pool::AdaptiveAvgPool1d">AdaptiveAvgPool1d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-AdaptiveAvgPool2d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-AdaptiveAvgPool2d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/pool/struct.AdaptiveAvgPool2d.html"
+                                title="struct burn::nn::pool::AdaptiveAvgPool2d">AdaptiveAvgPool2d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-AvgPool1d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-AvgPool1d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/pool/struct.AvgPool1d.html"
+                                title="struct burn::nn::pool::AvgPool1d">AvgPool1d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-AvgPool2d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-AvgPool2d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/pool/struct.AvgPool2d.html"
+                                title="struct burn::nn::pool::AvgPool2d">AvgPool2d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-MaxPool1d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-MaxPool1d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/pool/struct.MaxPool1d.html"
+                                title="struct burn::nn::pool::MaxPool1d">MaxPool1d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-MaxPool2d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-MaxPool2d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/pool/struct.MaxPool2d.html"
+                                title="struct burn::nn::pool::MaxPool2d">MaxPool2d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Dropout" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Dropout" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Dropout.html"
+                                title="struct burn::nn::Dropout">Dropout</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Gelu" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Gelu" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Gelu.html" title="struct burn::nn::Gelu">Gelu</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-HardSigmoid" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-HardSigmoid" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.HardSigmoid.html"
+                                title="struct burn::nn::HardSigmoid">HardSigmoid</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-LeakyRelu" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-LeakyRelu" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.LeakyRelu.html"
+                                title="struct burn::nn::LeakyRelu">LeakyRelu</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Relu" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Relu" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Relu.html" title="struct burn::nn::Relu">Relu</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Sigmoid" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Sigmoid" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Sigmoid.html"
+                                title="struct burn::nn::Sigmoid">Sigmoid</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Tanh" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Tanh" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Tanh.html" title="struct burn::nn::Tanh">Tanh</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Unfold4d" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Unfold4d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Unfold4d.html"
+                                title="struct burn::nn::Unfold4d">Unfold4d</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-bf16" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-bf16" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../tensor/struct.bf16.html"
+                                title="struct burn::tensor::bf16">bf16</a></h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-f16" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-f16" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../tensor/struct.f16.html" title="struct burn::tensor::f16">f16</a>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-MultiHeadAttention%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-MultiHeadAttention%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/attention/struct.MultiHeadAttention.html"
+                                title="struct burn::nn::attention::MultiHeadAttention">MultiHeadAttention</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Conv1d%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Conv1d%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/conv/struct.Conv1d.html"
+                                title="struct burn::nn::conv::Conv1d">Conv1d</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Conv2d%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Conv2d%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/conv/struct.Conv2d.html"
+                                title="struct burn::nn::conv::Conv2d">Conv2d</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Conv3d%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Conv3d%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/conv/struct.Conv3d.html"
+                                title="struct burn::nn::conv::Conv3d">Conv3d</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-ConvTranspose1d%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-ConvTranspose1d%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/conv/struct.ConvTranspose1d.html"
+                                title="struct burn::nn::conv::ConvTranspose1d">ConvTranspose1d</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-ConvTranspose2d%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-ConvTranspose2d%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/conv/struct.ConvTranspose2d.html"
+                                title="struct burn::nn::conv::ConvTranspose2d">ConvTranspose2d</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-ConvTranspose3d%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-ConvTranspose3d%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/conv/struct.ConvTranspose3d.html"
+                                title="struct burn::nn::conv::ConvTranspose3d">ConvTranspose3d</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-DeformConv2d%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-DeformConv2d%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/conv/struct.DeformConv2d.html"
+                                title="struct burn::nn::conv::DeformConv2d">DeformConv2d</a>&lt;B&gt;<div class="where">
+                                where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Gru%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Gru%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/gru/struct.Gru.html"
+                                title="struct burn::nn::gru::Gru">Gru</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-BinaryCrossEntropyLoss%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-BinaryCrossEntropyLoss%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/loss/struct.BinaryCrossEntropyLoss.html"
+                                title="struct burn::nn::loss::BinaryCrossEntropyLoss">BinaryCrossEntropyLoss</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-CrossEntropyLoss%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-CrossEntropyLoss%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/loss/struct.CrossEntropyLoss.html"
+                                title="struct burn::nn::loss::CrossEntropyLoss">CrossEntropyLoss</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-BiLstm%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-BiLstm%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.BiLstm.html"
+                                title="struct burn::nn::BiLstm">BiLstm</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Embedding%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Embedding%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Embedding.html"
+                                title="struct burn::nn::Embedding">Embedding</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-GateController%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-GateController%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.GateController.html"
+                                title="struct burn::nn::GateController">GateController</a>&lt;B&gt;<div class="where">
+                                where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-GroupNorm%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-GroupNorm%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.GroupNorm.html"
+                                title="struct burn::nn::GroupNorm">GroupNorm</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-InstanceNorm%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-InstanceNorm%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.InstanceNorm.html"
+                                title="struct burn::nn::InstanceNorm">InstanceNorm</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-LayerNorm%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-LayerNorm%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.LayerNorm.html"
+                                title="struct burn::nn::LayerNorm">LayerNorm</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Linear%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Linear%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Linear.html"
+                                title="struct burn::nn::Linear">Linear</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Lstm%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Lstm%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.Lstm.html"
+                                title="struct burn::nn::Lstm">Lstm</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-PRelu%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-PRelu%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.PRelu.html"
+                                title="struct burn::nn::PRelu">PRelu</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-PositionalEncoding%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-PositionalEncoding%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.PositionalEncoding.html"
+                                title="struct burn::nn::PositionalEncoding">PositionalEncoding</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-RmsNorm%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-RmsNorm%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.RmsNorm.html"
+                                title="struct burn::nn::RmsNorm">RmsNorm</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-RotaryEncoding%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-RotaryEncoding%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.RotaryEncoding.html"
+                                title="struct burn::nn::RotaryEncoding">RotaryEncoding</a>&lt;B&gt;<div class="where">
+                                where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-SwiGlu%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-SwiGlu%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.SwiGlu.html"
+                                title="struct burn::nn::SwiGlu">SwiGlu</a>&lt;B&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-PositionWiseFeedForward%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-PositionWiseFeedForward%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/transformer/struct.PositionWiseFeedForward.html"
+                                title="struct burn::nn::transformer::PositionWiseFeedForward">PositionWiseFeedForward</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-TransformerDecoder%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-TransformerDecoder%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/transformer/struct.TransformerDecoder.html"
+                                title="struct burn::nn::transformer::TransformerDecoder">TransformerDecoder</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-TransformerDecoderLayer%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-TransformerDecoderLayer%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/transformer/struct.TransformerDecoderLayer.html"
+                                title="struct burn::nn::transformer::TransformerDecoderLayer">TransformerDecoderLayer</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-TransformerEncoder%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-TransformerEncoder%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/transformer/struct.TransformerEncoder.html"
+                                title="struct burn::nn::transformer::TransformerEncoder">TransformerEncoder</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-TransformerEncoderLayer%3CB%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-TransformerEncoderLayer%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/transformer/struct.TransformerEncoderLayer.html"
+                                title="struct burn::nn::transformer::TransformerEncoderLayer">TransformerEncoderLayer</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-BatchNorm%3CB,+D%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-BatchNorm%3CB,+D%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B, const D: <a class="primitive"
+                                href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt; <a
+                                class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../nn/struct.BatchNorm.html"
+                                title="struct burn::nn::BatchNorm">BatchNorm</a>&lt;B, D&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Ignored%3CT%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Ignored%3CT%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;T&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="struct.Ignored.html"
+                                title="struct burn::module::Ignored">Ignored</a>&lt;T&gt;<div class="where">where
+                                T: <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sync.html"
+                                    title="trait core::marker::Sync">Sync</a> + <a class="trait"
+                                    href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html"
+                                    title="trait core::marker::Send">Send</a> + <a class="trait"
+                                    href="https://doc.rust-lang.org/1.88.0/core/fmt/trait.Debug.html"
+                                    title="trait core::fmt::Debug">Debug</a> + <a class="trait"
+                                    href="https://doc.rust-lang.org/1.88.0/core/clone/trait.Clone.html"
+                                    title="trait core::clone::Clone">Clone</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-RunningState%3CV%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-RunningState%3CV%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;V&gt; <a class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="struct.RunningState.html"
+                                title="struct burn::module::RunningState">RunningState</a>&lt;V&gt;</h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Param%3CTensor%3CB,+D%3E%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Param%3CTensor%3CB,+D%3E%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;const D: <a class="primitive"
+                                href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>, B&gt; <a
+                                class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="struct.Param.html"
+                                title="struct burn::module::Param">Param</a>&lt;<a class="struct"
+                                href="../tensor/struct.Tensor.html" title="struct burn::tensor::Tensor">Tensor</a>&lt;B,
+                            D&gt;&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Param%3CTensor%3CB,+D,+Bool%3E%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Param%3CTensor%3CB,+D,+Bool%3E%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;const D: <a class="primitive"
+                                href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>, B&gt; <a
+                                class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="struct.Param.html"
+                                title="struct burn::module::Param">Param</a>&lt;<a class="struct"
+                                href="../tensor/struct.Tensor.html" title="struct burn::tensor::Tensor">Tensor</a>&lt;B,
+                            D, <a class="struct" href="../tensor/struct.Bool.html"
+                                title="struct burn::tensor::Bool">Bool</a>&gt;&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Param%3CTensor%3CB,+D,+Int%3E%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Param%3CTensor%3CB,+D,+Int%3E%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;const D: <a class="primitive"
+                                href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>, B&gt; <a
+                                class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="struct.Param.html"
+                                title="struct burn::module::Param">Param</a>&lt;<a class="struct"
+                                href="../tensor/struct.Tensor.html" title="struct burn::tensor::Tensor">Tensor</a>&lt;B,
+                            D, <a class="struct" href="../tensor/struct.Int.html"
+                                title="struct burn::tensor::Int">Int</a>&gt;&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-ModuleDisplayDefault-for-Tensor%3CB,+D,+K%3E" class="impl"><a
+                            href="#impl-ModuleDisplayDefault-for-Tensor%3CB,+D,+K%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;const D: <a class="primitive"
+                                href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>, B, K&gt; <a
+                                class="trait" href="trait.ModuleDisplayDefault.html"
+                                title="trait burn::module::ModuleDisplayDefault">ModuleDisplayDefault</a> for <a
+                                class="struct" href="../tensor/struct.Tensor.html"
+                                title="struct burn::tensor::Tensor">Tensor</a>&lt;B, D, K&gt;<div class="where">where
+                                B: <a class="trait" href="../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,
+                                K: <a class="trait" href="../tensor/trait.BasicOps.html"
+                                    title="trait burn::tensor::BasicOps">BasicOps</a>&lt;B&gt;,</div>
+                        </h3>
+                    </section>
+                </div>
+                <script src="../../trait.impl/burn_core/module/display/trait.ModuleDisplayDefault.js"
+                    data-ignore-extern-crates="alloc,std,half,burn_tensor,core,burn_core" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

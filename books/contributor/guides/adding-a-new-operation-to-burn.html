@@ -1,0 +1,478 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Adding a New Operation to Mabor - The Mabor Contributor Book 🔥</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Mabor Contributor Book 🔥</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="adding-a-new-operation-to-burn"><a class="header" href="#adding-a-new-operation-to-burn">Adding a New Operation to mabor</a></h1>
+<p>Let's discuss how one might go about adding new operators to Mabor, using the example of the pow
+operator added in <a href="https://github.com/tracel-ai/burn/pull/1133/files">this PR</a>.</p>
+<h2 id="adding-the-op-to-burn-tensor"><a class="header" href="#adding-the-op-to-burn-tensor">Adding the Op to mabor-tensor</a></h2>
+<p><code>mabor-tensor</code> is the crate that defines all tensor operations that need to be implemented by the
+various backends. The core of this lies in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs">crates/mabor-tensor/src/tensor/api/numeric.rs</a>,
+which is home to the numeric trait and its implementation for the different tensor types. The
+numeric trait is the home of all tensor operations that are numeric in nature and that are shared by
+<code>Int</code> and <code>Float</code> Tensor types. More information on the relationship between Tensor modules can be
+found under the section for <a href="../project-architecture/tensor.html#tensor-operations">Tensor Architecture</a>.</p>
+<p>Here is where pow was added to <code>crates/mabor-tensor/src/tensor/api/numeric.rs</code>:</p>
+<ol>
+<li>for the
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L573"><code>Tensor&lt;Backend, Dimension, Kind&gt;</code> struct</a></li>
+<li>for the
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L1955">numeric trait</a></li>
+<li>for the implementation of numeric for
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L2722">float</a>
+and
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L2375">int</a></li>
+</ol>
+<p>Tensor is a struct that has a single member: <code>primitive</code> (defined
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/base.rs#L27">here</a>),
+that is defined by its
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/kind.rs#L16"><code>Kind</code></a>:
+one of <code>Bool</code>, <code>Float</code>, or <code>Int</code> (those linked in 3). These call the ops for that data type defined
+in the
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/backend/base.rs#L54"><code>Backend</code></a>
+supertrait<sup class="footnote-reference" id="fr-supertrait-1"><a href="#footnote-supertrait">1</a></sup>. This is the trait that is then implemented by the different <code>mabor-</code>
+backends (such as <code>mabor-ndarray</code> and <code>mabor-wgpu</code>) which must implement the functions if no default
+is provided.</p>
+<p>In this case, we don't need to worry about <code>Bool</code> Tensors. <code>Float</code> ops are implemented under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/ops/tensor.rs#L991"><code>crates/mabor-tensor/src/tensor/ops/tensor.rs</code></a>,
+and <code>Int</code> ops under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/ops/int_tensor.rs#L539"><code>crates/mabor-tensor/src/tensor/ops/int_tensor.rs</code></a>.
+The current convention is ops of each type, if not unique to that type, are prefixed with the type.
+So <code>powf</code> and sundry would be defined as <code>int_powf</code> for <code>IntTensorOps</code> and <code>float_powf</code> for
+<code>FloatTensorOps</code>. If an op is unique to a type, then it should be implemented under
+<code>mabor-tensor/src/api/{type}.rs</code>. For example, here is an implementation for
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/float.rs#L82"><code>sin</code> under <code>crates/mabor-tensor/src/api/float.rs</code></a>
+which obviously doesn't make sense for <code>Int</code> or <code>Bool</code> tensors.</p>
+<p>The <code>Int</code> Tensor function uses the ones defined for Float with 2 extra casts (LHS to a <code>Float</code>
+tensor, Output to an <code>Int</code>). Given that the rest of the code will only look at the float
+implementations.</p>
+<p>With the addition of quantized float tensors, the <code>Float</code> tensor primitive is represented by the
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tensor/api/kind.rs#L69"><code>TensorPrimitive</code></a>
+enum. This allows us to handle both float and quantized float operations in the <code>Tensor</code>
+implementation, correctly dispatching to the corresponding op (float or quantized) based on the
+variant. Following the same convention, the equivalent
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tensor/ops/qtensor.rs#L45">quantized tensor ops</a>
+are prefixed with <code>q_*</code> (e.g., <code>q_reshape</code> instead of <code>float_reshape</code>). Most ops have a default
+implementation that simply dequantizes the input into its floating-point representation, performs
+the operation on the float tensor, and quantizes the output. Backends can overwrite specific
+implementations when required/desired.</p>
+<h3 id="adding-tests"><a class="header" href="#adding-tests">Adding Tests</a></h3>
+<p>Additional Tests should be added to <code>mabor-tensor</code> under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tests/ops/powf.rs#L1"><code>crates/mabor-tensor/src/tests/ops/{op_name}.rs</code></a>,
+inserting the module name into <code>crates/mabor-tensor/src/tests/ops/mod.rs</code>. Then add it to the
+<code>testgen_all</code> macro under <code>crates/mabor-tensor/src/tests/mod.rs</code>. This macro is called from the
+<code>lib.rs</code> file in each backend, which autogenerates the tests for that specific backend. It isn't
+necessary to define tests in the backends directly, save for those that require specific testing
+such as <code>mabor-autodiff</code>.</p>
+<p>For float tensor operations, the
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tensor/ops/qtensor.rs#L45"><code>QTensorOps</code></a>
+counterpart is usually added at the same time with a default implementation (as mentioned in the
+previous section). Tests for <code>q_*</code> ops follow a similar procedure: the test is added under
+<a href="https://github.com/tracel-ai/burn/tree/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tests/quantization/ops"><code>crates/mabor-tensor/src/tests/quantization/ops/{op_name}.rs</code></a>,
+the module name is inserted into <code>crates/mabor-tensor/src/tests/quantization/ops/mod.rs</code> and finally
+the test is added to the
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tests/mod.rs#L67"><code>testgen_quantization</code> macro</a>.
+If you take a look at any of the existing tests for an operation on a quantized tensor,
+you will see that the inputs and expected outputs are always defined with floating point values.
+While it assumes that the quantization and dequantization are correct, it makes the tests much more
+readable and easier to understand w.r.t. what is being tested. Effectively, the tests are there to
+ensure that a tensor operation is invariant to quantization (up to some quantization error, of
+course).</p>
+<p><em>Note: the tests try to use tensors with floating point values which can be de/quantized without
+introducing too much quantization error, but the result always depends on the operation (e.g.,
+tensor product of values can grow larger and significantly increase the output tensor range, leading
+to more de/quantization error on the results).</em></p>
+<h2 id="adding-the-op-to-burn-autodiff"><a class="header" href="#adding-the-op-to-burn-autodiff">Adding the Op to mabor-autodiff</a></h2>
+<p>Since this is probably the hardest and the least straightforward, we'll cover this backend
+separately. <code>mabor-autodiff</code> enables other backends to use autodifferentiation<sup class="footnote-reference" id="fr-autodiff-1"><a href="#footnote-autodiff">2</a></sup>. Ops for
+float types are implemented in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-autodiff/src/ops/tensor.rs">crates/mabor-autodiff/src/ops/tensor.rs</a>
+and need to:</p>
+<ol>
+<li>Define a unit struct <sup class="footnote-reference" id="fr-absolute_units-1"><a href="#footnote-absolute_units">3</a></sup> that implements a backward (pass) function</li>
+<li>Within the backward function, as this is an elementwise binary operation it implements the binary
+function (from <code>backward.rs</code> under the same directory), the last 2 arguments are two closures
+that define the left and right partial derivatives.</li>
+<li>Then define what happens when a specific operation is tracked or untracked, where untracked just
+calls the function in the normal way, and tracked sets the execution the backward function
+defined above.</li>
+<li>When tracked, operations are part of the autodiff graph and must save the needed information to
+efficiently perform their backward pass later. If the information is light (such as a shape), it
+should be directly saved in the state. If the operation's inputs are needed to compute the
+backward pass, it should be checkpointed rather than saved. This will allow the input to be
+provided lazily at the backward pass depending on the checkpointing strategy.</li>
+<li>An operation must also be identified as <em>compute-bound</em> (<code>.computeBound()</code>) or <em>memory-bound</em>
+(<code>.memoryBound()</code>) for gradient checkpointing. <em>Compute-bound</em> operation are heavy to compute
+(for instance matmul or convolution), which means that even with checkpointing they will save
+their output for the backward pass and not recompute it. <em>Memory-bound</em> operations are more
+trivial (like <code>powf</code> which only performs one small operation per tensor entry), so it can be
+beneficial to recompute them during the backward pass instead of saving their whole forward
+output to memory. Operations registered as <em>memory-bound</em> need to know their parents
+(<code>.parents()</code> method) and how to recompute their forward pass during the backward pass (with a
+struct that implements <code>RetroForward</code>), using their parents' outputs.</li>
+</ol>
+<p>The above steps are mostly boilerplate, so you can often just copy the contents of another similar
+op, change the name of the structs, and ensure that either both sides have the data they need (if
+they need to have a copy of the opposite sided tensor, clone its contents).</p>
+<h3 id="computing-derivatives"><a class="header" href="#computing-derivatives">Computing derivatives</a></h3>
+<p>For those that need it, here is a quick refresher on the necessary calculus. If you are familiar
+with how to calculate partial derivatives, you can skip this section.</p>
+<p>Since <code>pow</code> is a binary operation, the left and right functions are the partial derivatives with
+respect to the left and right sided tensors.</p>
+<p>Let's define the operator as a function \(f(x,y)=x^{y}\) , where \(x\) is the left hand tensor
+and \(y\) is the right handed tensor. The two closures are defining the partial derivatives of
+\(f\) with respect to \(x\),\(y\). Treat the other variables as a constant</p>
+<p>$$\frac{\delta }{\delta x} (x^{y})= y \cdot x^{y-1}$$ is the left handed closure, and</p>
+<p>$$\frac{\delta }{\delta y} (x^{y}) = x^{y} \cdot ln(x)$$</p>
+<p>is the right. If you aren't sure how to calculate these by hand, it is recommended to use
+<a href="https://www.symbolab.com/solver/partial-derivative-calculator/%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20x%7D%5Cleft(x%5E%7By%7D%5Cright)?or=input">symbolab</a>,
+plug in your operator in terms of \(x\) and \(y\), and just swap out the variable
+\(x\)|\(y\) in the partial derivative to get the other side.</p>
+<h3 id="testing-autodiff"><a class="header" href="#testing-autodiff">Testing autodiff</a></h3>
+<p>For testing the <code>autodiff</code> operations, please refer to
+<a href="../getting-started/testing.html">this section</a>.</p>
+<h2 id="adding-the-op-to-other-backends"><a class="header" href="#adding-the-op-to-other-backends">Adding the Op to other backends</a></h2>
+<p>Most of these are fairly straightforward implementations. For reference here's pow's float
+implementation for torch, ndarray and candle backends:</p>
+<ol>
+<li>Torch implementation in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tch/src/ops/tensor.rs#L467">crates/mabor-tch/src/ops/tensor.rs</a>
+and the Op used in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tch/src/ops/base.rs#L481">crates/mabor-tch/src/ops/base.rs</a></li>
+<li>NdArray in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-ndarray/src/ops/tensor.rs#L472">crates/mabor-ndarray/src/ops/tensor.rs</a></li>
+<li>Candle in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-candle/src/ops/tensor.rs#L504">crates/mabor-candle/src/ops/tensor.rs</a></li>
+</ol>
+<p>This is where any calculation happens currently. Playing a guessing game with method names and
+seeing what completions are suggested will take you far. If you are having trouble figuring out how
+to do it from the docs for that backend,
+<a href="https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax">try searching github for relevant function calls</a>.</p>
+<h2 id="adding-the-op-to-fusion-jit-and-cubecl-backends"><a class="header" href="#adding-the-op-to-fusion-jit-and-cubecl-backends">Adding the Op to fusion, JIT and cubecl backends</a></h2>
+<p>Adding an operator to these backends can be fairly straightforward, though due to what these
+backends are for, involves a bit more indirection. Fusion and jit, like autodiff, are not target
+backends as much as backends that enable certain functionality for other backends, in this case
+kernel fusion or just-in-time compilation. Adding the operator won't involve doing any calculation,
+you'll just be describing how the generated code should look. Most of this can be
+copy/pasted/adjusted from other functions.</p>
+<p>Here's how powf was added to <code>mabor-fusion</code>:</p>
+<ol>
+<li>Added powf to the float ops under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-fusion/src/ops/float.rs#L1838"><code>crates/mabor-fusion/src/ops/float.rs</code></a></li>
+<li>Added powf to the <code>NumericOperationIr</code> enum under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-fusion/src/stream/operation.rs#L433">crates/mabor-fusion/src/stream/operation.rs</a></li>
+<li>Added powf to the implementations of <code>NumericOperationIr</code> enum under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-fusion/src/stream/context.rs#L771">crates/mabor-fusion/src/stream/context.rs</a></li>
+</ol>
+<p>The way <code>cubecl</code> handles tensor-scalar operations is by transforming both into a sequence of
+vectorized scalar operations. Since powf already existed in <code>cubecl</code>, it was pretty easy to reuse
+the existing implementation for the situation where both sides of the operation were tensors. The
+<code>cubecl</code> crate is primarily concerned with how the operation is compiled and executed by the gpu.
+The actual implementation is defined in <code>mabor-cubecl</code>.</p>
+<p>Here is where code was added for powf in <code>mabor-cubecl</code> and <code>cubecl</code>:</p>
+<ol>
+<li>to the implementation of
+<a href="https://github.com/tracel-ai/burn/blob/3b51c26958128502d60fb35029c43d9b686b816c/crates/burn-cubecl/src/ops/float_ops.rs#L410"><code>FloatTensorOps</code> under <code>crates/mabor-cubecl/src/ops/float_ops.rs</code></a></li>
+<li>the function being called was added to
+<a href="https://github.com/tracel-ai/burn/blob/3b51c26958128502d60fb35029c43d9b686b816c/crates/burn-cubecl/src/ops/numeric.rs#L147">crates/mabor-cubecl/src/ops/numeric.rs</a></li>
+<li>the operator was defined in
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-core/src/ir/operation.rs#L68"><code>cubecl-core/src/ir/operation.rs</code></a></li>
+<li>how the operation looks to the gpu was added to
+<a href="https://github.com/tracel-ai/burn/blob/3b51c26958128502d60fb35029c43d9b686b816c/crates/burn-cubecl/src/fusion/on_write/ir.rs#L52"><code>crates/mabor-cubecl/src/fusion/on_write/ir.rs</code></a></li>
+<li>the mappings between the gpu operation and the CPP, WGSL and SPIR-V instructions were added to
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-cpp/src/shared/base.rs#L456"><code>cubecl-cpp/src/shared/base.rs</code></a>,
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/compiler.rs#L652"><code>cubecl-wgpu/src/compiler/wgsl/compiler.rs</code></a>
+and
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-spirv/src/instruction.rs#L408"><code>cubecl-spirv/src/instruction.rs</code></a></li>
+<li>the instructions themselves were added for WGSL to
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/instructions.rs#L124">instruction op enum in <code>cubecl-wgpu/src/compiler/wgsl/instructions.rs</code></a>,
+and the actual
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/instructions.rs#L547-L555">instruction in wgsl here</a>,
+for CPP in the enum here
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-cpp/src/shared/instruction.rs#L127"><code>cubecl-cpp/src/shared/instruction.rs</code></a>
+and the actual instruction here
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-cpp/src/shared/binary.rs#L137"><code>cubecl-cpp/src/shared/binary.rs</code></a></li>
+</ol>
+<p>We needed to generate some custom WGSL code for powf in WGSL, primarily due to issues with proper
+case handling of the wgsl pow function, like 0 to the 0 power being 1, and any negative number to an
+even power being positive. We reused as much as the existing logic as possible, and then branched at
+the last point based off the var type of the rhs.
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/compiler.rs#L911">See here</a>.
+For most operations, you shouldn't need to add to <code>cubecl-wgpu/src/compiler/wgsl/extension.rs</code>
+unless the operation isn't native to WGSL.</p>
+<p>For functions that need a complex kernel without a direct mapping to a base instruction, simply use
+the <code>cube</code> macro (see
+<a href="https://github.com/tracel-ai/cubecl/tree/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/cubecl-book">the <code>cubecl</code> book</a>).</p>
+<h2 id="adding-the-op-to-burn-import"><a class="header" href="#adding-the-op-to-burn-import">Adding the Op to mabor-import</a></h2>
+<p>Generating the ONNX test files or tests is already covered
+<a href="onnx-to-burn-conversion-tool.html#adding-new-operators">in the ONNX to mabor guide</a>; this is more
+about the specific changes you need to make when adding new operators after you have generated the
+tests.</p>
+<p>Changes will need to be made to both <code>onnx-ir</code> and <code>mabor-import</code>. The code within <code>onnx-ir</code> defines
+how to parse the nodes in an onnx file and produces the intermediate representation. The code within
+<code>mabor-import</code> is divided into two sections: <code>src/onnx</code> and <code>src/mabor</code>. The code under the former
+maps that intermediate representation to one used for code generation and the latter defines how to
+generate code for the operator you've implemented earlier in this guide.</p>
+<p>So when you are loading a model, the operator is first parsed to an intermediate representation
+defined by <code>mabor-import</code> and then mapped to a Mabor operation defined under <code>src/mabor/node</code>; the
+mapping from onnx to mabor is aptly defined in <code>src/onnx/to_mabor</code></p>
+<p>Let's review the changes made for powf starting from <code>src/mabor</code> and moving to <code>src/onnx</code>:</p>
+<ol>
+<li>Determine the type of operator and add your operator to the appropriate node (operation) type, in
+this case
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/burn/node/binary.rs#L173">BinaryNode under <code>crates/mabor-import/src/mabor/node/binary.rs</code></a>
+along with its
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/burn/node/binary.rs#L15"><code>as_str</code> definition</a></li>
+<li>Add an arm to the match statement inside the <code>into_mabor</code> function in
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/onnx/to_burn.rs#L349">crates/mabor-import/src/onnx/to_mabor.rs</a>
+for the ONNX <code>NodeType</code> (which corresponds to an op in the ONNX spec), and make an
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/onnx/to_burn.rs#L1238"><code>{op}_conversion</code> function</a>
+that maps the ONNX node to the binary type</li>
+<li>Specify how dimensions for the output should be derived in
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/onnx-ir/src/rank_inference.rs#L64">crates/onnx-ir/src/rank_inference.rs</a></li>
+</ol>
+<p>And you're done! Congrats, you just fully added a new operation to mabor, and we are all one step
+closer to the answer to <a href="https://www.arewelearningyet.com/">Are we learning yet?</a> being "Yes, and
+it's freaking fast!". Buy yourself a coffee.</p>
+<hr>
+<ol class="footnote-definition"><li id="footnote-supertrait">
+<p>for more on supertraits see
+<a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-supertraits-to-require-one-traits-functionality-within-another-trait">the advanced trait section of the rust book</a> <a href="#fr-supertrait-1">↩</a></p>
+</li>
+<li id="footnote-autodiff">
+<p>wiki link for
+<a href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> <a href="#fr-autodiff-1">↩</a></p>
+</li>
+<li id="footnote-absolute_units">
+<p>for more information on unit structs see
+<a href="https://doc.rust-lang.org/book/ch05-01-defining-structs.html#unit-like-structs-without-any-fields">the defining and instantiating structs section of the rust book</a> <a href="#fr-absolute_units-1">↩</a></p>
+</li>
+</ol>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="onnx-to-burn-conversion-tool.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="submitting-examples.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="onnx-to-burn-conversion-tool.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="submitting-examples.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

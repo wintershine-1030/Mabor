@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":["Module"],"fn":["extract_type_name","list_param_ids"],"struct":["Attribute","ConstantRecord","Content","DisplaySettings","Ignored","Param","ParamId","Quantizer","Reinitializer","RunningState"],"trait":["AutodiffModule","Module","ModuleDisplay","ModuleDisplayDefault","ModuleMapper","ModuleVisitor","Parameter"],"type":["Devices"]};

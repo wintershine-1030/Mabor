@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="350px" height="283px" viewBox="-0.5 -0.5 350 283" style="background-color: rgb(255, 255, 255);">
+  <defs></defs>
+  <g>
+    <path d="M 200 1 L 310 53.82 L 310 228.18 L 200 281 L 90 228.18 L 90 53.82 Z" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10"></path>
+    <path d="M 90 53.82 L 200 106.63 L 310 53.82 M 200 106.63 L 200 281" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10"></path>
+    <path d="M 200 161 L 310 213.82 L 310 228.18 L 200 281 L 90 228.18 L 90 213.82 Z" fill="#99ff99" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10"></path>
+    <path d="M 90 213.82 L 200 266.63 L 310 213.82 M 200 266.63 L 200 281" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10"></path>
+    <path d="M 70 81 L 70 190.9" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10"></path>
+    <path d="M 70 197.65 L 65.5 188.65 L 70 190.9 L 74.5 188.65 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10"></path>
+    <rect x="0" y="111" width="60" height="30" fill="none" stroke="none"></rect>
+    <g transform="translate(-0.5 -0.5)scale(0.9999999999999999)">
+      <switch>
+        <text x="30" y="130" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle" font-weight="bold">Reduce dim...</text>
+      </switch>
+    </g>
+    <path d="M 200 91 L 216.25 98.8 L 216.25 273.2 L 200 281 L 183.75 273.2 L 183.75 98.8 Z" fill="#9b94ff" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 183.75 98.8 L 200 106.61 L 216.25 98.8 M 200 106.61 L 200 281" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <rect x="216.25" y="131" width="60" height="30" fill="none" stroke="none"></rect>
+    <g transform="translate(-0.5 -0.5)scale(0.9999999999999999)">
+      <switch>
+        <text x="246" y="150" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle" font-weight="bold">Reduce col...</text>
+      </switch>
+    </g>
+    <path d="M 110 51 L 164.3 23.85" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 169 21.5 L 164.3 27.76 L 164.3 23.85 L 161.17 21.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 110 51 L 164.3 78.15" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 169 80.5 L 161.17 80.5 L 164.3 78.15 L 164.3 74.24 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <rect x="140" y="31" width="60" height="30" fill="none" stroke="none"></rect>
+    <g transform="translate(-0.5 -0.5)scale(0.9999999999999999)">
+      <switch>
+        <text x="170" y="50" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">Other dime...</text>
+      </switch>
+    </g>
+    <rect x="250" y="241" width="100" height="30" fill="none" stroke="none"></rect>
+    <g transform="translate(-0.5 -0.5)scale(0.9999999999999999)">
+      <switch>
+        <text x="300" y="260" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">Output shape</text>
+      </switch>
+    </g>
+    <path d="M 199.87 266.56 L 218.48 257.72" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 200.16 266.56 L 178.44 256.28" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+  </g>
+  <switch>
+    <g></g>
+    <a transform="translate(0,-5)" xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems">
+      <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+</svg>

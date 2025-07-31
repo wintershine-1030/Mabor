@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Items that are lazy are not ready to be processed by metrics.">
+    <title>ItemLazy in mabor::train::metric - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Item<wbr>Lazy</a></h2>
+                <h3><a href="#required-associated-types">Required Associated Types</a></h3>
+                <ul class="block">
+                    <li><a href="#associatedtype.ItemSync" title="ItemSync">ItemSync</a></li>
+                </ul>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.sync" title="sync">sync</a></li>
+                </ul>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>train::<wbr>metric</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">train</a>::<wbr><a href="index.html">metric</a></div>
+                    <h1>Trait <span class="trait">ItemLazy</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait ItemLazy: <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> {
+    type <a href="#associatedtype.ItemSync" class="associatedtype">ItemSync</a>: <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a>;
+
+    // Required method
+    fn <a href="#tymethod.sync" class="fn">sync</a>(self) -&gt; Self::<a class="associatedtype" href="trait.ItemLazy.html#associatedtype.ItemSync" title="type burn::train::metric::ItemLazy::ItemSync">ItemSync</a>;
+}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Items that are lazy are not ready to be processed by metrics.</p>
+                        <p>We want to sync them on a different thread to avoid blocking training.</p>
+                    </div>
+                </details>
+                <h2 id="required-associated-types" class="section-header">Required Associated Types<a
+                        href="#required-associated-types" class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.ItemSync" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.ItemSync"
+                                        class="associatedtype">ItemSync</a>: <a class="trait"
+                                        href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html"
+                                        title="trait core::marker::Send">Send</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Item that is properly synced and ready to be processed by metrics.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.sync" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.sync" class="fn">sync</a>(self) -&gt;
+                                    Self::<a class="associatedtype" href="trait.ItemLazy.html#associatedtype.ItemSync"
+                                        title="type burn::train::metric::ItemLazy::ItemSync">ItemSync</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Sync the item.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-ItemLazy-for-ClassificationOutput%3CB%3E" class="impl"><a
+                                    href="#impl-ItemLazy-for-ClassificationOutput%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ItemLazy.html"
+                                        title="trait burn::train::metric::ItemLazy">ItemLazy</a> for <a class="struct"
+                                        href="../struct.ClassificationOutput.html"
+                                        title="struct burn::train::ClassificationOutput">ClassificationOutput</a>&lt;B&gt;
+                                    <div class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.ItemSync-1" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.ItemSync-1" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.ItemSync"
+                                        class="associatedtype">ItemSync</a> = <a class="struct"
+                                        href="../struct.ClassificationOutput.html"
+                                        title="struct burn::train::ClassificationOutput">ClassificationOutput</a>&lt;NdArray&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-ItemLazy-for-MultiLabelClassificationOutput%3CB%3E" class="impl"><a
+                                    href="#impl-ItemLazy-for-MultiLabelClassificationOutput%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ItemLazy.html"
+                                        title="trait burn::train::metric::ItemLazy">ItemLazy</a> for <a class="struct"
+                                        href="../struct.MultiLabelClassificationOutput.html"
+                                        title="struct burn::train::MultiLabelClassificationOutput">MultiLabelClassificationOutput</a>&lt;B&gt;
+                                    <div class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.ItemSync-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.ItemSync-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.ItemSync"
+                                        class="associatedtype">ItemSync</a> = <a class="struct"
+                                        href="../struct.MultiLabelClassificationOutput.html"
+                                        title="struct burn::train::MultiLabelClassificationOutput">MultiLabelClassificationOutput</a>&lt;NdArray&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-ItemLazy-for-RegressionOutput%3CB%3E" class="impl"><a
+                                    href="#impl-ItemLazy-for-RegressionOutput%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.ItemLazy.html"
+                                        title="trait burn::train::metric::ItemLazy">ItemLazy</a> for <a class="struct"
+                                        href="../struct.RegressionOutput.html"
+                                        title="struct burn::train::RegressionOutput">RegressionOutput</a>&lt;B&gt;<div
+                                        class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.ItemSync-3" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.ItemSync-3" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.ItemSync"
+                                        class="associatedtype">ItemSync</a> = <a class="struct"
+                                        href="../struct.RegressionOutput.html"
+                                        title="struct burn::train::RegressionOutput">RegressionOutput</a>&lt;NdArray&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                </div>
+                <script src="../../../trait.impl/burn_train/metric/processor/base/trait.ItemLazy.js"
+                    data-ignore-extern-crates="burn_train" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

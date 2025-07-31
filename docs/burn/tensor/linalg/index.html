@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="The linalg module.">
+    <title>mabor::tensor::linalg - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module linalg</a></h2>
+                <h3><a href="#enums">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#constants" title="Constants">Constants</a></li>
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>tensor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">tensor</a></div>
+                    <h1>Module <span>linalg</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>The linalg module.</p>
+                    </div>
+                </details>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.Norm.html" title="enum burn::tensor::linalg::Norm">Norm</a></dt>
+                    <dd>Specifies the type of norm to compute.</dd>
+                </dl>
+                <h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="constant" href="constant.DEFAULT_EPSILON.html"
+                            title="constant burn::tensor::linalg::DEFAULT_EPSILON">DEFAULT_<wbr>EPSILON</a></dt>
+                    <dd>Default epsilon value to avoid division by zero</dd>
+                </dl>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.cosine_similarity.html"
+                            title="fn burn::tensor::linalg::cosine_similarity">cosine_<wbr>similarity</a></dt>
+                    <dd>Computes the cosine similarity between two tensors along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.l0_norm.html" title="fn burn::tensor::linalg::l0_norm">l0_norm</a></dt>
+                    <dd>Computes the L0 norm of a tensor along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.l1_norm.html" title="fn burn::tensor::linalg::l1_norm">l1_norm</a></dt>
+                    <dd>Computes the L1 norm of a tensor along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.l2_norm.html" title="fn burn::tensor::linalg::l2_norm">l2_norm</a></dt>
+                    <dd>Computes the L2 norm of a tensor along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.lp_norm.html" title="fn burn::tensor::linalg::lp_norm">lp_norm</a></dt>
+                    <dd>Computes the general <code>L(p)</code> norm of a tensor along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.max_abs_norm.html"
+                            title="fn burn::tensor::linalg::max_abs_norm">max_<wbr>abs_<wbr>norm</a></dt>
+                    <dd>Computes the L:INFINITY norm of a tensor along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.min_abs_norm.html"
+                            title="fn burn::tensor::linalg::min_abs_norm">min_<wbr>abs_<wbr>norm</a></dt>
+                    <dd>Computes the L:NEG_INFINITY norm of a tensor along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.vector_norm.html"
+                            title="fn burn::tensor::linalg::vector_norm">vector_<wbr>norm</a></dt>
+                    <dd>Computes the vector norm of a tensor along a specified dimension.</dd>
+                    <dt><a class="fn" href="fn.vector_normalize.html"
+                            title="fn burn::tensor::linalg::vector_normalize">vector_<wbr>normalize</a></dt>
+                    <dd>Normalize a tensor versus its <code>vector_norm</code>.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

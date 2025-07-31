@@ -1,0 +1,1170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Trait that list all operations that can be applied on all tensors.">
+    <title>BasicOps in mabor::tensor - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Basic<wbr>Ops</a></h2>
+                <h3><a href="#">Sections</a></h3>
+                <ul class="block top-toc">
+                    <li><a href="#warnings" title="Warnings">Warnings</a></li>
+                </ul>
+                <h3><a href="#required-associated-types">Required Associated Types</a></h3>
+                <ul class="block">
+                    <li><a href="#associatedtype.Elem" title="Elem">Elem</a></li>
+                </ul>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.all" title="all">all</a></li>
+                    <li><a href="#tymethod.all_dim" title="all_dim">all_dim</a></li>
+                    <li><a href="#tymethod.any" title="any">any</a></li>
+                    <li><a href="#tymethod.any_dim" title="any_dim">any_dim</a></li>
+                    <li><a href="#tymethod.cat" title="cat">cat</a></li>
+                    <li><a href="#tymethod.device" title="device">device</a></li>
+                    <li><a href="#tymethod.empty" title="empty">empty</a></li>
+                    <li><a href="#tymethod.equal" title="equal">equal</a></li>
+                    <li><a href="#tymethod.expand" title="expand">expand</a></li>
+                    <li><a href="#tymethod.flip" title="flip">flip</a></li>
+                    <li><a href="#tymethod.from_data" title="from_data">from_data</a></li>
+                    <li><a href="#tymethod.from_data_dtype" title="from_data_dtype">from_data_dtype</a></li>
+                    <li><a href="#tymethod.into_data_async" title="into_data_async">into_data_async</a></li>
+                    <li><a href="#tymethod.not_equal" title="not_equal">not_equal</a></li>
+                    <li><a href="#tymethod.permute" title="permute">permute</a></li>
+                    <li><a href="#tymethod.register_transaction" title="register_transaction">register_transaction</a>
+                    </li>
+                    <li><a href="#tymethod.repeat_dim" title="repeat_dim">repeat_dim</a></li>
+                    <li><a href="#tymethod.reshape" title="reshape">reshape</a></li>
+                    <li><a href="#tymethod.slice" title="slice">slice</a></li>
+                    <li><a href="#tymethod.slice_assign" title="slice_assign">slice_assign</a></li>
+                    <li><a href="#tymethod.swap_dims" title="swap_dims">swap_dims</a></li>
+                    <li><a href="#tymethod.to_device" title="to_device">to_device</a></li>
+                    <li><a href="#tymethod.transpose" title="transpose">transpose</a></li>
+                </ul>
+                <h3><a href="#provided-methods">Provided Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#method.dtype" title="dtype">dtype</a></li>
+                    <li><a href="#method.elem_type_name" title="elem_type_name">elem_type_name</a></li>
+                    <li><a href="#method.slice_dim" title="slice_dim">slice_dim</a></li>
+                    <li><a href="#method.slice_fill" title="slice_fill">slice_fill</a></li>
+                </ul>
+                <h3><a href="#dyn-compatibility">Dyn Compatibility</a></h3>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>tensor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a>::<wbr><a
+                            href="index.html">tensor</a></div>
+                    <h1>Trait <span class="trait">BasicOps</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait BasicOps&lt;B&gt;: <a class="trait" href="trait.TensorKind.html" title="trait burn::tensor::TensorKind">TensorKind</a>&lt;B&gt;<div class="where">where
+    B: <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>,</div>{
+    type <a href="#associatedtype.Elem" class="associatedtype">Elem</a>: <a class="trait" href="trait.Element.html" title="trait burn::tensor::Element">Element</a>;
+
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 27 methods</span></summary>    // Required methods
+    fn <a href="#tymethod.empty" class="fn">empty</a>(shape: <a class="struct" href="struct.Shape.html" title="struct burn::tensor::Shape">Shape</a>, device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.reshape" class="fn">reshape</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>, shape: <a class="struct" href="struct.Shape.html" title="struct burn::tensor::Shape">Shape</a>) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.transpose" class="fn">transpose</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.swap_dims" class="fn">swap_dims</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        dim1: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+        dim2: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.permute" class="fn">permute</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>, axes: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>]) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.flip" class="fn">flip</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>, axes: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>]) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.slice" class="fn">slice</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>, range: &amp;[<a class="struct" href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html" title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;]) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.slice_assign" class="fn">slice_assign</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        ranges: &amp;[<a class="struct" href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html" title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+        value: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.device" class="fn">device</a>(tensor: &amp;Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.to_device" class="fn">to_device</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.into_data_async" class="fn">into_data_async</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+    ) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/future/future/trait.Future.html" title="trait core::future::future::Future">Future</a>&lt;Output = <a class="struct" href="struct.TensorData.html" title="struct burn::tensor::TensorData">TensorData</a>&gt; + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.register_transaction" class="fn">register_transaction</a>(tr: &amp;mut <a class="struct" href="struct.Transaction.html" title="struct burn::tensor::Transaction">Transaction</a>&lt;B&gt;, tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>);
+<span class="item-spacer"></span>    fn <a href="#tymethod.from_data" class="fn">from_data</a>(
+        data: <a class="struct" href="struct.TensorData.html" title="struct burn::tensor::TensorData">TensorData</a>,
+        device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.from_data_dtype" class="fn">from_data_dtype</a>(
+        data: <a class="struct" href="struct.TensorData.html" title="struct burn::tensor::TensorData">TensorData</a>,
+        device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>,
+        dtype: <a class="enum" href="enum.DType.html" title="enum burn::tensor::DType">DType</a>,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.repeat_dim" class="fn">repeat_dim</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+        times: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.cat" class="fn">cat</a>(vectors: <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>&gt;, dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.equal" class="fn">equal</a>(
+        lhs: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        rhs: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.not_equal" class="fn">not_equal</a>(
+        lhs: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        rhs: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.any" class="fn">any</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.any_dim" class="fn">any_dim</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.all" class="fn">all</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.all_dim" class="fn">all_dim</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.expand" class="fn">expand</a>(tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>, shape: <a class="struct" href="struct.Shape.html" title="struct burn::tensor::Shape">Shape</a>) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>;
+
+    // Provided methods
+    fn <a href="#method.slice_fill" class="fn">slice_fill</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        ranges: &amp;[<a class="struct" href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html" title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+        value: Self::<a class="associatedtype" href="trait.BasicOps.html#associatedtype.Elem" title="type burn::tensor::BasicOps::Elem">Elem</a>,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.slice_dim" class="fn">slice_dim</a>(
+        tensor: Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+        range: &amp;<a class="struct" href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html" title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;,
+    ) -&gt; Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.elem_type_name" class="fn">elem_type_name</a>() -&gt; &amp;'static <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.str.html">str</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.dtype" class="fn">dtype</a>(tensor: &amp;Self::<a class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive" title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; <a class="enum" href="enum.DType.html" title="enum burn::tensor::DType">DType</a> { ... }
+</details>}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Trait that list all operations that can be applied on all tensors.</p>
+                        <h2 id="warnings"><a class="doc-anchor" href="#warnings">§</a>Warnings</h2>
+                        <p>This is an internal trait, use the public API provided by <a href="struct.Tensor.html"
+                                title="struct burn::tensor::Tensor">tensor struct</a>.</p>
+                    </div>
+                </details>
+                <h2 id="required-associated-types" class="section-header">Required Associated Types<a
+                        href="#required-associated-types" class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.Elem" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.Elem"
+                                        class="associatedtype">Elem</a>: <a class="trait" href="trait.Element.html"
+                                        title="trait burn::tensor::Element">Element</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>The type of the tensor elements.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.empty" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.empty" class="fn">empty</a>(shape: <a
+                                        class="struct" href="struct.Shape.html"
+                                        title="struct burn::tensor::Shape">Shape</a>, device: &amp;&lt;B as <a
+                                        class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>) -&gt; Self::<a
+                                        class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Creates an empty tensor with the given shape.</p>
+                            <h5 id="arguments"><a class="doc-anchor" href="#arguments">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>shape</code> - The shape of the tensor.</li>
+                                <li><code>device</code> - The device on which the tensor will be allocated.</li>
+                            </ul>
+                            <h5 id="returns"><a class="doc-anchor" href="#returns">§</a>Returns</h5>
+                            <p>The empty tensor.</p>
+                            <h5 id="remarks"><a class="doc-anchor" href="#remarks">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For creating empty tensors, users should prefer the <a
+                                    href="struct.Tensor.html#method.empty"
+                                    title="associated function burn::tensor::Tensor::empty">Tensor::empty</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.reshape" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.reshape" class="fn">reshape</a>(tensor:
+                                    Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>, shape: <a
+                                        class="struct" href="struct.Shape.html"
+                                        title="struct burn::tensor::Shape">Shape</a>) -&gt; Self::<a
+                                        class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Reshapes the tensor.</p>
+                            <h5 id="arguments-1"><a class="doc-anchor" href="#arguments-1">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>shape</code> - The new shape of the tensor.</li>
+                            </ul>
+                            <h5 id="returns-1"><a class="doc-anchor" href="#returns-1">§</a>Returns</h5>
+                            <p>The reshaped tensor.</p>
+                            <h5 id="remarks-1"><a class="doc-anchor" href="#remarks-1">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For reshaping a tensor, users should prefer the <a
+                                    href="struct.Tensor.html#method.reshape"
+                                    title="method burn::tensor::Tensor::reshape">Tensor::reshape</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.transpose" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.transpose"
+                                        class="fn">transpose</a>(tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; Self::<a
+                                        class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Transposes a tensor.</p>
+                            <h5 id="arguments-2"><a class="doc-anchor" href="#arguments-2">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to transpose.</li>
+                            </ul>
+                            <h5 id="returns-2"><a class="doc-anchor" href="#returns-2">§</a>Returns</h5>
+                            <p>The transposed tensor.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.swap_dims" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.swap_dims" class="fn">swap_dims</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    dim1: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    dim2: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Swaps two dimensions of a tensor.</p>
+                            <h5 id="arguments-3"><a class="doc-anchor" href="#arguments-3">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to swap the dimensions of.</li>
+                                <li><code>dim1</code> - The first dimension to swap.</li>
+                                <li><code>dim2</code> - The second dimension to swap.</li>
+                            </ul>
+                            <h5 id="returns-3"><a class="doc-anchor" href="#returns-3">§</a>Returns</h5>
+                            <p>The tensor with the dimensions swapped.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.permute" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.permute" class="fn">permute</a>(tensor:
+                                    Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>, axes: &amp;[<a
+                                        class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>])
+                                    -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Permutes the dimensions of a tensor.</p>
+                            <h5 id="arguments-4"><a class="doc-anchor" href="#arguments-4">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to permute the dimensions of.</li>
+                                <li><code>axes</code> - The new order of the dimensions.</li>
+                            </ul>
+                            <h5 id="returns-4"><a class="doc-anchor" href="#returns-4">§</a>Returns</h5>
+                            <p>The tensor with the dimensions permuted.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.flip" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.flip" class="fn">flip</a>(tensor: Self::<a
+                                        class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>, axes: &amp;[<a
+                                        class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>])
+                                    -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Flips the tensor along the given axes.</p>
+                            <h5 id="arguments-5"><a class="doc-anchor" href="#arguments-5">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to flip.</li>
+                                <li><code>axes</code> - The axes to flip the tensor along.</li>
+                            </ul>
+                            <h5 id="returns-5"><a class="doc-anchor" href="#returns-5">§</a>Returns</h5>
+                            <p>The tensor with the axes flipped.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.slice" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.slice" class="fn">slice</a>(tensor:
+                                    Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>, range: &amp;[<a
+                                        class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                        title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;])
+                                    -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Select tensor elements corresponding for the given ranges.</p>
+                            <h5 id="arguments-6"><a class="doc-anchor" href="#arguments-6">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>ranges</code> - The ranges of the elements to select.</li>
+                            </ul>
+                            <h5 id="returns-6"><a class="doc-anchor" href="#returns-6">§</a>Returns</h5>
+                            <p>The selected elements.</p>
+                            <h5 id="remarks-2"><a class="doc-anchor" href="#remarks-2">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For selecting elements of a tensor, users should prefer the <a
+                                    href="struct.Tensor.html#method.slice"
+                                    title="method burn::tensor::Tensor::slice">Tensor::slice</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.slice_assign" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.slice_assign" class="fn">slice_assign</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    ranges: &amp;[<a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                        title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+                                    value: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Assigns the given value to the tensor elements corresponding for the given ranges.</p>
+                            <h5 id="arguments-7"><a class="doc-anchor" href="#arguments-7">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>ranges</code> - The ranges of the elements to select.</li>
+                                <li><code>value</code> - The value to assign.</li>
+                            </ul>
+                            <h5 id="returns-7"><a class="doc-anchor" href="#returns-7">§</a>Returns</h5>
+                            <p>The tensor with the assigned values.</p>
+                            <h5 id="remarks-3"><a class="doc-anchor" href="#remarks-3">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For assigning values to elements of a tensor, users should prefer the <a
+                                    href="struct.Tensor.html#method.slice_assign"
+                                    title="method burn::tensor::Tensor::slice_assign">Tensor::slice_assign</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.device" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.device" class="fn">device</a>(tensor:
+                                    &amp;Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; &lt;B as
+                                    <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Returns the device on which the tensor is allocated.</p>
+                            <h5 id="arguments-8"><a class="doc-anchor" href="#arguments-8">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                            </ul>
+                            <h5 id="returns-8"><a class="doc-anchor" href="#returns-8">§</a>Returns</h5>
+                            <p>The device on which the tensor is allocated.</p>
+                            <h5 id="remarks-4"><a class="doc-anchor" href="#remarks-4">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For getting the device of a tensor, users should prefer the <a
+                                    href="struct.Tensor.html#method.device"
+                                    title="method burn::tensor::Tensor::device">Tensor::device</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.to_device" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.to_device" class="fn">to_device</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Moves the tensor to the given device.</p>
+                            <h5 id="arguments-9"><a class="doc-anchor" href="#arguments-9">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>device</code> - The device on which the tensor will be moved.</li>
+                            </ul>
+                            <h5 id="returns-9"><a class="doc-anchor" href="#returns-9">§</a>Returns</h5>
+                            <p>The tensor on the given device.</p>
+                            <h5 id="remarks-5"><a class="doc-anchor" href="#remarks-5">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For moving a tensor to a device, users should prefer the <a
+                                    href="struct.Tensor.html#method.to_device"
+                                    title="method burn::tensor::Tensor::to_device">Tensor::to_device</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.into_data_async" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.into_data_async"
+                                        class="fn">into_data_async</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    ) -&gt; impl <a class="trait"
+                                        href="https://doc.rust-lang.org/1.88.0/core/future/future/trait.Future.html"
+                                        title="trait core::future::future::Future">Future</a>&lt;Output = <a
+                                        class="struct" href="struct.TensorData.html"
+                                        title="struct burn::tensor::TensorData">TensorData</a>&gt; + <a class="trait"
+                                        href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html"
+                                        title="trait core::marker::Send">Send</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Extracts the data from the tensor asynchronously.</p>
+                            <h5 id="arguments-10"><a class="doc-anchor" href="#arguments-10">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                            </ul>
+                            <h5 id="returns-10"><a class="doc-anchor" href="#returns-10">§</a>Returns</h5>
+                            <p>The data of the tensor.</p>
+                            <h5 id="remarks-6"><a class="doc-anchor" href="#remarks-6">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For extracting the data of a tensor, users should prefer the <a
+                                    href="struct.Tensor.html#method.into_data"
+                                    title="method burn::tensor::Tensor::into_data">Tensor::into_data</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.register_transaction" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.register_transaction"
+                                        class="fn">register_transaction</a>(tr: &amp;mut <a class="struct"
+                                        href="struct.Transaction.html"
+                                        title="struct burn::tensor::Transaction">Transaction</a>&lt;B&gt;, tensor:
+                                    Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>)</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Read the data from the tensor using a transaction.</p>
+                            <h5 id="remarks-7"><a class="doc-anchor" href="#remarks-7">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.from_data" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.from_data" class="fn">from_data</a>(
+                                    data: <a class="struct" href="struct.TensorData.html"
+                                        title="struct burn::tensor::TensorData">TensorData</a>,
+                                    device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Creates a tensor from the given data.</p>
+                            <h5 id="arguments-11"><a class="doc-anchor" href="#arguments-11">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>data</code> - The data of the tensor.</li>
+                                <li><code>device</code> - The device on which the tensor will be allocated.</li>
+                            </ul>
+                            <h5 id="returns-11"><a class="doc-anchor" href="#returns-11">§</a>Returns</h5>
+                            <p>The tensor.</p>
+                            <h5 id="remarks-8"><a class="doc-anchor" href="#remarks-8">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For creating a tensor from data, users should prefer the <a
+                                    href="struct.Tensor.html#method.from_data"
+                                    title="associated function burn::tensor::Tensor::from_data">Tensor::from_data</a>
+                                function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.from_data_dtype" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.from_data_dtype"
+                                        class="fn">from_data_dtype</a>(
+                                    data: <a class="struct" href="struct.TensorData.html"
+                                        title="struct burn::tensor::TensorData">TensorData</a>,
+                                    device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>,
+                                    dtype: <a class="enum" href="enum.DType.html"
+                                        title="enum burn::tensor::DType">DType</a>,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Creates a tensor from the given data enforcing the given data type.</p>
+                            <h5 id="remarks-9"><a class="doc-anchor" href="#remarks-9">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For creating a tensor from data, users should prefer the <a
+                                    href="struct.Tensor.html#method.from_data_dtype"
+                                    title="associated function burn::tensor::Tensor::from_data_dtype">Tensor::from_data_dtype</a>
+                                function, which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.repeat_dim" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.repeat_dim" class="fn">repeat_dim</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    times: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Repeat the tensor along the given dimension.</p>
+                            <h5 id="arguments-12"><a class="doc-anchor" href="#arguments-12">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>dim</code> - The dimension along which the tensor will be repeated.</li>
+                                <li><code>times</code> - The number of times the tensor will be repeated.</li>
+                            </ul>
+                            <h5 id="returns-12"><a class="doc-anchor" href="#returns-12">§</a>Returns</h5>
+                            <p>The repeated tensor.</p>
+                            <h5 id="remarks-10"><a class="doc-anchor" href="#remarks-10">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For repeating a tensor, users should prefer the <a
+                                    href="struct.Tensor.html#method.repeat_dim"
+                                    title="method burn::tensor::Tensor::repeat_dim">Tensor::repeat_dim</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.cat" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.cat" class="fn">cat</a>(vectors: <a
+                                        class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html"
+                                        title="struct alloc::vec::Vec">Vec</a>&lt;Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>&gt;, dim: <a
+                                        class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>)
+                                    -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Concatenates the given tensors along the given dimension.</p>
+                            <h5 id="arguments-13"><a class="doc-anchor" href="#arguments-13">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>vectors</code> - The tensors to concatenate.</li>
+                                <li><code>dim</code> - The dimension along which the tensors will be concatenated.</li>
+                            </ul>
+                            <h5 id="returns-13"><a class="doc-anchor" href="#returns-13">§</a>Returns</h5>
+                            <p>The concatenated tensor.</p>
+                            <h5 id="remarks-11"><a class="doc-anchor" href="#remarks-11">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For concatenating tensors, users should prefer the <a
+                                    href="struct.Tensor.html#method.cat"
+                                    title="associated function burn::tensor::Tensor::cat">Tensor::cat</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.equal" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.equal" class="fn">equal</a>(
+                                    lhs: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    rhs: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Equates the given tensors.</p>
+                            <h5 id="arguments-14"><a class="doc-anchor" href="#arguments-14">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>lhs</code> - The left hand side tensor.</li>
+                                <li><code>rhs</code> - The right hand side tensor.</li>
+                            </ul>
+                            <h5 id="returns-14"><a class="doc-anchor" href="#returns-14">§</a>Returns</h5>
+                            <p>The tensor of booleans indicating whether the corresponding elements are equal.</p>
+                            <h5 id="remarks-12"><a class="doc-anchor" href="#remarks-12">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For equating tensors, users should prefer the <a href="struct.Tensor.html#method.equal"
+                                    title="method burn::tensor::Tensor::equal">Tensor::equal</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.not_equal" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.not_equal" class="fn">not_equal</a>(
+                                    lhs: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    rhs: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Applies element-wise non-equality comparison between the given tensors.</p>
+                            <h5 id="arguments-15"><a class="doc-anchor" href="#arguments-15">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>lhs</code> - The left hand side tensor.</li>
+                                <li><code>rhs</code> - The right hand side tensor.</li>
+                            </ul>
+                            <h5 id="returns-15"><a class="doc-anchor" href="#returns-15">§</a>Returns</h5>
+                            <p>The tensor of booleans indicating whether the corresponding elements are equal.</p>
+                            <h5 id="remarks-13"><a class="doc-anchor" href="#remarks-13">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For non-equality comparison of tensors, users should prefer the <a
+                                    href="struct.Tensor.html#method.not_equal"
+                                    title="method burn::tensor::Tensor::not_equal">Tensor::not_equal</a>
+                                function, which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.any" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.any" class="fn">any</a>(tensor: Self::<a
+                                        class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; &lt;B as
+                                    <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if any element in the <code>tensor</code> evaluates to True.</p>
+                            <h5 id="arguments-16"><a class="doc-anchor" href="#arguments-16">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to test.</li>
+                            </ul>
+                            <h5 id="returns-16"><a class="doc-anchor" href="#returns-16">§</a>Returns</h5>
+                            <p>A boolean tensor with a single element, True if any element in the input tensor evaluates
+                                to True, False otherwise.</p>
+                            <h5 id="remarks-14"><a class="doc-anchor" href="#remarks-14">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly. Users should prefer the <a
+                                    href="struct.Tensor.html#method.any"
+                                    title="method burn::tensor::Tensor::any">Tensor::any</a> function
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.any_dim" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.any_dim" class="fn">any_dim</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if any element in the tensor evaluates to True along a given dimension dim.</p>
+                            <h5 id="arguments-17"><a class="doc-anchor" href="#arguments-17">§</a>Arguments</h5>
+                            <ul>
+                                <li>tensor - The tensor to test.</li>
+                                <li>dim - The axis along which to test.</li>
+                            </ul>
+                            <h5 id="returns-17"><a class="doc-anchor" href="#returns-17">§</a>Returns</h5>
+                            <p>A boolean tensor with the same size as input tensor, except in the dim axis where the
+                                size is 1.
+                                Returns True if any element in the input tensor along the given dimension evaluates to
+                                True, False otherwise.</p>
+                            <h5 id="remarks-15"><a class="doc-anchor" href="#remarks-15">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly. Users should prefer the <a
+                                    href="struct.Tensor.html#method.any_dim"
+                                    title="method burn::tensor::Tensor::any_dim">Tensor::any_dim</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.all" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.all" class="fn">all</a>(tensor: Self::<a
+                                        class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; &lt;B as
+                                    <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if all elements in the <code>tensor</code> evaluate to True.</p>
+                            <h5 id="arguments-18"><a class="doc-anchor" href="#arguments-18">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to test.</li>
+                            </ul>
+                            <h5 id="returns-18"><a class="doc-anchor" href="#returns-18">§</a>Returns</h5>
+                            <p>A boolean tensor with a single element, True if all elements in the input tensor
+                                evaluates to True, False otherwise.</p>
+                            <h5 id="remarks-16"><a class="doc-anchor" href="#remarks-16">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly. Users should prefer the <a
+                                    href="struct.Tensor.html#method.all"
+                                    title="method burn::tensor::Tensor::all">Tensor::all</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.all_dim" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.all_dim" class="fn">all_dim</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if all elements in the <code>tensor</code> evaluate to True along a given dimension
+                                <code>dim</code>.</p>
+                            <h5 id="arguments-19"><a class="doc-anchor" href="#arguments-19">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to test.</li>
+                            </ul>
+                            <h5 id="returns-19"><a class="doc-anchor" href="#returns-19">§</a>Returns</h5>
+                            <p>A boolean tensor with the same size as input <code>tensor</code>, except in the
+                                <code>dim</code> axis where the size is 1.
+                                Returns True if all elements in the input tensor along the given dimension evaluate to
+                                True, False otherwise.</p>
+                            <h5 id="remarks-17"><a class="doc-anchor" href="#remarks-17">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly. Users should prefer the <a
+                                    href="struct.Tensor.html#method.all_dim"
+                                    title="method burn::tensor::Tensor::all_dim">Tensor::all_dim</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.expand" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.expand" class="fn">expand</a>(tensor:
+                                    Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>, shape: <a
+                                        class="struct" href="struct.Shape.html"
+                                        title="struct burn::tensor::Shape">Shape</a>) -&gt; Self::<a
+                                        class="associatedtype" href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Broadcasts the given tensor to the specified shape.</p>
+                            <h5 id="arguments-20"><a class="doc-anchor" href="#arguments-20">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to broadcast.</li>
+                                <li><code>shape</code> - The shape to broadcast to.</li>
+                            </ul>
+                            <h5 id="returns-20"><a class="doc-anchor" href="#returns-20">§</a>Returns</h5>
+                            <p>The broadcasted tensor.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.slice_fill" class="method">
+                                <h4 class="code-header">fn <a href="#method.slice_fill" class="fn">slice_fill</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    ranges: &amp;[<a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                        title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+                                    value: Self::<a class="associatedtype"
+                                        href="trait.BasicOps.html#associatedtype.Elem"
+                                        title="type burn::tensor::BasicOps::Elem">Elem</a>,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Fills the tensor elements corresponding for the given ranges with the given value.</p>
+                            <h5 id="arguments-21"><a class="doc-anchor" href="#arguments-21">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>ranges</code> - The ranges of the elements to fill.</li>
+                                <li><code>value</code> - The value to fill.</li>
+                            </ul>
+                            <h5 id="returns-21"><a class="doc-anchor" href="#returns-21">§</a>Returns</h5>
+                            <p>The tensor with the filled values.</p>
+                            <h5 id="remarks-18"><a class="doc-anchor" href="#remarks-18">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                            <p>For filling values in a tensor, users should prefer the <a
+                                    href="struct.Tensor.html#method.slice_fill"
+                                    title="method burn::tensor::Tensor::slice_fill">Tensor::slice_fill</a> function,
+                                which is more high-level and designed for public use.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.slice_dim" class="method">
+                                <h4 class="code-header">fn <a href="#method.slice_dim" class="fn">slice_dim</a>(
+                                    tensor: Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    range: &amp;<a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                        title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;,
+                                    ) -&gt; Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Slices the tensor along a given dimension with the specified range.</p>
+                            <h5 id="arguments-22"><a class="doc-anchor" href="#arguments-22">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to slice.</li>
+                                <li><code>dim</code> - The dimension along which to slice.</li>
+                                <li><code>range</code> - The range of indices to slice along the specified dimension.
+                                </li>
+                            </ul>
+                            <h5 id="returns-22"><a class="doc-anchor" href="#returns-22">§</a>Returns</h5>
+                            <p>The sliced tensor.</p>
+                            <h5 id="remarks-19"><a class="doc-anchor" href="#remarks-19">§</a>Remarks</h5>
+                            <p>This is a low-level function used internally by the library to call different backend
+                                functions
+                                with static dispatch. It is not designed for direct usage by users, and not recommended
+                                to import
+                                or use this function directly.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.elem_type_name" class="method">
+                                <h4 class="code-header">fn <a href="#method.elem_type_name"
+                                        class="fn">elem_type_name</a>() -&gt; &amp;'static <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.str.html">str</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Returns the name of the element type.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.dtype" class="method">
+                                <h4 class="code-header">fn <a href="#method.dtype" class="fn">dtype</a>(tensor:
+                                    &amp;Self::<a class="associatedtype"
+                                        href="trait.TensorKind.html#associatedtype.Primitive"
+                                        title="type burn::tensor::TensorKind::Primitive">Primitive</a>) -&gt; <a
+                                        class="enum" href="enum.DType.html" title="enum burn::tensor::DType">DType</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Returns the tensor data type.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="dyn-compatibility" class="section-header">Dyn Compatibility<a href="#dyn-compatibility"
+                        class="anchor">§</a></h2>
+                <div class="dyn-compatibility-info">
+                    <p>This trait is <b>not</b> <a
+                            href="https://doc.rust-lang.org/1.88.0/reference/items/traits.html#dyn-compatibility">dyn
+                            compatible</a>.</p>
+                    <p><i>In older versions of Rust, dyn compatibility was called "object safety", so this trait is not
+                            object safe.</i></p>
+                </div>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-BasicOps%3CB%3E-for-Bool" class="impl"><a
+                                    href="#impl-BasicOps%3CB%3E-for-Bool" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.BasicOps.html"
+                                        title="trait burn::tensor::BasicOps">BasicOps</a>&lt;B&gt; for <a class="struct"
+                                        href="struct.Bool.html" title="struct burn::tensor::Bool">Bool</a>
+                                    <div class="where">where
+                                        B: <a class="trait" href="../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Elem-1" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Elem-1" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Elem"
+                                        class="associatedtype">Elem</a> = &lt;B as <a class="trait"
+                                        href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.BoolElem"
+                                        title="type burn::prelude::Backend::BoolElem">BoolElem</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-BasicOps%3CB%3E-for-Float" class="impl"><a
+                                    href="#impl-BasicOps%3CB%3E-for-Float" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.BasicOps.html"
+                                        title="trait burn::tensor::BasicOps">BasicOps</a>&lt;B&gt; for <a class="struct"
+                                        href="struct.Float.html" title="struct burn::tensor::Float">Float</a>
+                                    <div class="where">where
+                                        B: <a class="trait" href="../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Elem-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Elem-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Elem"
+                                        class="associatedtype">Elem</a> = &lt;B as <a class="trait"
+                                        href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.FloatElem"
+                                        title="type burn::prelude::Backend::FloatElem">FloatElem</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-BasicOps%3CB%3E-for-Int" class="impl"><a
+                                    href="#impl-BasicOps%3CB%3E-for-Int" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.BasicOps.html"
+                                        title="trait burn::tensor::BasicOps">BasicOps</a>&lt;B&gt; for <a class="struct"
+                                        href="struct.Int.html" title="struct burn::tensor::Int">Int</a>
+                                    <div class="where">where
+                                        B: <a class="trait" href="../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Elem-3" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Elem-3" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Elem"
+                                        class="associatedtype">Elem</a> = &lt;B as <a class="trait"
+                                        href="../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../prelude/trait.Backend.html#associatedtype.IntElem"
+                                        title="type burn::prelude::Backend::IntElem">IntElem</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                </div>
+                <script src="../../trait.impl/burn_tensor/tensor/api/base/trait.BasicOps.js"
+                    data-ignore-extern-crates="burn_tensor" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,525 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PyTorch Model - The Mabor Book 🔥</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Mabor Book 🔥</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="pytorch-model"><a class="header" href="#pytorch-model">PyTorch Model</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>Mabor supports importing model weights from PyTorch, whether you've trained your model in PyTorch or
+want to use a pre-trained model. Mabor supports importing PyTorch model weights with <code>.pt</code> and
+<code>.safetensors</code> file extensions. Compared to ONNX models, these files only contain the weights of the
+model, so you will need to reconstruct the model architecture in Mabor.</p>
+<p>This guide demonstrates the complete workflow for exporting models from PyTorch and importing them
+into Mabor. You can also refer to this
+<a href="https://dev.to/laggui/transitioning-from-pytorch-to-burn-45m">Transitioning From PyTorch to Mabor</a>
+tutorial for importing a more complex model.</p>
+<h2 id="exporting-models-to-pytorch-format"><a class="header" href="#exporting-models-to-pytorch-format">Exporting Models to PyTorch Format</a></h2>
+<p>To export a PyTorch model correctly, you need to save only the model weights (state_dict) using the
+<code>torch.save</code> function, not the entire model.</p>
+<h3 id="example-exporting-a-pytorch-model"><a class="header" href="#example-exporting-a-pytorch-model">Example: Exporting a PyTorch Model</a></h3>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(2, 2, (2,2))
+        self.conv2 = nn.Conv2d(2, 2, (2,2), bias=False)
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.conv2(x)
+        return x
+
+if __name__ == "__main__":
+    # Set seed for reproducibility
+    torch.manual_seed(42)
+
+    # Initialize model and ensure it's on CPU
+    model = Net().to(torch.device("cpu"))
+
+    # Extract model weights dictionary
+    model_weights = model.state_dict()
+
+    # Save only the weights, not the entire model
+    torch.save(model_weights, "conv2d.pt")
+</code></pre>
+<p>If you accidentally save the entire model instead of just the weights, you may encounter errors
+during import like:</p>
+<pre><code>Failed to decode foobar: DeserializeError("Serde error: other error:
+Missing source values for the 'foo1' field of type 'BarRecordItem'.
+Please verify the source data and ensure the field name is correct")
+</code></pre>
+<h3 id="verifying-the-export"><a class="header" href="#verifying-the-export">Verifying the Export</a></h3>
+<p>You can verify your exported model by viewing the <code>.pt</code> file in
+<a href="https://github.com/lutzroeder/netron">Netron</a>, a neural network visualization tool. A properly
+exported weights file will show a flat structure of tensors, while an incorrectly exported file will
+display nested blocks representing the entire model architecture.</p>
+<p>When viewing the exported model in Netron, you should see something like this:</p>
+<p><img src="conv2d.svg" alt="image alt&gt;"></p>
+<h2 id="importing-pytorch-models-into-burn"><a class="header" href="#importing-pytorch-models-into-burn">Importing PyTorch Models into Mabor</a></h2>
+<p>Importing a PyTorch model into Mabor involves two main steps:</p>
+<ol>
+<li>Defining the model architecture in Mabor</li>
+<li>Loading the weights from the exported PyTorch model</li>
+</ol>
+<h3 id="step-1-define-the-model-in-burn"><a class="header" href="#step-1-define-the-model-in-burn">Step 1: Define the Model in Mabor</a></h3>
+<p>First, you need to create a Mabor model that matches the architecture of the model you exported:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use mabor::{
+    nn::conv::{Conv2d, Conv2dConfig},
+    prelude::*,
+};
+
+#[derive(Module, Debug)]
+pub struct Net&lt;B: Backend&gt; {
+    conv1: Conv2d&lt;B&gt;,
+    conv2: Conv2d&lt;B&gt;,
+}
+
+impl&lt;B: Backend&gt; Net&lt;B&gt; {
+    /// Create a new model.
+    pub fn init(device: &amp;B::Device) -&gt; Self {
+        let conv1 = Conv2dConfig::new([2, 2], [2, 2])
+            .init(device);
+        let conv2 = Conv2dConfig::new([2, 2], [2, 2])
+            .with_bias(false)
+            .init(device);
+        Self { conv1, conv2 }
+    }
+
+    /// Forward pass of the model.
+    pub fn forward(&amp;self, x: Tensor&lt;B, 4&gt;) -&gt; Tensor&lt;B, 4&gt; {
+        let x = self.conv1.forward(x);
+        self.conv2.forward(x)
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="step-2-load-the-weights"><a class="header" href="#step-2-load-the-weights">Step 2: Load the Weights</a></h3>
+<p>You have two options for loading the weights:</p>
+<h4 id="option-a-load-dynamically-at-runtime"><a class="header" href="#option-a-load-dynamically-at-runtime">Option A: Load Dynamically at Runtime</a></h4>
+<p>This approach loads the PyTorch file directly at runtime, requiring the <code>mabor-import</code> dependency:</p>
+<pre><pre class="playground"><code class="language-rust">use crate::model;
+use mabor::record::{FullPrecisionSettings, Recorder};
+use mabor_import::pytorch::PyTorchFileRecorder;
+
+type Backend = mabor_ndarray::NdArray&lt;f32&gt;;
+
+fn main() {
+    let device = Default::default();
+
+    // Load weights from PyTorch file
+    let record = PyTorchFileRecorder::&lt;FullPrecisionSettings&gt;::default()
+        .load("./conv2d.pt".into(), &amp;device)
+        .expect("Should decode state successfully");
+
+    // Initialize model and load weights
+    let model = model::Net::&lt;Backend&gt;::init(&amp;device).load_record(record);
+}</code></pre></pre>
+<h4 id="option-b-pre-convert-to-burns-binary-format"><a class="header" href="#option-b-pre-convert-to-burns-binary-format">Option B: Pre-convert to Mabor's Binary Format</a></h4>
+<p>This approach converts the PyTorch file to Mabor's optimized binary format during build time,
+removing the runtime dependency on <code>mabor-import</code>:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// This code would go in build.rs or a separate tool
+
+use crate::model;
+use Mabor::record::{FullPrecisionSettings, NamedMpkFileRecorder, Recorder};
+use Mabor_import::pytorch::PyTorchFileRecorder;
+
+type Backend = Mabor_ndarray::NdArray&lt;f32&gt;;
+
+fn convert_model() {
+    let device = Default::default();
+
+    // Load from PyTorch
+    let recorder = PyTorchFileRecorder::&lt;FullPrecisionSettings&gt;::default();
+    let record = recorder
+        .load("./conv2d.pt".into(), &amp;device)
+        .expect("Should decode state successfully");
+
+    // Save to Mabor's binary format
+    let recorder = NamedMpkFileRecorder::&lt;FullPrecisionSettings&gt;::default();
+    recorder
+        .record(record, "model.mpk".into())
+        .expect("Failed to save model record");
+}
+
+// In your application code
+fn load_model() -&gt; Net&lt;Backend&gt; {
+    let device = Default::default();
+
+    // Load from Mabor's binary format
+    let record = NamedMpkFileRecorder::&lt;FullPrecisionSettings&gt;::default()
+        .load("./model.mpk".into(), &amp;device)
+        .expect("Should decode state successfully");
+
+    Net::&lt;Backend&gt;::init(&amp;device).load_record(record)
+}
+<span class="boring">}</span></code></pre></pre>
+<blockquote>
+<p><strong>Note</strong>: For examples of pre-converting models, see the <code>examples/import-model-weights</code> directory
+in the Mabor repository.</p>
+</blockquote>
+<h2 id="extract-configuration"><a class="header" href="#extract-configuration">Extract Configuration</a></h2>
+<p>In some cases, models may require additional configuration settings, which are often included in a
+<code>.pt</code> file during export. The <code>config_from_file</code> function from the <code>mabor-import</code> cargo package
+allows for the extraction of these configurations directly from the <code>.pt</code> file.</p>
+<pre><pre class="playground"><code class="language-rust">use std::collections::HashMap;
+
+use mabor::config::Config;
+use mabor_import::pytorch::config_from_file;
+
+#[derive(Debug, Config)]
+struct NetConfig {
+    n_head: usize,
+    n_layer: usize,
+    d_model: usize,
+    some_float: f64,
+    some_int: i32,
+    some_bool: bool,
+    some_str: String,
+    some_list_int: Vec&lt;i32&gt;,
+    some_list_str: Vec&lt;String&gt;,
+    some_list_float: Vec&lt;f64&gt;,
+    some_dict: HashMap&lt;String, String&gt;,
+}
+
+fn main() {
+    let path = "weights_with_config.pt";
+    let top_level_key = Some("my_config");
+    let config: NetConfig = config_from_file(path, top_level_key).unwrap();
+    println!("{:#?}", config);
+
+    // After extracting, it's recommended you save it as a json file.
+    config.save("my_config.json").unwrap();
+}</code></pre></pre>
+<h2 id="troubleshooting-and-advanced-features"><a class="header" href="#troubleshooting-and-advanced-features">Troubleshooting and Advanced Features</a></h2>
+<h3 id="key-remapping-for-different-model-architectures"><a class="header" href="#key-remapping-for-different-model-architectures">Key Remapping for Different Model Architectures</a></h3>
+<p>If your Mabor model structure doesn't match the parameter names in the PyTorch file, you can remap
+keys using regular expressions:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let device = Default::default();
+let load_args = LoadArgs::new("tests/key_remap/key_remap.pt".into())
+    // Remove "conv" prefix, e.g. "conv.conv1" -&gt; "conv1"
+    .with_key_remap("conv\\.(.*)", "$1");
+
+let record = PyTorchFileRecorder::&lt;FullPrecisionSettings&gt;::default()
+    .load(load_args, &amp;device)
+    .expect("Should decode state successfully");
+
+let model = Net::&lt;Backend&gt;::init(&amp;device).load_record(record);
+<span class="boring">}</span></code></pre></pre>
+<h3 id="debugging-with-key-inspection"><a class="header" href="#debugging-with-key-inspection">Debugging with Key Inspection</a></h3>
+<p>To help with troubleshooting import issues, you can enable debugging to print the original and
+remapped keys:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let device = Default::default();
+let load_args = LoadArgs::new("tests/key_remap/key_remap.pt".into())
+    // Remove "conv" prefix, e.g. "conv.conv1" -&gt; "conv1"
+    .with_key_remap("conv\\.(.*)", "$1")
+    .with_debug_print(); // Print the keys and remapped keys
+
+let record = PyTorchFileRecorder::&lt;FullPrecisionSettings&gt;::default()
+    .load(load_args, &amp;device)
+    .expect("Should decode state successfully");
+
+let model = Net::&lt;Backend&gt;::init(&amp;device).load_record(record);
+<span class="boring">}</span></code></pre></pre>
+<p>Here is an example of the output:</p>
+<pre><code class="language-text">Debug information of keys and tensor shapes:
+---
+Original Key: conv.conv1.bias
+Remapped Key: conv1.bias
+Shape: [2]
+Dtype: F32
+---
+Original Key: conv.conv1.weight
+Remapped Key: conv1.weight
+Shape: [2, 2, 2, 2]
+Dtype: F32
+---
+Original Key: conv.conv2.weight
+Remapped Key: conv2.weight
+Shape: [2, 2, 2, 2]
+Dtype: F32
+---
+</code></pre>
+<h3 id="automatic-handling-of-non-contiguous-indices"><a class="header" href="#automatic-handling-of-non-contiguous-indices">Automatic Handling of Non-Contiguous Indices</a></h3>
+<p>The PyTorchFileRecorder automatically handles non-contiguous indices in model layer names. For
+example, if the source model contains indices with gaps:</p>
+<pre><code>"model.layers.0.weight"
+"model.layers.0.bias"
+"model.layers.2.weight"  // Note the gap (no index 1)
+"model.layers.2.bias"
+"model.layers.4.weight"
+"model.layers.4.bias"
+</code></pre>
+<p>The recorder will automatically reindex these to be contiguous while preserving their order:</p>
+<pre><code>"model.layers.0.weight"
+"model.layers.0.bias"
+"model.layers.1.weight"  // Reindexed from 2
+"model.layers.1.bias"
+"model.layers.2.weight"  // Reindexed from 4
+"model.layers.2.bias"
+</code></pre>
+<h3 id="partial-model-loading"><a class="header" href="#partial-model-loading">Partial Model Loading</a></h3>
+<p>You can selectively load weights into a partial model, which is useful for:</p>
+<ul>
+<li>Loading only the encoder from an encoder-decoder architecture</li>
+<li>Fine-tuning specific layers while initializing others randomly</li>
+<li>Creating hybrid models combining parts from different sources</li>
+</ul>
+<h3 id="specifying-the-top-level-key-for-state_dict"><a class="header" href="#specifying-the-top-level-key-for-state_dict">Specifying the Top-Level Key for state_dict</a></h3>
+<p>Sometimes the
+<a href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#what-is-a-state-dict"><code>state_dict</code></a>
+is nested under a top-level key along with other metadata. In this case, you can specify the
+top-level key in <code>LoadArgs</code>:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let device = Default::default();
+let load_args = LoadArgs::new("tiny.en.pt".into())
+    .with_top_level_key("my_state_dict");
+
+let record = PyTorchFileRecorder::&lt;FullPrecisionSettings&gt;::default()
+    .load(load_args, &amp;device)
+    .expect("Should decode state successfully")
+<span class="boring">}</span></code></pre></pre>
+<h3 id="support-for-enum-modules"><a class="header" href="#support-for-enum-modules">Support for Enum Modules</a></h3>
+<p>The PyTorchFileRecorder supports models containing enum modules with new-type variants. The enum
+variant is automatically selected based on the enum variant type, allowing for flexible model
+architectures.</p>
+<h2 id="current-known-issues"><a class="header" href="#current-known-issues">Current Known Issues</a></h2>
+<ol>
+<li><a href="https://github.com/tracel-ai/burn/issues/1179">Candle's pickle does not currently unpack boolean tensors</a>.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="onnx-model.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="safetensors-model.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="onnx-model.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="safetensors-model.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

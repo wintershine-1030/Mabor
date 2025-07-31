@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Module for the recorder.">
+    <title>mabor::record - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module record</a></h2>
+                <h3><a href="#structs">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                    <li><a href="#types" title="Type Aliases">Type Aliases</a></li>
+                    <li><a href="#derives" title="Derive Macros">Derive Macros</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2 class="in-crate"><a href="../index.html">In crate mabor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a></div>
+                    <h1>Module <span>record</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Module for the recorder.</p>
+                    </div>
+                </details>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.BinBytesRecorder.html"
+                            title="struct burn::record::BinBytesRecorder">BinBytes<wbr>Recorder</a></dt>
+                    <dd>In memory recorder using the <a href="https://docs.rs/bincode/2.0.1/bincode/index.html"
+                            title="mod bincode">bincode format</a>.</dd>
+                    <dt><a class="struct" href="struct.BinFileRecorder.html"
+                            title="struct burn::record::BinFileRecorder">BinFile<wbr>Recorder</a></dt>
+                    <dd>File recorder using the <a href="https://docs.rs/bincode/2.0.1/bincode/index.html"
+                            title="mod bincode">bincode format</a>.</dd>
+                    <dt><a class="struct" href="struct.BinGzFileRecorder.html"
+                            title="struct burn::record::BinGzFileRecorder">BinGz<wbr>File<wbr>Recorder</a></dt>
+                    <dd>File recorder using the <a href="https://docs.rs/bincode/2.0.1/bincode/index.html"
+                            title="mod bincode">bincode format</a> compressed with gzip.</dd>
+                    <dt><a class="struct" href="struct.BurnMetadata.html"
+                            title="struct burn::record::BurnMetadata">Burn<wbr>Metadata</a></dt>
+                    <dd>Metadata of a record.</dd>
+                    <dt><a class="struct" href="struct.BurnRecord.html"
+                            title="struct burn::record::BurnRecord">Burn<wbr>Record</a></dt>
+                    <dd>Record that can be saved by a <a href="trait.Recorder.html"
+                            title="trait burn::record::Recorder">Recorder</a>.</dd>
+                    <dt><a class="struct" href="struct.BurnRecordNoItem.html"
+                            title="struct burn::record::BurnRecordNoItem">Burn<wbr>Record<wbr>NoItem</a></dt>
+                    <dd>Record that can be saved by a <a href="trait.Recorder.html"
+                            title="trait burn::record::Recorder">Recorder</a> without the item.</dd>
+                    <dt><a class="struct" href="struct.DoublePrecisionSettings.html"
+                            title="struct burn::record::DoublePrecisionSettings">Double<wbr>Precision<wbr>Settings</a>
+                    </dt>
+                    <dd>Precision settings optimized for precision.</dd>
+                    <dt><a class="struct" href="struct.FullPrecisionSettings.html"
+                            title="struct burn::record::FullPrecisionSettings">Full<wbr>Precision<wbr>Settings</a></dt>
+                    <dd>Default precision settings.</dd>
+                    <dt><a class="struct" href="struct.HalfPrecisionSettings.html"
+                            title="struct burn::record::HalfPrecisionSettings">Half<wbr>Precision<wbr>Settings</a></dt>
+                    <dd>Precision settings optimized for compactness.</dd>
+                    <dt><a class="struct" href="struct.JsonGzFileRecorder.html"
+                            title="struct burn::record::JsonGzFileRecorder">Json<wbr>GzFile<wbr>Recorder</a></dt>
+                    <dd>File recorder using the <a href="https://docs.rs/serde_json/1.0.140/serde_json/index.html"
+                            title="mod serde_json">json format</a> compressed with gzip.</dd>
+                    <dt><a class="struct" href="struct.NamedMpkBytesRecorder.html"
+                            title="struct burn::record::NamedMpkBytesRecorder">Named<wbr>MpkBytes<wbr>Recorder</a></dt>
+                    <dd>In memory recorder using the <a href="rmp_serde">Named MessagePack</a>.</dd>
+                    <dt><a class="struct" href="struct.NamedMpkFileRecorder.html"
+                            title="struct burn::record::NamedMpkFileRecorder">Named<wbr>MpkFile<wbr>Recorder</a></dt>
+                    <dd>File recorder using the <a href="rmp_serde">named msgpack</a> format.</dd>
+                    <dt><a class="struct" href="struct.NamedMpkGzFileRecorder.html"
+                            title="struct burn::record::NamedMpkGzFileRecorder">Named<wbr>MpkGz<wbr>File<wbr>Recorder</a>
+                    </dt>
+                    <dd>File recorder using the <a href="rmp_serde">named msgpack</a> format compressed with gzip.</dd>
+                    <dt><a class="struct" href="struct.ParamSerde.html"
+                            title="struct burn::record::ParamSerde">Param<wbr>Serde</a></dt>
+                    <dd>(De)serialize parameters into a clean format.</dd>
+                    <dt><a class="struct" href="struct.PrettyJsonFileRecorder.html"
+                            title="struct burn::record::PrettyJsonFileRecorder">Pretty<wbr>Json<wbr>File<wbr>Recorder</a>
+                    </dt>
+                    <dd>File recorder using <a href="https://docs.rs/serde_json/1.0.140/serde_json/index.html"
+                            title="mod serde_json">pretty json format</a> for easy readability.</dd>
+                </dl>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.RecorderError.html"
+                            title="enum burn::record::RecorderError">Recorder<wbr>Error</a></dt>
+                    <dd>Error that can occur when using a <a href="trait.Recorder.html"
+                            title="trait burn::record::Recorder">Recorder</a>.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.BytesRecorder.html"
+                            title="trait burn::record::BytesRecorder">Bytes<wbr>Recorder</a></dt>
+                    <dd>Recorder trait specialized to save and load data to and from bytes.</dd>
+                    <dt><a class="trait" href="trait.FileRecorder.html"
+                            title="trait burn::record::FileRecorder">File<wbr>Recorder</a></dt>
+                    <dd>Recorder trait specialized to save and load data to and from files.</dd>
+                    <dt><a class="trait" href="trait.PrecisionSettings.html"
+                            title="trait burn::record::PrecisionSettings">Precision<wbr>Settings</a></dt>
+                    <dd>Settings allowing to control the precision when (de)serializing items.</dd>
+                    <dt><a class="trait" href="trait.Record.html" title="trait burn::record::Record">Record</a></dt>
+                    <dd>Trait to define a family of types which can be recorded using any <a
+                            href="trait.PrecisionSettings.html"
+                            title="trait burn::record::PrecisionSettings">settings</a>.</dd>
+                    <dt><a class="trait" href="trait.Recorder.html" title="trait burn::record::Recorder">Recorder</a>
+                    </dt>
+                    <dd>Record any item implementing <a href="../serde/trait.Serialize.html"
+                            title="trait burn::serde::Serialize">Serialize</a> and <a
+                            href="../serde/de/trait.DeserializeOwned.html"
+                            title="trait burn::serde::de::DeserializeOwned">DeserializeOwned</a>.</dd>
+                </dl>
+                <h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="type" href="type.CompactRecorder.html"
+                            title="type burn::record::CompactRecorder">Compact<wbr>Recorder</a></dt>
+                    <dd>Recorder optimized for compactness.</dd>
+                    <dt><a class="type" href="type.DebugRecordSettings.html"
+                            title="type burn::record::DebugRecordSettings">Debug<wbr>Record<wbr>Settings</a></dt>
+                    <dd>Debug recorder.</dd>
+                    <dt><a class="type" href="type.DefaultFileRecorder.html"
+                            title="type burn::record::DefaultFileRecorder">Default<wbr>File<wbr>Recorder</a></dt>
+                    <dd>Default <a href="trait.FileRecorder.html" title="trait burn::record::FileRecorder">file
+                            recorder</a>.</dd>
+                    <dt><a class="type" href="type.DefaultRecorder.html"
+                            title="type burn::record::DefaultRecorder">Default<wbr>Recorder</a></dt>
+                    <dd>Default recorder.</dd>
+                    <dt><a class="type" href="type.NoStdInferenceRecorder.html"
+                            title="type burn::record::NoStdInferenceRecorder">NoStd<wbr>Inference<wbr>Recorder</a></dt>
+                    <dd>Inference recorder compatible with no-std.</dd>
+                    <dt><a class="type" href="type.NoStdTrainingRecorder.html"
+                            title="type burn::record::NoStdTrainingRecorder">NoStd<wbr>Training<wbr>Recorder</a></dt>
+                    <dd>Training recorder compatible with no-std inference.</dd>
+                    <dt><a class="type" href="type.SensitiveCompactRecorder.html"
+                            title="type burn::record::SensitiveCompactRecorder">Sensitive<wbr>Compact<wbr>Recorder</a>
+                    </dt>
+                    <dd>Recorder optimized for compactness making it a good choice for model deployment.</dd>
+                </dl>
+                <h2 id="derives" class="section-header">Derive Macros<a href="#derives" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="derive" href="derive.Record.html" title="derive burn::record::Record">Record</a></dt>
+                    <dd>Derive macro for the record.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

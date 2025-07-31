@@ -1,0 +1,1243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description"
+        content="Bool Tensor API for basic operations, see tensor for documentation on each function.">
+    <title>BoolTensorOps in mabor::tensor::ops - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Bool<wbr>Tensor<wbr>Ops</a></h2>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.bool_and" title="bool_and">bool_and</a></li>
+                    <li><a href="#tymethod.bool_device" title="bool_device">bool_device</a></li>
+                    <li><a href="#tymethod.bool_empty" title="bool_empty">bool_empty</a></li>
+                    <li><a href="#tymethod.bool_equal" title="bool_equal">bool_equal</a></li>
+                    <li><a href="#tymethod.bool_expand" title="bool_expand">bool_expand</a></li>
+                    <li><a href="#tymethod.bool_flip" title="bool_flip">bool_flip</a></li>
+                    <li><a href="#tymethod.bool_from_data" title="bool_from_data">bool_from_data</a></li>
+                    <li><a href="#tymethod.bool_into_data" title="bool_into_data">bool_into_data</a></li>
+                    <li><a href="#tymethod.bool_into_float" title="bool_into_float">bool_into_float</a></li>
+                    <li><a href="#tymethod.bool_into_int" title="bool_into_int">bool_into_int</a></li>
+                    <li><a href="#tymethod.bool_not" title="bool_not">bool_not</a></li>
+                    <li><a href="#tymethod.bool_or" title="bool_or">bool_or</a></li>
+                    <li><a href="#tymethod.bool_permute" title="bool_permute">bool_permute</a></li>
+                    <li><a href="#tymethod.bool_reshape" title="bool_reshape">bool_reshape</a></li>
+                    <li><a href="#tymethod.bool_slice" title="bool_slice">bool_slice</a></li>
+                    <li><a href="#tymethod.bool_slice_assign" title="bool_slice_assign">bool_slice_assign</a></li>
+                    <li><a href="#tymethod.bool_swap_dims" title="bool_swap_dims">bool_swap_dims</a></li>
+                    <li><a href="#tymethod.bool_to_device" title="bool_to_device">bool_to_device</a></li>
+                </ul>
+                <h3><a href="#provided-methods">Provided Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#method.bool_all" title="bool_all">bool_all</a></li>
+                    <li><a href="#method.bool_all_dim" title="bool_all_dim">bool_all_dim</a></li>
+                    <li><a href="#method.bool_any" title="bool_any">bool_any</a></li>
+                    <li><a href="#method.bool_any_dim" title="bool_any_dim">bool_any_dim</a></li>
+                    <li><a href="#method.bool_argwhere" title="bool_argwhere">bool_argwhere</a></li>
+                    <li><a href="#method.bool_cat" title="bool_cat">bool_cat</a></li>
+                    <li><a href="#method.bool_not_equal" title="bool_not_equal">bool_not_equal</a></li>
+                    <li><a href="#method.bool_repeat_dim" title="bool_repeat_dim">bool_repeat_dim</a></li>
+                    <li><a href="#method.bool_transpose" title="bool_transpose">bool_transpose</a></li>
+                </ul>
+                <h3><a href="#foreign-impls">Implementations on Foreign Types</a></h3>
+                <ul class="block">
+                    <li><a href="#impl-BoolTensorOps%3CNdArray%3CE,+I,+Q%3E%3E-for-NdArray%3CE,+I,+Q%3E"
+                            title="NdArray&#60;E, I, Q&#62;">NdArray&#60;E, I, Q&#62;</a></li>
+                </ul>
+                <h3><a href="#dyn-compatibility">Dyn Compatibility</a></h3>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>tensor::<wbr>ops</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">tensor</a>::<wbr><a href="index.html">ops</a></div>
+                    <h1>Trait <span class="trait">BoolTensorOps</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait BoolTensorOps&lt;B&gt;<div class="where">where
+    B: <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>,</div>{
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 27 methods</span></summary>    // Required methods
+    fn <a href="#tymethod.bool_empty" class="fn">bool_empty</a>(
+        shape: <a class="struct" href="../struct.Shape.html" title="struct burn::tensor::Shape">Shape</a>,
+        device: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_into_data" class="fn">bool_into_data</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/future/future/trait.Future.html" title="trait core::future::future::Future">Future</a>&lt;Output = <a class="struct" href="../struct.TensorData.html" title="struct burn::tensor::TensorData">TensorData</a>&gt; + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_from_data" class="fn">bool_from_data</a>(
+        data: <a class="struct" href="../struct.TensorData.html" title="struct burn::tensor::TensorData">TensorData</a>,
+        device: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_into_int" class="fn">bool_into_int</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.IntTensorPrimitive" title="type burn::prelude::Backend::IntTensorPrimitive">IntTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_into_float" class="fn">bool_into_float</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.FloatTensorPrimitive" title="type burn::prelude::Backend::FloatTensorPrimitive">FloatTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_device" class="fn">bool_device</a>(
+        tensor: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_to_device" class="fn">bool_to_device</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        device: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_reshape" class="fn">bool_reshape</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        shape: <a class="struct" href="../struct.Shape.html" title="struct burn::tensor::Shape">Shape</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_slice" class="fn">bool_slice</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        ranges: &amp;[<a class="struct" href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html" title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_slice_assign" class="fn">bool_slice_assign</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        ranges: &amp;[<a class="struct" href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html" title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+        value: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_equal" class="fn">bool_equal</a>(
+        lhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_not" class="fn">bool_not</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_and" class="fn">bool_and</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_or" class="fn">bool_or</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_swap_dims" class="fn">bool_swap_dims</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        dim1: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+        dim2: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_permute" class="fn">bool_permute</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        axes: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>],
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_flip" class="fn">bool_flip</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        axes: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>],
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.bool_expand" class="fn">bool_expand</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        shape: <a class="struct" href="../struct.Shape.html" title="struct burn::tensor::Shape">Shape</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>;
+
+    // Provided methods
+    fn <a href="#method.bool_repeat_dim" class="fn">bool_repeat_dim</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+        times: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_cat" class="fn">bool_cat</a>(
+        tensors: <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>&gt;,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_not_equal" class="fn">bool_not_equal</a>(
+        lhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_transpose" class="fn">bool_transpose</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_any" class="fn">bool_any</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_any_dim" class="fn">bool_any_dim</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_all" class="fn">bool_all</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_all_dim" class="fn">bool_all_dim</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+        dim: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.bool_argwhere" class="fn">bool_argwhere</a>(
+        tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive" title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+    ) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/future/future/trait.Future.html" title="trait core::future::future::Future">Future</a>&lt;Output = &lt;B as <a class="trait" href="../../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../../prelude/trait.Backend.html#associatedtype.IntTensorPrimitive" title="type burn::prelude::Backend::IntTensorPrimitive">IntTensorPrimitive</a>&gt; + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + 'static { ... }
+</details>}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Bool Tensor API for basic operations, see <a href="../struct.Tensor.html"
+                                title="struct burn::tensor::Tensor">tensor</a>
+                            for documentation on each function.</p>
+                    </div>
+                </details>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_empty" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_empty" class="fn">bool_empty</a>(
+                                    shape: <a class="struct" href="../struct.Shape.html"
+                                        title="struct burn::tensor::Shape">Shape</a>,
+                                    device: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Creates a new bool tensor.</p>
+                            <h5 id="arguments"><a class="doc-anchor" href="#arguments">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>shape</code> - The shape of the tensor.</li>
+                                <li><code>device</code> - The device to create the tensor on.</li>
+                            </ul>
+                            <h5 id="returns"><a class="doc-anchor" href="#returns">§</a>Returns</h5>
+                            <p>The boolean tensor with the given shape.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_into_data" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_into_data"
+                                        class="fn">bool_into_data</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; impl <a class="trait"
+                                        href="https://doc.rust-lang.org/1.88.0/core/future/future/trait.Future.html"
+                                        title="trait core::future::future::Future">Future</a>&lt;Output = <a
+                                        class="struct" href="../struct.TensorData.html"
+                                        title="struct burn::tensor::TensorData">TensorData</a>&gt; + <a class="trait"
+                                        href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html"
+                                        title="trait core::marker::Send">Send</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Converts the tensor to a data structure.</p>
+                            <h5 id="arguments-1"><a class="doc-anchor" href="#arguments-1">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                            </ul>
+                            <h5 id="returns-1"><a class="doc-anchor" href="#returns-1">§</a>Returns</h5>
+                            <p>The data structure with the tensor’s data.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_from_data" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_from_data"
+                                        class="fn">bool_from_data</a>(
+                                    data: <a class="struct" href="../struct.TensorData.html"
+                                        title="struct burn::tensor::TensorData">TensorData</a>,
+                                    device: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Creates a tensor from the data structure.</p>
+                            <h5 id="arguments-2"><a class="doc-anchor" href="#arguments-2">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>data</code> - The data structure.</li>
+                                <li><code>device</code> - The device to create the tensor on.</li>
+                            </ul>
+                            <h5 id="returns-2"><a class="doc-anchor" href="#returns-2">§</a>Returns</h5>
+                            <p>The tensor with the data.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_into_int" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_into_int"
+                                        class="fn">bool_into_int</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.IntTensorPrimitive"
+                                        title="type burn::prelude::Backend::IntTensorPrimitive">IntTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Converts bool tensor to int tensor.</p>
+                            <h5 id="arguments-3"><a class="doc-anchor" href="#arguments-3">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                            </ul>
+                            <h5 id="returns-3"><a class="doc-anchor" href="#returns-3">§</a>Returns</h5>
+                            <p>The int tensor with the same data as the bool tensor.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_into_float" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_into_float"
+                                        class="fn">bool_into_float</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.FloatTensorPrimitive"
+                                        title="type burn::prelude::Backend::FloatTensorPrimitive">FloatTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Converts bool tensor to float tensor.</p>
+                            <h5 id="arguments-4"><a class="doc-anchor" href="#arguments-4">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                            </ul>
+                            <h5 id="returns-4"><a class="doc-anchor" href="#returns-4">§</a>Returns</h5>
+                            <p>The float tensor with the same data as the bool tensor.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_device" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_device" class="fn">bool_device</a>(
+                                    tensor: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Gets the device of the tensor.</p>
+                            <h5 id="arguments-5"><a class="doc-anchor" href="#arguments-5">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                            </ul>
+                            <h5 id="returns-5"><a class="doc-anchor" href="#returns-5">§</a>Returns</h5>
+                            <p>The device of the tensor.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_to_device" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_to_device"
+                                        class="fn">bool_to_device</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    device: &amp;&lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                        title="type burn::prelude::Backend::Device">Device</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Moves the tensor to the device.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_reshape" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_reshape" class="fn">bool_reshape</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    shape: <a class="struct" href="../struct.Shape.html"
+                                        title="struct burn::tensor::Shape">Shape</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Reshapes the tensor.</p>
+                            <h5 id="arguments-6"><a class="doc-anchor" href="#arguments-6">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>shape</code> - The new shape.</li>
+                            </ul>
+                            <h5 id="returns-6"><a class="doc-anchor" href="#returns-6">§</a>Returns</h5>
+                            <p>The tensor with the new shape.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_slice" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_slice" class="fn">bool_slice</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ranges: &amp;[<a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                        title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Gets the values from the tensor for the given ranges.</p>
+                            <h5 id="arguments-7"><a class="doc-anchor" href="#arguments-7">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>ranges</code> - The ranges to get the values from.</li>
+                            </ul>
+                            <h5 id="returns-7"><a class="doc-anchor" href="#returns-7">§</a>Returns</h5>
+                            <p>The tensor with the values for the given ranges.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_slice_assign" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_slice_assign"
+                                        class="fn">bool_slice_assign</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ranges: &amp;[<a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                        title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+                                    value: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Sets the values in the tensor for the given ranges.</p>
+                            <h5 id="arguments-8"><a class="doc-anchor" href="#arguments-8">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>ranges</code> - The ranges to set the values for.</li>
+                                <li><code>value</code> - The values to set.</li>
+                            </ul>
+                            <h5 id="returns-8"><a class="doc-anchor" href="#returns-8">§</a>Returns</h5>
+                            <p>The tensor with the values set for the given ranges.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_equal" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_equal" class="fn">bool_equal</a>(
+                                    lhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Equates the two tensors.</p>
+                            <h5 id="arguments-9"><a class="doc-anchor" href="#arguments-9">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>lhs</code> - The left hand side tensor.</li>
+                                <li><code>rhs</code> - The right hand side tensor.</li>
+                            </ul>
+                            <h5 id="returns-9"><a class="doc-anchor" href="#returns-9">§</a>Returns</h5>
+                            <p>The tensor with the result of the equate.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_not" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_not" class="fn">bool_not</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Inverses boolean values.</p>
+                            <h5 id="arguments-10"><a class="doc-anchor" href="#arguments-10">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                            </ul>
+                            <h5 id="returns-10"><a class="doc-anchor" href="#returns-10">§</a>Returns</h5>
+                            <p>The tensor with the result of the negation.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_and" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_and" class="fn">bool_and</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Executes the logical and (<code>&amp;&amp;</code>) operation on two boolean tensors.</p>
+                            <h5 id="arguments-11"><a class="doc-anchor" href="#arguments-11">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>lhs</code> - The left hand side tensor.</li>
+                                <li><code>rhs</code> - The right hand side tensor.</li>
+                            </ul>
+                            <h5 id="returns-11"><a class="doc-anchor" href="#returns-11">§</a>Returns</h5>
+                            <p>The tensor with the result of the logical and.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_or" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_or" class="fn">bool_or</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Executes the logical or (<code>||</code>) operation on two boolean tensors.</p>
+                            <h5 id="arguments-12"><a class="doc-anchor" href="#arguments-12">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>lhs</code> - The left hand side tensor.</li>
+                                <li><code>rhs</code> - The right hand side tensor.</li>
+                            </ul>
+                            <h5 id="returns-12"><a class="doc-anchor" href="#returns-12">§</a>Returns</h5>
+                            <p>The tensor with the result of the logical or.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_swap_dims" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_swap_dims"
+                                        class="fn">bool_swap_dims</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    dim1: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    dim2: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Swaps two dimensions of a bool tensor.</p>
+                            <h5 id="arguments-13"><a class="doc-anchor" href="#arguments-13">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to swap the dimensions of.</li>
+                                <li><code>dim1</code> - The first dimension to swap.</li>
+                                <li><code>dim2</code> - The second dimension to swap.</li>
+                            </ul>
+                            <h5 id="returns-13"><a class="doc-anchor" href="#returns-13">§</a>Returns</h5>
+                            <p>The tensor with the dimensions swapped.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_permute" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_permute" class="fn">bool_permute</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    axes: &amp;[<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>],
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Permutes the dimensions of a tensor.</p>
+                            <h5 id="arguments-14"><a class="doc-anchor" href="#arguments-14">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to permute the dimensions of.</li>
+                                <li><code>axes</code> - The new order of the dimensions.</li>
+                            </ul>
+                            <h5 id="returns-14"><a class="doc-anchor" href="#returns-14">§</a>Returns</h5>
+                            <p>The tensor with the dimensions permuted.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_flip" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_flip" class="fn">bool_flip</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    axes: &amp;[<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>],
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Reverse the order of elements in a tensor along the given axes.</p>
+                            <h5 id="arguments-15"><a class="doc-anchor" href="#arguments-15">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to reverse.</li>
+                                <li><code>axes</code> - The axes to reverse.</li>
+                            </ul>
+                            <p>The tensor with the elements reversed.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.bool_expand" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.bool_expand" class="fn">bool_expand</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    shape: <a class="struct" href="../struct.Shape.html"
+                                        title="struct burn::tensor::Shape">Shape</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Broadcasts the bool <code>tensor</code> to the given <code>shape</code>.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_repeat_dim" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_repeat_dim"
+                                        class="fn">bool_repeat_dim</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    times: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Repeats one dimension of the tensor a given number of times along that dimension.</p>
+                            <h5 id="arguments-16"><a class="doc-anchor" href="#arguments-16">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor.</li>
+                                <li><code>dim</code> - The dimension to repeat.</li>
+                                <li><code>times</code> - The number of times to repeat the dimension.</li>
+                            </ul>
+                            <h5 id="returns-15"><a class="doc-anchor" href="#returns-15">§</a>Returns</h5>
+                            <p>The tensor with the dimension repeated.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_cat" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_cat" class="fn">bool_cat</a>(
+                                    tensors: <a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html"
+                                        title="struct alloc::vec::Vec">Vec</a>&lt;&lt;B as <a class="trait"
+                                        href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>&gt;,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Concatenates the tensors along the given dimension.</p>
+                            <h5 id="arguments-17"><a class="doc-anchor" href="#arguments-17">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensors</code> - The tensors to concatenate.</li>
+                                <li><code>dim</code> - The dimension to concatenate along.</li>
+                            </ul>
+                            <h5 id="returns-16"><a class="doc-anchor" href="#returns-16">§</a>Returns</h5>
+                            <p>The tensor with the tensors concatenated along the given dimension.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_not_equal" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_not_equal"
+                                        class="fn">bool_not_equal</a>(
+                                    lhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    rhs: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Element-wise non-equality comparison.</p>
+                            <h5 id="arguments-18"><a class="doc-anchor" href="#arguments-18">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>lhs</code> - The left hand side tensor.</li>
+                                <li><code>rhs</code> - The right hand side tensor.</li>
+                            </ul>
+                            <h5 id="returns-17"><a class="doc-anchor" href="#returns-17">§</a>Returns</h5>
+                            <p>The tensor with the result of the comparison.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_transpose" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_transpose"
+                                        class="fn">bool_transpose</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Transposes a bool tensor.</p>
+                            <h5 id="arguments-19"><a class="doc-anchor" href="#arguments-19">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to transpose.</li>
+                            </ul>
+                            <h5 id="returns-18"><a class="doc-anchor" href="#returns-18">§</a>Returns</h5>
+                            <p>The transposed tensor.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_any" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_any" class="fn">bool_any</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if any element in the boolean <code>tensor</code> evaluates to True.</p>
+                            <h5 id="arguments-20"><a class="doc-anchor" href="#arguments-20">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to test.</li>
+                            </ul>
+                            <h5 id="returns-19"><a class="doc-anchor" href="#returns-19">§</a>Returns</h5>
+                            <p>A boolean tensor with a single element, True if any element in the tensor is True, False
+                                otherwise.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_any_dim" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_any_dim" class="fn">bool_any_dim</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if any element in the boolean <code>tensor</code> evaluates to True along a given
+                                dimension <code>dim</code>.</p>
+                            <h5 id="arguments-21"><a class="doc-anchor" href="#arguments-21">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to test.</li>
+                                <li><code>dim</code> - The axis along which to test.</li>
+                            </ul>
+                            <h5 id="returns-20"><a class="doc-anchor" href="#returns-20">§</a>Returns</h5>
+                            <p>A boolean tensor <code>Tensor&lt;B, D, Bool&gt;</code> with the same size as input
+                                <code>tensor</code>, except in the <code>dim</code> axis
+                                where the size is 1. The elem in the <code>dim</code> axis is True if any element along
+                                this dim in the input
+                                evaluates to True, False otherwise.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_all" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_all" class="fn">bool_all</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if all elements in the boolean <code>tensor</code> evaluate to True.</p>
+                            <h5 id="arguments-22"><a class="doc-anchor" href="#arguments-22">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to test.</li>
+                            </ul>
+                            <h5 id="returns-21"><a class="doc-anchor" href="#returns-21">§</a>Returns</h5>
+                            <p>A boolean tensor <code>Tensor&lt;B, 1, Bool&gt;</code> with a single element, True if all
+                                elements in the input tensor
+                                evaluate to True, False otherwise.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_all_dim" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_all_dim" class="fn">bool_all_dim</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    dim: <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                    ) -&gt; &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Tests if all elements in the boolean <code>tensor</code> evaluate to True along a given
+                                dimension <code>dim</code>.</p>
+                            <h5 id="arguments-23"><a class="doc-anchor" href="#arguments-23">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The tensor to test.</li>
+                                <li><code>dim</code> - The axis along which to test.</li>
+                            </ul>
+                            <h5 id="returns-22"><a class="doc-anchor" href="#returns-22">§</a>Returns</h5>
+                            <p>A boolean tensor <code>Tensor&lt;B, D, Bool&gt;</code> with the same size as input
+                                <code>tensor</code>, except in the <code>dim</code> axis
+                                where the size is 1. The elem in the <code>dim</code> axis is True if all elements along
+                                this dim in the input
+                                evaluates to True, False otherwise.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.bool_argwhere" class="method">
+                                <h4 class="code-header">fn <a href="#method.bool_argwhere" class="fn">bool_argwhere</a>(
+                                    tensor: &lt;B as <a class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.BoolTensorPrimitive"
+                                        title="type burn::prelude::Backend::BoolTensorPrimitive">BoolTensorPrimitive</a>,
+                                    ) -&gt; impl <a class="trait"
+                                        href="https://doc.rust-lang.org/1.88.0/core/future/future/trait.Future.html"
+                                        title="trait core::future::future::Future">Future</a>&lt;Output = &lt;B as <a
+                                        class="trait" href="../../prelude/trait.Backend.html"
+                                        title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                        href="../../prelude/trait.Backend.html#associatedtype.IntTensorPrimitive"
+                                        title="type burn::prelude::Backend::IntTensorPrimitive">IntTensorPrimitive</a>&gt;
+                                    + <a class="trait"
+                                        href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html"
+                                        title="trait core::marker::Send">Send</a> + 'static</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Compute the indices of the elements that are non-zero, grouped by element.</p>
+                            <h5 id="arguments-24"><a class="doc-anchor" href="#arguments-24">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>tensor</code> - The input tensor.</li>
+                            </ul>
+                            <h5 id="returns-23"><a class="doc-anchor" href="#returns-23">§</a>Returns</h5>
+                            <p>A 2D tensor containing the indices of all non-zero elements of the given tensor.
+                                Each row contains the indices of a non-zero element.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="dyn-compatibility" class="section-header">Dyn Compatibility<a href="#dyn-compatibility"
+                        class="anchor">§</a></h2>
+                <div class="dyn-compatibility-info">
+                    <p>This trait is <b>not</b> <a
+                            href="https://doc.rust-lang.org/1.88.0/reference/items/traits.html#dyn-compatibility">dyn
+                            compatible</a>.</p>
+                    <p><i>In older versions of Rust, dyn compatibility was called "object safety", so this trait is not
+                            object safe.</i></p>
+                </div>
+                <h2 id="foreign-impls" class="section-header">Implementations on Foreign Types<a href="#foreign-impls"
+                        class="anchor">§</a></h2>
+                <details class="toggle implementors-toggle">
+                    <summary>
+                        <section id="impl-BoolTensorOps%3CNdArray%3CE,+I,+Q%3E%3E-for-NdArray%3CE,+I,+Q%3E"
+                            class="impl"><a
+                                href="#impl-BoolTensorOps%3CNdArray%3CE,+I,+Q%3E%3E-for-NdArray%3CE,+I,+Q%3E"
+                                class="anchor">§</a>
+                            <h3 class="code-header">impl&lt;E, I, Q&gt; <a class="trait" href="trait.BoolTensorOps.html"
+                                    title="trait burn::tensor::ops::BoolTensorOps">BoolTensorOps</a>&lt;NdArray&lt;E, I,
+                                Q&gt;&gt; for NdArray&lt;E, I, Q&gt;<div class="where">where
+                                    E: FloatNdArrayElement,
+                                    I: IntNdArrayElement,
+                                    Q: QuantElement,</div>
+                            </h3>
+                        </section>
+                    </summary>
+                    <div class="impl-items">
+                        <section id="method.bool_from_data" class="method trait-impl"><a href="#method.bool_from_data"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_from_data" class="fn">bool_from_data</a>(
+                                data: <a class="struct" href="../struct.TensorData.html"
+                                    title="struct burn::tensor::TensorData">TensorData</a>,
+                                _device: &amp;NdArrayDevice,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_into_data" class="method trait-impl"><a href="#method.bool_into_data"
+                                class="anchor">§</a>
+                            <h4 class="code-header">async fn <a href="#tymethod.bool_into_data"
+                                    class="fn">bool_into_data</a>(tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;) -&gt;
+                                <a class="struct" href="../struct.TensorData.html"
+                                    title="struct burn::tensor::TensorData">TensorData</a></h4>
+                        </section>
+                        <section id="method.bool_to_device" class="method trait-impl"><a href="#method.bool_to_device"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_to_device" class="fn">bool_to_device</a>(
+                                tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                _device: &amp;NdArrayDevice,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_reshape" class="method trait-impl"><a href="#method.bool_reshape"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_reshape" class="fn">bool_reshape</a>(
+                                tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                shape: <a class="struct" href="../struct.Shape.html"
+                                    title="struct burn::tensor::Shape">Shape</a>,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_slice" class="method trait-impl"><a href="#method.bool_slice"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_slice" class="fn">bool_slice</a>(
+                                tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                ranges: &amp;[<a class="struct"
+                                    href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                    title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_into_int" class="method trait-impl"><a href="#method.bool_into_int"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_into_int"
+                                    class="fn">bool_into_int</a>(tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;) -&gt;
+                                NdArrayTensor&lt;I&gt;</h4>
+                        </section>
+                        <section id="method.bool_device" class="method trait-impl"><a href="#method.bool_device"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_device"
+                                    class="fn">bool_device</a>(_tensor: &amp;NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;) -&gt;
+                                &lt;NdArray&lt;E&gt; as <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                    href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                    title="type burn::prelude::Backend::Device">Device</a></h4>
+                        </section>
+                        <section id="method.bool_empty" class="method trait-impl"><a href="#method.bool_empty"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_empty" class="fn">bool_empty</a>(
+                                shape: <a class="struct" href="../struct.Shape.html"
+                                    title="struct burn::tensor::Shape">Shape</a>,
+                                _device: &amp;&lt;NdArray&lt;E&gt; as <a class="trait"
+                                    href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                    href="../../prelude/trait.Backend.html#associatedtype.Device"
+                                    title="type burn::prelude::Backend::Device">Device</a>,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_slice_assign" class="method trait-impl"><a
+                                href="#method.bool_slice_assign" class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_slice_assign"
+                                    class="fn">bool_slice_assign</a>(
+                                tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                ranges: &amp;[<a class="struct"
+                                    href="https://doc.rust-lang.org/1.88.0/core/ops/range/struct.Range.html"
+                                    title="struct core::ops::range::Range">Range</a>&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;],
+                                value: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_cat-1" class="method trait-impl"><a href="#method.bool_cat-1"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#method.bool_cat" class="fn">bool_cat</a>(
+                                tensors: <a class="struct"
+                                    href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html"
+                                    title="struct alloc::vec::Vec">Vec</a>&lt;NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;&gt;,
+                                dim: <a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_equal" class="method trait-impl"><a href="#method.bool_equal"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_equal" class="fn">bool_equal</a>(
+                                lhs: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                rhs: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_not" class="method trait-impl"><a href="#method.bool_not"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_not" class="fn">bool_not</a>(tensor:
+                                NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;) -&gt;
+                                NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_and" class="method trait-impl"><a href="#method.bool_and"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_and" class="fn">bool_and</a>(
+                                lhs: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                rhs: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_or" class="method trait-impl"><a href="#method.bool_or"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_or" class="fn">bool_or</a>(
+                                lhs: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                rhs: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_into_float" class="method trait-impl"><a href="#method.bool_into_float"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_into_float"
+                                    class="fn">bool_into_float</a>(
+                                tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                ) -&gt; &lt;NdArray&lt;E, I, Q&gt; as <a class="trait"
+                                    href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype"
+                                    href="../../prelude/trait.Backend.html#associatedtype.FloatTensorPrimitive"
+                                    title="type burn::prelude::Backend::FloatTensorPrimitive">FloatTensorPrimitive</a>
+                            </h4>
+                        </section>
+                        <section id="method.bool_swap_dims" class="method trait-impl"><a href="#method.bool_swap_dims"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_swap_dims" class="fn">bool_swap_dims</a>(
+                                tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                dim1: <a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                dim2: <a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>,
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_permute" class="method trait-impl"><a href="#method.bool_permute"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_permute" class="fn">bool_permute</a>(
+                                tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;,
+                                axes: &amp;[<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>],
+                                ) -&gt; NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_expand" class="method trait-impl"><a href="#method.bool_expand"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_expand"
+                                    class="fn">bool_expand</a>(tensor: NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;, shape:
+                                <a class="struct" href="../struct.Shape.html"
+                                    title="struct burn::tensor::Shape">Shape</a>) -&gt; NdArrayTensor&lt;<a
+                                    class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                        <section id="method.bool_flip" class="method trait-impl"><a href="#method.bool_flip"
+                                class="anchor">§</a>
+                            <h4 class="code-header">fn <a href="#tymethod.bool_flip" class="fn">bool_flip</a>(tensor:
+                                NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;, axes:
+                                &amp;[<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>]) -&gt;
+                                NdArrayTensor&lt;<a class="primitive"
+                                    href="https://doc.rust-lang.org/1.88.0/std/primitive.bool.html">bool</a>&gt;</h4>
+                        </section>
+                    </div>
+                </details>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <section id="impl-BoolTensorOps%3CAutodiff%3CB,+C%3E%3E-for-Autodiff%3CB,+C%3E" class="impl"><a
+                            href="#impl-BoolTensorOps%3CAutodiff%3CB,+C%3E%3E-for-Autodiff%3CB,+C%3E"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B, C&gt; <a class="trait" href="trait.BoolTensorOps.html"
+                                title="trait burn::tensor::ops::BoolTensorOps">BoolTensorOps</a>&lt;<a class="struct"
+                                href="../../backend/struct.Autodiff.html"
+                                title="struct burn::backend::Autodiff">Autodiff</a>&lt;B, C&gt;&gt; for <a
+                                class="struct" href="../../backend/struct.Autodiff.html"
+                                title="struct burn::backend::Autodiff">Autodiff</a>&lt;B, C&gt;<div class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,
+                                C: CheckpointStrategy,</div>
+                        </h3>
+                    </section>
+                </div>
+                <script src="../../../trait.impl/burn_tensor/tensor/ops/bool_tensor/trait.BoolTensorOps.js"
+                    data-ignore-extern-crates="burn_ndarray,burn_autodiff" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

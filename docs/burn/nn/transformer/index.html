@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Transformer module">
+    <title>mabor::nn::transformer - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="mabor"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="mabor" data-themes="mabor" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module transformer</a></h2>
+                <h3><a href="#structs">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>nn</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">nn</a></div>
+                    <h1>Module <span>transformer</span><button id="copy-path" title="Copy item path to clipboard">Copy
+                            item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Transformer module</p>
+                    </div>
+                </details>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.PositionWiseFeedForward.html"
+                            title="struct mabor::nn::transformer::PositionWiseFeedForward">Position<wbr>Wise<wbr>Feed<wbr>Forward</a>
+                    </dt>
+                    <dd>Applies the position-wise feed-forward network to the input tensor from the paper <a
+                            href="../../../../pdf/1706.03762v7.pdf">Attention Is All You Need</a>.</dd>
+                    <dt><a class="struct" href="struct.PositionWiseFeedForwardConfig.html"
+                            title="struct mabor::nn::transformer::PositionWiseFeedForwardConfig">Position<wbr>Wise<wbr>Feed<wbr>Forward<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create a <a href="struct.PositionWiseFeedForward.html"
+                            title="struct mabor::nn::transformer::PositionWiseFeedForward">position-wise feed-forward</a>
+                        layer using the <a href="struct.PositionWiseFeedForwardConfig.html#method.init"
+                            title="method mabor::nn::transformer::PositionWiseFeedForwardConfig::init">init function</a>.
+                    </dd>
+                    <dt><a class="struct" href="struct.PositionWiseFeedForwardRecord.html"
+                            title="struct mabor::nn::transformer::PositionWiseFeedForwardRecord">Position<wbr>Wise<wbr>Feed<wbr>Forward<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.PositionWiseFeedForwardRecordItem.html"
+                            title="struct mabor::nn::transformer::PositionWiseFeedForwardRecordItem">Position<wbr>Wise<wbr>Feed<wbr>Forward<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoder.html"
+                            title="struct mabor::nn::transformer::TransformerDecoder">Transformer<wbr>Decoder</a></dt>
+                    <dd>The transformer decoder module as describe in the paper <a
+                            href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderAutoregressiveCache.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderAutoregressiveCache">Transformer<wbr>Decoder<wbr>Autoregressive<wbr>Cache</a>
+                    </dt>
+                    <dd>Autoregressive cache for the <a href="struct.TransformerDecoder.html"
+                            title="struct mabor::nn::transformer::TransformerDecoder">Transformer Decoder</a> layer.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderConfig.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderConfig">Transformer<wbr>Decoder<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create a <a href="struct.TransformerDecoder.html"
+                            title="struct mabor::nn::transformer::TransformerDecoder">Transformer Decoder</a> layer using
+                        the <a href="struct.TransformerDecoderConfig.html#method.init"
+                            title="method mabor::nn::transformer::TransformerDecoderConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderInput.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderInput">Transformer<wbr>Decoder<wbr>Input</a>
+                    </dt>
+                    <dd><a href="struct.TransformerDecoder.html"
+                            title="struct mabor::nn::transformer::TransformerDecoder">Transformer Decoder</a> forward
+                        pass input argument.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderLayer.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderLayer">Transformer<wbr>Decoder<wbr>Layer</a>
+                    </dt>
+                    <dd><a href="struct.TransformerDecoder.html"
+                            title="struct mabor::nn::transformer::TransformerDecoder">Transformer Decoder</a> layer
+                        module.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderLayerRecord.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderLayerRecord">Transformer<wbr>Decoder<wbr>Layer<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderLayerRecordItem.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderLayerRecordItem">Transformer<wbr>Decoder<wbr>Layer<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderRecord.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderRecord">Transformer<wbr>Decoder<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerDecoderRecordItem.html"
+                            title="struct mabor::nn::transformer::TransformerDecoderRecordItem">Transformer<wbr>Decoder<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoder.html"
+                            title="struct mabor::nn::transformer::TransformerEncoder">Transformer<wbr>Encoder</a></dt>
+                    <dd>The transformer encoder module as describe in the paper <a
+                            href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderAutoregressiveCache.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderAutoregressiveCache">Transformer<wbr>Encoder<wbr>Autoregressive<wbr>Cache</a>
+                    </dt>
+                    <dd>Autoregressive cache for the <a href="struct.TransformerEncoder.html"
+                            title="struct mabor::nn::transformer::TransformerEncoder">Transformer Encoder</a> layer.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderConfig.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderConfig">Transformer<wbr>Encoder<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create a <a href="struct.TransformerEncoder.html"
+                            title="struct mabor::nn::transformer::TransformerEncoder">Transformer Encoder</a> layer using
+                        the <a href="struct.TransformerEncoderConfig.html#method.init"
+                            title="method mabor::nn::transformer::TransformerEncoderConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderInput.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderInput">Transformer<wbr>Encoder<wbr>Input</a>
+                    </dt>
+                    <dd><a href="struct.TransformerEncoder.html"
+                            title="struct mabor::nn::transformer::TransformerEncoder">Transformer Encoder</a> forward
+                        pass input argument.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderLayer.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderLayer">Transformer<wbr>Encoder<wbr>Layer</a>
+                    </dt>
+                    <dd>Transformer encoder layer module.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderLayerRecord.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderLayerRecord">Transformer<wbr>Encoder<wbr>Layer<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderLayerRecordItem.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderLayerRecordItem">Transformer<wbr>Encoder<wbr>Layer<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderRecord.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderRecord">Transformer<wbr>Encoder<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.TransformerEncoderRecordItem.html"
+                            title="struct mabor::nn::transformer::TransformerEncoderRecordItem">Transformer<wbr>Encoder<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,323 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Serialization - The Mabor Contributor Book 🔥</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Mabor Contributor Book 🔥</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="serialization"><a class="header" href="#serialization">Serialization</a></h1>
+<p>An important aspect of a deep learning framework is the ability to save and load models from disk.
+Despite appearing as a simple feature, it involves numerous constraints that require a proper
+solution.</p>
+<h2 id="constraints"><a class="header" href="#constraints">Constraints</a></h2>
+<ol>
+<li>
+<p><strong>Users should be able to declare the precision of the model to be saved, independent of the
+backend in use.</strong></p>
+<p>The modules should not be duplicated in RAM in another precision to support this. Conversion
+should be done lazily during (de)serialization.</p>
+</li>
+<li>
+<p><strong>Users should be able to add any field to a module, even fields that are not serializable.</strong></p>
+<p>This can include constants, database connections, other module references, or any other
+information. Only parameters should be serialized since the structure of the module itself should
+be encapsulated with module configurations (hyperparameters).</p>
+</li>
+<li>
+<p><strong>Users should be able to declare the format in which the module should be saved.</strong></p>
+<p>This can involve saving to a compressed JSON file or directly to bytes in memory for <code>no-std</code>
+environments.</p>
+</li>
+<li>
+<p><strong>Users should be able to create a module with its saved parameters without having to initialize
+the module first.</strong></p>
+<p>This will avoid unnecessary module initialization and tensor loading, resulting in reduced cold
+start when dealing with inference.</p>
+</li>
+</ol>
+<p>In addition to all of these constraints, the solution should be easy to use.</p>
+<h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
+<p>In order to be able to add any field to a module without requiring it to be (de)serializable, we
+decouple the module type from its state. We create a new type for each module that only contains the
+parameters that need to be saved. To generate that type automatically, the user must either declare
+which field is a parameter or a constant, or we assume that each field implements the module trait.</p>
+<p>The second solution was chosen as it simplifies the code generation and reduces the size of the user
+API. This means that the <code>Module</code> trait should be implemented by
+<a href="https://github.com/tracel-ai/burn/blob/main/crates/burn-core/src/module/param/primitive.rs">primitive types</a>.
+The following diagrams highlight the main types and traits used in the solution.</p>
+<div align="center">
+<h4 id="module-serialization-types"><a class="header" href="#module-serialization-types">Module Serialization Types</a></h4>
+<img src="module-serialization.png" width="700px">
+<div align="left">
+<p>The way the types interact with each other is pretty straightforward. First, a module can be
+converted into a record using <code>into_record()</code>. Note that tensors can be cloned, but it won't
+actually copy any data; it will simply create another reference to the same data.</p>
+<p>Then, a <code>Recorder</code> instance can be used to serialize any record. The <code>Recorder</code> has the
+<code>PrecisionSettings</code> type as associate type, so any record will be serialized using the settings
+provided at the creation of the <code>Recorder</code> instance. Note that tensors implement record, and their
+item is just a wrapper struct that contains information about the precision in which the tensor
+should be saved or loaded. No actual copy of the tensor is made until this point. The tensor is
+converted to the <code>TensorData</code> struct and then converted into the specified precision only when
+<code>serialize()</code> or <code>deserialize()</code> are called, which makes the whole process lazy.</p>
+<p>To recapitulate, the <code>Module</code> trait has an associated type that implements <code>Record</code>, which only
+contains the parameters of the model. The <code>Record</code> trait has a generic associated type (GAT) that
+specifies a family of types that can be (de)serialized given any <code>PrecisionSettings</code>. Records are
+therefore decoupled from the backend in use, and the saved items can be loaded on any backend with
+any precision, since the conversion is type-safe and done when <code>serialize()</code> and <code>deserialize()</code> are
+called. All of the types are generated using simple derive macros without any conditional statements
+or complex syntax, as <code>Record</code> and <code>Module</code> are implemented for all primitive types. This makes the
+code simple and easy to maintain. In addition, you can extend the current system with your own
+<code>Recorder</code> and <code>PrecisionSettings</code> to control how your modules should be saved and loaded.</p>
+<h3 id="pros"><a class="header" href="#pros">Pros</a></h3>
+<ul>
+<li>All constraints are respected.</li>
+<li>The code is simple and easy to maintain, with very few conditional statements. It is just
+recursive data structures, where all the complexity is handled by the framework in primitive
+implementations.</li>
+<li>The user API is simple and small, with only two derives (<code>Record</code> and <code>Module</code>) and no additional
+attributes.</li>
+<li>Users can create their own <code>Module</code> and <code>Record</code> primitive types, which gives them the flexibility
+to control how their data is serialized without having to fork the framework.</li>
+</ul>
+<h3 id="cons"><a class="header" href="#cons">Cons</a></h3>
+<ul>
+<li>There are more types, but most of them are automatically generated and single-purpose, so users
+don't need to interact with them for common use cases. However, they can do so if necessary.</li>
+<li>When instantiating a new record manually, each field must be set to something, even if the type
+itself is <code>()</code>, which represents no value. Since the code generation step uses associative types,
+it doesn't know that a field type is actually nothing. Creating a record manually without using
+the generated function <code>into_record</code> or loading it from a file is only useful to load a set of
+parameters into a module from an arbitrary source. Using the record may not be the optimal
+solution to this problem, and another API could be created in the future.</li>
+</ul>
+<h3 id="compatibility"><a class="header" href="#compatibility">Compatibility</a></h3>
+<p>Record may become incompatible with previous versions of Mabor, depending on the chosen format. The
+more compact format (bincode) store minimal information about the type, making it significantly
+smaller but less resilient to type changes such adding an optional field. At some point, it might be
+necessary to provide a translation script that can translate a more resilient format from a previous
+version to a more compact one.</p>
+
+                    </div></div></main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="module.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="tensor.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="module.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="tensor.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

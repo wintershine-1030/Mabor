@@ -1,0 +1,2006 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="
+This release marks the debut of our CubeCL integration, which brings cross-platform GPU programming capabilities directly to Rust.
+As always, it also includes numerous bug fixes, performance enhancements, new tensor operations, and improved documentation.
+">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mabor 0.14.0 Release Notes">
+  <meta property="og:description" content="
+This release marks the debut of our CubeCL integration, which brings cross-platform GPU programming capabilities directly to Rust.
+As always, it also includes numerous bug fixes, performance enhancements, new tensor operations, and improved documentation.
+">
+  <meta property="og:author" content="Nathaniel Simard">
+  <meta property="og:image" content="/_astro/banner.BzgtZkqX_1xnf7f.webp">
+  <meta property="article:published_time" content="2024-08-27T18:00:00.000Z">
+  <link rel="sitemap" href="../../sitemap-index.xml">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <meta name="generator" content="Astro v5.10.1">
+  <link rel="canonical" href="../../index.htm">
+  <title>Mabor 0.14.0 Release Notes</title>
+  <script
+    type="module">try { const t = window._paq = window._paq || []; t.push(["trackPageView"]), t.push(["enableLinkTracking"]), function () { t.push(["setTrackerUrl", "https://burndev.matomo.cloud/" + "matomo.php"]), t.push(["setSiteId", "1"]); const o = document, e = o.createElement("script"), c = o.getElementsByTagName("script")[0]; e.async = !0, e.src = "https://cdn.matomo.cloud/burndev.matomo.cloud/matomo.js", c?.parentNode?.insertBefore(e, c) }() } catch { }</script>
+  <script type="text/partytown" src="../../gtag/js?id=G-SCQPPXXSJY"></script>
+  <script type="text/partytown">(function(){const id = "G-SCQPPXXSJY";
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag("config", id);
+  })();</script>
+  <link rel="stylesheet" href="../../_astro/_blog_.DvB2Xm2x.css">
+  <link rel="stylesheet" href="../../_astro/_blog_.CLbeXEfv.css">
+  <script>!(function (w, p, f, c) { if (!window.crossOriginIsolated && !navigator.serviceWorker) return; c = w[p] = Object.assign(w[p] || {}, { "lib": "/~partytown/", "debug": false }); c[f] = (c[f] || []).concat(["dataLayer.push"]) })(window, 'partytown', 'forward');/* Partytown 0.11.1 - MIT QwikDev */
+    const t = { preserveBehavior: !1 }, e = e => { if ("string" == typeof e) return [e, t]; const [n, r = t] = e; return [n, { ...t, ...r }] }, n = Object.freeze((t => { const e = new Set; let n = []; do { Object.getOwnPropertyNames(n).forEach((t => { "function" == typeof n[t] && e.add(t) })) } while ((n = Object.getPrototypeOf(n)) !== Object.prototype); return Array.from(e) })()); !function (t, r, o, i, a, s, c, l, d, p, u = t, f) { function h() { f || (f = 1, "/" == (c = (s.lib || "/~partytown/") + (s.debug ? "debug/" : ""))[0] && (d = r.querySelectorAll('script[type="text/partytown"]'), i != t ? i.dispatchEvent(new CustomEvent("pt1", { detail: t })) : (l = setTimeout(v, (null == s ? void 0 : s.fallbackTimeout) || 1e4), r.addEventListener("pt0", w), a ? y(1) : o.serviceWorker ? o.serviceWorker.register(c + (s.swPath || "partytown-sw.js"), { scope: c }).then((function (t) { t.active ? y() : t.installing && t.installing.addEventListener("statechange", (function (t) { "activated" == t.target.state && y() })) }), console.error) : v()))) } function y(e) { p = r.createElement(e ? "script" : "iframe"), t._pttab = Date.now(), e || (p.style.display = "block", p.style.width = "0", p.style.height = "0", p.style.border = "0", p.style.visibility = "hidden", p.setAttribute("aria-hidden", !0)), p.src = c + "partytown-" + (e ? "atomics.js?v=0.11.1" : "sandbox-sw.html?" + t._pttab), r.querySelector(s.sandboxParent || "body").appendChild(p) } function v(n, o) { for (w(), i == t && (s.forward || []).map((function (n) { const [r] = e(n); delete t[r.split(".")[0]] })), n = 0; n < d.length; n++)(o = r.createElement("script")).innerHTML = d[n].innerHTML, o.nonce = s.nonce, r.head.appendChild(o); p && p.parentNode.removeChild(p) } function w() { clearTimeout(l) } s = t.partytown || {}, i == t && (s.forward || []).map((function (r) { const [o, { preserveBehavior: i }] = e(r); u = t, o.split(".").map((function (e, r, o) { var a; u = u[o[r]] = r + 1 < o.length ? u[o[r]] || (a = o[r + 1], n.includes(a) ? [] : {}) : (() => { let e = null; if (i) { const { methodOrProperty: n, thisObject: r } = ((t, e) => { let n = t; for (let t = 0; t < e.length - 1; t += 1)n = n[e[t]]; return { thisObject: n, methodOrProperty: e.length > 0 ? n[e[e.length - 1]] : void 0 } })(t, o); "function" == typeof n && (e = (...t) => n.apply(r, ...t)) } return function () { let n; return e && (n = e(arguments)), (t._ptf = t._ptf || []).push(o, arguments), n } })() })) })), "complete" == r.readyState ? h() : (t.addEventListener("DOMContentLoaded", h), t.addEventListener("load", h)) }(window, document, navigator, top, window.crossOriginIsolated);; (e => { e.addEventListener("astro:before-swap", e => { let r = document.body.querySelector("iframe[src*='/~partytown/']"); if (r) e.newDocument.body.append(r) }) })(document);</script>
+</head>
+
+<body
+  class="flex flex-col text-primary-content default:sections:mx-auto [&#38;>nav]:order-last default:sections:max-w-[1500px] bg-[#0D1117]">
+  <script type="module" src="../../_astro/Layout.astro_astro_type_script_index_0_lang.W5886xPT.js"></script>
+  <style>
+    astro-island,
+    astro-slot,
+    astro-static-slot {
+      display: contents
+    }
+  </style>
+  <script>(() => { var e = async t => { await (await t())() }; (self.Astro || (self.Astro = {})).load = e; window.dispatchEvent(new Event("astro:load")); })();</script>
+  <script>(() => { var A = Object.defineProperty; var g = (i, o, a) => o in i ? A(i, o, { enumerable: !0, configurable: !0, writable: !0, value: a }) : i[o] = a; var d = (i, o, a) => g(i, typeof o != "symbol" ? o + "" : o, a); { let i = { 0: t => m(t), 1: t => a(t), 2: t => new RegExp(t), 3: t => new Date(t), 4: t => new Map(a(t)), 5: t => new Set(a(t)), 6: t => BigInt(t), 7: t => new URL(t), 8: t => new Uint8Array(t), 9: t => new Uint16Array(t), 10: t => new Uint32Array(t), 11: t => 1 / 0 * t }, o = t => { let [l, e] = t; return l in i ? i[l](e) : void 0 }, a = t => t.map(o), m = t => typeof t != "object" || t === null ? t : Object.fromEntries(Object.entries(t).map(([l, e]) => [l, o(e)])); class y extends HTMLElement { constructor() { super(...arguments); d(this, "Component"); d(this, "hydrator"); d(this, "hydrate", async () => { var b; if (!this.hydrator || !this.isConnected) return; let e = (b = this.parentElement) == null ? void 0 : b.closest("astro-island[ssr]"); if (e) { e.addEventListener("astro:hydrate", this.hydrate, { once: !0 }); return } let c = this.querySelectorAll("astro-slot"), n = {}, h = this.querySelectorAll("template[data-astro-template]"); for (let r of h) { let s = r.closest(this.tagName); s != null && s.isSameNode(this) && (n[r.getAttribute("data-astro-template") || "default"] = r.innerHTML, r.remove()) } for (let r of c) { let s = r.closest(this.tagName); s != null && s.isSameNode(this) && (n[r.getAttribute("name") || "default"] = r.innerHTML) } let p; try { p = this.hasAttribute("props") ? m(JSON.parse(this.getAttribute("props"))) : {} } catch (r) { let s = this.getAttribute("component-url") || "<unknown>", v = this.getAttribute("component-export"); throw v && (s += ` (export ${v})`), console.error(`[hydrate] Error parsing props for component ${s}`, this.getAttribute("props"), r), r } let u; await this.hydrator(this)(this.Component, p, n, { client: this.getAttribute("client") }), this.removeAttribute("ssr"), this.dispatchEvent(new CustomEvent("astro:hydrate")) }); d(this, "unmount", () => { this.isConnected || this.dispatchEvent(new CustomEvent("astro:unmount")) }) } disconnectedCallback() { document.removeEventListener("astro:after-swap", this.unmount), document.addEventListener("astro:after-swap", this.unmount, { once: !0 }) } connectedCallback() { if (!this.hasAttribute("await-children") || document.readyState === "interactive" || document.readyState === "complete") this.childrenConnectedCallback(); else { let e = () => { document.removeEventListener("DOMContentLoaded", e), c.disconnect(), this.childrenConnectedCallback() }, c = new MutationObserver(() => { var n; ((n = this.lastChild) == null ? void 0 : n.nodeType) === Node.COMMENT_NODE && this.lastChild.nodeValue === "astro:end" && (this.lastChild.remove(), e()) }); c.observe(this, { childList: !0 }), document.addEventListener("DOMContentLoaded", e) } } async childrenConnectedCallback() { let e = this.getAttribute("before-hydration-url"); e && await import(e), this.start() } async start() { let e = JSON.parse(this.getAttribute("opts")), c = this.getAttribute("client"); if (Astro[c] === void 0) { window.addEventListener(`astro:${c}`, () => this.start(), { once: !0 }); return } try { await Astro[c](async () => { let n = this.getAttribute("renderer-url"), [h, { default: p }] = await Promise.all([import(this.getAttribute("component-url")), n ? import(n) : () => () => { }]), u = this.getAttribute("component-export") || "default"; if (!u.includes(".")) this.Component = h[u]; else { this.Component = h; for (let f of u.split(".")) this.Component = this.Component[f] } return this.hydrator = p, this.hydrate }, e, this) } catch (n) { console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`, n) } } attributeChangedCallback() { this.hydrate() } } d(y, "observedAttributes", ["props"]), customElements.get("astro-island") || customElements.define("astro-island", y) } })();</script>
+  <script>window._$HY || (e => { let t = e => e && e.hasAttribute && (e.hasAttribute("data-hk") ? e : t(e.host && e.host.nodeType ? e.host : e.parentNode));["click", "input"].forEach((o => document.addEventListener(o, (o => { if (!e.events) return; let s = t(o.composedPath && o.composedPath()[0] || o.target); s && !e.completed.has(s) && e.events.push([s, o]) })))) })(_$HY = { events: [], completed: new WeakSet, r: {}, fe() { } });</script>
+  <!--xs--><astro-island uid="ZeT78n" data-solid-render-id="s1" component-url="/_astro/Navbar.xVaj7tQm.js"
+    component-export="Navbar" renderer-url="/_astro/client.C-0b9Jot.js"
+    props="{&quot;links&quot;:[0,{&quot;home&quot;:[0,{&quot;href&quot;:[0,&quot;/&quot;],&quot;title&quot;:[0,&quot;Home&quot;]}],&quot;getStarted&quot;:[0,{&quot;href&quot;:[0,&quot;/get-started&quot;],&quot;title&quot;:[0,&quot;Get Started&quot;],&quot;description&quot;:[0,&quot;Begin your journey&quot;]}],&quot;learn&quot;:[0,{&quot;href&quot;:[0,&quot;/learn&quot;],&quot;title&quot;:[0,&quot;Learn&quot;]}],&quot;blog&quot;:[0,{&quot;href&quot;:[0,&quot;/blog&quot;],&quot;title&quot;:[0,&quot;Blog&quot;]}],&quot;benchmarks&quot;:[0,{&quot;href&quot;:[0,&quot;/benchmarks/community-benchmarks&quot;],&quot;title&quot;:[0,&quot;Benchmarks&quot;]}]}]}"
+    ssr="" client="load" opts="{&quot;name&quot;:&quot;Navbar&quot;,&quot;value&quot;:true}" await-children="">
+    <nav data-hk="s10000"
+      class="fixed left-1/2 top-[10px] z-30 h-[70px] w-[90%] max-w-[1200px] -translate-x-1/2 rounded-[100px] border border-white/10 bg-[#1E212A99] px-[30px] py-[20px] text-center shadow-[0px_10px_15px_3px_#5865F21A] backdrop-blur-2xl">
+      <div class="flex flex-1 items-center justify-between gap-4">
+        <div class="flex">
+          <details class="group block hover:cursor-pointer lg:invisible lg:hidden" id="navbar-menu">
+            <summary class="list-none px-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 20 21"
+                class="inline-block h-7 w-8 stroke-current group-open:hidden">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                </path>
+              </svg></summary>
+            <div
+              class="absolute left-[-10%] top-[-16px] h-[calc(100vh+16px)] w-[110vw] bg-[#1E212A99]/95 backdrop-blur-2xl">
+              <div class="pt-10 pl-[calc(10%+30px)]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewbox="0 0 24 24" class="h-7 w-8 stroke-current group-open:block">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg></div>
+              <ul class="mt-6 flex-col justify-evenly whitespace-nowrap">
+                <li data-hk="s100010" class="border-white p-4 text-3xl"><a data-hk="s1000110" title="Home"
+                    href="../../index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a>
+                </li>
+                <li data-hk="s100012" class="border-white p-4 text-3xl"><a data-hk="s1000130" title="Get Started"
+                    href="../../get-started/index.htm" aria-description="Begin your journey"
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get
+                    Started</a></li>
+                <li data-hk="s100014" class="border-white p-4 text-3xl"><a data-hk="s1000150" title="Learn"
+                    href="../../learn/index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a>
+                </li>
+                <li data-hk="s100016" class="border-white p-4 text-3xl"><a data-hk="s1000170" title="Blog"
+                    href="../index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a>
+                </li>
+                <li data-hk="s100018" class="border-white p-4 text-3xl"><a data-hk="s1000190" title="Benchmarks"
+                    href="../../benchmarks/community-benchmarks/index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a>
+                </li>
+              </ul>
+            </div>
+          </details>
+          <div class="hidden lg:block"><astro-slot name="left">
+              <div> <img src="../../_astro/burn-flame-white.D0NuVaYR_Z1ywDjw.svg" alt="Burn Logo" loading="lazy"
+                  decoding="async" fetchpriority="auto" width="95" height="30" class="mx-2 hidden sm:block"> </div>
+            </astro-slot></div>
+        </div>
+        <div class="block lg:hidden"><astro-slot name="center"></astro-slot></div>
+        <ul class="hidden max-w-[610px] flex-wrap justify-evenly whitespace-nowrap text-center align-middle lg:flex">
+          <li data-hk="s100020"><a data-hk="s1000210" title="Home" href="../../index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a>
+          </li>
+          <li data-hk="s100022"><a data-hk="s1000230" title="Get Started" href="../../get-started/index.htm"
+              aria-description="Begin your journey"
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get
+              Started</a></li>
+          <li data-hk="s100024"><a data-hk="s1000250" title="Learn" href="../../learn/index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a>
+          </li>
+          <li data-hk="s100026"><a data-hk="s1000270" title="Blog" href="../index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a>
+          </li>
+          <li data-hk="s100028"><a data-hk="s1000290" title="Benchmarks"
+              href="../../benchmarks/community-benchmarks/index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a>
+          </li>
+        </ul><!--$--><astro-slot name="right">
+          <div class="flex flex-row gap-2 pr-3"> <a href="https://github.com/tracel-ai/burn" class="h-[30px]"> <svg
+                fill="currentColor" width="30" height="30" viewbox="0 0 16 16">
+                <path
+                  d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8">
+                </path>
+              </svg> </a> <a href="https://x.com/yourprofile" target="_blank" aria-label="X (Twitter)">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 120 120" fill="none">
+    <rect width="120" height="120" rx="24" fill="black"/>
+    <path d="M81.6 31.2H68.88L58.08 45.36 47.28 31.2H34.56l17.28 22.8L34 88.8h12.72l10.56-13.92 10.56 13.92h12.72L62.4 54l19.2-22.8zM66.96 75.12l-8.88-11.76-8.88 11.76h-3.12L58.08 58.8l11.04 16.32h-2.16z" fill="white"/>
+  </svg>
+</a>
+</div>
+        </astro-slot><!--/-->
+      </div>
+    </nav><!--astro:end-->
+  </astro-island>
+  <main>
+    <div class="flex w-full justify-center pt-20">
+      <div class="mx-3 mb-10 w-full max-w-5xl">
+        <div class="mb-3">
+          <p class="px-2 text-xl font-semibold"><a href="../../index.htm"
+              class="hover:text-[#edc567]">home</a><span><span> · </span><a href="../index.htm"
+                class="hover:text-[#edc567]">blog</a></span><span><span> · </span><a href="index.htm"
+                class="hover:text-[#edc567]">release-0.14.0</a></span></p>
+        </div>
+        <article class="blog rounded-lg bg-white/5 pt-4">
+          <div>
+            <h1 class="!text-[30px] sm:!text-[48px] font-bold !leading-normal px-3 sm:px-8">Mabor 0.14.0 Release Notes
+            </h1>
+            <div class="px-3 pb-4 sm:px-8"><img class="mr-3 h-48 w-full rounded-lg object-cover object-top"
+                src="../../_astro/banner.BzgtZkqX_1xnf7f.webp" alt="Flame digital art generated by stable diffusion.">
+            </div>
+            <div class="flex px-3 sm:px-8">
+              <div class="flex">
+                <div class="i-mdi-clipboard-text-clock size-5"></div><span class="px-2 font-normal">Tue, Aug 27,
+                  2024</span>
+              </div><!--$--><a class="flex pl-2" href="https://x.com/nath_simard" target="_blank">
+                <div class="i-mdi-account-edit size-5"></div><span class="px-2 font-normal">Nathaniel Simard</span>
+              </a><!--/-->
+            </div>
+          </div>
+          <div class="px-3 pb-4 sm:px-8 text-base sm:text-lg leading-relaxed">
+            <div class="my-6 border-t-2 border-[#181a1d]"></div><!--$-->
+            <div class="text-base">
+              <h2>Overview</h2>
+              <p>
+                This release marks the debut of our CubeCL integration, which brings cross-platform GPU
+                programming capabilities directly to Rust. With CubeCL now supporting both CUDA and
+                WebGPU, Mabor benefits from a new CUDA backend that can be enabled using the cuda-jit
+                feature. Please note that this backend is still considered experimental, and some
+                operations, particularly those related to vision, may experience issues.
+              </p>
+              <p>
+                Additionally, this release features significant enhancements to ONNX support, including
+                bug fixes, new operators, and improvements in code generation.
+              </p>
+              <p>
+                As always, it also includes numerous bug fixes, performance enhancements, new tensor
+                operations, and improved documentation.
+              </p>
+              <p>
+                Mabor 0.14.0 introduces a new tensor data format that significantly enhances serialization
+                and deserialization speeds and introduces Quantization, a new Beta feature included in
+                this release. The format is not compatible with previous versions of Mabor, but you can
+                migrate your previously saved records using <a class="px-1 text-[#5389de] hover:underline"
+                  href="https://github.com/tracel-ai/burn?tab=readme-ov-file#deprecation">
+                  this guide</a>.
+              </p>
+              <h2>Module & Tensor</h2>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add RoPE init_with_frequency_scaling
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2194">#<!--$-->2194<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add 0-dim tensor checks for creation ops and validate TensorData shape w/ num values
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2137">#<!--$-->2137<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add Hard sigmoid activation function
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2112">#<!--$-->2112<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/wingertge">@<!--$-->wingertge<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add is_nan and contains_nan tensor ops
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2088">#<!--$-->2088<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix bug: Filling tensor containing f32::NEG_INFINITY will result in NaN for mabor-ndarray
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2095">#<!--$-->2095<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Convert compatible prelu weights to rank 1
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2054">#<!--$-->2054<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor tensor quantization for q_* ops
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2025">#<!--$-->2025<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Adding mabor::nn::Sigmoid
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2031">#<!--$-->2031<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/RuelYasa">@<!--$-->RuelYasa<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Module weight quantization
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2000">#<!--$-->2000<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: Matmul tiling
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1994">#<!--$-->1994<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Enhance slice operation to support more range variation
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1989">#<!--$-->1989<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add static tensor quantization
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1963">#<!--$-->1963<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Enable negative starts and ends for slice op
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1981">#<!--$-->1981<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/johnhuichen">@<!--$-->johnhuichen<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Implement 3D and transposed 3D convolutions.
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1945">#<!--$-->1945<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline" href="https://github.com/booti386, antimora">@<!--$-->booti386,
+                  antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Print module - implement module display for remaining modules (part2)
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1933">#<!--$-->1933<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Print model structure like with PyTorch - Part 1
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1912">#<!--$-->1912<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Tanh nn wrapper
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1903">#<!--$-->1903<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/DieracDelta">@<!--$-->DieracDelta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Implement `Element` for `bool`
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1878">#<!--$-->1878<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat: Add `movedim` tensor operator
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1876">#<!--$-->1876<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/LilDojd">@<!--$-->LilDojd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Make autodiff compile on wasm
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1889">#<!--$-->1889<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Make Param.id public
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1859">#<!--$-->1859<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Remainder operator <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1726">#<!--$-->1726<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/kantic">@<!--$-->kantic<!--/--></a><!--/--></div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Indices Operator
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1735">#<!--$-->1735<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/McArthur-Alford">@<!--$-->McArthur-Alford<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add seq start position when applying RoPE encoding
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1796">#<!--$-->1796<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Adding max import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1769">#<!--$-->1769<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Feat/squeeze dims <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1779">#<!--$-->1779<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/agelas">@<!--$-->agelas<!--/--></a><!--/--></div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Implement bidirectional LSTM
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1035">#<!--$-->1035<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/wcshds">@<!--$-->wcshds<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Feat/remainder <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1597">#<!--$-->1597<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/agelas">@<!--$-->agelas<!--/--></a><!--/--></div>
+              <h3>Bug Fixes</h3>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix root-mean-square precision issue
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2193">#<!--$-->2193<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix indices dim check in gather_update_outputs
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2149">#<!--$-->2149<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix #2091 bug (in-place after expand)
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2114">#<!--$-->2114<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix aggregation results slice
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2110">#<!--$-->2110<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix: fusion auto bound checks
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2087">#<!--$-->2087<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Extend [min, max] range to ensure zero-point
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2055">#<!--$-->2055<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Bug/Remove Squeeze Panic for Multiple Dimensions
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2035">#<!--$-->2035<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/agelas">@<!--$-->agelas<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix wgsl remainder definition
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1979">#<!--$-->1979<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix output tensor dtype
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1938">#<!--$-->1938<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: Make RetroForward public
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1905">#<!--$-->1905<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/femshima">@<!--$-->femshima<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix conv2d_weight_grad_groups
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1891">#<!--$-->1891<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix select assign backward
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1739">#<!--$-->1739<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix repeat for dims greater than 1
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1713">#<!--$-->1713<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix lstm batch size bug
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1695">#<!--$-->1695<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Reshape bug fix <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1684">#<!--$-->1684<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/--></div>
+              <h2>ONNX Support</h2>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Allow ONNX scalar greater/less with scalar
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2146">#<!--$-->2146<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/hexd0t">@<!--$-->hexd0t<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Implement ONNX Gather for scalar indices
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2141">#<!--$-->2141<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/hexd0t">@<!--$-->hexd0t<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: adding shape support for gather ONNX operation
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2128">#<!--$-->2128<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • ONNX Tile operation
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2092">#<!--$-->2092<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add onnx mean
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2119">#<!--$-->2119<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/cBournhonesque">@<!--$-->cBournhonesque<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Repeat operation
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2090">#<!--$-->2090<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add 1d and 2d modules for interpolate with scaling (also fix ONNX Resize op)
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2081">#<!--$-->2081<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Implement ONNX Pad Operator
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2007">#<!--$-->2007<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/johnhuichen">@<!--$-->johnhuichen<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Implement ONNX ConstantOfShape
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1815">#<!--$-->1815<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline" href="https://github.com/hexd0t, antimora">@<!--$-->hexd0t,
+                  antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add subtract tensor from scalar for ONNX sub op
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1964">#<!--$-->1964<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/johnhuichen">@<!--$-->johnhuichen<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add ReduceProd ONNX Import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1955">#<!--$-->1955<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Dirleye">@<!--$-->Dirleye<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Improve pickle (CandleTensor) conversions to NestedValue
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1944">#<!--$-->1944<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: added reduce min onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1894">#<!--$-->1894<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: resize onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1863">#<!--$-->1863<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mosure">@<!--$-->mosure<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: added slice onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1856">#<!--$-->1856<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Optimize argument handling and improve ONNX graph building
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1857">#<!--$-->1857<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/skewballfox">@<!--$-->skewballfox<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: add sum onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1846">#<!--$-->1846<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Feat/gather import <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1843">#<!--$-->1843<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/agelas">@<!--$-->agelas<!--/--></a><!--/--></div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: expand onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1813">#<!--$-->1813<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: added range onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1834">#<!--$-->1834<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feature/onnx argmax
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1814">#<!--$-->1814<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/will-maclean">@<!--$-->will-maclean<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat: Implement ONNX RandomUniform + RandomNormal in mabor-import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1806">#<!--$-->1806<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/hexd0t">@<!--$-->hexd0t<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: Greater + GreaterOrEqual onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1801">#<!--$-->1801<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: Less + LessOrEqual onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1800">#<!--$-->1800<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat: added min onnx import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1778">#<!--$-->1778<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/JachymPutta">@<!--$-->JachymPutta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Squeeze Onnx Import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1753">#<!--$-->1753<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/agelas">@<!--$-->agelas<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Added ONNX AvgPool1d
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1744">#<!--$-->1744<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Arjun31415">@<!--$-->Arjun31415<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add MaxPool1d ONNX O
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1725">#<!--$-->1725<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Arjun31415">@<!--$-->Arjun31415<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add reduce sum onnx ops to mabor imports
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1723">#<!--$-->1723<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/AntBlo">@<!--$-->AntBlo<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • PReLu ONNX import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1721">#<!--$-->1721<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Arjun31415">@<!--$-->Arjun31415<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Update SUPPORTED-ONNX-OPS.md
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1717">#<!--$-->1717<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • ONNX debug improvements
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1712">#<!--$-->1712<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Skip updating shape for linear if not present
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1700">#<!--$-->1700<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Remove leaky relu ONNX file
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1697">#<!--$-->1697<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • ONNX support for scalar unsqueeze
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1690">#<!--$-->1690<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add layer norm onnx op support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1680">#<!--$-->1680<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix reshape bug (support for opset version 1)
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1667">#<!--$-->1667<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add sign ONNX op import support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1663">#<!--$-->1663<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/wufniks">@<!--$-->wufniks<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add where onnx op support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1653">#<!--$-->1653<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add matmul ONNX op support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1638">#<!--$-->1638<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add reduce max ONNX op support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1636">#<!--$-->1636<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add shape ONNX op support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1639">#<!--$-->1639<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • [ONNX] Add not op and extend cast support to tensors
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1634">#<!--$-->1634<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add reduce mean ONNX op support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1637">#<!--$-->1637<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Update SUPPORTED-ONNX-OPS.md
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1641">#<!--$-->1641<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add sin onnx op support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1633">#<!--$-->1633<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <h3>Bug Fixes</h3>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Tensor type indent fix
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2196">#<!--$-->2196<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • pad-input-fix: adding support for pads as attributes
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2195">#<!--$-->2195<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix ONNX Gather codegen for Shape input
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2148">#<!--$-->2148<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/hexd0t">@<!--$-->hexd0t<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • bug fix: adding bounds checking to pad ONNX inputs
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2120">#<!--$-->2120<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix checks_channels_div_groups condition and ONNX conv import with groups
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2051">#<!--$-->2051<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Support linear 1d
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1682">#<!--$-->1682<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix ONNX and PyTorch import section links in mabor book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1681">#<!--$-->1681<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix bug 1645 (Unsqueeze OpSet 11)
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1661">#<!--$-->1661<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix transpose onnx op (permute)
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1657">#<!--$-->1657<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <h2>Enhancements</h2>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add scientific notation formatting for small metric values
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2136">#<!--$-->2136<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Always derive Cube features from adapter
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1958">#<!--$-->1958<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                Dynamic memory management preset + updated wgpu buffer memory management
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1962">#<!--$-->1962<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73, nathanielsimard">@<!--$-->mepatrick73,
+                  nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/fixed chunk alloc by class
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1960">#<!--$-->1960<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Consistent sync/async handling, allow more functions to be async for wasm.
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1936">#<!--$-->1936<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Replaced `str` with `Path`
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1919">#<!--$-->1919<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/varonroy">@<!--$-->varonroy<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                New autodiff graph memory management strategy
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1698">#<!--$-->1698<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd, nathanielsimard">@<!--$-->louisfd,
+                  nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Move HandleContainer and Tensor Ops descriptions from mabor-fusion to mabor-tensor
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1654">#<!--$-->1654<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • WindowDataset/windows function
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1553">#<!--$-->1553<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/NicoZweifel">@<!--$-->NicoZweifel<!--/--></a><!--/-->
+              </div>
+              <h3>Refactoring</h3>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Scatter kernel from cpa to cubecl
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2169">#<!--$-->2169<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor binary op
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2085">#<!--$-->2085<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Fix typos <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2098">#<!--$-->2098<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/omahs">@<!--$-->omahs<!--/--></a><!--/--></div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor/jit/unary
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1965">#<!--$-->1965<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Separating ONNX parsing from mabor-import
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1921">#<!--$-->1921<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/skewballfox">@<!--$-->skewballfox<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor tensor data
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1916">#<!--$-->1916<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Remove GraphicsAPI generic for WgpuRuntime
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1888">#<!--$-->1888<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • add dependency management for python
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1887">#<!--$-->1887<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/skewballfox">@<!--$-->skewballfox<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • refactor reduce into separate traits
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1798">#<!--$-->1798<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor/jit fusion
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1750">#<!--$-->1750<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor/mabor compute
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1580">#<!--$-->1580<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <h3>Documentation & Examples</h3>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Enable cuda-jit in mabor-core + in text classification example
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2160">#<!--$-->2160<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add comments for matmul kernel
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2138">#<!--$-->2138<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/cBournhonesque">@<!--$-->cBournhonesque<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix inner backend typo in book guide
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2135">#<!--$-->2135<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Improve ONNX import book section
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2059">#<!--$-->2059<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Update slice documentation
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2024">#<!--$-->2024<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Remove mention of example in backend section of the book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2014">#<!--$-->2014<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix image-classsification-web + autotune flag usage
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2011">#<!--$-->2011<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube/doc/readme
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1904">#<!--$-->1904<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add models and examples reference
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1966">#<!--$-->1966<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline" href="https://github.com/laggui, syl20bnr">@<!--$-->laggui,
+                  syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Print module part3 - Update book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1940">#<!--$-->1940<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Book: Fix the link to mabor-train in "Learner" page
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1920">#<!--$-->1920<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/towerpark">@<!--$-->towerpark<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Doc: Improve module to_device/fork docs
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1901">#<!--$-->1901<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                Add documentation to mabor core nn
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1746">#<!--$-->1746<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/jwric, ThierryCantin-Demers, mepatrick73">@<!--$-->jwric,
+                  ThierryCantin-Demers, mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Book: Fix typos in the name of MessagePack format
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1868">#<!--$-->1868<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/towerpark">@<!--$-->towerpark<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Remainder operator doc
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1836">#<!--$-->1836<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Zirconium409122, kantic">@<!--$-->Zirconium409122, kantic<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix wasm examples
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1824">#<!--$-->1824<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • docs: update README.md
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1810">#<!--$-->1810<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/eltociear">@<!--$-->eltociear<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Contributor Book: Onnx to Mabor Conversion
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1771">#<!--$-->1771<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/agelas">@<!--$-->agelas<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • update ARCHITECTURE.md links to project architecture section in contributor book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1759">#<!--$-->1759<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/benbaarber">@<!--$-->benbaarber<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add hidden code snippets to guide example in Mabor book [redo]
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1742">#<!--$-->1742<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/jwric">@<!--$-->jwric<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fixing various syntax errors in the Mabor book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1740">#<!--$-->1740<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add indentation to project architecture in contributing book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1738">#<!--$-->1738<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ThierryCantin-Demers">@<!--$-->ThierryCantin-Demers<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add info about enabling debugging for new contributors
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1719">#<!--$-->1719<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/AntBlo">@<!--$-->AntBlo<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • [guide] Remove ambiguity lib vs. executable
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1649">#<!--$-->1649<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Update README.md
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1696">#<!--$-->1696<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/wangxiaochuTHU">@<!--$-->wangxiaochuTHU<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • [mabor-book] Fix broken URL to SUPPORTED-ONNX-OPS.md
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1651">#<!--$-->1651<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • [mabor-book] Fix typos in getting started
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1650">#<!--$-->1650<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Many superficial fixes to the contributor book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1644">#<!--$-->1644<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix guide project name in the book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1631">#<!--$-->1631<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Improve grammar <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1619">#<!--$-->1619<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Gadersd">@<!--$-->Gadersd<!--/--></a><!--/--></div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Docs/update contributor book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1622">#<!--$-->1622<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/agelas">@<!--$-->agelas<!--/--></a><!--/-->
+              </div>
+              <h3>CubeCL</h3>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Remove CubeCL GELU kernel example reference (moved to CubeCL repo)
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2150">#<!--$-->2150<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Convert `reduce_dim_naive` kernel to use the `#[cube]` derive macro
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2117">#<!--$-->2117<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/cBournhonesque">@<!--$-->cBournhonesque<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Rename revision key to rev for cubecl dependencies in Cargo.toml
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2086">#<!--$-->2086<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix cubecl version in Cargo.toml to correctly fecth the version tag
+                <!--/--><!--$--><!--/--><!--$--><a class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor/jit cube/mask
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2075">#<!--$-->2075<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Chore/update/cubecl
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2067">#<!--$-->2067<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat: Dynamic cube count dispatch
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1975">#<!--$-->1975<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor cube launch + support inplace operation
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1961">#<!--$-->1961<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/cube/cooperative matrix-multiply and accumulate.
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1943">#<!--$-->1943<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor/cube/mutability
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1934">#<!--$-->1934<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Handle visibility in cube
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1929">#<!--$-->1929<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/cube/array assign ops
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1914">#<!--$-->1914<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/comptime expr
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1910">#<!--$-->1910<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/cube/compile error
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1909">#<!--$-->1909<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • feat cube support Array
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1907">#<!--$-->1907<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: variable reusability + refactor in cube macros
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1885">#<!--$-->1885<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor the tuner to be used standalone
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1884">#<!--$-->1884<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add option to flush queue instead of waiting for completion.
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1864">#<!--$-->1864<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: Vectorization + simple matmul implementation
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1866">#<!--$-->1866<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Get resources from server
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1861">#<!--$-->1861<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Speedup client.create for small allocations.
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1858">#<!--$-->1858<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add a feature to initialize from an existing wgpu adapter/device/queue
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1788">#<!--$-->1788<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$--> • Fix cmma test <!--/--><!--$--><a
+                  class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1957">#<!--$-->1957<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/--></div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Perf/dynamic mm
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1906">#<!--$-->1906<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/dynamic small pool
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1931">#<!--$-->1931<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Perf/dynamic mm slice adressing
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1917">#<!--$-->1917<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/dynamic mm basic implementation + small refactor
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1844">#<!--$-->1844<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/mepatrick73">@<!--$-->mepatrick73<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: CubeType (no launch) and Comptime::map
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1853">#<!--$-->1853<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                Feat/cube/struct support
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1842">#<!--$-->1842<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd, nathanielsimard">@<!--$-->louisfd,
+                  nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • [Refactor - Breaking] Refactor cube operations with better names & Support subgroup
+                operations
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1839">#<!--$-->1839<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                Cube: Topology constants
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1838">#<!--$-->1838<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd, nathanielsimard">@<!--$-->louisfd,
+                  nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: cleaner use of topology values
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1835">#<!--$-->1835<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: support for shared memory
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1831">#<!--$-->1831<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: support method call + prettier tensor metadata
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1829">#<!--$-->1829<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add vectorization support into cube
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1830">#<!--$-->1830<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: support for return + conv2d early return
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1828">#<!--$-->1828<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/cube/launch
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1827">#<!--$-->1827<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Update cuda-jit
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1799">#<!--$-->1799<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat/cube/remaining ops
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1807">#<!--$-->1807<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Cube: first ported kernel + comptime support + variable reuse + cleanup
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1797">#<!--$-->1797<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor/cube/vectorization
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1781">#<!--$-->1781<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                Feat/enable cube cl
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1777">#<!--$-->1777<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd, nathanielsimard">@<!--$-->louisfd,
+                  nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                Feat/cubecl ir
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1776">#<!--$-->1776<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard, louisfd">@<!--$-->nathanielsimard,
+                  louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • CubeCL first iteration
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1756">#<!--$-->1756<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • First draft CUDA runtime
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1685">#<!--$-->1685<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Upgrade wgpu
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1692">#<!--$-->1692<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <h3>Miscellaneous</h3>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Make compatible with thumbv6m-none-eabi + add raspberry pi pico example
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2096">#<!--$-->2096<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/BjornTheProgrammer">@<!--$-->BjornTheProgrammer<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Precision option for tensor display
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2139">#<!--$-->2139<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • remove lto linker option to make build successful
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2123">#<!--$-->2123<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/tiruka">@<!--$-->tiruka<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add top-k accuracy
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2097">#<!--$-->2097<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/cBournhonesque">@<!--$-->cBournhonesque<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Modify contributing md scripts to solve conflicts between doc and scripts
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2107">#<!--$-->2107<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/tiruka">@<!--$-->tiruka<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add polars DataFrame support for Dataset
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2029">#<!--$-->2029<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ragyabraham, antimora">@<!--$-->ragyabraham, antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • modify broken link src of ide image
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2079">#<!--$-->2079<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/tiruka">@<!--$-->tiruka<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Bump rust minimal version to 1.79
+                <!--/--><!--$--><!--/--><!--$--><a class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Added parameter trust_remote_code to hf dataset call.
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2013">#<!--$-->2013<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Haislich">@<!--$-->Haislich<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Enable optimized handling of bytes
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2003">#<!--$-->2003<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Feat: Support trait with CubeCL
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1980">#<!--$-->1980<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Set DEFAULT_MAX_TASKS to 1 when running tests
+                <!--/--><!--$--><!--/--><!--$--><a class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • remove manual option matching
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1948">#<!--$-->1948<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/loganbnielsen">@<!--$-->loganbnielsen<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Remove closed 'future improvements'
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1935">#<!--$-->1935<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/jwhogg">@<!--$-->jwhogg<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix: launch without generics
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1932">#<!--$-->1932<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Update candle-core to a released version
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1913">#<!--$-->1913<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Do not use default mabor-compute features unless enabled.
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1908">#<!--$-->1908<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ArthurBrussee">@<!--$-->ArthurBrussee<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • clippy on rust update
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1886">#<!--$-->1886<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • LearnerBuilder "with_checkpointing_strategy" should use builder pattern
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1841">#<!--$-->1841<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/Icekey">@<!--$-->Icekey<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix bench load record benchmarks
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1826">#<!--$-->1826<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add configurable application logger to learner builder
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1774">#<!--$-->1774<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/jwric">@<!--$-->jwric<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Add Clone trait to the `OptimizerAdaptor` and Clone implementations to the optimizers
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1770">#<!--$-->1770<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/getumen">@<!--$-->getumen<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Replace opaque return types in optim
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1767">#<!--$-->1767<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/benbaarber">@<!--$-->benbaarber<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • #1747 Upgrade Rust dependencies
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1748">#<!--$-->1748<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ahmedyarub, syl20bnr">@<!--$-->ahmedyarub, syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor: replace trait TemplateKernel by existing trait JitKernel
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1737">#<!--$-->1737<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/sebhtml">@<!--$-->sebhtml<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Autodiff Memory Management: BFS
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1710">#<!--$-->1710<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • [Fusion] Support multi-precision fusion
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1718">#<!--$-->1718<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Refactor element type to be decoupled from runtime
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1693">#<!--$-->1693<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Arc EventStoreClient to Rc EventStoreClient EventStoreClient
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1668">#<!--$-->1668<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/AlexErrant">@<!--$-->AlexErrant<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • remove JIT subsequent RNG tests
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1652">#<!--$-->1652<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Enable native sign operation for Candle backend
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1647">#<!--$-->1647<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/antimora">@<!--$-->antimora<!--/--></a><!--/-->
+              </div>
+              <h3>Bug Fixes</h3>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix module derive with generics
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2127">#<!--$-->2127<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • modified mnist image link in the Hugging face
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2134">#<!--$-->2134<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/tiruka">@<!--$-->tiruka<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix broken links in contributor book
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2061">#<!--$-->2061<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/NoahSchiro">@<!--$-->NoahSchiro<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Bump gix-tempfile to fix security audit on gix-fs
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/2022">#<!--$-->2022<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/syl20bnr">@<!--$-->syl20bnr<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix warnings when using `record-backward-compat`
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1977">#<!--$-->1977<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix: constant record loading
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1902">#<!--$-->1902<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/nathanielsimard">@<!--$-->nathanielsimard<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix `DataSerialize` conversion for elements of the same type
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1832">#<!--$-->1832<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix mabor-jit compile error
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1803">#<!--$-->1803<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/DieracDelta">@<!--$-->DieracDelta<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix record nested value de/serialization
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1751">#<!--$-->1751<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • fix prng bug during autotune
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1791">#<!--$-->1791<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/louisfd">@<!--$-->louisfd<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                Fix Cargo.toml repository links
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1749">#<!--$-->1749<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/ThierryCantin-Demers, jwric">@<!--$-->ThierryCantin-Demers,
+                  jwric<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix unstable tests when run concurrently
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1724">#<!--$-->1724<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/AntBlo">@<!--$-->AntBlo<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Handle ndarray matmul broadcasting
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1679">#<!--$-->1679<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/lancelet">@<!--$-->lancelet<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • Fix inverted epoch - iteration counts in valid progress
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1699">#<!--$-->1699<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/laggui">@<!--$-->laggui<!--/--></a><!--/-->
+              </div>
+              <div class="font-light font-serif flex flex-wrap"><!--$-->
+                • fix: `window` `pub window` in `dataset/mod.rs`
+                <!--/--><!--$--><a class="px-1 text-[#5389de] hover:font-bold underline"
+                  href="https://github.com/tracel-ai/burn/pull/1658">#<!--$-->1658<!--/--></a><!--/--><!--$--><a
+                  class="px-1 hover:font-bold underline"
+                  href="https://github.com/NicoZweifel">@<!--$-->NicoZweifel<!--/--></a><!--/-->
+              </div>
+            </div> <!--/--><!--$-->
+            <div>
+              <h2>References</h2><!--$-->
+              <div>
+                <div id="reference-1"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://github.com/tracel-ai/burn/releases/tag/v0.14.0" target="_blank">1</a>]</span><span
+                    class="font-light font-serif">Github Release Page</span></div>
+              </div><!--/-->
+            </div><!--/-->
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <dialog
+    class="items-center text-balance rounded-2xl border bg-transparent p-8 text-center backdrop-blur-md backdrop:bg-black/70 max-sm:mx-6 overflow-hidden"
+    id="stay-connected-dialog">
+    <h2 class="text-v2h2">Join the mailing list</h2>
+    <p class="py-4 font-mono text-body"> Join our community! We&#39;d love to keep you in the loop with our newsletter.
+    </p>
+    <script>(() => { var a = (s, i, o) => { let r = async () => { await (await s())() }, t = typeof i.value == "object" ? i.value : void 0, c = { rootMargin: t == null ? void 0 : t.rootMargin }, n = new IntersectionObserver(e => { for (let l of e) if (l.isIntersecting) { n.disconnect(), r(); break } }, c); for (let e of o.children) n.observe(e) }; (self.Astro || (self.Astro = {})).visible = a; window.dispatchEvent(new Event("astro:visible")); })();</script>
+    <astro-island uid="Z1fPhRT" data-solid-render-id="s0" component-url="/_astro/EmailCollector.BqSZQ7nP.js"
+      component-export="EmailCollector" renderer-url="/_astro/client.C-0b9Jot.js"
+      props="{&quot;website&quot;:[0,&quot;burn&quot;],&quot;inputId&quot;:[0,&quot;stay-connected&quot;],&quot;title&quot;:[0,&quot;Stay connected&quot;],&quot;submitTitle&quot;:[0,&quot;submit email&quot;],&quot;inputLabel&quot;:[0,&quot;email address&quot;],&quot;placeholder&quot;:[0,&quot;your em@il&quot;],&quot;bgAlt&quot;:[0,&quot;stay connected background&quot;],&quot;subscribed&quot;:[0,&quot;subscribed&quot;],&quot;unsubscribed&quot;:[0,&quot;unsubscribed&quot;],&quot;firebaseConfig&quot;:[0,{&quot;apiKey&quot;:[0,&quot;AIzaSyDtXjGAc35AxrqEa8Fdmz3E1sKIX7MfgzU&quot;],&quot;authDomain&quot;:[0,&quot;tracel-website.firebaseapp.com&quot;],&quot;projectId&quot;:[0,&quot;tracel-website&quot;],&quot;storageBucket&quot;:[0,&quot;tracel-website.appspot.com&quot;],&quot;messagingSenderId&quot;:[0,&quot;278977725843&quot;],&quot;appId&quot;:[0,&quot;1:278977725843:web:be459a460a35c455cb9466&quot;]}]}"
+      ssr="" client="visible" opts="{&quot;name&quot;:&quot;EmailCollector&quot;,&quot;value&quot;:true}"
+      await-children="">
+      <form data-hk="s00000" name="stay-connected"><span class="flex items-center rounded-lg gap-2">
+          <div class="relative w-full"><input
+              class="w-full h-12 flex-1 rounded-md bg-black/20 pl-2 pr-6 text-xs transition-border-duration-700 placeholder:text-primary-content/40 focus:outline-2 border border-primary-content"
+              id="stay-connected" placeholder="your em@il" name="email" autocomplete="email" type="email"
+              aria-label="email address" required=""><output class="absolute right-5 top-1/2 -translate-y-1/2"
+              name="subscribeStatus" for="stay-connected"><svg width="16px" viewbox="2 -11 9 10"
+                xmlns="http://www.w3.org/2000/svg">
+                <title>unsubscribed</title><text x="0" y="0" class="fill-green-700"></text>
+              </svg></output></div><button class="primary-button rounded-md px-2 text-xl h-12 w-20 border border-white"
+            title="submit email" type="submit">⇥</button>
+        </span></form><!--astro:end-->
+    </astro-island>
+    <form class="absolute right-0 top-0" method="dialog"> <button class="rounded-md p-4" title="dismiss">
+        ✕
+      </button> </form>
+  </dialog>
+  <script>(function () {
+      const id = "stay-connected";
+
+      /* eslint-env browser */
+      const setupModal = () => {
+        if (location.hash === `#${id}`) {
+          const dialog = document.getElementById(`${id}-dialog`);
+          dialog.addEventListener(
+            "close",
+            () => {
+              history.pushState(
+                "",
+                document.title,
+                window.location.pathname + window.location.search,
+              );
+            },
+            { once: true },
+          );
+
+          dialog.addEventListener("click", (e) => {
+            const dialogDimensions = dialog.getBoundingClientRect();
+            if (
+              e.clientX < dialogDimensions.left ||
+              e.clientX > dialogDimensions.right ||
+              e.clientY < dialogDimensions.top ||
+              e.clientY > dialogDimensions.bottom
+            ) {
+              dialog.close();
+            }
+          });
+
+          dialog.showModal();
+        }
+      };
+
+      document.addEventListener("readystatechange", (e) => {
+        if (e.target.readyState === "interactive") {
+          setupModal();
+          window.addEventListener("popstate", setupModal);
+        }
+      });
+    })();</script>
+  <div class="flex w-full flex-col items-center gap-8 py-10 text-mid">
+    <div class="w-full max-w-[1360px] px-8 md:px-20">
+      <div
+        class="grid w-full grid-cols-1 gap-8 md:gap-20 [@media(min-width:400px)]:grid-cols-2 [@media(min-width:768px)]:grid-cols-4">
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Resources</h3> <a href="../../index.htm"
+            class="text-body text-grey-accent hover:text-light"> Home </a><a href="../../get-started/index.htm"
+            class="text-body text-grey-accent hover:text-light"> Get Started </a><a
+            href="../../benchmarks/community-benchmarks/index.htm" class="text-body text-grey-accent hover:text-light">
+            Benchmarks </a><a href="../index.htm" class="text-body text-grey-accent hover:text-light"> Blog </a><a
+            href="../../learn/index.htm" class="text-body text-grey-accent hover:text-light"> Learn </a><a
+            href="../../docs/burn/index.htm" class="text-body text-grey-accent hover:text-light"> Docs </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Community</h3> <a href="https://github.com/tracel-ai/burn"
+            class="text-body text-grey-accent hover:text-light"> Github </a><a href="https://discord.gg/uPEBbYYDB6"
+            class="text-body text-grey-accent hover:text-light"> Discord </a><a href="#stay-connected"
+            class="text-body text-grey-accent hover:text-light"> Mailing list </a><a href="https://tracel.ai"
+            class="text-body text-grey-accent hover:text-light"> Tracel </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Projects</h3> <a href="https://crates.io/crates/burn"
+            class="text-body text-grey-accent hover:text-light"> Mabor Crate </a><a
+            href="https://github.com/tracel-ai/burn" class="text-body text-grey-accent hover:text-light"> Mabor GitHub
+          </a><a href="https://crates.io/crates/cubecl" class="text-body text-grey-accent hover:text-light"> CubeCL
+            Crate </a><a href="https://github.com/tracel-ai/cubecl" class="text-body text-grey-accent hover:text-light">
+            CubeCL GitHub </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Company</h3> <a href="https://tracel.ai/"
+            class="text-body text-grey-accent hover:text-light"> Tracel AI </a><a
+            href="https://www.linkedin.com/company/tracel-technologies"
+            class="text-body text-grey-accent hover:text-light"> LinkedIn </a><a href="https://x.com/tracel_ai"
+            class="text-body text-grey-accent hover:text-light"> X </a>
+        </div>
+      </div>
+    </div>
+    <p class="mt-6 text-center font-mono text-b2 text-mid md:flex"> Copyright 2025 © Mabor | Tracel Inc. All rights
+      reserved. Design by Perdomo </p>
+  </div>
+</body>
+
+</html>

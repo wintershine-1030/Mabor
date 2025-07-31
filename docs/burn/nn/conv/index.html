@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Convolution module">
+    <title>mabor::nn::conv - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="mabor"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="mabor" data-themes="mabor" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module conv</a></h2>
+                <h3><a href="#structs">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>nn</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">nn</a></div>
+                    <h1>Module <span>conv</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Convolution module</p>
+                    </div>
+                </details>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.Conv1d.html" title="struct mabor::nn::conv::Conv1d">Conv1d</a>
+                    </dt>
+                    <dd>Applies a 1D convolution over input tensors.</dd>
+                    <dt><a class="struct" href="struct.Conv1dConfig.html"
+                            title="struct mabor::nn::conv::Conv1dConfig">Conv1d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.Conv1d.html" title="struct mabor::nn::conv::Conv1d">1D
+                            convolution</a> layer using the <a href="struct.Conv1dConfig.html#method.init"
+                            title="method mabor::nn::conv::Conv1dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.Conv1dRecord.html"
+                            title="struct mabor::nn::conv::Conv1dRecord">Conv1d<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.Conv1dRecordItem.html"
+                            title="struct mabor::nn::conv::Conv1dRecordItem">Conv1d<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Conv2d.html" title="struct mabor::nn::conv::Conv2d">Conv2d</a>
+                    </dt>
+                    <dd>Applies a 2D convolution over input tensors.</dd>
+                    <dt><a class="struct" href="struct.Conv2dConfig.html"
+                            title="struct mabor::nn::conv::Conv2dConfig">Conv2d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.Conv2d.html" title="struct mabor::nn::conv::Conv2d">2D
+                            convolution</a> layer, using the <a href="struct.Conv2dConfig.html#method.init"
+                            title="method mabor::nn::conv::Conv2dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.Conv2dRecord.html"
+                            title="struct mabor::nn::conv::Conv2dRecord">Conv2d<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.Conv2dRecordItem.html"
+                            title="struct mabor::nn::conv::Conv2dRecordItem">Conv2d<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Conv3d.html" title="struct mabor::nn::conv::Conv3d">Conv3d</a>
+                    </dt>
+                    <dd>Applies a 3D convolution over input tensors.</dd>
+                    <dt><a class="struct" href="struct.Conv3dConfig.html"
+                            title="struct mabor::nn::conv::Conv3dConfig">Conv3d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.Conv3d.html" title="struct mabor::nn::conv::Conv3d">3D
+                            convolution</a> layer, using the <a href="struct.Conv3dConfig.html#method.init"
+                            title="method mabor::nn::conv::Conv3dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.Conv3dRecord.html"
+                            title="struct mabor::nn::conv::Conv3dRecord">Conv3d<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.Conv3dRecordItem.html"
+                            title="struct mabor::nn::conv::Conv3dRecordItem">Conv3d<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose1d.html"
+                            title="struct mabor::nn::conv::ConvTranspose1d">Conv<wbr>Transpose1d</a></dt>
+                    <dd>Applies a 1D transposed convolution over input tensors.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose1dConfig.html"
+                            title="struct mabor::nn::conv::ConvTranspose1dConfig">Conv<wbr>Transpose1d<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create an <a href="struct.ConvTranspose1d.html"
+                            title="struct mabor::nn::conv::ConvTranspose1d">1D transposed convolution</a> layer
+                        using the <a href="struct.ConvTranspose1dConfig.html#method.init"
+                            title="method mabor::nn::conv::ConvTranspose1dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose1dRecord.html"
+                            title="struct mabor::nn::conv::ConvTranspose1dRecord">Conv<wbr>Transpose1d<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose1dRecordItem.html"
+                            title="struct mabor::nn::conv::ConvTranspose1dRecordItem">Conv<wbr>Transpose1d<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose2d.html"
+                            title="struct mabor::nn::conv::ConvTranspose2d">Conv<wbr>Transpose2d</a></dt>
+                    <dd>Applies a 2D transposed convolution over input tensors.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose2dConfig.html"
+                            title="struct mabor::nn::conv::ConvTranspose2dConfig">Conv<wbr>Transpose2d<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create an <a href="struct.ConvTranspose2d.html"
+                            title="struct mabor::nn::conv::ConvTranspose2d">2D transposed convolution</a> layer
+                        using the <a href="struct.ConvTranspose2dConfig.html#method.init"
+                            title="method mabor::nn::conv::ConvTranspose2dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose2dRecord.html"
+                            title="struct mabor::nn::conv::ConvTranspose2dRecord">Conv<wbr>Transpose2d<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose2dRecordItem.html"
+                            title="struct mabor::nn::conv::ConvTranspose2dRecordItem">Conv<wbr>Transpose2d<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose3d.html"
+                            title="struct mabor::nn::conv::ConvTranspose3d">Conv<wbr>Transpose3d</a></dt>
+                    <dd>Applies a 3D transposed convolution over input tensors.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose3dConfig.html"
+                            title="struct mabor::nn::conv::ConvTranspose3dConfig">Conv<wbr>Transpose3d<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create an <a href="struct.ConvTranspose3d.html"
+                            title="struct mabor::nn::conv::ConvTranspose3d">3D transposed convolution</a> layer
+                        using the <a href="struct.ConvTranspose3dConfig.html#method.init"
+                            title="method mabor::nn::conv::ConvTranspose3dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose3dRecord.html"
+                            title="struct mabor::nn::conv::ConvTranspose3dRecord">Conv<wbr>Transpose3d<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.ConvTranspose3dRecordItem.html"
+                            title="struct mabor::nn::conv::ConvTranspose3dRecordItem">Conv<wbr>Transpose3d<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.DeformConv2d.html"
+                            title="struct mabor::nn::conv::DeformConv2d">Deform<wbr>Conv2d</a></dt>
+                    <dd>Applies a deformable 2D convolution over input tensors.</dd>
+                    <dt><a class="struct" href="struct.DeformConv2dConfig.html"
+                            title="struct mabor::nn::conv::DeformConv2dConfig">Deform<wbr>Conv2d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.DeformConv2d.html"
+                            title="struct mabor::nn::conv::DeformConv2d">deformable 2D convolution</a> layer, using the
+                        <a href="struct.DeformConv2dConfig.html#method.init"
+                            title="method mabor::nn::conv::DeformConv2dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.DeformConv2dRecord.html"
+                            title="struct mabor::nn::conv::DeformConv2dRecord">Deform<wbr>Conv2d<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.DeformConv2dRecordItem.html"
+                            title="struct mabor::nn::conv::DeformConv2dRecordItem">Deform<wbr>Conv2d<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

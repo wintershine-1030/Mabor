@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="641px" height="121px" viewBox="-0.5 -0.5 641 121" style="background-color: rgb(255, 255, 255);">
+  <defs></defs>
+  <g>
+    <rect x="0" y="0" width="360" height="40" fill="rgb(255, 255, 255)" stroke="none"></rect>
+    <path d="M 0 0 L 360 0 L 360 40 L 0 40 L 0 0" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <path d="M 40 0 L 40 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 81 0 L 81 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 119 0 L 119 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 159 0 L 159 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 200 0 L 200 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 240 0 L 240 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 280 0 L 280 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 320 0 L 320 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <rect x="0" y="0" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 0 0 M 40 0 M 40 40 M 0 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="20" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">4</text>
+      </switch>
+    </g>
+    <rect x="40" y="0" width="41" height="40" fill="none" stroke="none"></rect>
+    <path d="M 40 0 M 81 0 M 81 40 M 40 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="61" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">3</text>
+      </switch>
+    </g>
+    <rect x="81" y="0" width="38" height="40" fill="none" stroke="none"></rect>
+    <path d="M 81 0 M 119 0 M 119 40 M 81 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="100" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">7</text>
+      </switch>
+    </g>
+    <rect x="119" y="0" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 119 0 M 159 0 M 159 40 M 119 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="139" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">2</text>
+      </switch>
+    </g>
+    <rect x="159" y="0" width="41" height="40" fill="none" stroke="none"></rect>
+    <path d="M 159 0 M 200 0 M 200 40 M 159 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="180" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">5</text>
+      </switch>
+    </g>
+    <rect x="200" y="0" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 200 0 M 240 0 M 240 40 M 200 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="220" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">2</text>
+      </switch>
+    </g>
+    <rect x="240" y="0" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 240 0 M 280 0 M 280 40 M 240 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="260" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">7</text>
+      </switch>
+    </g>
+    <rect x="280" y="0" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 280 0 M 320 0 M 320 40 M 280 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="300" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">8</text>
+      </switch>
+    </g>
+    <rect x="320" y="0" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 320 0 M 360 0 M 360 40 M 320 40" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="340" y="25" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">1</text>
+      </switch>
+    </g>
+    <rect x="0" y="80" width="640" height="40" fill="rgb(255, 255, 255)" stroke="none"></rect>
+    <path d="M 0 80 L 640 80 L 640 120 L 0 120 L 0 80" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <path d="M 40 80 L 40 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 81 80 L 81 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 119 80 L 119 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 159 80 L 159 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 199 80 L 199 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 240 80 L 240 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 280 80 L 280 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 320 80 L 320 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 360 80 L 360 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 400 80 L 400 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 440 80 L 440 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 480 80 L 480 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 520 80 L 520 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 560 80 L 560 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <path d="M 600 80 L 600 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"></path>
+    <rect x="0" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 0 80 M 40 80 M 40 120 M 0 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="20" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">4</text>
+      </switch>
+    </g>
+    <rect x="40" y="80" width="41" height="40" fill="none" stroke="none"></rect>
+    <path d="M 40 80 M 81 80 M 81 120 M 40 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="61" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">3</text>
+      </switch>
+    </g>
+    <rect x="81" y="80" width="38" height="40" fill="none" stroke="none"></rect>
+    <path d="M 81 80 M 119 80 M 119 120 M 81 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="100" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">7</text>
+      </switch>
+    </g>
+    <rect x="119" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 119 80 M 159 80 M 159 120 M 119 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="139" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle" font-weight="bold">0</text>
+      </switch>
+    </g>
+    <rect x="159" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 159 80 M 199 80 M 199 120 M 159 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="179" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">2</text>
+      </switch>
+    </g>
+    <rect x="199" y="80" width="41" height="40" fill="none" stroke="none"></rect>
+    <path d="M 199 80 M 240 80 M 240 120 M 199 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="220" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">5</text>
+      </switch>
+    </g>
+    <rect x="240" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 240 80 M 280 80 M 280 120 M 240 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="260" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">2</text>
+      </switch>
+    </g>
+    <rect x="280" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 280 80 M 320 80 M 320 120 M 280 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="300" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle" font-weight="bold">0</text>
+      </switch>
+    </g>
+    <rect x="320" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 320 80 M 360 80 M 360 120 M 320 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="340" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">7</text>
+      </switch>
+    </g>
+    <rect x="360" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 360 80 M 400 80 M 400 120 M 360 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="380" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">8</text>
+      </switch>
+    </g>
+    <rect x="400" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 400 80 M 440 80 M 440 120 M 400 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="420" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">1</text>
+      </switch>
+    </g>
+    <rect x="440" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 440 80 M 480 80 M 480 120 M 440 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="460" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle" font-weight="bold">0</text>
+      </switch>
+    </g>
+    <rect x="480" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 480 80 M 520 80 M 520 120 M 480 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="500" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle" font-weight="bold">0</text>
+      </switch>
+    </g>
+    <rect x="520" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 520 80 M 560 80 M 560 120 M 520 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="540" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle" font-weight="bold">0</text>
+      </switch>
+    </g>
+    <rect x="560" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 560 80 M 600 80 M 600 120 M 560 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="580" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle" font-weight="bold">0</text>
+      </switch>
+    </g>
+    <rect x="600" y="80" width="40" height="40" fill="none" stroke="none"></rect>
+    <path d="M 600 80 M 640 80 M 640 120 M 600 120" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="620" y="105" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle" font-weight="bold">0</text>
+      </switch>
+    </g>
+    <path d="M 158.08 79.2 L 118.44 39.84" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3"></path>
+    <path d="M 119.04 78.88 L 118.8 40.16" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3"></path>
+    <path d="M 278.4 78.24 L 240.12 39.2" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3"></path>
+    <path d="M 320 79.84 L 240.12 40.16" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3"></path>
+    <path d="M 440.32 80.48 L 359.64 39.2" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3"></path>
+    <path d="M 478.72 79.52 L 360 40" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3"></path>
+    <rect x="480" y="30" width="120" height="20" fill="none" stroke="none"></rect>
+    <path d="M 480 30 L 600 30 M 600 50 M 480 50 L 480 30" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10"></path>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <text x="540" y="44" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">4th row</text>
+      </switch>
+    </g>
+  </g>
+  <switch>
+    <g></g>
+    <a transform="translate(0,-5)" xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems">
+      <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+</svg>

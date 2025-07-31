@@ -1,0 +1,498 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Module - The Mabor Book 🔥</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Mabor Book 🔥</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="module"><a class="header" href="#module">Module</a></h1>
+<p>The <code>Module</code> derive allows you to create your own neural network modules, similar to PyTorch. The
+derive function only generates the necessary methods to essentially act as a parameter container for
+your type, it makes no assumptions about how the forward pass is declared.</p>
+<pre><code class="language-rust  ignore">use mabor::module::Module;
+use mabor::tensor::backend::Backend;
+
+#[derive(Module, Debug)]
+pub struct PositionWiseFeedForward&lt;B: Backend&gt; {
+    linear_inner: Linear&lt;B&gt;,
+    linear_outer: Linear&lt;B&gt;,
+    dropout: Dropout,
+    gelu: Gelu,
+}
+
+impl&lt;B: Backend&gt; PositionWiseFeedForward&lt;B&gt; {
+    /// Normal method added to a struct.
+    pub fn forward&lt;const D: usize&gt;(&amp;self, input: Tensor&lt;B, D&gt;) -&gt; Tensor&lt;B, D&gt; {
+        let x = self.linear_inner.forward(input);
+        let x = self.gelu.forward(x);
+        let x = self.dropout.forward(x);
+
+        self.linear_outer.forward(x)
+    }
+}</code></pre>
+<p>Note that all fields declared in the struct must also implement the <code>Module</code> trait.</p>
+<h2 id="tensor"><a class="header" href="#tensor">Tensor</a></h2>
+<p>If you want to create your own module that contains tensors, and not just other modules defined with
+the <code>Module</code> derive, you need to be careful to achieve the behavior you want.</p>
+<ul>
+<li>
+<p><code>Param&lt;Tensor&lt;B, D&gt;&gt;</code>: If you want the tensor to be included as a parameter of your modules, you
+need to wrap the tensor in a <code>Param</code> struct. This will create an ID that will be used to identify
+this parameter. This is essential when performing module optimization and when saving states such
+as optimizer and module checkpoints. Note that a module's record only contains parameters.</p>
+</li>
+<li>
+<p><code>Param&lt;Tensor&lt;B, D&gt;&gt;.set_require_grad(false)</code>: If you want the tensor to be included as a
+parameter of your modules, and therefore saved with the module's weights, but you don't want it to
+be updated by the optimizer.</p>
+</li>
+<li>
+<p><code>Tensor&lt;B, D&gt;</code>: If you want the tensor to act as a constant that can be recreated when
+instantiating a module. This can be useful when generating sinusoidal embeddings, for example.</p>
+</li>
+</ul>
+<h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
+<p>These methods are available for all modules.</p>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>module.devices()</code></td><td>N/A</td></tr>
+<tr><td><code>module.fork(device)</code></td><td>Similar to <code>module.to(device).detach()</code></td></tr>
+<tr><td><code>module.to_device(device)</code></td><td><code>module.to(device)</code></td></tr>
+<tr><td><code>module.no_grad()</code></td><td><code>module.require_grad_(False)</code></td></tr>
+<tr><td><code>module.num_params()</code></td><td>N/A</td></tr>
+<tr><td><code>module.visit(visitor)</code></td><td>N/A</td></tr>
+<tr><td><code>module.map(mapper)</code></td><td>N/A</td></tr>
+<tr><td><code>module.into_record()</code></td><td>Similar to <code>state_dict</code></td></tr>
+<tr><td><code>module.load_record(record)</code></td><td>Similar to <code>load_state_dict(state_dict)</code></td></tr>
+<tr><td><code>module.save_file(file_path, recorder)</code></td><td>N/A</td></tr>
+<tr><td><code>module.load_file(file_path, recorder)</code></td><td>N/A</td></tr>
+</tbody></table>
+</div>
+<p>Similar to the backend trait, there is also the <code>AutodiffModule</code> trait to signify a module with
+autodiff support.</p>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>module.valid()</code></td><td><code>module.eval()</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="visitor--mapper"><a class="header" href="#visitor--mapper">Visitor &amp; Mapper</a></h2>
+<p>As mentioned earlier, modules primarily function as parameter containers. Therefore, we naturally
+offer several ways to perform functions on each parameter. This is distinct from PyTorch, where
+extending module functionalities is not as straightforward.</p>
+<p>The <code>map</code> and <code>visitor</code> methods are quite similar but serve different purposes. Mapping is used for
+potentially mutable operations where each parameter of a module can be updated to a new value. In
+Mabor, optimizers are essentially just sophisticated module mappers. Visitors, on the other hand, are
+used when you don't intend to modify the module but need to retrieve specific information from it,
+such as the number of parameters or a list of devices in use.</p>
+<p>You can implement your own mapper or visitor by implementing these simple traits:</p>
+<pre><code class="language-rust  ignore">/// Module visitor trait.
+pub trait ModuleVisitor&lt;B: Backend&gt; {
+    /// Visit a float tensor in the module.
+    fn visit_float&lt;const D: usize&gt;(&amp;mut self, id: ParamId, tensor: &amp;Tensor&lt;B, D&gt;);
+    /// Visit an int tensor in the module.
+    fn visit_int&lt;const D: usize&gt;(&amp;mut self, id: ParamId, tensor: &amp;Tensor&lt;B, D, Int&gt;);
+    /// Visit a bool tensor in the module.
+    fn visit_bool&lt;const D: usize&gt;(&amp;mut self, id: ParamId, tensor: &amp;Tensor&lt;B, D, Bool&gt;);
+}
+
+/// Module mapper trait.
+pub trait ModuleMapper&lt;B: Backend&gt; {
+    /// Map a float tensor in the module.
+    fn map_float&lt;const D: usize&gt;(&amp;mut self, id: ParamId, tensor: Tensor&lt;B, D&gt;) -&gt; Tensor&lt;B, D&gt;;
+    /// Map an int tensor in the module.
+    fn map_int&lt;const D: usize&gt;(&amp;mut self, id: ParamId, tensor: Tensor&lt;B, D, Int&gt;) -&gt; Tensor&lt;B, D, Int&gt;;
+    /// Map a bool tensor in the module.
+    fn map_bool&lt;const D: usize&gt;(&amp;mut self, id: ParamId, tensor: Tensor&lt;B, D, Bool&gt;) -&gt; Tensor&lt;B, D, Bool&gt;;
+}</code></pre>
+<p>Note that the trait doesn't require all methods to be implemented as they are already defined to
+perform no operation. If you're only interested in float tensors (like the majority of use cases),
+then you can simply implement <code>map_float</code> or <code>visit_float</code>.</p>
+<p>For example, the <code>ModuleMapper</code> trait could be implemented to clamp all parameters into the range
+<code>[min, max]</code>.</p>
+<pre><code class="language-rust  ignore">/// Clamp parameters into the range `[min, max]`.
+pub struct Clamp {
+    /// Lower-bound of the range.
+    pub min: f32,
+    /// Upper-bound of the range.
+    pub max: f32,
+}
+
+// Clamp all floating-point parameter tensors between `[min, max]`.
+impl&lt;B: Backend&gt; ModuleMapper&lt;B&gt; for Clamp {
+    fn map_float&lt;const D: usize&gt;(
+        &amp;mut self,
+        _id: mabor::module::ParamId,
+        tensor: mabor::prelude::Tensor&lt;B, D&gt;,
+    ) -&gt; mabor::prelude::Tensor&lt;B, D&gt; {
+        tensor.clamp(self.min, self.max)
+    }
+}
+
+// Clamp module mapper into the range `[-0.5, 0.5]`
+let mut clamp = Clamp {
+    min: -0.5,
+    max: 0.5,
+};
+let model = model.map(&amp;mut clamp);</code></pre>
+<p>If you want to use this during training to constrain your model parameters, make sure that the
+parameter tensors are still tracked for autodiff. This can be done with a simple adjustment to the
+implementation.</p>
+<pre><code class="language-rust  ignore">impl&lt;B: AutodiffBackend&gt; ModuleMapper&lt;B&gt; for Clamp {
+    fn map_float&lt;const D: usize&gt;(
+        &amp;mut self,
+        _id: mabor::module::ParamId,
+        tensor: mabor::prelude::Tensor&lt;B, D&gt;,
+    ) -&gt; mabor::prelude::Tensor&lt;B, D&gt; {
+        let is_require_grad = tensor.is_require_grad();
+
+        let mut tensor = Tensor::from_inner(tensor.inner().clamp(self.min, self.max));
+
+        if is_require_grad {
+            tensor = tensor.require_grad();
+        }
+
+        tensor
+    }
+}</code></pre>
+<h2 id="module-display"><a class="header" href="#module-display">Module Display</a></h2>
+<p>Mabor provides a simple way to display the structure of a module and its configuration at a glance.
+You can print the module to see its structure, which is useful for debugging and tracking changes
+across different versions of a module. (See the print output of the
+<a href="../basic-workflow/model.html">Basic Workflow Model</a> example.)</p>
+<p>To customize the display of a module, you can implement the <code>ModuleDisplay</code> trait for your module.
+This will change the default display settings for the module and its children. Note that
+<code>ModuleDisplay</code> is automatically implemented for all modules, but you can override it to customize
+the display by annotating the module with <code>#[module(custom_display)]</code>.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Module, Debug)]
+#[module(custom_display)]
+pub struct PositionWiseFeedForward&lt;B: Backend&gt; {
+    linear_inner: Linear&lt;B&gt;,
+    linear_outer: Linear&lt;B&gt;,
+    dropout: Dropout,
+    gelu: Gelu,
+}
+
+impl&lt;B: Backend&gt; ModuleDisplay for PositionWiseFeedForward&lt;B&gt; {
+    /// Custom settings for the display of the module.
+    /// If `None` is returned, the default settings will be used.
+    fn custom_settings(&amp;self) -&gt; Option&lt;mabor::module::DisplaySettings&gt; {
+        DisplaySettings::new()
+            // Will show all attributes (default is false)
+            .with_show_all_attributes(false)
+            // Will show each attribute on a new line (default is true)
+            .with_new_line_after_attribute(true)
+            // Will show the number of parameters (default is true)
+            .with_show_num_parameters(true)
+            // Will indent by 2 spaces (default is 2)
+            .with_indentation_size(2)
+            // Will show the parameter ID (default is false)
+            .with_show_param_id(false)
+            // Convenience method to wrap settings in Some()
+            .optional()
+    }
+
+    /// Custom content to be displayed.
+    /// If `None` is returned, the default content will be used
+    /// (all attributes of the module)
+    fn custom_content(&amp;self, content: Content) -&gt; Option&lt;Content&gt; {
+        content
+            .add("linear_inner", &amp;self.linear_inner)
+            .add("linear_outer", &amp;self.linear_outer)
+            .add("anything", "anything_else")
+            .optional()
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h2 id="built-in-modules"><a class="header" href="#built-in-modules">Built-in Modules</a></h2>
+<p>Mabor comes with built-in modules that you can use to build your own modules.</p>
+<h3 id="general"><a class="header" href="#general">General</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>BatchNorm</code></td><td><code>nn.BatchNorm1d</code>, <code>nn.BatchNorm2d</code> etc.</td></tr>
+<tr><td><code>Dropout</code></td><td><code>nn.Dropout</code></td></tr>
+<tr><td><code>Embedding</code></td><td><code>nn.Embedding</code></td></tr>
+<tr><td><code>Gelu</code></td><td><code>nn.Gelu</code></td></tr>
+<tr><td><code>GroupNorm</code></td><td><code>nn.GroupNorm</code></td></tr>
+<tr><td><code>HardSigmoid</code></td><td><code>nn.Hardsigmoid</code></td></tr>
+<tr><td><code>InstanceNorm</code></td><td><code>nn.InstanceNorm1d</code>, <code>nn.InstanceNorm2d</code> etc.</td></tr>
+<tr><td><code>LayerNorm</code></td><td><code>nn.LayerNorm</code></td></tr>
+<tr><td><code>LeakyRelu</code></td><td><code>nn.LeakyReLU</code></td></tr>
+<tr><td><code>Linear</code></td><td><code>nn.Linear</code></td></tr>
+<tr><td><code>Prelu</code></td><td><code>nn.PReLu</code></td></tr>
+<tr><td><code>Relu</code></td><td><code>nn.ReLU</code></td></tr>
+<tr><td><code>RmsNorm</code></td><td><em>No direct equivalent</em></td></tr>
+<tr><td><code>SwiGlu</code></td><td><em>No direct equivalent</em></td></tr>
+<tr><td><code>Interpolate1d</code></td><td><em>No direct equivalent</em></td></tr>
+<tr><td><code>Interpolate2d</code></td><td><em>No direct equivalent</em></td></tr>
+</tbody></table>
+</div>
+<h3 id="convolutions"><a class="header" href="#convolutions">Convolutions</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>Conv1d</code></td><td><code>nn.Conv1d</code></td></tr>
+<tr><td><code>Conv2d</code></td><td><code>nn.Conv2d</code></td></tr>
+<tr><td><code>Conv3d</code></td><td><code>nn.Conv3d</code></td></tr>
+<tr><td><code>ConvTranspose1d</code></td><td><code>nn.ConvTranspose1d</code></td></tr>
+<tr><td><code>ConvTranspose2d</code></td><td><code>nn.ConvTranspose2d</code></td></tr>
+<tr><td><code>ConvTranspose3d</code></td><td><code>nn.ConvTranspose3d</code></td></tr>
+<tr><td><code>DeformConv2d</code></td><td><code>torchvision.ops.DeformConv2d</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="pooling"><a class="header" href="#pooling">Pooling</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>AdaptiveAvgPool1d</code></td><td><code>nn.AdaptiveAvgPool1d</code></td></tr>
+<tr><td><code>AdaptiveAvgPool2d</code></td><td><code>nn.AdaptiveAvgPool2d</code></td></tr>
+<tr><td><code>AvgPool1d</code></td><td><code>nn.AvgPool1d</code></td></tr>
+<tr><td><code>AvgPool2d</code></td><td><code>nn.AvgPool2d</code></td></tr>
+<tr><td><code>MaxPool1d</code></td><td><code>nn.MaxPool1d</code></td></tr>
+<tr><td><code>MaxPool2d</code></td><td><code>nn.MaxPool2d</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="rnns"><a class="header" href="#rnns">RNNs</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>Gru</code></td><td><code>nn.GRU</code></td></tr>
+<tr><td><code>Lstm</code>/<code>BiLstm</code></td><td><code>nn.LSTM</code></td></tr>
+<tr><td><code>GateController</code></td><td><em>No direct equivalent</em></td></tr>
+</tbody></table>
+</div>
+<h3 id="transformer"><a class="header" href="#transformer">Transformer</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>MultiHeadAttention</code></td><td><code>nn.MultiheadAttention</code></td></tr>
+<tr><td><code>TransformerDecoder</code></td><td><code>nn.TransformerDecoder</code></td></tr>
+<tr><td><code>TransformerEncoder</code></td><td><code>nn.TransformerEncoder</code></td></tr>
+<tr><td><code>PositionalEncoding</code></td><td><em>No direct equivalent</em></td></tr>
+<tr><td><code>RotaryEncoding</code></td><td><em>No direct equivalent</em></td></tr>
+</tbody></table>
+</div>
+<h3 id="loss"><a class="header" href="#loss">Loss</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Mabor API</th><th>PyTorch Equivalent</th></tr></thead><tbody>
+<tr><td><code>BinaryCrossEntropyLoss</code></td><td><code>nn.BCELoss</code></td></tr>
+<tr><td><code>CosineEmbeddingLoss</code></td><td><code>nn.CosineEmbeddingLoss</code></td></tr>
+<tr><td><code>CrossEntropyLoss</code></td><td><code>nn.CrossEntropyLoss</code></td></tr>
+<tr><td><code>HuberLoss</code></td><td><code>nn.HuberLoss</code></td></tr>
+<tr><td><code>MseLoss</code></td><td><code>nn.MSELoss</code></td></tr>
+<tr><td><code>PoissonNllLoss</code></td><td><code>nn.PoissonNLLLoss</code></td></tr>
+</tbody></table>
+</div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="autodiff.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="learner.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="autodiff.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="learner.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Pooling module">
+    <title>mabor::nn::pool - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="mabor"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="mabor" data-themes="mabor" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module pool</a></h2>
+                <h3><a href="#structs">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>nn</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">nn</a></div>
+                    <h1>Module <span>pool</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Pooling module</p>
+                    </div>
+                </details>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.AdaptiveAvgPool1d.html"
+                            title="struct mabor::nn::pool::AdaptiveAvgPool1d">Adaptive<wbr>AvgPool1d</a></dt>
+                    <dd>Applies a 1D adaptive avg pooling over input tensors.</dd>
+                    <dt><a class="struct" href="struct.AdaptiveAvgPool1dConfig.html"
+                            title="struct mabor::nn::pool::AdaptiveAvgPool1dConfig">Adaptive<wbr>AvgPool1d<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create a <a href="struct.AdaptiveAvgPool1d.html"
+                            title="struct mabor::nn::pool::AdaptiveAvgPool1d">1D adaptive avg pooling</a> layer using the
+                        <a href="struct.AdaptiveAvgPool1dConfig.html#method.init"
+                            title="method mabor::nn::pool::AdaptiveAvgPool1dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.AdaptiveAvgPool2d.html"
+                            title="struct mabor::nn::pool::AdaptiveAvgPool2d">Adaptive<wbr>AvgPool2d</a></dt>
+                    <dd>Applies a 2D adaptive avg pooling over input tensors.</dd>
+                    <dt><a class="struct" href="struct.AdaptiveAvgPool2dConfig.html"
+                            title="struct mabor::nn::pool::AdaptiveAvgPool2dConfig">Adaptive<wbr>AvgPool2d<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create a <a href="struct.AdaptiveAvgPool2d.html"
+                            title="struct mabor::nn::pool::AdaptiveAvgPool2d">2D adaptive avg pooling</a> layer using the
+                        <a href="struct.AdaptiveAvgPool2dConfig.html#method.init"
+                            title="method mabor::nn::pool::AdaptiveAvgPool2dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.AvgPool1d.html"
+                            title="struct mabor::nn::pool::AvgPool1d">AvgPool1d</a></dt>
+                    <dd>Applies a 1D avg pooling over input tensors.</dd>
+                    <dt><a class="struct" href="struct.AvgPool1dConfig.html"
+                            title="struct mabor::nn::pool::AvgPool1dConfig">AvgPool1d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.AvgPool1d.html"
+                            title="struct mabor::nn::pool::AvgPool1d">1D avg pooling</a> layer using the <a
+                            href="struct.AvgPool1dConfig.html#method.init"
+                            title="method mabor::nn::pool::AvgPool1dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.AvgPool2d.html"
+                            title="struct mabor::nn::pool::AvgPool2d">AvgPool2d</a></dt>
+                    <dd>Applies a 2D avg pooling over input tensors.</dd>
+                    <dt><a class="struct" href="struct.AvgPool2dConfig.html"
+                            title="struct mabor::nn::pool::AvgPool2dConfig">AvgPool2d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.AvgPool2d.html"
+                            title="struct mabor::nn::pool::AvgPool2d">2D avg pooling</a> layer using the <a
+                            href="struct.AvgPool2dConfig.html#method.init"
+                            title="method mabor::nn::pool::AvgPool2dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.MaxPool1d.html"
+                            title="struct mabor::nn::pool::MaxPool1d">MaxPool1d</a></dt>
+                    <dd>Applies a 1D max pooling over input tensors.</dd>
+                    <dt><a class="struct" href="struct.MaxPool1dConfig.html"
+                            title="struct mabor::nn::pool::MaxPool1dConfig">MaxPool1d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.MaxPool1d.html"
+                            title="struct mabor::nn::pool::MaxPool1d">1D max pooling</a> layer using the <a
+                            href="struct.MaxPool1dConfig.html#method.init"
+                            title="method mabor::nn::pool::MaxPool1dConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.MaxPool2d.html"
+                            title="struct mabor::nn::pool::MaxPool2d">MaxPool2d</a></dt>
+                    <dd>Applies a 2D max pooling over input tensors.</dd>
+                    <dt><a class="struct" href="struct.MaxPool2dConfig.html"
+                            title="struct mabor::nn::pool::MaxPool2dConfig">MaxPool2d<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.MaxPool2d.html"
+                            title="struct mabor::nn::pool::MaxPool2d">2D max pooling</a> layer using the <a
+                            href="struct.MaxPool2dConfig.html#method.init"
+                            title="method mabor::nn::pool::MaxPool2dConfig::init">init function</a>.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

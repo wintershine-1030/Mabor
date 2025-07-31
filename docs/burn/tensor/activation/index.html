@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="The activation module.">
+    <title>mabor::tensor::activation - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module activation</a></h2>
+                <h3><a href="#functions">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>tensor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">tensor</a></div>
+                    <h1>Module <span>activation</span><button id="copy-path" title="Copy item path to clipboard">Copy
+                            item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>The activation module.</p>
+                    </div>
+                </details>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.gelu.html" title="fn burn::tensor::activation::gelu">gelu</a></dt>
+                    <dd>Applies the Gaussian Error Linear Units function as described in the paper
+                        <a href="https://arxiv.org/pdf/1606.08415v3.pdf">Gaussian Error Linear Units (GELUs)</a>.
+                    </dd>
+                    <dt><a class="fn" href="fn.hard_sigmoid.html"
+                            title="fn burn::tensor::activation::hard_sigmoid">hard_<wbr>sigmoid</a></dt>
+                    <dd>Applies the hard sigmoid function element-wise.</dd>
+                    <dt><a class="fn" href="fn.leaky_relu.html"
+                            title="fn burn::tensor::activation::leaky_relu">leaky_<wbr>relu</a></dt>
+                    <dd>Applies the leaky rectified linear unit function element-wise.</dd>
+                    <dt><a class="fn" href="fn.log_sigmoid.html"
+                            title="fn burn::tensor::activation::log_sigmoid">log_<wbr>sigmoid</a></dt>
+                    <dd>Applies the log sigmoid function element-wise.</dd>
+                    <dt><a class="fn" href="fn.log_softmax.html"
+                            title="fn burn::tensor::activation::log_softmax">log_<wbr>softmax</a></dt>
+                    <dd>Applies the log softmax function on the input tensor along the given dimension.</dd>
+                    <dt><a class="fn" href="fn.mish.html" title="fn burn::tensor::activation::mish">mish</a></dt>
+                    <dd>Applies the Mish function as described in the paper in
+                        <a href="https://arxiv.org/abs/1908.08681">Mish: A Self Regularized Non-Monotonic Neural
+                            Activation Function</a>.
+                    </dd>
+                    <dt><a class="fn" href="fn.prelu.html" title="fn burn::tensor::activation::prelu">prelu</a></dt>
+                    <dd>Applies Parametric ReLu activation function as described in the paper
+                        <a href="../../../../pdf/1502.01852v1.pdf">Delving Deep into Rectifiers: Surpassing Human-Level
+                            Performance on ImageNet Classification</a>.
+                    </dd>
+                    <dt><a class="fn" href="fn.quiet_softmax.html"
+                            title="fn burn::tensor::activation::quiet_softmax">quiet_<wbr>softmax</a></dt>
+                    <dd>Applies the “quiet softmax” function on the input tensor along the given dimension.</dd>
+                    <dt><a class="fn" href="fn.relu.html" title="fn burn::tensor::activation::relu">relu</a></dt>
+                    <dd>Applies the rectified linear unit function element-wise
+                        as described in the paper <a href="../../../../pdf/1803.08375v2.pdf">Deep Learning using
+                            Rectified Linear Units (ReLU)</a>.</dd>
+                    <dt><a class="fn" href="fn.sigmoid.html" title="fn burn::tensor::activation::sigmoid">sigmoid</a>
+                    </dt>
+                    <dd>Applies the sigmoid function element-wise.</dd>
+                    <dt><a class="fn" href="fn.silu.html" title="fn burn::tensor::activation::silu">silu</a></dt>
+                    <dd>Applies the SiLU function (also known as the swish function) element-wise.</dd>
+                    <dt><a class="fn" href="fn.softmax.html" title="fn burn::tensor::activation::softmax">softmax</a>
+                    </dt>
+                    <dd>Applies the softmax function on the input tensor along the given dimension.</dd>
+                    <dt><a class="fn" href="fn.softmin.html" title="fn burn::tensor::activation::softmin">softmin</a>
+                    </dt>
+                    <dd>Applies the softmin function on the input tensor along the given dimension.</dd>
+                    <dt><a class="fn" href="fn.softplus.html" title="fn burn::tensor::activation::softplus">softplus</a>
+                    </dt>
+                    <dd>Applies the SoftPlus function element-wise.</dd>
+                    <dt><a class="fn" href="fn.tanh.html" title="fn burn::tensor::activation::tanh">tanh</a></dt>
+                    <dd>Applies the tanh function element-wise.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

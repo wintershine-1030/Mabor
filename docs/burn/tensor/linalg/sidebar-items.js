@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["DEFAULT_EPSILON"],"enum":["Norm"],"fn":["cosine_similarity","l0_norm","l1_norm","l2_norm","lp_norm","max_abs_norm","min_abs_norm","vector_norm","vector_normalize"]};

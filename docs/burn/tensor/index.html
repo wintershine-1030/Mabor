@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Module for the tensor.">
+    <title>mabor::tensor - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module tensor</a></h2>
+                <h3><a href="#modules">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#modules" title="Modules">Modules</a></li>
+                    <li><a href="#macros" title="Macros">Macros</a></li>
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#constants" title="Constants">Constants</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                    <li><a href="#types" title="Type Aliases">Type Aliases</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2 class="in-crate"><a href="../index.html">In crate mabor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a></div>
+                    <h1>Module <span>tensor</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Module for the tensor.</p>
+                    </div>
+                </details>
+                <h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="mod" href="activation/index.html" title="mod burn::tensor::activation">activation</a>
+                    </dt>
+                    <dd>The activation module.</dd>
+                    <dt><a class="mod" href="backend/index.html" title="mod burn::tensor::backend">backend</a></dt>
+                    <dd>The backend module.</dd>
+                    <dt><a class="mod" href="cast/index.html" title="mod burn::tensor::cast">cast</a></dt>
+                    <dd>Tensor element casting.</dd>
+                    <dt><a class="mod" href="container/index.html" title="mod burn::tensor::container">container</a>
+                    </dt>
+                    <dd>The container module.</dd>
+                    <dt><a class="mod" href="grid/index.html" title="mod burn::tensor::grid">grid</a></dt>
+                    <dd>The grid module.</dd>
+                    <dt><a class="mod" href="indexing/index.html" title="mod burn::tensor::indexing">indexing</a></dt>
+                    <dd>The indexing module.
+                        A module for indexing utility machinery.</dd>
+                    <dt><a class="mod" href="linalg/index.html" title="mod burn::tensor::linalg">linalg</a></dt>
+                    <dd>The linalg module.</dd>
+                    <dt><a class="mod" href="loss/index.html" title="mod burn::tensor::loss">loss</a></dt>
+                    <dd>The loss module.</dd>
+                    <dt><a class="mod" href="module/index.html" title="mod burn::tensor::module">module</a></dt>
+                    <dd>The mabor module.</dd>
+                    <dt><a class="mod" href="ops/index.html" title="mod burn::tensor::ops">ops</a></dt>
+                    <dd>Operations on tensors module.</dd>
+                    <dt><a class="mod" href="quantization/index.html"
+                            title="mod burn::tensor::quantization">quantization</a></dt>
+                    <dd>Tensor quantization module.</dd>
+                </dl>
+                <h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="macro" href="macro.dequant_op_flow.html"
+                            title="macro burn::tensor::dequant_op_flow">dequant_<wbr>op_<wbr>flow</a></dt>
+                    <dd>Automatically applies <code>dequantization -&gt; float operation [-&gt; quantization]</code>.
+                    </dd>
+                    <dt><a class="macro" href="macro.dequant_op_quant.html"
+                            title="macro burn::tensor::dequant_op_quant">dequant_<wbr>op_<wbr>quant</a></dt>
+                    <dd>Automatically applies <code>dequantization -&gt; float operation -&gt; quantization</code>.</dd>
+                    <dt><a class="macro" href="macro.make_element.html"
+                            title="macro burn::tensor::make_element">make_<wbr>element</a></dt>
+                    <dd>Macro to implement the element trait for a type.</dd>
+                    <dt><a class="macro" href="macro.s.html" title="macro burn::tensor::s">s</a></dt>
+                    <dd>Creates a slice specification for tensor indexing operations.</dd>
+                </dl>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.Bool.html" title="struct burn::tensor::Bool">Bool</a></dt>
+                    <dd>A type-level representation of the kind of a bool tensor.</dd>
+                    <dt><a class="struct" href="struct.Bytes.html" title="struct burn::tensor::Bytes">Bytes</a></dt>
+                    <dd>A sort of <code>Box&lt;[u8]&gt;</code> that remembers the original alignment and can contain
+                        trailing uninitialized bytes.</dd>
+                    <dt><a class="struct" href="struct.DimIter.html" title="struct burn::tensor::DimIter">DimIter</a>
+                    </dt>
+                    <dd>Iterator given by (Tensor::iter_dim).</dd>
+                    <dt><a class="struct" href="struct.DistributionSampler.html"
+                            title="struct burn::tensor::DistributionSampler">Distribution<wbr>Sampler</a></dt>
+                    <dd>Distribution sampler for random value of a tensor.</dd>
+                    <dt><a class="struct" href="struct.Float.html" title="struct burn::tensor::Float">Float</a></dt>
+                    <dd>A type-level representation of the kind of a float tensor</dd>
+                    <dt><a class="struct" href="struct.Int.html" title="struct burn::tensor::Int">Int</a></dt>
+                    <dd>A type-level representation of the kind of a int tensor.</dd>
+                    <dt><a class="struct" href="struct.PrintOptions.html"
+                            title="struct burn::tensor::PrintOptions">Print<wbr>Options</a></dt>
+                    <dd>Options for Tensor pretty printing</dd>
+                    <dt><a class="struct" href="struct.Shape.html" title="struct burn::tensor::Shape">Shape</a></dt>
+                    <dd>Shape of a tensor.</dd>
+                    <dt><a class="struct" href="struct.Slice.html" title="struct burn::tensor::Slice">Slice</a></dt>
+                    <dd>A slice (range).</dd>
+                    <dt><a class="struct" href="struct.T.html" title="struct burn::tensor::T">T</a></dt>
+                    <dd>Transpose marker (zero-size type). Used to sugar the transpose of a tensor, e.g.</dd>
+                    <dt><a class="struct" href="struct.Tensor.html" title="struct burn::tensor::Tensor">Tensor</a></dt>
+                    <dd>A tensor with a given backend, shape and data type.</dd>
+                    <dt><a class="struct" href="struct.TensorData.html"
+                            title="struct burn::tensor::TensorData">Tensor<wbr>Data</a></dt>
+                    <dd>Data structure for tensors.</dd>
+                    <dt><a class="struct" href="struct.Tolerance.html"
+                            title="struct burn::tensor::Tolerance">Tolerance</a></dt>
+                    <dd>The tolerance used to compare to floating point numbers.</dd>
+                    <dt><a class="struct" href="struct.Transaction.html"
+                            title="struct burn::tensor::Transaction">Transaction</a></dt>
+                    <dd>A transaction can <a href="struct.Transaction.html#method.register"
+                            title="method burn::tensor::Transaction::register">read</a> multiple tensors at once with a
+                        single operation improving
+                        compute utilization with optimized laziness.</dd>
+                    <dt><a class="struct" href="struct.bf16.html" title="struct burn::tensor::bf16">bf16</a></dt>
+                    <dd>A 16-bit floating point type implementing the <a
+                            href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format"><code>bfloat16</code></a>
+                        format.</dd>
+                    <dt><a class="struct" href="struct.f16.html" title="struct burn::tensor::f16">f16</a></dt>
+                    <dd>A 16-bit floating point type implementing the IEEE 754-2008 standard <a
+                            href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format"><code>binary16</code></a>
+                        a.k.a “half”
+                        format.</dd>
+                    <dt><a class="struct" href="struct.flex32.html" title="struct burn::tensor::flex32">flex32</a></dt>
+                    <dd>A floating point type with relaxed precision, minimum <a
+                            href="https://doc.rust-lang.org/1.88.0/std/primitive.f16.html"
+                            title="primitive f16"><code>f16</code></a>, max [<code>f32</code>].</dd>
+                </dl>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.DType.html" title="enum burn::tensor::DType">DType</a></dt>
+                    <dt><a class="enum" href="enum.DataError.html"
+                            title="enum burn::tensor::DataError">Data<wbr>Error</a></dt>
+                    <dd>The things that can go wrong when manipulating tensor data.</dd>
+                    <dt><a class="enum" href="enum.Distribution.html"
+                            title="enum burn::tensor::Distribution">Distribution</a></dt>
+                    <dd>Distribution for random value of a tensor.</dd>
+                    <dt><a class="enum" href="enum.DistributionSamplerKind.html"
+                            title="enum burn::tensor::DistributionSamplerKind">Distribution<wbr>Sampler<wbr>Kind</a>
+                    </dt>
+                    <dd>Distribution sampler kind for random value of a tensor.</dd>
+                    <dt><a class="enum" href="enum.FloatDType.html"
+                            title="enum burn::tensor::FloatDType">FloatD<wbr>Type</a></dt>
+                    <dt><a class="enum" href="enum.Precision.html" title="enum burn::tensor::Precision">Precision</a>
+                    </dt>
+                    <dd>Element precision trait for tensor.</dd>
+                    <dt><a class="enum" href="enum.TensorPrimitive.html"
+                            title="enum burn::tensor::TensorPrimitive">Tensor<wbr>Primitive</a></dt>
+                    <dd>A primitive tensor representation.</dd>
+                </dl>
+                <h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="constant" href="constant.DEFAULT_ATOL.html"
+                            title="constant burn::tensor::DEFAULT_ATOL">DEFAULT_<wbr>ATOL</a></dt>
+                    <dd>Default ATOL value for <code>is_close</code> and <code>all_close</code>.</dd>
+                    <dt><a class="constant" href="constant.DEFAULT_RTOL.html"
+                            title="constant burn::tensor::DEFAULT_RTOL">DEFAULT_<wbr>RTOL</a></dt>
+                    <dd>Default RTOL value for <code>is_close</code> and <code>all_close</code>.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.AsIndex.html" title="trait burn::tensor::AsIndex">AsIndex</a></dt>
+                    <dd>Helper trait for implementing indexing with support for negative indices.</dd>
+                    <dt><a class="trait" href="trait.BasicAutodiffOps.html"
+                            title="trait burn::tensor::BasicAutodiffOps">Basic<wbr>Autodiff<wbr>Ops</a></dt>
+                    <dd>Trait that list all operations that can be applied on all tensors on an autodiff backend.</dd>
+                    <dt><a class="trait" href="trait.BasicOps.html"
+                            title="trait burn::tensor::BasicOps">Basic<wbr>Ops</a></dt>
+                    <dd>Trait that list all operations that can be applied on all tensors.</dd>
+                    <dt><a class="trait" href="trait.BroadcastArgs.html"
+                            title="trait burn::tensor::BroadcastArgs">Broadcast<wbr>Args</a></dt>
+                    <dd>Trait used for broadcast arguments.</dd>
+                    <dt><a class="trait" href="trait.Element.html" title="trait burn::tensor::Element">Element</a></dt>
+                    <dd>Element trait for tensor.</dd>
+                    <dt><a class="trait" href="trait.ElementComparison.html"
+                            title="trait burn::tensor::ElementComparison">Element<wbr>Comparison</a></dt>
+                    <dd>Element ordering trait.</dd>
+                    <dt><a class="trait" href="trait.ElementConversion.html"
+                            title="trait burn::tensor::ElementConversion">Element<wbr>Conversion</a></dt>
+                    <dd>Element conversion trait for tensor.</dd>
+                    <dt><a class="trait" href="trait.ElementLimits.html"
+                            title="trait burn::tensor::ElementLimits">Element<wbr>Limits</a></dt>
+                    <dd>Element ordering trait.</dd>
+                    <dt><a class="trait" href="trait.ElementPrecision.html"
+                            title="trait burn::tensor::ElementPrecision">Element<wbr>Precision</a></dt>
+                    <dd>Element precision trait for tensor.</dd>
+                    <dt><a class="trait" href="trait.ElementRandom.html"
+                            title="trait burn::tensor::ElementRandom">Element<wbr>Random</a></dt>
+                    <dd>Element trait for random value of a tensor.</dd>
+                    <dt><a class="trait" href="trait.MovedimArgs.html"
+                            title="trait burn::tensor::MovedimArgs">Movedim<wbr>Args</a></dt>
+                    <dd>Trait used for movedim arguments</dd>
+                    <dt><a class="trait" href="trait.Numeric.html" title="trait burn::tensor::Numeric">Numeric</a></dt>
+                    <dd>Trait that list all operations that can be applied on all numerical tensors.</dd>
+                    <dt><a class="trait" href="trait.RangeArg.html"
+                            title="trait burn::tensor::RangeArg">Range<wbr>Arg</a></dt>
+                    <dd>Trait used for slice dim arguments.</dd>
+                    <dt><a class="trait" href="trait.RangesArg.html"
+                            title="trait burn::tensor::RangesArg">Ranges<wbr>Arg</a></dt>
+                    <dd>Trait used for slice arguments</dd>
+                    <dt><a class="trait" href="trait.ReshapeArgs.html"
+                            title="trait burn::tensor::ReshapeArgs">Reshape<wbr>Args</a></dt>
+                    <dd>Trait used for reshape arguments.</dd>
+                    <dt><a class="trait" href="trait.TensorKind.html"
+                            title="trait burn::tensor::TensorKind">Tensor<wbr>Kind</a></dt>
+                    <dd>A type-level representation of the kind of a tensor.
+                        Metadata access is lazy.</dd>
+                    <dt><a class="trait" href="trait.TensorMetadata.html"
+                            title="trait burn::tensor::TensorMetadata">Tensor<wbr>Metadata</a></dt>
+                    <dd>Tensor metadata trait for tensor primitive.</dd>
+                </dl>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.argsort.html" title="fn burn::tensor::argsort">argsort</a></dt>
+                    <dd>Returns the indices that sort the elements of the input <code>tensor</code> along a given
+                        dimension.</dd>
+                    <dt><a class="fn" href="fn.argwhere_data.html"
+                            title="fn burn::tensor::argwhere_data">argwhere_<wbr>data</a></dt>
+                    <dd>Compute the indices of the elements that are non-zero, grouped by element.</dd>
+                    <dt><a class="fn" href="fn.cartesian_grid.html"
+                            title="fn burn::tensor::cartesian_grid">cartesian_<wbr>grid</a></dt>
+                    <dd>Generates a cartesian grid for the given tensor shape on the specified device.
+                        The generated tensor is of dimension <code>D2 = D + 1</code>, where each element at dimension D
+                        contains the cartesian grid coordinates for that element.</dd>
+                    <dt><a class="fn" href="fn.check_closeness.html"
+                            title="fn burn::tensor::check_closeness">check_<wbr>closeness</a></dt>
+                    <dd>Checks the closeness of two tensors and prints the results.</dd>
+                    <dt><a class="fn" href="fn.read_sync.html" title="fn burn::tensor::read_sync">read_<wbr>sync</a>
+                    </dt>
+                    <dd>Read a future synchronously.</dd>
+                    <dt><a class="fn" href="fn.set_print_options.html"
+                            title="fn burn::tensor::set_print_options">set_<wbr>print_<wbr>options</a></dt>
+                    <dd>Set print options</dd>
+                    <dt><a class="fn" href="fn.sort.html" title="fn burn::tensor::sort">sort</a></dt>
+                    <dd>Sort the elements of the input <code>tensor</code> by value along a given dimension.</dd>
+                    <dt><a class="fn" href="fn.sort_with_indices.html"
+                            title="fn burn::tensor::sort_with_indices">sort_<wbr>with_<wbr>indices</a></dt>
+                    <dd>Sort the elements of the input <code>tensor</code> by value along a given dimension.</dd>
+                    <dt><a class="fn" href="fn.try_read_sync.html"
+                            title="fn burn::tensor::try_read_sync">try_<wbr>read_<wbr>sync</a></dt>
+                    <dd>Read a future synchronously.</dd>
+                </dl>
+                <h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="type" href="type.Device.html" title="type burn::tensor::Device">Device</a></dt>
+                    <dd>Device type used by the backend.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,604 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Configuration trait.">
+    <title>Config in mabor::config - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Config</a></h2>
+                <h3><a href="#provided-methods">Provided Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#method.load" title="load">load</a></li>
+                    <li><a href="#method.load_binary" title="load_binary">load_binary</a></li>
+                    <li><a href="#method.save" title="save">save</a></li>
+                </ul>
+                <h3><a href="#dyn-compatibility">Dyn Compatibility</a></h3>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>config</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a>::<wbr><a
+                            href="index.html">config</a></div>
+                    <h1>Trait <span class="trait">Config</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait Config: <a class="trait" href="../serde/trait.Serialize.html" title="trait mabor::serde::Serialize">Serialize</a> + <a class="trait" href="../serde/de/trait.DeserializeOwned.html" title="trait mabor::serde::de::DeserializeOwned">DeserializeOwned</a> {
+    // Provided methods
+    fn <a href="#method.save" class="fn">save</a>&lt;P&gt;(&amp;self, file: P) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/1.88.0/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;
+       <span class="where">where P: <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/convert/trait.AsRef.html" title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.88.0/std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.load" class="fn">load</a>&lt;P&gt;(file: P) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;Self, <a class="enum" href="enum.ConfigError.html" title="enum mabor::config::ConfigError">ConfigError</a>&gt;
+       <span class="where">where P: <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/convert/trait.AsRef.html" title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.88.0/std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.load_binary" class="fn">load_binary</a>(data: &amp;[<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.u8.html">u8</a>]) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.88.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;Self, <a class="enum" href="enum.ConfigError.html" title="enum mabor::config::ConfigError">ConfigError</a>&gt; { ... }
+}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Configuration trait.</p>
+                    </div>
+                </details>
+                <h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.save" class="method">
+                                <h4 class="code-header">fn <a href="#method.save"
+                                        class="fn">save</a>&lt;P&gt;(&amp;self, file: P) -&gt; <a class="enum"
+                                        href="https://doc.rust-lang.org/1.88.0/core/result/enum.Result.html"
+                                        title="enum core::result::Result">Result</a>&lt;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a>, <a
+                                        class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/std/io/error/struct.Error.html"
+                                        title="struct std::io::error::Error">Error</a>&gt;<div class="where">where
+                                        P: <a class="trait"
+                                            href="https://doc.rust-lang.org/1.88.0/core/convert/trait.AsRef.html"
+                                            title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct"
+                                            href="https://doc.rust-lang.org/1.88.0/std/path/struct.Path.html"
+                                            title="struct std::path::Path">Path</a>&gt;,</div>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Saves the configuration to a file.</p>
+                            <h5 id="arguments"><a class="doc-anchor" href="#arguments">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>file</code> - File to save the configuration to.</li>
+                            </ul>
+                            <h5 id="returns"><a class="doc-anchor" href="#returns">§</a>Returns</h5>
+                            <p>The output of the save operation.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.load" class="method">
+                                <h4 class="code-header">fn <a href="#method.load" class="fn">load</a>&lt;P&gt;(file: P)
+                                    -&gt; <a class="enum"
+                                        href="https://doc.rust-lang.org/1.88.0/core/result/enum.Result.html"
+                                        title="enum core::result::Result">Result</a>&lt;Self, <a class="enum"
+                                        href="enum.ConfigError.html"
+                                        title="enum mabor::config::ConfigError">ConfigError</a>&gt;<div class="where">
+                                        where
+                                        P: <a class="trait"
+                                            href="https://doc.rust-lang.org/1.88.0/core/convert/trait.AsRef.html"
+                                            title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct"
+                                            href="https://doc.rust-lang.org/1.88.0/std/path/struct.Path.html"
+                                            title="struct std::path::Path">Path</a>&gt;,</div>
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Loads the configuration from a file.</p>
+                            <h5 id="arguments-1"><a class="doc-anchor" href="#arguments-1">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>file</code> - File to load the configuration from.</li>
+                            </ul>
+                            <h5 id="returns-1"><a class="doc-anchor" href="#returns-1">§</a>Returns</h5>
+                            <p>The loaded configuration.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="method.load_binary" class="method">
+                                <h4 class="code-header">fn <a href="#method.load_binary"
+                                        class="fn">load_binary</a>(data: &amp;[<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.u8.html">u8</a>]) -&gt; <a
+                                        class="enum"
+                                        href="https://doc.rust-lang.org/1.88.0/core/result/enum.Result.html"
+                                        title="enum core::result::Result">Result</a>&lt;Self, <a class="enum"
+                                        href="enum.ConfigError.html"
+                                        title="enum burn::config::ConfigError">ConfigError</a>&gt;</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Loads the configuration from a binary buffer.</p>
+                            <h5 id="arguments-2"><a class="doc-anchor" href="#arguments-2">§</a>Arguments</h5>
+                            <ul>
+                                <li><code>data</code> - Binary buffer to load the configuration from.</li>
+                            </ul>
+                            <h5 id="returns-2"><a class="doc-anchor" href="#returns-2">§</a>Returns</h5>
+                            <p>The loaded configuration.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="dyn-compatibility" class="section-header">Dyn Compatibility<a href="#dyn-compatibility"
+                        class="anchor">§</a></h2>
+                <div class="dyn-compatibility-info">
+                    <p>This trait is <b>not</b> <a
+                            href="https://doc.rust-lang.org/1.88.0/reference/items/traits.html#dyn-compatibility">dyn
+                            compatible</a>.</p>
+                    <p><i>In older versions of Rust, dyn compatibility was called "object safety", so this trait is not
+                            object safe.</i></p>
+                </div>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <section id="impl-Config-for-GradientClippingConfig" class="impl"><a
+                            href="#impl-Config-for-GradientClippingConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="enum"
+                                href="../grad_clipping/enum.GradientClippingConfig.html"
+                                title="enum burn::grad_clipping::GradientClippingConfig">GradientClippingConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-Initializer" class="impl"><a href="#impl-Config-for-Initializer"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="enum"
+                                href="../nn/enum.Initializer.html" title="enum burn::nn::Initializer">Initializer</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-PaddingConfig1d" class="impl"><a
+                            href="#impl-Config-for-PaddingConfig1d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="enum"
+                                href="../nn/enum.PaddingConfig1d.html"
+                                title="enum burn::nn::PaddingConfig1d">PaddingConfig1d</a></h3>
+                    </section>
+                    <section id="impl-Config-for-PaddingConfig2d" class="impl"><a
+                            href="#impl-Config-for-PaddingConfig2d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="enum"
+                                href="../nn/enum.PaddingConfig2d.html"
+                                title="enum burn::nn::PaddingConfig2d">PaddingConfig2d</a></h3>
+                    </section>
+                    <section id="impl-Config-for-PaddingConfig3d" class="impl"><a
+                            href="#impl-Config-for-PaddingConfig3d" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="enum"
+                                href="../nn/enum.PaddingConfig3d.html"
+                                title="enum burn::nn::PaddingConfig3d">PaddingConfig3d</a></h3>
+                    </section>
+                    <section id="impl-Config-for-CosineAnnealingLrSchedulerConfig" class="impl"><a
+                            href="#impl-Config-for-CosineAnnealingLrSchedulerConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../lr_scheduler/cosine/struct.CosineAnnealingLrSchedulerConfig.html"
+                                title="struct burn::lr_scheduler::cosine::CosineAnnealingLrSchedulerConfig">CosineAnnealingLrSchedulerConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-ExponentialLrSchedulerConfig" class="impl"><a
+                            href="#impl-Config-for-ExponentialLrSchedulerConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../lr_scheduler/exponential/struct.ExponentialLrSchedulerConfig.html"
+                                title="struct burn::lr_scheduler::exponential::ExponentialLrSchedulerConfig">ExponentialLrSchedulerConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-LinearLrSchedulerConfig" class="impl"><a
+                            href="#impl-Config-for-LinearLrSchedulerConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../lr_scheduler/linear/struct.LinearLrSchedulerConfig.html"
+                                title="struct burn::lr_scheduler::linear::LinearLrSchedulerConfig">LinearLrSchedulerConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-NoamLrSchedulerConfig" class="impl"><a
+                            href="#impl-Config-for-NoamLrSchedulerConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../lr_scheduler/noam/struct.NoamLrSchedulerConfig.html"
+                                title="struct burn::lr_scheduler::noam::NoamLrSchedulerConfig">NoamLrSchedulerConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-StepLrSchedulerConfig" class="impl"><a
+                            href="#impl-Config-for-StepLrSchedulerConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../lr_scheduler/step/struct.StepLrSchedulerConfig.html"
+                                title="struct burn::lr_scheduler::step::StepLrSchedulerConfig">StepLrSchedulerConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-MultiHeadAttentionConfig" class="impl"><a
+                            href="#impl-Config-for-MultiHeadAttentionConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/attention/struct.MultiHeadAttentionConfig.html"
+                                title="struct burn::nn::attention::MultiHeadAttentionConfig">MultiHeadAttentionConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-Conv1dConfig" class="impl"><a href="#impl-Config-for-Conv1dConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/conv/struct.Conv1dConfig.html"
+                                title="struct burn::nn::conv::Conv1dConfig">Conv1dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-Conv2dConfig" class="impl"><a href="#impl-Config-for-Conv2dConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/conv/struct.Conv2dConfig.html"
+                                title="struct burn::nn::conv::Conv2dConfig">Conv2dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-Conv3dConfig" class="impl"><a href="#impl-Config-for-Conv3dConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/conv/struct.Conv3dConfig.html"
+                                title="struct burn::nn::conv::Conv3dConfig">Conv3dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-ConvTranspose1dConfig" class="impl"><a
+                            href="#impl-Config-for-ConvTranspose1dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/conv/struct.ConvTranspose1dConfig.html"
+                                title="struct burn::nn::conv::ConvTranspose1dConfig">ConvTranspose1dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-ConvTranspose2dConfig" class="impl"><a
+                            href="#impl-Config-for-ConvTranspose2dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/conv/struct.ConvTranspose2dConfig.html"
+                                title="struct burn::nn::conv::ConvTranspose2dConfig">ConvTranspose2dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-ConvTranspose3dConfig" class="impl"><a
+                            href="#impl-Config-for-ConvTranspose3dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/conv/struct.ConvTranspose3dConfig.html"
+                                title="struct burn::nn::conv::ConvTranspose3dConfig">ConvTranspose3dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-DeformConv2dConfig" class="impl"><a
+                            href="#impl-Config-for-DeformConv2dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/conv/struct.DeformConv2dConfig.html"
+                                title="struct burn::nn::conv::DeformConv2dConfig">DeformConv2dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-GruConfig" class="impl"><a href="#impl-Config-for-GruConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/gru/struct.GruConfig.html"
+                                title="struct burn::nn::gru::GruConfig">GruConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-Interpolate1dConfig" class="impl"><a
+                            href="#impl-Config-for-Interpolate1dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/interpolate/struct.Interpolate1dConfig.html"
+                                title="struct burn::nn::interpolate::Interpolate1dConfig">Interpolate1dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-Interpolate2dConfig" class="impl"><a
+                            href="#impl-Config-for-Interpolate2dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/interpolate/struct.Interpolate2dConfig.html"
+                                title="struct burn::nn::interpolate::Interpolate2dConfig">Interpolate2dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-BinaryCrossEntropyLossConfig" class="impl"><a
+                            href="#impl-Config-for-BinaryCrossEntropyLossConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/loss/struct.BinaryCrossEntropyLossConfig.html"
+                                title="struct burn::nn::loss::BinaryCrossEntropyLossConfig">BinaryCrossEntropyLossConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-CosineEmbeddingLossConfig" class="impl"><a
+                            href="#impl-Config-for-CosineEmbeddingLossConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/loss/struct.CosineEmbeddingLossConfig.html"
+                                title="struct burn::nn::loss::CosineEmbeddingLossConfig">CosineEmbeddingLossConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-CrossEntropyLossConfig" class="impl"><a
+                            href="#impl-Config-for-CrossEntropyLossConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/loss/struct.CrossEntropyLossConfig.html"
+                                title="struct burn::nn::loss::CrossEntropyLossConfig">CrossEntropyLossConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-HuberLossConfig" class="impl"><a
+                            href="#impl-Config-for-HuberLossConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/loss/struct.HuberLossConfig.html"
+                                title="struct burn::nn::loss::HuberLossConfig">HuberLossConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-PoissonNllLossConfig" class="impl"><a
+                            href="#impl-Config-for-PoissonNllLossConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/loss/struct.PoissonNllLossConfig.html"
+                                title="struct burn::nn::loss::PoissonNllLossConfig">PoissonNllLossConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-AdaptiveAvgPool1dConfig" class="impl"><a
+                            href="#impl-Config-for-AdaptiveAvgPool1dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/pool/struct.AdaptiveAvgPool1dConfig.html"
+                                title="struct burn::nn::pool::AdaptiveAvgPool1dConfig">AdaptiveAvgPool1dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-AdaptiveAvgPool2dConfig" class="impl"><a
+                            href="#impl-Config-for-AdaptiveAvgPool2dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/pool/struct.AdaptiveAvgPool2dConfig.html"
+                                title="struct burn::nn::pool::AdaptiveAvgPool2dConfig">AdaptiveAvgPool2dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-AvgPool1dConfig" class="impl"><a
+                            href="#impl-Config-for-AvgPool1dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/pool/struct.AvgPool1dConfig.html"
+                                title="struct burn::nn::pool::AvgPool1dConfig">AvgPool1dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-AvgPool2dConfig" class="impl"><a
+                            href="#impl-Config-for-AvgPool2dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/pool/struct.AvgPool2dConfig.html"
+                                title="struct burn::nn::pool::AvgPool2dConfig">AvgPool2dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-MaxPool1dConfig" class="impl"><a
+                            href="#impl-Config-for-MaxPool1dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/pool/struct.MaxPool1dConfig.html"
+                                title="struct burn::nn::pool::MaxPool1dConfig">MaxPool1dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-MaxPool2dConfig" class="impl"><a
+                            href="#impl-Config-for-MaxPool2dConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/pool/struct.MaxPool2dConfig.html"
+                                title="struct burn::nn::pool::MaxPool2dConfig">MaxPool2dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-BatchNormConfig" class="impl"><a
+                            href="#impl-Config-for-BatchNormConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.BatchNormConfig.html"
+                                title="struct burn::nn::BatchNormConfig">BatchNormConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-BiLstmConfig" class="impl"><a href="#impl-Config-for-BiLstmConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.BiLstmConfig.html"
+                                title="struct burn::nn::BiLstmConfig">BiLstmConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-DropoutConfig" class="impl"><a href="#impl-Config-for-DropoutConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.DropoutConfig.html"
+                                title="struct burn::nn::DropoutConfig">DropoutConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-EmbeddingConfig" class="impl"><a
+                            href="#impl-Config-for-EmbeddingConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.EmbeddingConfig.html"
+                                title="struct burn::nn::EmbeddingConfig">EmbeddingConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-GroupNormConfig" class="impl"><a
+                            href="#impl-Config-for-GroupNormConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.GroupNormConfig.html"
+                                title="struct burn::nn::GroupNormConfig">GroupNormConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-HardSigmoidConfig" class="impl"><a
+                            href="#impl-Config-for-HardSigmoidConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.HardSigmoidConfig.html"
+                                title="struct burn::nn::HardSigmoidConfig">HardSigmoidConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-InstanceNormConfig" class="impl"><a
+                            href="#impl-Config-for-InstanceNormConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.InstanceNormConfig.html"
+                                title="struct burn::nn::InstanceNormConfig">InstanceNormConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-LayerNormConfig" class="impl"><a
+                            href="#impl-Config-for-LayerNormConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.LayerNormConfig.html"
+                                title="struct burn::nn::LayerNormConfig">LayerNormConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-LeakyReluConfig" class="impl"><a
+                            href="#impl-Config-for-LeakyReluConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.LeakyReluConfig.html"
+                                title="struct burn::nn::LeakyReluConfig">LeakyReluConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-LinearConfig" class="impl"><a href="#impl-Config-for-LinearConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.LinearConfig.html"
+                                title="struct burn::nn::LinearConfig">LinearConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-LstmConfig" class="impl"><a href="#impl-Config-for-LstmConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.LstmConfig.html" title="struct burn::nn::LstmConfig">LstmConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-PReluConfig" class="impl"><a href="#impl-Config-for-PReluConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.PReluConfig.html"
+                                title="struct burn::nn::PReluConfig">PReluConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-PositionalEncodingConfig" class="impl"><a
+                            href="#impl-Config-for-PositionalEncodingConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.PositionalEncodingConfig.html"
+                                title="struct burn::nn::PositionalEncodingConfig">PositionalEncodingConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-RmsNormConfig" class="impl"><a href="#impl-Config-for-RmsNormConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.RmsNormConfig.html"
+                                title="struct burn::nn::RmsNormConfig">RmsNormConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-RotaryEncodingConfig" class="impl"><a
+                            href="#impl-Config-for-RotaryEncodingConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.RotaryEncodingConfig.html"
+                                title="struct burn::nn::RotaryEncodingConfig">RotaryEncodingConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-SwiGluConfig" class="impl"><a href="#impl-Config-for-SwiGluConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.SwiGluConfig.html"
+                                title="struct burn::nn::SwiGluConfig">SwiGluConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-Unfold4dConfig" class="impl"><a href="#impl-Config-for-Unfold4dConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/struct.Unfold4dConfig.html"
+                                title="struct burn::nn::Unfold4dConfig">Unfold4dConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-PositionWiseFeedForwardConfig" class="impl"><a
+                            href="#impl-Config-for-PositionWiseFeedForwardConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/transformer/struct.PositionWiseFeedForwardConfig.html"
+                                title="struct burn::nn::transformer::PositionWiseFeedForwardConfig">PositionWiseFeedForwardConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-TransformerDecoderConfig" class="impl"><a
+                            href="#impl-Config-for-TransformerDecoderConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/transformer/struct.TransformerDecoderConfig.html"
+                                title="struct burn::nn::transformer::TransformerDecoderConfig">TransformerDecoderConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-TransformerEncoderConfig" class="impl"><a
+                            href="#impl-Config-for-TransformerEncoderConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../nn/transformer/struct.TransformerEncoderConfig.html"
+                                title="struct burn::nn::transformer::TransformerEncoderConfig">TransformerEncoderConfig</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Config-for-WeightDecayConfig" class="impl"><a
+                            href="#impl-Config-for-WeightDecayConfig" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../optim/decay/struct.WeightDecayConfig.html"
+                                title="struct burn::optim::decay::WeightDecayConfig">WeightDecayConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-MomentumConfig" class="impl"><a href="#impl-Config-for-MomentumConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../optim/momentum/struct.MomentumConfig.html"
+                                title="struct burn::optim::momentum::MomentumConfig">MomentumConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-AdaGradConfig" class="impl"><a href="#impl-Config-for-AdaGradConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../optim/struct.AdaGradConfig.html"
+                                title="struct burn::optim::AdaGradConfig">AdaGradConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-AdamConfig" class="impl"><a href="#impl-Config-for-AdamConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../optim/struct.AdamConfig.html"
+                                title="struct burn::optim::AdamConfig">AdamConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-AdamWConfig" class="impl"><a href="#impl-Config-for-AdamWConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../optim/struct.AdamWConfig.html"
+                                title="struct burn::optim::AdamWConfig">AdamWConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-RmsPropConfig" class="impl"><a href="#impl-Config-for-RmsPropConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../optim/struct.RmsPropConfig.html"
+                                title="struct burn::optim::RmsPropConfig">RmsPropConfig</a></h3>
+                    </section>
+                    <section id="impl-Config-for-SgdConfig" class="impl"><a href="#impl-Config-for-SgdConfig"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Config.html"
+                                title="trait burn::config::Config">Config</a> for <a class="struct"
+                                href="../optim/struct.SgdConfig.html"
+                                title="struct burn::optim::SgdConfig">SgdConfig</a></h3>
+                    </section>
+                </div>
+                <script src="../../trait.impl/burn_core/config/trait.Config.js" data-ignore-extern-crates="burn_core"
+                    async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

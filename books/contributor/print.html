@@ -1,0 +1,1406 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Mabor Contributor Book 🔥</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Mabor Contributor Book 🔥</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="overview"><a class="header" href="#overview">Overview</a></h1>
+<p>Welcome to The Mabor Contributor's Book 👋</p>
+<p>This book will help you get acquainted with the internals of the Mabor deep learning framework and
+provide some detailed guidance on how to contribute to the project.</p>
+<p>We have crafted some sections for you:</p>
+<ul>
+<li>
+<p><a href="getting-started/index.htm">Getting Started</a>: Much like the <a href="../burn/index.htm">Mabor Book</a> which
+targets users, we'll start with the fundamentals, guiding you through tasks like setting up the
+development environment, running tests, and what you should check prior to each commit.</p>
+</li>
+<li>
+<p><a href="project-architecture/index.htm">Project Architecture</a>: This section will give you an in-depth look at the
+architecture of Mabor.</p>
+</li>
+<li>
+<p><a href="guides/index.htm">Guides</a>: We provide some guides on how to do specific tasks, such as adding a new
+operations to Mabor.</p>
+</li>
+<li>
+<p><a href="frequently-encountered-issues/index.htm">Frequently Encountered Issues</a>: If you are running into an issue
+that has you stumped, this is the section to check out prior to asking on the
+<a href="https://discord.gg/uPEBbYYDB6">Discord</a>. It's a collection of errors encountered by contributors,
+what caused them, and how they were resolved.</p>
+</li>
+</ul>
+<p>As this book is geared towards contributors and not towards users of Mabor, we'll assume you have a
+good understanding of software development, but will make efforts to explain anything outside of
+that scope, or at least provide links to resources that explain it better than we can.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="how-to-read-this-book"><a class="header" href="#how-to-read-this-book">How to read this book</a></h1>
+<p>Throughout this book, we maintain the following structure.</p>
+<h2 id="linking"><a class="header" href="#linking">Linking</a></h2>
+<p>When referring to structures or functions within codebase, we provide permalinks to the lines in
+specific commits, and indicate them by the relative path of their parent file from the project root.
+For example this is a reference to the <code>Tensor</code> struct in
+<a href="https://github.com/tracel-ai/burn/blob/e303e31c8bc85486690ff80df65d1e25e16728c4/crates/burn-tensor/src/tensor/api/base.rs#L27"><code>crates/mabor-tensor/src/tensor/api/base.rs</code></a></p>
+<p>When some reference information is useful but is beyond the scope of contributing to Mabor, we
+provide that information in a footnote. To build on the previous example, the <code>Tensor</code> mentioned is
+what's referred to as a newtype struct<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup>.</p>
+<p>Direct hyperlinks are for tools and resources that are not part of the Mabor project, but are useful
+for contributing to it. For example, when working on implementing an operation for autodiff, it can
+be useful to use <a href="https://www.symbolab.com/">symbolab</a> to calculate the left and right partial
+derivatives.</p>
+<hr>
+<ol class="footnote-definition"><li id="footnote-1">
+<p>For more information on newtype please refer to
+<a href="https://doc.rust-lang.org/book/ch19-04-advanced-types.html#using-the-newtype-pattern-for-type-safety-and-abstraction">the Advanced Types chapter of the Rust Book</a> <a href="#fr-1-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<p>This section is for setting up the environment and how to do basic development tasks such as running
+tests and checking your code before committing. If you need help with the process or run into
+issues, feel free to ask on the <a href="https://discord.gg/uPEBbYYDB6">Discord server</a> in the Development
+channels.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="setting-up-the-environment"><a class="header" href="#setting-up-the-environment">Setting up the environment</a></h1>
+<p>Depending on what part of the project you plan on contributing to, there are a couple of tools to
+install and commands to be familiar with. This section should be up to date with current project
+practices (as of 2024-04-15).</p>
+<h2 id="general"><a class="header" href="#general">General</a></h2>
+<p>There are a few commands you will want to run prior to any commit for a non-draft PR:</p>
+<ol>
+<li>
+<p><code>cargo fmt --all</code> will run <code>rustfmt</code> on all files in the project.</p>
+</li>
+<li>
+<p><code>cargo clippy --fix</code> will run <a href="https://github.com/rust-lang/rust-clippy">Clippy</a> and fix any
+coding issues it can. Clippy necessitates to be in a clean Git state, but this can be
+circumvented by adding the <code>--allow-dirty</code> flag.</p>
+</li>
+<li>
+<p><code>cargo run-checks</code> is a command used to test the project. It is required to run successfully
+prior to merging a PR. Fair warning, running these tests can take a while<sup class="footnote-reference" id="fr-linux_mem_note-1"><a href="#footnote-linux_mem_note">1</a></sup>.</p>
+<blockquote>
+<p>Want more detailed macro error diagnostics? This is especially useful for debugging tensor-related tests:</p>
+<pre><code class="language-bash">RUSTC_BOOTSTRAP=1 RUSTFLAGS="-Zmacro-backtrace" cargo run-checks
+</code></pre>
+</blockquote>
+</li>
+</ol>
+<h2 id="updating-the-burn-semver-version"><a class="header" href="#updating-the-burn-semver-version">Updating the mabor semver version</a></h2>
+<p>If for some reason you need to bump for the next version (though that should probably be left to the
+maintainers), edit the semantic version number in <code>mabor/Cargo.toml</code>, and then run <code>cargo update</code> to
+update the lock file.</p>
+<h2 id="contributing-to-either-the-burn-book-or-contributor-book"><a class="header" href="#contributing-to-either-the-burn-book-or-contributor-book">Contributing to either the Mabor Book or Contributor Book</a></h2>
+<p>Both the Mabor Book and the Contributor Book are built with mdbook. To open the book locally, run
+<code>mdbook serve &lt;path/to/book&gt;</code> or <code>cargo xtask books {mabor|contributor} open</code> which will install and
+use mdbook automatically.</p>
+<p>Alternatively, if you want to install mdbook directly, run the following command<sup class="footnote-reference" id="fr-update_note-1"><a href="#footnote-update_note">2</a></sup>:</p>
+<pre><code class="language-bash">cargo install mdbook
+</code></pre>
+<p>Also instead of running <code>cargo run-checks</code>, you can run <code>cargo xtask check typos</code> to only check
+for misspellings. This will install <a href="https://crates.io/crates/typos-cli">typo</a>, and if any are
+encountered you should be able to run <code>typo -w /path/to/book</code> to fix them.</p>
+<hr>
+<ol class="footnote-definition"><li id="footnote-linux_mem_note">
+<p>If your system is running into issues with memory and you are on linux, you may want to switch
+to a <a href="https://wiki.archlinux.org/title/Linux_console#Virtual_consoles">virtual console</a> to run
+the tests. To do this, press <code>ctrl+alt+f3</code> to switch to a virtual console (and log in), and
+either <code>ctrl+alt+f1</code> or <code>ctrl+alt+f2</code> to switch back to your graphical session. <a href="#fr-linux_mem_note-1">↩</a></p>
+</li>
+<li id="footnote-update_note">
+<p>You might also want to install <a href="https://github.com/nabijaczleweli/cargo-update">cargo-update</a> to
+easily keep your tools up to date, though it is in no way required. <a href="#fr-update_note-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-your-editor"><a class="header" href="#configuring-your-editor">Configuring your editor</a></h1>
+<p>These steps are not required, and most of this isn't specific to Mabor, but it's definitely helpful
+if you haven't already done it.</p>
+<h2 id="vscode"><a class="header" href="#vscode">VSCode</a></h2>
+<p>Install the following extensions:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">rust-lang.rust-analyzer</a>
+for Rust syntax and semantic analysis</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml">tamasfe.even-better-toml</a>
+for TOML syntax and semantic analysis</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=fill-labs.dependi">fill-labs.dependi</a> for
+managing dependencies</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb">vadimcn.vscode-lldb</a> for
+debugging</li>
+</ul>
+<h3 id="setting-up-the-debugger"><a class="header" href="#setting-up-the-debugger">Setting up the Debugger</a></h3>
+<p>To use the debugger, follow these steps:</p>
+<ol>
+<li>Open <code>Command Palette</code> with <code>Ctrl+Shift+P</code> or <code>F1</code> and type
+<code>LLDB: Generate Launch Configurations from Cargo.toml</code> then select it, this will generate a file
+that should be saved as <code>.vscode/launch.json</code>.</li>
+<li>Select the configuration from the "run and debug" side panel, then select the target from the list.
+Since this repo has <code>debug = 0</code> in the root <code>Cargo.toml</code> to speed up compilation, you need replace it with <code>debug = true</code> in the root <code>Cargo.toml</code> when using a debugger and breakpoints with <code>launch.json</code> settings.</li>
+<li>Now you can enable breakpoints on code through IDE then start debugging the library/binary you
+want, like in the following example:</li>
+</ol>
+<p><img src="getting-started/debug-options-vscode.png" alt="debug-options"></p>
+<p>If you're creating a new library or binary, keep in mind to repeat step 1 to always keep a fresh
+list of targets.</p>
+<h2 id="have-another-editor-open-a-pr"><a class="header" href="#have-another-editor-open-a-pr">Have another editor? Open a PR!</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="testing"><a class="header" href="#testing">Testing</a></h1>
+<h2 id="test-for-tensor-operations"><a class="header" href="#test-for-tensor-operations">Test for Tensor Operations</a></h2>
+<p>Test for tensor operations (generally of the form: given this input, expect it match or approximate
+this output) are defined only in
+<a href="https://github.com/tracel-ai/burn/tree/81a67b6a0992b9b5c33cda8b9784570143b67319/crates/burn-tensor/src/tests/ops"><code>crates/mabor-tensor/src/test/ops</code></a>
+and not in the backends (with the exception of <code>mabor-autodiff</code>). The tensor operation tests are
+added to the <code>testgen_all</code> macro rule in
+<a href="https://github.com/tracel-ai/burn/blob/81a67b6a0992b9b5c33cda8b9784570143b67319/crates/burn-tensor/src/tests/mod.rs"><code>crates/mabor-tensor/src/tests/mod.rs</code></a>.
+This is then propagated to the existing backends without any additional work.</p>
+<h3 id="test-for-autodiff"><a class="header" href="#test-for-autodiff">Test for Autodiff</a></h3>
+<p>Tests for autodiff go under
+<a href="https://github.com/tracel-ai/burn/tree/81a67b6a0992b9b5c33cda8b9784570143b67319/crates/burn-autodiff/src/tests">mabor-autodiff/src/tests</a>
+and should verify backward pass correctness. For binary tensor operations, both the left and right
+sides need to be verified.</p>
+<p>Here's an easy way to define tests for a new operation's backward pass:</p>
+<ol>
+<li>Use small tensors with simple values.</li>
+<li>Pop open a terminal, launch <code>ipython</code> and import <code>numpy</code> then do the calculations by hand. You
+can also use <a href="https://colab.google/">Google Colab</a> so you don't have to install the packages on
+your system.</li>
+<li>Compare the actual outputs to the expected output for left-hand side, right-hand side.</li>
+</ol>
+<p>For float tensors, it is advised to use
+<code>actual_output_tensor.into_data().assert_approx_eq::&lt;FLOAT&gt;(&amp;expected_tensor_data, Tolerance::default())</code>
+where <code>FLOAT</code> is the floating point types (<code>f32</code>, <code>f64</code>, ...) you are using instead of
+<code>assert_eq!(...</code> due to occasional hiccups with floating point calculations.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="project-architecture"><a class="header" href="#project-architecture">Project Architecture</a></h1>
+<p>This section documents most major architectural decisions with the reasoning behind them.</p>
+<p><strong>Sections</strong></p>
+<ul>
+<li><a href="project-architecture/module.html">Module</a>
+<ul>
+<li><a href="project-architecture/module.html#optimization">Optimization</a>
+<ul>
+<li><a href="project-architecture/module.html#constraints">Constraints</a></li>
+<li><a href="project-architecture/module.html#solution">Solution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="project-architecture/serialization.html">Serialization</a>
+<ul>
+<li><a href="project-architecture/serialization.html#constraints">Constraints</a></li>
+<li><a href="project-architecture/serialization.html#solution">Solution</a>
+<ul>
+<li><a href="project-architecture/serialization.html#pros">Pros</a></li>
+<li><a href="project-architecture/serialization.html#cons">Cons</a></li>
+<li><a href="project-architecture/serialization.html#compatibility">Compatibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="project-architecture/tensor.html">Tensor</a></li>
+<li><a href="project-architecture/backend.html">Backend</a>
+<ul>
+<li><a href="project-architecture/backend.html#autodiff">Autodiff</a></li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="module"><a class="header" href="#module">Module</a></h1>
+<p>Modules are a way of creating neural network structures that can be easily optimized, saved, and
+loaded with little to no boilerplate. Unlike other frameworks, a module does not force the
+declaration of the forward pass, leaving it up to the implementer to decide how it should be
+defined.</p>
+<p>Additionally, most modules are created using a (de)serializable configuration, which defines the
+structure of the module and its hyperparameters. Parameters and hyperparameters are not serialized
+into the same file, and both are normally necessary to load a module for inference.</p>
+<h2 id="optimization"><a class="header" href="#optimization">Optimization</a></h2>
+<p>Optimization is normally done with variants of gradient descent, and it is important to provide an
+easy API for optimizing modules.</p>
+<h3 id="constraints"><a class="header" href="#constraints">Constraints</a></h3>
+<ol>
+<li><strong>Users should be able to control what is optimized.</strong> Modules can contain anything for maximum
+flexibility, but not everything needs to be optimized.</li>
+<li><strong>Optimizers should have a serializable state that is updated during training.</strong> Many optimizers
+keep track of previous gradients to implement some form of momentum. However, the state can be
+anything, not just tensors, allowing for easy implementation of any kind of optimizer.</li>
+<li><strong>The learning rate can be updated during training.</strong> Learning rate schedulers are often used
+during training and should be considered as a key aspect.</li>
+</ol>
+<h3 id="solution"><a class="header" href="#solution">Solution</a></h3>
+<p>In the following, the <code>Module</code> trait is defined in
+<a href="https://github.com/tracel-ai/burn/blob/81a67b6a0992b9b5c33cda8b9784570143b67319/crates/burn-core/src/module/base.rs#L83"><code>crates/mabor-core/src/module/base.rs</code></a>
+and the <code>Optimizer</code> trait is defined in
+<a href="https://github.com/tracel-ai/burn/blob/81a67b6a0992b9b5c33cda8b9784570143b67319/crates/burn-core/src/optim/base.rs#L8"><code>crates/mabor-core/src/optim/base.rs</code></a></p>
+<p>The solution to this problem comprises multiple parts. Firstly, the <code>Optimizer</code> trait is quite
+similar to the <code>Module</code> trait, in terms of saving and loading the state. Please refer to the
+<a href="project-architecture/serialization.html">serialization</a> section for more details.</p>
+<p>Secondly, two traits were created. The <code>Optimizer</code> trait is general and relatively unopinionated,
+with a simple <code>step</code> method that takes a learning rate, a module, and the gradients. The other
+trait, <code>SimpleOptimizer</code>, aims to provide an easier API for implementing new optimizers. The goal is
+to allow implementations to avoid handling missing gradients, loading and exporting records,
+navigating the module parameter structure, handling tracked and untracked tensors, and other such
+tasks.</p>
+<p>Thirdly, each tensor that will be optimized needs to be wrapped into a <code>Param</code> struct, which gives
+them an ID used for (de)serialization and to associate the state of the optimizer to each parameter.
+The <code>Module</code> trait has two ways to navigate over parameters. The first one is the <code>map</code> function,
+which returns <code>Self</code> and makes it easy to implement any transformation and mutate all parameters.
+The second one is the <code>visit</code> function, which has a similar signature but does not mutate the
+parameter tensors.</p>
+<h4 id="simpleoptimizer"><a class="header" href="#simpleoptimizer">SimpleOptimizer</a></h4>
+<p>Located in
+<a href="https://github.com/tracel-ai/burn/blob/81a67b6a0992b9b5c33cda8b9784570143b67319/crates/burn-core/src/optim/simple/base.rs#L9"><code>crates/mabor-core/src/optim/simple/base.rs</code></a>,
+the <code>SimpleOptimizer</code> has two major assumptions:</p>
+<ol>
+<li>The state of the optimizer is linked to each parameter. In other words, each parameter has its
+own optimizer state, decoupled from the other parameters.</li>
+<li>The state of the optimizer implements <code>Record</code>, <code>Clone</code>, and has a <code>'static</code> lifetime.</li>
+</ol>
+<p>The benefits of those assumptions materialize in simplicity with little loss in flexibility. The
+state associative type is also generic over the dimension, making it extremely easy to include
+tensors in the state that share the same dimensionality as its parameter.</p>
+<p>To wrap a simple optimizer into the more general <code>Optimizer</code> trait, the <code>OptimizerAdaptor</code> struct is
+used.</p>
+<h4 id="optimizeradaptor"><a class="header" href="#optimizeradaptor">OptimizerAdaptor</a></h4>
+<p>Located in in
+<a href="https://github.com/tracel-ai/burn/blob/81a67b6a0992b9b5c33cda8b9784570143b67319/crates/burn-core/src/optim/simple/adaptor.rs#L14"><code>crates/mabor-core/src/optim/simple/adaptor.rs</code></a>,
+the <code>OptimizerAdaptor</code> is a simple struct composed of a <code>SimpleOptimizer</code> and a hashmap with all
+records associated with each parameter ID.</p>
+<p>When performing an optimization step, the adaptor handles the following:</p>
+<ol>
+<li>Updates each parameter tensor in the given module using the <code>Module::map</code> function.</li>
+<li>Checks if a gradient for the current tensor exists.</li>
+<li>Makes sure that the gradient, the tensor, and the optimizer state associated with the current
+parameter are on the same device. The device can be different if the state is loaded from disk to
+restart training.</li>
+<li>Performs the simple optimizer step using the inner tensor since the operations done by the
+optimizer should not be tracked in the autodiff graph.</li>
+<li>Updates the state for the current parameter and returns the updated tensor, making sure it's
+properly registered into the autodiff graph if gradients are marked as required.</li>
+</ol>
+<p>Note that a parameter can still be updated by another process, as it is the case with running
+metrics used in batch norm. These tensors are still wrapped using the <code>Param</code> struct so that they
+are included in the module's state and given a proper parameter ID, but they are not registered in
+the autodiff graph.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="serialization"><a class="header" href="#serialization">Serialization</a></h1>
+<p>An important aspect of a deep learning framework is the ability to save and load models from disk.
+Despite appearing as a simple feature, it involves numerous constraints that require a proper
+solution.</p>
+<h2 id="constraints-1"><a class="header" href="#constraints-1">Constraints</a></h2>
+<ol>
+<li>
+<p><strong>Users should be able to declare the precision of the model to be saved, independent of the
+backend in use.</strong></p>
+<p>The modules should not be duplicated in RAM in another precision to support this. Conversion
+should be done lazily during (de)serialization.</p>
+</li>
+<li>
+<p><strong>Users should be able to add any field to a module, even fields that are not serializable.</strong></p>
+<p>This can include constants, database connections, other module references, or any other
+information. Only parameters should be serialized since the structure of the module itself should
+be encapsulated with module configurations (hyperparameters).</p>
+</li>
+<li>
+<p><strong>Users should be able to declare the format in which the module should be saved.</strong></p>
+<p>This can involve saving to a compressed JSON file or directly to bytes in memory for <code>no-std</code>
+environments.</p>
+</li>
+<li>
+<p><strong>Users should be able to create a module with its saved parameters without having to initialize
+the module first.</strong></p>
+<p>This will avoid unnecessary module initialization and tensor loading, resulting in reduced cold
+start when dealing with inference.</p>
+</li>
+</ol>
+<p>In addition to all of these constraints, the solution should be easy to use.</p>
+<h2 id="solution-1"><a class="header" href="#solution-1">Solution</a></h2>
+<p>In order to be able to add any field to a module without requiring it to be (de)serializable, we
+decouple the module type from its state. We create a new type for each module that only contains the
+parameters that need to be saved. To generate that type automatically, the user must either declare
+which field is a parameter or a constant, or we assume that each field implements the module trait.</p>
+<p>The second solution was chosen as it simplifies the code generation and reduces the size of the user
+API. This means that the <code>Module</code> trait should be implemented by
+<a href="https://github.com/tracel-ai/burn/blob/main/crates/burn-core/src/module/param/primitive.rs">primitive types</a>.
+The following diagrams highlight the main types and traits used in the solution.</p>
+<div align="center">
+<h4 id="module-serialization-types"><a class="header" href="#module-serialization-types">Module Serialization Types</a></h4>
+<img src="project-architecture/module-serialization.png" width="700px">
+<div align="left">
+<p>The way the types interact with each other is pretty straightforward. First, a module can be
+converted into a record using <code>into_record()</code>. Note that tensors can be cloned, but it won't
+actually copy any data; it will simply create another reference to the same data.</p>
+<p>Then, a <code>Recorder</code> instance can be used to serialize any record. The <code>Recorder</code> has the
+<code>PrecisionSettings</code> type as associate type, so any record will be serialized using the settings
+provided at the creation of the <code>Recorder</code> instance. Note that tensors implement record, and their
+item is just a wrapper struct that contains information about the precision in which the tensor
+should be saved or loaded. No actual copy of the tensor is made until this point. The tensor is
+converted to the <code>TensorData</code> struct and then converted into the specified precision only when
+<code>serialize()</code> or <code>deserialize()</code> are called, which makes the whole process lazy.</p>
+<p>To recapitulate, the <code>Module</code> trait has an associated type that implements <code>Record</code>, which only
+contains the parameters of the model. The <code>Record</code> trait has a generic associated type (GAT) that
+specifies a family of types that can be (de)serialized given any <code>PrecisionSettings</code>. Records are
+therefore decoupled from the backend in use, and the saved items can be loaded on any backend with
+any precision, since the conversion is type-safe and done when <code>serialize()</code> and <code>deserialize()</code> are
+called. All of the types are generated using simple derive macros without any conditional statements
+or complex syntax, as <code>Record</code> and <code>Module</code> are implemented for all primitive types. This makes the
+code simple and easy to maintain. In addition, you can extend the current system with your own
+<code>Recorder</code> and <code>PrecisionSettings</code> to control how your modules should be saved and loaded.</p>
+<h3 id="pros"><a class="header" href="#pros">Pros</a></h3>
+<ul>
+<li>All constraints are respected.</li>
+<li>The code is simple and easy to maintain, with very few conditional statements. It is just
+recursive data structures, where all the complexity is handled by the framework in primitive
+implementations.</li>
+<li>The user API is simple and small, with only two derives (<code>Record</code> and <code>Module</code>) and no additional
+attributes.</li>
+<li>Users can create their own <code>Module</code> and <code>Record</code> primitive types, which gives them the flexibility
+to control how their data is serialized without having to fork the framework.</li>
+</ul>
+<h3 id="cons"><a class="header" href="#cons">Cons</a></h3>
+<ul>
+<li>There are more types, but most of them are automatically generated and single-purpose, so users
+don't need to interact with them for common use cases. However, they can do so if necessary.</li>
+<li>When instantiating a new record manually, each field must be set to something, even if the type
+itself is <code>()</code>, which represents no value. Since the code generation step uses associative types,
+it doesn't know that a field type is actually nothing. Creating a record manually without using
+the generated function <code>into_record</code> or loading it from a file is only useful to load a set of
+parameters into a module from an arbitrary source. Using the record may not be the optimal
+solution to this problem, and another API could be created in the future.</li>
+</ul>
+<h3 id="compatibility"><a class="header" href="#compatibility">Compatibility</a></h3>
+<p>Record may become incompatible with previous versions of Mabor, depending on the chosen format. The
+more compact format (bincode) store minimal information about the type, making it significantly
+smaller but less resilient to type changes such adding an optional field. At some point, it might be
+necessary to provide a translation script that can translate a more resilient format from a previous
+version to a more compact one.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tensor"><a class="header" href="#tensor">Tensor</a></h1>
+<p>A proper deep learning framework should have a fast tensor implementation with autodiff support, and
+Mabor is no exception. The tensor API abstracts away backend implementation details and focuses on
+usability without compromising performance. To make it as easy as possible to use, there is only one
+tensor type, which is different from multiple tensor and deep learning crates in Rust. Generic
+parameters are used instead to specialize the tensor type.</p>
+<ul>
+<li><strong>B: Backend:</strong> The first argument is the backend on which the tensor implementation lies.</li>
+<li><strong>const D: usize:</strong> The second argument is the dimensionality of the tensor.</li>
+<li><strong>K: TensorKind:</strong> The third argument is the tensor kind, which can be either Float, Int or Bool.
+By default, the tensor kind is set to Float, so for most tensors, the kind argument is not
+necessary.</li>
+</ul>
+<p>Having one struct for tensors reduces the complexity of the tensor API, which also means less
+duplicated documentation to write and maintain.</p>
+<p>Tensors are thread-safe, which means that you can send a tensor to another thread, and everything
+will work, including auto-differentiation. Note that there are no explicit in-place tensor
+operations since all tensor operations take owned tensors as parameters, which make it possible to
+mutate them. Tensors can be shared simply by cloning them, but if there is only one reference to a
+tensor, the backend implementation is free to reuse the tensor's allocated data. For more
+information about how it is done, you can have a look at this
+<a href="../../blog/burn-rusty-approach-to-tensor-handling/index.htm">blog post</a>.</p>
+<h2 id="tensor-operations"><a class="header" href="#tensor-operations">Tensor Operations</a></h2>
+<p>Operations on Tensors (sometimes shortened to Ops) are defined in traits (generally part of the
+Backend Supertrait) and implemented for the Tensor struct. The appropriate parent trait of an
+operation depends on the type of operation:</p>
+<ul>
+<li><code>base</code> =&gt; All tensor kinds should implement these operations (reshape, into_data, etc.). The
+implementation is in
+<a href="https://github.com/tracel-ai/burn/blob/6d96e8d8086d2309c425f2c8a43a8246f8c454d2/crates/burn-tensor/src/tensor/api/base.rs">crates/mabor-tensor/src/tensor/api/base.rs</a>.</li>
+<li><code>numeric</code> =&gt; All tensors that are numeric by nature should implement these operations (Add, Sub,
+Div, etc.). The implementation is in
+<a href="https://github.com/tracel-ai/burn/blob/6d96e8d8086d2309c425f2c8a43a8246f8c454d2/crates/burn-tensor/src/tensor/api/numeric.rs">crates/mabor-tensor/src/tensor/api/numeric.rs</a>.</li>
+<li><code>Float</code> =&gt; Tensor operations are only available for float tensors. The implementation is in
+<a href="https://github.com/tracel-ai/burn/blob/6d96e8d8086d2309c425f2c8a43a8246f8c454d2/crates/burn-tensor/src/tensor/api/float.rs">mabor-tensor/src/tensor/api/float.rs</a>.</li>
+<li><code>Int</code> =&gt; Tensor operations are only available for int tensors. The implementation is in
+<a href="https://github.com/tracel-ai/burn/blob/6d96e8d8086d2309c425f2c8a43a8246f8c454d2/crates/burn-tensor/src/tensor/api/int.rs">mabor-tensor/src/tensor/api/int.rs</a>.</li>
+<li><code>bool</code> =&gt; Tensor operations are only available for bool tensors. The implementation is in
+<a href="https://github.com/tracel-ai/burn/blob/6d96e8d8086d2309c425f2c8a43a8246f8c454d2/crates/burn-tensor/src/tensor/api/bool.rs">mabor-tensor/src/tensor/api/bool.rs</a>.</li>
+</ul>
+<p><code>Numeric</code> is directly implemented for <code>Float</code> and <code>Int</code> tensors, and in general, The implementations
+for these methods are calling the corresponding <code>{Int|Float}</code> method defined in the backend
+supertrait.</p>
+<p>Anything that is implemented by numeric should have an implementation in the <code>{Int|Float}</code> traits,
+though it may be avoidable if the operation for one type requires casting to the other type. To
+provide an example, <code>powf</code> should be implemented for <code>Int</code> tensors, but it should not be an Int
+Tensor Operation. The LHS should be converted to a float, and the output should be converted back to
+an int. So it's possible to avoid implementing <code>IntTensorOp</code> altogether.</p>
+<p>Additionally there are some operations that should be defined as functions instead of tensor op
+methods. These are:</p>
+<p><code>module</code> =&gt; These should be exported as functions instead of methods on tensors. The implementation
+is in
+<a href="https://github.com/tracel-ai/burn/tree/6d96e8d8086d2309c425f2c8a43a8246f8c454d2/crates/burn-tensor/src/tensor/ops/modules">crates/mabor-tensor/src/tensor/ops/module.rs</a>.
+<code>activation</code> =&gt; These should also be exported as functions instead of methods on tensors. The
+implementation is in
+<a href="https://github.com/tracel-ai/burn/blob/6d96e8d8086d2309c425f2c8a43a8246f8c454d2/crates/burn-tensor/src/tensor/ops/activation.rs">crates/mabor-tensor/src/tensor/ops/activation.rs</a>.
+Note that some activations are just a combination of backend operations and are not declared in
+there.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="backend"><a class="header" href="#backend">Backend</a></h1>
+<p>The Backend trait abstracts multiple things:</p>
+<ul>
+<li>Device type</li>
+<li>Float tensor type</li>
+<li>Bool tensor type</li>
+<li>Int tensor type</li>
+<li>Float element type</li>
+<li>Int element type</li>
+<li>Float tensor operations (kernels)</li>
+<li>Int tensor operations (kernels)</li>
+<li>Bool tensor operations (kernels)</li>
+</ul>
+<h2 id="element-types"><a class="header" href="#element-types">Element types</a></h2>
+<blockquote>
+<p>Warning: there are plans to change this architecture in the near future.</p>
+</blockquote>
+<p>Even though having one type for tensors is convenient for the tensor API, it can be cumbersome when
+implementing a backend. Therefore, backends can decide, through associated types, what types they
+want to use for their int, float, and bool tensors. Since float and int can have multiple
+precisions, the float and int element types are also associated types that must be declared by the
+backend.</p>
+<p>Note that the backend chooses the precision and not the user. Since not all backends will support
+the same element types, no assumptions must be made. Therefore, there are no methods on tensors to
+change the precision, except for the <code>to_full_precision</code> function, which ensures numerical stability
+on the current backend. Backend implementations can provide a way to choose the precision, which can
+be accomplished with a generic parameter (e.g. <code>NdArray&lt;f32&gt;</code>).</p>
+<h2 id="operations"><a class="header" href="#operations">Operations</a></h2>
+<p>To be as general as possible, tensor operations are implemented as plain functions. There is no
+object or self, just functions that take tensors as input and often return tensors as output as
+well. Backend implementations are free to use their own patterns to implement these kernels. Note
+that Mabor is a dynamic graph deep learning framework, so backends may have to implement asynchronous
+kernel executions for performance reasons.</p>
+<h2 id="autodiff"><a class="header" href="#autodiff">Autodiff</a></h2>
+<p>As of now, there is only one backend decorator that supports autodiff. It follows the decorator
+pattern, making any backend differentiable. However, the <code>AutodiffBackend</code> trait abstracts how
+gradients are calculated, and other approaches to autodiff might be added later. For more
+information about how the current autodiff backend works, you can read this (slightly outdated)
+<a href="../../blog/burn-rusty-approach-to-tensor-handling/index.htm">blog post</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="guides-for-contributors"><a class="header" href="#guides-for-contributors">Guides for Contributors</a></h1>
+<p>The following guides are meant to help contributors accomplish specific tasks, such as adding new operations to Mabor or generating test models for <code>mabor-import</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="onnx-to-burn-development-guide"><a class="header" href="#onnx-to-burn-development-guide">ONNX to Mabor: Development Guide</a></h1>
+<p>This guide offers in-depth design insights and step-by-step procedures for developers working on the
+ONNX to Mabor conversion tool. This tool allows the importation of ONNX models into the Mabor deep
+learning framework written in Rust. It converts both ONNX models to Rust source code and model
+weights to Mabor state files.</p>
+<p>For an introduction to ONNX import in Mabor, see
+<a href="../burn/import/onnx-model.html">this section of the Mabor book</a>.</p>
+<h2 id="design-overview"><a class="header" href="#design-overview">Design Overview</a></h2>
+<h3 id="design-goals"><a class="header" href="#design-goals">Design Goals</a></h3>
+<ul>
+<li>Perform best-effort conversion of ONNX models to Rust source code via Mabor APIs.</li>
+<li>Convert ONNX model weights to Mabor state files.</li>
+<li>Support ONNX models generated by PyTorch (ONNX Opset 16).</li>
+<li>Produce easy-to-understand and modifiable models.</li>
+<li>Ensure the generated models are trainable using Mabor APIs.</li>
+</ul>
+<h3 id="design-decisions"><a class="header" href="#design-decisions">Design Decisions</a></h3>
+<ul>
+<li>Limit interaction with ONNX to the Intermediate Representation (IR) stage to simplify the process.</li>
+<li>Ensure operator behavior consistency across different OpSet versions.</li>
+<li>Exclude any ONNX/Protobuf-specific logic from the Mabor graph.</li>
+</ul>
+<p>The conversion process involves three main stages:</p>
+<ol>
+<li>Convert ONNX model to Intermediate Representation (IR).</li>
+<li>Translate IR to a Mabor graph.</li>
+<li>Generate Rust source code from the Mabor graph.</li>
+</ol>
+<h2 id="adding-new-operators"><a class="header" href="#adding-new-operators">Adding New Operators</a></h2>
+<p>To extend <code>mabor-import</code> with support for new ONNX operators, follow these steps:</p>
+<ol>
+<li>
+<p><strong>Create PyTorch Script</strong>: Place a PyTorch script using the new operator under
+<code>crates/mabor-import/onnx-tests/tests/&lt;op&gt;/&lt;op&gt;.py</code>. Make sure to print both input and output
+tensors for end-to-end testing.</p>
+</li>
+<li>
+<p><strong>Generate ONNX Model</strong>: Run the PyTorch script to produce an ONNX model.</p>
+</li>
+<li>
+<p><strong>Visualize ONNX Model</strong>: Use <a href="https://github.com/lutzroeder/netron">Netron</a> to verify the ONNX
+model contains the expected operators.</p>
+</li>
+<li>
+<p><strong>Generate IR and Mabor Graph</strong>: Navigate to
+<a href="https://github.com/tracel-ai/burn/tree/main/crates/burn-import">crates/mabor-import/</a> and run:</p>
+<pre><code>cargo r -- ./onnx-tests/tests/&lt;op&gt;/&lt;op&gt;.onnx ./out
+</code></pre>
+</li>
+<li>
+<p><strong>Implement Missing Operators</strong>: If you encounter an error stating that an operator is
+unsupported, <a href="guides/onnx-to-burn-conversion-tool.html#implementing-a-new-operator">implement it</a>. The <code>./out/my-model.graph.txt</code> should
+provide relevant information.</p>
+</li>
+<li>
+<p><strong>Inspect Generated Files</strong>: The <code>my-model.graph.txt</code> contains IR details, <code>my-model.rs</code> holds
+the Mabor model in Rust code, and <code>my-model.json</code> includes the model data.</p>
+</li>
+<li>
+<p><strong>Add End-to-End Test</strong>: Include the test in
+<a href="https://github.com/tracel-ai/burn/blob/main/crates/burn-import/onnx-tests/tests/test_onnx.rs">crates/mabor-import/onnx-tests/tests/test_onnx.rs</a>.
+Further details can be found in the
+<a href="https://github.com/tracel-ai/burn/blob/main/crates/burn-import/onnx-tests/README.md">onnx-tests README</a>.</p>
+</li>
+</ol>
+<h2 id="implementing-a-new-operator"><a class="header" href="#implementing-a-new-operator">Implementing a New Operator</a></h2>
+<p>To extend the capabilities of the Mabor library by supporting new operations imported from ONNX
+graphs, developers must go through a few systematic steps. Here, we detail the process, using the
+implementation of the <code>Squeeze</code> operation to illustrate points as needed. All file/directory paths
+are relative to the root of the mabor repository.</p>
+<h3 id="step-1-visibility"><a class="header" href="#step-1-visibility">Step 1: Visibility</a></h3>
+<p>To make a new operation accessible, there are two key modules to update:</p>
+<ol>
+<li>In <code>crates/onnx-ir/src/node/mod.rs</code>, add your new operation module to make it visible within the
+IR</li>
+<li>In <code>crates/mabor-import/src/mabor/node/mod.rs</code>, make the corresponding node type visible within
+mabor-import</li>
+</ol>
+<h3 id="step-2-node-implementation"><a class="header" href="#step-2-node-implementation">Step 2: Node Implementation</a></h3>
+<h4 id="within-onnx-ir"><a class="header" href="#within-onnx-ir">Within onnx-ir</a></h4>
+<p>The <code>onnx-ir</code> crate handles the Intermediate Representation (IR) of ONNX models. For each operation:</p>
+<ol>
+<li>
+<p>Add the operation to the <code>NodeType</code> enum in <code>crates/onnx-ir/src/ir.rs</code>.</p>
+</li>
+<li>
+<p>Create a new module file in <code>crates/onnx-ir/src/node/&lt;operation_name&gt;.rs</code>. This file should
+include:</p>
+<ul>
+<li>A <code>&lt;operation_name&gt;_config</code> function to extract operation parameters</li>
+<li>A <code>&lt;operation_name&gt;_update_output</code> function for dimension inference</li>
+</ul>
+</li>
+<li>
+<p>If the operation might work with constants, add it to the list of node types checked for
+constants in <code>crates/onnx-ir/src/from_onnx.rs</code>.</p>
+</li>
+</ol>
+<p>For example, the squeeze operation is defined in <code>crates/onnx-ir/src/node/squeeze.rs</code> and contains:</p>
+<ul>
+<li>A <code>squeeze_config</code> function that extracts axes from node attributes</li>
+<li>A <code>squeeze_update_output</code> function that updates output dimensions by reducing input rank</li>
+</ul>
+<h4 id="within-burn-import"><a class="header" href="#within-burn-import">Within mabor-import</a></h4>
+<ol>
+<li>
+<p>Create a new file named <code>&lt;operation_name&gt;.rs</code> in the <code>crates/mabor-import/src/mabor/node/</code>
+directory. This file will define the structure and functionality of your new operation. By
+convention, the necessary information for carrying out an operation is encapsulated within a
+struct named <code>&lt;operation&gt;Node</code>. For the <code>Squeeze</code> operation, we defined a struct called
+<code>SqueezeNode</code> that holds necessary information about the input tensor, output tensor, and axes
+for the operation. <strong>If implementing a unary or binary operation, please see note below.</strong></p>
+</li>
+<li>
+<p>The core of integrating a new operation involves implementing the <code>NodeCodegen</code> trait for your
+node. This trait defines how the node generates code during the graph compilation process. The
+implementation must provide methods to define input and output types, to generate the forward
+pass code, and to encapsulate the node into the more general <code>Node</code> structure. Specifically:</p>
+<ul>
+<li><code>output_types</code> and <code>input_types</code> return the tensor (or element) types for the output and inputs
+of the node, respectively.</li>
+<li><code>forward</code> generates the Rust code that performs the operation during the execution phase. The
+<code>quote!</code> macro is used to generate rust code. Ensure that this is syntactically correct using
+Mabor code.</li>
+<li><code>into_node</code> wraps the specific node in a general <code>Node</code> type, facilitating its inclusion in the
+broader Mabor graph structure.</li>
+</ul>
+</li>
+<li>
+<p>This file is also where you would put <code>test_codegen_nodes()</code>, to make sure that the generated
+code works within the Mabor library.</p>
+</li>
+</ol>
+<p><strong>For unary and binary operations:</strong> The implementation of <code>NodeCodegen</code> is mostly implemented in
+binary.rs and unary.rs, so each new operation only has to define a method to execute the function on
+the input(s) token stream.</p>
+<h3 id="step-3-registering-new-operations"><a class="header" href="#step-3-registering-new-operations">Step 3: Registering New Operations</a></h3>
+<ol>
+<li>In <code>crates/mabor-import/src/onnx/to_mabor.rs</code>, add the operation to the match statement in the
+<code>into_mabor()</code> method:</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl ParsedOnnxGraph {
+    pub fn into_mabor&lt;PS: PrecisionSettings + 'static&gt;(self) -&gt; MaborGraph&lt;PS&gt; {
+        // ...
+        for node in self.0.nodes {
+            match node.node_type {
+                // ...
+                NodeType::Squeeze =&gt; graph.register(Self::squeeze_conversion(node)),
+                // Add your new operation here
+            }
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<ol start="2">
+<li>Create a conversion function that creates an instance of your Mabor node:</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn squeeze_conversion(node: Node) -&gt; SqueezeNode {
+    let input = TensorType::from(node.inputs.first().unwrap());
+    let output = TensorType::from(node.outputs.first().unwrap());
+    let axes = squeeze_config(&amp;node);
+
+    SqueezeNode::new(input, output, axes)
+}
+<span class="boring">}</span></code></pre></pre>
+<p>This function extracts the necessary information from the ONNX node and passes it to your node's
+constructor.</p>
+<h3 id="step-4-create-a-config-function"><a class="header" href="#step-4-create-a-config-function">Step 4: Create a Config Function</a></h3>
+<p>In <code>crates/onnx-ir/src/node/&lt;operation_name&gt;.rs</code>, create a config function that extracts
+operation-specific parameters from the ONNX node:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn squeeze_config(curr: &amp;Node) -&gt; Vec&lt;i64&gt; {
+    let axes = curr
+        .attrs
+        .iter()
+        .filter_map(|(key, value)| {
+            if key == "axes" {
+                Some(value.clone().into_i64s())
+            } else {
+                None
+            }
+        })
+        .next()
+        .unwrap_or_else(Vec::new);
+
+    match curr.inputs.first().unwrap().clone().ty {
+        ArgType::Tensor(tensor) =&gt; tensor,
+        _ =&gt; panic!("Only tensor input is valid"),
+    };
+
+    axes
+}
+<span class="boring">}</span></code></pre></pre>
+<p>This config function is responsible for parsing the ONNX node attributes and extracting
+operation-specific parameters. In this case, it extracts the "axes" attribute from the squeeze
+operation.</p>
+<h3 id="step-5-rank-inference"><a class="header" href="#step-5-rank-inference">Step 5: Rank Inference</a></h3>
+<p>In <code>crates/onnx-ir/src/node/&lt;operation_name&gt;.rs</code>, implement a rank inference function that updates
+the output rank based on the operation:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn squeeze_update_output(node: &amp;mut Node) {
+    // Extract axes information
+    let axes = /* ... */;
+    let input_rank = /* ... */;
+    let output_rank = input_rank - axes.len();
+
+    // Update output rank
+    node.outputs[0].ty = ArgType::Tensor(TensorType {
+        elem_type: node.inputs[0].ty.elem_type().clone(),
+        rank: output_rank,
+        static_shape: None,
+    });
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Then register this function in <code>crates/onnx-ir/src/rank_inference.rs</code> by adding it to the match
+statement:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn rank_inference(node: &amp;mut Node) {
+    match node.node_type {
+        // ...
+        NodeType::Squeeze =&gt; squeeze_update_output(node),
+        // Add your new operation here
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>The <code>rank_inference.rs</code> file is responsible for determining the output tensor rank for each node in
+the graph.</p>
+<p>If the rank remains unchanged, you can use helper functions like <code>same_as_input()</code> or
+<code>same_as_input_broadcast()</code> instead of writing a custom update function.</p>
+<h3 id="step-6-integrate-into-the-graph-building-process"><a class="header" href="#step-6-integrate-into-the-graph-building-process">Step 6: Integrate into the Graph Building Process</a></h3>
+<p>When a new node type is introduced, it must be added to the <code>Node&lt;PS: PrecisionSettings&gt;</code> enum in
+<code>crates/mabor-import/src/mabor/node/base.rs</code> and the <code>match_all!</code> macro in the same file.</p>
+<p>The <code>Node</code> enum abstracts over different types of operations (nodes) within a network graph. Each
+variant of the enum corresponds to a specific type of operation and encapsulates the
+operation-specific data structures (like <code>SqueezeNode</code>) that were defined in step 2.</p>
+<h3 id="step-7-add-newly-supported-op"><a class="header" href="#step-7-add-newly-supported-op">Step 7: Add Newly Supported Op!</a></h3>
+<p>As a reward, add an extra check to <code>crates/mabor-import/SUPPORTED-ONNX-OPS.md</code>!</p>
+<h3 id="lifting-constant-nodes"><a class="header" href="#lifting-constant-nodes">Lifting Constant Nodes</a></h3>
+<p>If your operation takes inputs from constant nodes (such as weights in Conv1d, shape tensors in
+Reshape, etc.), you need to add your operation's <code>NodeType</code> to the <code>LIFT_CONSTANTS_FOR_NODE_TYPES</code>
+array in <code>crates/onnx-ir/src/from_onnx.rs</code>.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const LIFT_CONSTANTS_FOR_NODE_TYPES: [NodeType; 16] = [
+    NodeType::BatchNormalization,
+    // other operations...
+    NodeType::Squeeze,
+    NodeType::Unsqueeze,
+    // Add your operation here if it needs constants to be processed
+];
+<span class="boring">}</span></code></pre></pre>
+<p>"Lifting" constants means converting Constant nodes into direct input values. This is similar to how
+ONNX initializers work. For example, instead of having a separate Constant node providing weights to
+a Convolution operation, the weights are directly embedded as values in the Convolution node's
+inputs.</p>
+<p>This transformation makes it easier to:</p>
+<ol>
+<li>Access the constant values during node configuration</li>
+<li>Process operations like Conv1d that expect weights as direct inputs</li>
+<li>Handle shape-defining inputs needed for operations like Reshape</li>
+</ol>
+<p>Without this, operations that need to extract configuration from constant inputs (such as shapes,
+weights, or other parameters) would not work correctly because they wouldn't have direct access to
+those constant values.</p>
+<h2 id="testing-1"><a class="header" href="#testing-1">Testing</a></h2>
+<p>When implementing a new operator, there are several levels of testing to consider:</p>
+<h3 id="unit-testing"><a class="header" href="#unit-testing">Unit Testing</a></h3>
+<ul>
+<li>
+<p><strong>Node Configuration</strong>: Write unit tests for the <code>&lt;operation_name&gt;_config</code> function in
+<code>crates/onnx-ir/src/node/&lt;operation_name&gt;.rs</code> to verify that it correctly extracts parameters from
+ONNX nodes.</p>
+</li>
+<li>
+<p><strong>Rank Inference</strong>: Test the <code>&lt;operation_name&gt;_update_output</code> function to ensure it correctly
+computes output ranks.</p>
+</li>
+<li>
+<p><strong>Code Generation</strong>: Test the Node implementation in <code>mabor-import</code> to verify that it generates
+correct Rust code.</p>
+</li>
+</ul>
+<h3 id="integration-testing"><a class="header" href="#integration-testing">Integration Testing</a></h3>
+<ul>
+<li>Create small ONNX models that use your operator and test the end-to-end conversion process</li>
+<li>Ensure the generated Rust code compiles and produces the expected outputs</li>
+<li>Add these tests to <code>crates/mabor-import/onnx-tests/tests/test_onnx.rs</code></li>
+</ul>
+<h3 id="end-to-end-testing"><a class="header" href="#end-to-end-testing">End-to-End Testing</a></h3>
+<ul>
+<li>Test with realistic ONNX models that use your operator in conjunction with others</li>
+<li>Verify that inputs and outputs match between the original ONNX model and the converted Mabor model</li>
+<li>Include models that test edge cases (e.g., different input shapes, parameter combinations)</li>
+</ul>
+<p>Testing both the rank inference and node configuration is particularly important as these components
+directly affect the correctness of the conversion process. Incorrect rank inference can lead to
+mismatched tensor shapes, while incorrect configuration can cause runtime errors or incorrect
+results.</p>
+<h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
+<ol>
+<li><a href="https://pytorch.org/docs/stable/onnx.html">PyTorch to ONNX</a></li>
+<li><a href="https://github.com/ENOT-AutoDL/onnx2torch">ONNX to PyTorch</a></li>
+<li><a href="https://onnx.ai/onnx/intro/">ONNX Introduction</a></li>
+<li><a href="https://onnx.ai/onnx/operators/index.html">ONNX Operators</a></li>
+<li><a href="https://onnx.ai/onnx/api/classes.html">ONNX Protos</a></li>
+<li><a href="https://github.com/onnx/optimizer">ONNX Optimizer</a></li>
+<li><a href="https://github.com/lutzroeder/netron">Netron</a></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="adding-a-new-operation-to-burn"><a class="header" href="#adding-a-new-operation-to-burn">Adding a New Operation to mabor</a></h1>
+<p>Let's discuss how one might go about adding new operators to Mabor, using the example of the pow
+operator added in <a href="https://github.com/tracel-ai/burn/pull/1133/files">this PR</a>.</p>
+<h2 id="adding-the-op-to-burn-tensor"><a class="header" href="#adding-the-op-to-burn-tensor">Adding the Op to mabor-tensor</a></h2>
+<p><code>mabor-tensor</code> is the crate that defines all tensor operations that need to be implemented by the
+various backends. The core of this lies in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs">crates/mabor-tensor/src/tensor/api/numeric.rs</a>,
+which is home to the numeric trait and its implementation for the different tensor types. The
+numeric trait is the home of all tensor operations that are numeric in nature and that are shared by
+<code>Int</code> and <code>Float</code> Tensor types. More information on the relationship between Tensor modules can be
+found under the section for <a href="project-architecture/tensor.html#tensor-operations">Tensor Architecture</a>.</p>
+<p>Here is where pow was added to <code>crates/mabor-tensor/src/tensor/api/numeric.rs</code>:</p>
+<ol>
+<li>for the
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L573"><code>Tensor&lt;Backend, Dimension, Kind&gt;</code> struct</a></li>
+<li>for the
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L1955">numeric trait</a></li>
+<li>for the implementation of numeric for
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L2722">float</a>
+and
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/numeric.rs#L2375">int</a></li>
+</ol>
+<p>Tensor is a struct that has a single member: <code>primitive</code> (defined
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/base.rs#L27">here</a>),
+that is defined by its
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/kind.rs#L16"><code>Kind</code></a>:
+one of <code>Bool</code>, <code>Float</code>, or <code>Int</code> (those linked in 3). These call the ops for that data type defined
+in the
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/backend/base.rs#L54"><code>Backend</code></a>
+supertrait<sup class="footnote-reference" id="fr-supertrait-1"><a href="#footnote-supertrait">1</a></sup>. This is the trait that is then implemented by the different <code>mabor-</code>
+backends (such as <code>mabor-ndarray</code> and <code>mabor-wgpu</code>) which must implement the functions if no default
+is provided.</p>
+<p>In this case, we don't need to worry about <code>Bool</code> Tensors. <code>Float</code> ops are implemented under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/ops/tensor.rs#L991"><code>crates/mabor-tensor/src/tensor/ops/tensor.rs</code></a>,
+and <code>Int</code> ops under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/ops/int_tensor.rs#L539"><code>crates/mabor-tensor/src/tensor/ops/int_tensor.rs</code></a>.
+The current convention is ops of each type, if not unique to that type, are prefixed with the type.
+So <code>powf</code> and sundry would be defined as <code>int_powf</code> for <code>IntTensorOps</code> and <code>float_powf</code> for
+<code>FloatTensorOps</code>. If an op is unique to a type, then it should be implemented under
+<code>mabor-tensor/src/api/{type}.rs</code>. For example, here is an implementation for
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tensor/api/float.rs#L82"><code>sin</code> under <code>crates/mabor-tensor/src/api/float.rs</code></a>
+which obviously doesn't make sense for <code>Int</code> or <code>Bool</code> tensors.</p>
+<p>The <code>Int</code> Tensor function uses the ones defined for Float with 2 extra casts (LHS to a <code>Float</code>
+tensor, Output to an <code>Int</code>). Given that the rest of the code will only look at the float
+implementations.</p>
+<p>With the addition of quantized float tensors, the <code>Float</code> tensor primitive is represented by the
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tensor/api/kind.rs#L69"><code>TensorPrimitive</code></a>
+enum. This allows us to handle both float and quantized float operations in the <code>Tensor</code>
+implementation, correctly dispatching to the corresponding op (float or quantized) based on the
+variant. Following the same convention, the equivalent
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tensor/ops/qtensor.rs#L45">quantized tensor ops</a>
+are prefixed with <code>q_*</code> (e.g., <code>q_reshape</code> instead of <code>float_reshape</code>). Most ops have a default
+implementation that simply dequantizes the input into its floating-point representation, performs
+the operation on the float tensor, and quantizes the output. Backends can overwrite specific
+implementations when required/desired.</p>
+<h3 id="adding-tests"><a class="header" href="#adding-tests">Adding Tests</a></h3>
+<p>Additional Tests should be added to <code>mabor-tensor</code> under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tensor/src/tests/ops/powf.rs#L1"><code>crates/mabor-tensor/src/tests/ops/{op_name}.rs</code></a>,
+inserting the module name into <code>crates/mabor-tensor/src/tests/ops/mod.rs</code>. Then add it to the
+<code>testgen_all</code> macro under <code>crates/mabor-tensor/src/tests/mod.rs</code>. This macro is called from the
+<code>lib.rs</code> file in each backend, which autogenerates the tests for that specific backend. It isn't
+necessary to define tests in the backends directly, save for those that require specific testing
+such as <code>mabor-autodiff</code>.</p>
+<p>For float tensor operations, the
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tensor/ops/qtensor.rs#L45"><code>QTensorOps</code></a>
+counterpart is usually added at the same time with a default implementation (as mentioned in the
+previous section). Tests for <code>q_*</code> ops follow a similar procedure: the test is added under
+<a href="https://github.com/tracel-ai/burn/tree/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tests/quantization/ops"><code>crates/mabor-tensor/src/tests/quantization/ops/{op_name}.rs</code></a>,
+the module name is inserted into <code>crates/mabor-tensor/src/tests/quantization/ops/mod.rs</code> and finally
+the test is added to the
+<a href="https://github.com/tracel-ai/burn/blob/a6a5c22e0db56d947b9165d4dae42783a5a6b689/crates/burn-tensor/src/tests/mod.rs#L67"><code>testgen_quantization</code> macro</a>.
+If you take a look at any of the existing tests for an operation on a quantized tensor,
+you will see that the inputs and expected outputs are always defined with floating point values.
+While it assumes that the quantization and dequantization are correct, it makes the tests much more
+readable and easier to understand w.r.t. what is being tested. Effectively, the tests are there to
+ensure that a tensor operation is invariant to quantization (up to some quantization error, of
+course).</p>
+<p><em>Note: the tests try to use tensors with floating point values which can be de/quantized without
+introducing too much quantization error, but the result always depends on the operation (e.g.,
+tensor product of values can grow larger and significantly increase the output tensor range, leading
+to more de/quantization error on the results).</em></p>
+<h2 id="adding-the-op-to-burn-autodiff"><a class="header" href="#adding-the-op-to-burn-autodiff">Adding the Op to mabor-autodiff</a></h2>
+<p>Since this is probably the hardest and the least straightforward, we'll cover this backend
+separately. <code>mabor-autodiff</code> enables other backends to use autodifferentiation<sup class="footnote-reference" id="fr-autodiff-1"><a href="#footnote-autodiff">2</a></sup>. Ops for
+float types are implemented in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-autodiff/src/ops/tensor.rs">crates/mabor-autodiff/src/ops/tensor.rs</a>
+and need to:</p>
+<ol>
+<li>Define a unit struct <sup class="footnote-reference" id="fr-absolute_units-1"><a href="#footnote-absolute_units">3</a></sup> that implements a backward (pass) function</li>
+<li>Within the backward function, as this is an elementwise binary operation it implements the binary
+function (from <code>backward.rs</code> under the same directory), the last 2 arguments are two closures
+that define the left and right partial derivatives.</li>
+<li>Then define what happens when a specific operation is tracked or untracked, where untracked just
+calls the function in the normal way, and tracked sets the execution the backward function
+defined above.</li>
+<li>When tracked, operations are part of the autodiff graph and must save the needed information to
+efficiently perform their backward pass later. If the information is light (such as a shape), it
+should be directly saved in the state. If the operation's inputs are needed to compute the
+backward pass, it should be checkpointed rather than saved. This will allow the input to be
+provided lazily at the backward pass depending on the checkpointing strategy.</li>
+<li>An operation must also be identified as <em>compute-bound</em> (<code>.computeBound()</code>) or <em>memory-bound</em>
+(<code>.memoryBound()</code>) for gradient checkpointing. <em>Compute-bound</em> operation are heavy to compute
+(for instance matmul or convolution), which means that even with checkpointing they will save
+their output for the backward pass and not recompute it. <em>Memory-bound</em> operations are more
+trivial (like <code>powf</code> which only performs one small operation per tensor entry), so it can be
+beneficial to recompute them during the backward pass instead of saving their whole forward
+output to memory. Operations registered as <em>memory-bound</em> need to know their parents
+(<code>.parents()</code> method) and how to recompute their forward pass during the backward pass (with a
+struct that implements <code>RetroForward</code>), using their parents' outputs.</li>
+</ol>
+<p>The above steps are mostly boilerplate, so you can often just copy the contents of another similar
+op, change the name of the structs, and ensure that either both sides have the data they need (if
+they need to have a copy of the opposite sided tensor, clone its contents).</p>
+<h3 id="computing-derivatives"><a class="header" href="#computing-derivatives">Computing derivatives</a></h3>
+<p>For those that need it, here is a quick refresher on the necessary calculus. If you are familiar
+with how to calculate partial derivatives, you can skip this section.</p>
+<p>Since <code>pow</code> is a binary operation, the left and right functions are the partial derivatives with
+respect to the left and right sided tensors.</p>
+<p>Let's define the operator as a function \(f(x,y)=x^{y}\) , where \(x\) is the left hand tensor
+and \(y\) is the right handed tensor. The two closures are defining the partial derivatives of
+\(f\) with respect to \(x\),\(y\). Treat the other variables as a constant</p>
+<p>$$\frac{\delta }{\delta x} (x^{y})= y \cdot x^{y-1}$$ is the left handed closure, and</p>
+<p>$$\frac{\delta }{\delta y} (x^{y}) = x^{y} \cdot ln(x)$$</p>
+<p>is the right. If you aren't sure how to calculate these by hand, it is recommended to use
+<a href="https://www.symbolab.com/solver/partial-derivative-calculator/%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20x%7D%5Cleft(x%5E%7By%7D%5Cright)?or=input">symbolab</a>,
+plug in your operator in terms of \(x\) and \(y\), and just swap out the variable
+\(x\)|\(y\) in the partial derivative to get the other side.</p>
+<h3 id="testing-autodiff"><a class="header" href="#testing-autodiff">Testing autodiff</a></h3>
+<p>For testing the <code>autodiff</code> operations, please refer to
+<a href="getting-started/testing.html">this section</a>.</p>
+<h2 id="adding-the-op-to-other-backends"><a class="header" href="#adding-the-op-to-other-backends">Adding the Op to other backends</a></h2>
+<p>Most of these are fairly straightforward implementations. For reference here's pow's float
+implementation for torch, ndarray and candle backends:</p>
+<ol>
+<li>Torch implementation in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tch/src/ops/tensor.rs#L467">crates/mabor-tch/src/ops/tensor.rs</a>
+and the Op used in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-tch/src/ops/base.rs#L481">crates/mabor-tch/src/ops/base.rs</a></li>
+<li>NdArray in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-ndarray/src/ops/tensor.rs#L472">crates/mabor-ndarray/src/ops/tensor.rs</a></li>
+<li>Candle in
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-candle/src/ops/tensor.rs#L504">crates/mabor-candle/src/ops/tensor.rs</a></li>
+</ol>
+<p>This is where any calculation happens currently. Playing a guessing game with method names and
+seeing what completions are suggested will take you far. If you are having trouble figuring out how
+to do it from the docs for that backend,
+<a href="https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax">try searching github for relevant function calls</a>.</p>
+<h2 id="adding-the-op-to-fusion-jit-and-cubecl-backends"><a class="header" href="#adding-the-op-to-fusion-jit-and-cubecl-backends">Adding the Op to fusion, JIT and cubecl backends</a></h2>
+<p>Adding an operator to these backends can be fairly straightforward, though due to what these
+backends are for, involves a bit more indirection. Fusion and jit, like autodiff, are not target
+backends as much as backends that enable certain functionality for other backends, in this case
+kernel fusion or just-in-time compilation. Adding the operator won't involve doing any calculation,
+you'll just be describing how the generated code should look. Most of this can be
+copy/pasted/adjusted from other functions.</p>
+<p>Here's how powf was added to <code>mabor-fusion</code>:</p>
+<ol>
+<li>Added powf to the float ops under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-fusion/src/ops/float.rs#L1838"><code>crates/mabor-fusion/src/ops/float.rs</code></a></li>
+<li>Added powf to the <code>NumericOperationIr</code> enum under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-fusion/src/stream/operation.rs#L433">crates/mabor-fusion/src/stream/operation.rs</a></li>
+<li>Added powf to the implementations of <code>NumericOperationIr</code> enum under
+<a href="https://github.com/tracel-ai/burn/blob/0ee2021567b3725907df5fd1a905ce60b1aca096/crates/burn-fusion/src/stream/context.rs#L771">crates/mabor-fusion/src/stream/context.rs</a></li>
+</ol>
+<p>The way <code>cubecl</code> handles tensor-scalar operations is by transforming both into a sequence of
+vectorized scalar operations. Since powf already existed in <code>cubecl</code>, it was pretty easy to reuse
+the existing implementation for the situation where both sides of the operation were tensors. The
+<code>cubecl</code> crate is primarily concerned with how the operation is compiled and executed by the gpu.
+The actual implementation is defined in <code>mabor-cubecl</code>.</p>
+<p>Here is where code was added for powf in <code>mabor-cubecl</code> and <code>cubecl</code>:</p>
+<ol>
+<li>to the implementation of
+<a href="https://github.com/tracel-ai/burn/blob/3b51c26958128502d60fb35029c43d9b686b816c/crates/burn-cubecl/src/ops/float_ops.rs#L410"><code>FloatTensorOps</code> under <code>crates/mabor-cubecl/src/ops/float_ops.rs</code></a></li>
+<li>the function being called was added to
+<a href="https://github.com/tracel-ai/burn/blob/3b51c26958128502d60fb35029c43d9b686b816c/crates/burn-cubecl/src/ops/numeric.rs#L147">crates/mabor-cubecl/src/ops/numeric.rs</a></li>
+<li>the operator was defined in
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-core/src/ir/operation.rs#L68"><code>cubecl-core/src/ir/operation.rs</code></a></li>
+<li>how the operation looks to the gpu was added to
+<a href="https://github.com/tracel-ai/burn/blob/3b51c26958128502d60fb35029c43d9b686b816c/crates/burn-cubecl/src/fusion/on_write/ir.rs#L52"><code>crates/mabor-cubecl/src/fusion/on_write/ir.rs</code></a></li>
+<li>the mappings between the gpu operation and the CPP, WGSL and SPIR-V instructions were added to
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-cpp/src/shared/base.rs#L456"><code>cubecl-cpp/src/shared/base.rs</code></a>,
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/compiler.rs#L652"><code>cubecl-wgpu/src/compiler/wgsl/compiler.rs</code></a>
+and
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-spirv/src/instruction.rs#L408"><code>cubecl-spirv/src/instruction.rs</code></a></li>
+<li>the instructions themselves were added for WGSL to
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/instructions.rs#L124">instruction op enum in <code>cubecl-wgpu/src/compiler/wgsl/instructions.rs</code></a>,
+and the actual
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/instructions.rs#L547-L555">instruction in wgsl here</a>,
+for CPP in the enum here
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-cpp/src/shared/instruction.rs#L127"><code>cubecl-cpp/src/shared/instruction.rs</code></a>
+and the actual instruction here
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-cpp/src/shared/binary.rs#L137"><code>cubecl-cpp/src/shared/binary.rs</code></a></li>
+</ol>
+<p>We needed to generate some custom WGSL code for powf in WGSL, primarily due to issues with proper
+case handling of the wgsl pow function, like 0 to the 0 power being 1, and any negative number to an
+even power being positive. We reused as much as the existing logic as possible, and then branched at
+the last point based off the var type of the rhs.
+<a href="https://github.com/tracel-ai/cubecl/blob/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/crates/cubecl-wgpu/src/compiler/wgsl/compiler.rs#L911">See here</a>.
+For most operations, you shouldn't need to add to <code>cubecl-wgpu/src/compiler/wgsl/extension.rs</code>
+unless the operation isn't native to WGSL.</p>
+<p>For functions that need a complex kernel without a direct mapping to a base instruction, simply use
+the <code>cube</code> macro (see
+<a href="https://github.com/tracel-ai/cubecl/tree/f5b63076a01a5c03ea9ed20799d3eeaf776b45da/cubecl-book">the <code>cubecl</code> book</a>).</p>
+<h2 id="adding-the-op-to-burn-import"><a class="header" href="#adding-the-op-to-burn-import">Adding the Op to mabor-import</a></h2>
+<p>Generating the ONNX test files or tests is already covered
+<a href="guides/onnx-to-burn-conversion-tool.html#adding-new-operators">in the ONNX to mabor guide</a>; this is more
+about the specific changes you need to make when adding new operators after you have generated the
+tests.</p>
+<p>Changes will need to be made to both <code>onnx-ir</code> and <code>mabor-import</code>. The code within <code>onnx-ir</code> defines
+how to parse the nodes in an onnx file and produces the intermediate representation. The code within
+<code>mabor-import</code> is divided into two sections: <code>src/onnx</code> and <code>src/mabor</code>. The code under the former
+maps that intermediate representation to one used for code generation and the latter defines how to
+generate code for the operator you've implemented earlier in this guide.</p>
+<p>So when you are loading a model, the operator is first parsed to an intermediate representation
+defined by <code>mabor-import</code> and then mapped to a Mabor operation defined under <code>src/mabor/node</code>; the
+mapping from onnx to mabor is aptly defined in <code>src/onnx/to_mabor</code></p>
+<p>Let's review the changes made for powf starting from <code>src/mabor</code> and moving to <code>src/onnx</code>:</p>
+<ol>
+<li>Determine the type of operator and add your operator to the appropriate node (operation) type, in
+this case
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/burn/node/binary.rs#L173">BinaryNode under <code>crates/mabor-import/src/mabor/node/binary.rs</code></a>
+along with its
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/burn/node/binary.rs#L15"><code>as_str</code> definition</a></li>
+<li>Add an arm to the match statement inside the <code>into_mabor</code> function in
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/onnx/to_burn.rs#L349">crates/mabor-import/src/onnx/to_mabor.rs</a>
+for the ONNX <code>NodeType</code> (which corresponds to an op in the ONNX spec), and make an
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/burn-import/src/onnx/to_burn.rs#L1238"><code>{op}_conversion</code> function</a>
+that maps the ONNX node to the binary type</li>
+<li>Specify how dimensions for the output should be derived in
+<a href="https://github.com/tracel-ai/burn/blob/925716f89d0249cbc6bd14f85f40967bd7ef80a8/crates/onnx-ir/src/rank_inference.rs#L64">crates/onnx-ir/src/rank_inference.rs</a></li>
+</ol>
+<p>And you're done! Congrats, you just fully added a new operation to mabor, and we are all one step
+closer to the answer to <a href="https://www.arewelearningyet.com/">Are we learning yet?</a> being "Yes, and
+it's freaking fast!". Buy yourself a coffee.</p>
+<hr>
+<ol class="footnote-definition"><li id="footnote-supertrait">
+<p>for more on supertraits see
+<a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-supertraits-to-require-one-traits-functionality-within-another-trait">the advanced trait section of the rust book</a> <a href="#fr-supertrait-1">↩</a></p>
+</li>
+<li id="footnote-autodiff">
+<p>wiki link for
+<a href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> <a href="#fr-autodiff-1">↩</a></p>
+</li>
+<li id="footnote-absolute_units">
+<p>for more information on unit structs see
+<a href="https://doc.rust-lang.org/book/ch05-01-defining-structs.html#unit-like-structs-without-any-fields">the defining and instantiating structs section of the rust book</a> <a href="#fr-absolute_units-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="submitting-examples-to-burn"><a class="header" href="#submitting-examples-to-burn">Submitting Examples to Mabor</a></h1>
+<p>This guide explains how to create and submit new examples to the Mabor repository. Examples are a great way to demonstrate Mabor's capabilities and help users understand how to use the framework effectively.</p>
+<p>For a minimal working example, see the <a href="https://github.com/tracel-ai/burn/blob/main/examples/simple-regression/examples/regression.rs">simple-regression</a> example in the repository.</p>
+<h2 id="repository-structure"><a class="header" href="#repository-structure">Repository Structure</a></h2>
+<p>The Mabor repository is set up as a workspace, with examples located in the <code>examples/</code> directory. Each example is a separate crate that can reuse workspace dependencies.</p>
+<h2 id="creating-a-new-example"><a class="header" href="#creating-a-new-example">Creating a New Example</a></h2>
+<ol>
+<li>
+<p>Navigate to the examples directory:</p>
+<pre><code class="language-bash">cd examples
+</code></pre>
+</li>
+<li>
+<p>Create a new library crate:</p>
+<pre><code class="language-bash">cargo new --lib &lt;my-example&gt;
+</code></pre>
+</li>
+<li>
+<p>Update the example's <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[package]
+name = "&lt;my-example&gt;"
+version = "0.1.0"
+edition = "2021"
+readme = "README.md"
+# Remove this line if it exists
+# readme.workspace = true
+
+[dependencies]
+# Reuse workspace dependencies when available
+serde = { workspace = true }
+# Add example-specific dependencies
+mabor = { path = "../../" }
+</code></pre>
+</li>
+</ol>
+<h2 id="required-files-and-structure"><a class="header" href="#required-files-and-structure">Required Files and Structure</a></h2>
+<h3 id="readmemd"><a class="header" href="#readmemd">README.md</a></h3>
+<p>Each example must include a README.md file with:</p>
+<ul>
+<li>A brief description of what the example demonstrates</li>
+<li>A terminal command showing how to run the example</li>
+<li>Any prerequisites or setup instructions</li>
+</ul>
+<p>Example README structure:</p>
+<pre><code class="language-markdown"># Example Name
+
+Brief description of what this example demonstrates.
+
+## Running the Example
+
+```bash
+cargo run --example &lt;my-example&gt;
+```
+
+## Prerequisites
+
+List any prerequisites here.
+</code></pre>
+<h3 id="source-code-structure"><a class="header" href="#source-code-structure">Source Code Structure</a></h3>
+<ul>
+<li><code>src/</code> directory: Contains the main implementation code</li>
+<li><code>examples/</code> directory: Contains example code
+<ul>
+<li><code>&lt;my-example&gt;.rs</code>: Example implementation</li>
+</ul>
+</li>
+</ul>
+<h2 id="resource-handling"><a class="header" href="#resource-handling">Resource Handling</a></h2>
+<ul>
+<li>Resources (datasets, models, etc.) should be downloaded in the example code</li>
+<li>Do not track external files in the repository</li>
+<li>Include code to download and prepare resources when the example is run</li>
+</ul>
+<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
+<ol>
+<li>
+<p><strong>Code Organization</strong></p>
+<ul>
+<li>Keep the code modular and well-documented</li>
+<li>Use clear, descriptive variable and function names</li>
+<li>Include comments explaining complex operations</li>
+</ul>
+</li>
+<li>
+<p><strong>Error Handling</strong></p>
+<ul>
+<li>Implement proper error handling</li>
+<li>Provide meaningful error messages</li>
+<li>Handle resource download failures gracefully</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance</strong></p>
+<ul>
+<li>Optimize for reasonable execution time</li>
+<li>Include progress indicators for long-running operations</li>
+<li>Consider adding configuration options for different hardware capabilities</li>
+</ul>
+</li>
+<li>
+<p><strong>Documentation</strong></p>
+<ul>
+<li>Document all public APIs</li>
+<li>Include inline comments for complex logic</li>
+<li>Explain any non-obvious implementation details</li>
+</ul>
+</li>
+</ol>
+<h2 id="submitting-your-example"><a class="header" href="#submitting-your-example">Submitting Your Example</a></h2>
+<ol>
+<li>Ensure your example follows all the guidelines above</li>
+<li>Test your example thoroughly</li>
+<li>Create a pull request with:
+<ul>
+<li>A clear description of what the example demonstrates</li>
+<li>Any relevant issue numbers</li>
+<li>Screenshots or output examples (if applicable)</li>
+</ul>
+</li>
+</ol>
+<p>Feel free to ask questions in the pull request if you need clarification or guidance.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="frequently-encountered-issues"><a class="header" href="#frequently-encountered-issues">Frequently Encountered Issues</a></h1>
+<p>This is a collection of issues people have encountered and asked about on the
+<a href="https://discord.gg/uPEBbYYDB6">Discord server</a>. This section is separated from the guides since it
+can involve lots of details that are only relevant to a small subset of contributors.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="issues-encountered-while-adding-ops"><a class="header" href="#issues-encountered-while-adding-ops">Issues encountered while adding ops</a></h1>
+<p>Below are some of the issues that were encountered while adding ops to the project. If you encounter
+an issue while adding an op that isn't listed here, and it's not obvious how to fix it, you can add
+it to this list or reach out on the <a href="https://discord.gg/uPEBbYYDB6">Discord server</a> if you need
+help.</p>
+<h2 id="off-by-000001-errors"><a class="header" href="#off-by-000001-errors">Off by .000001 errors</a></h2>
+<pre><code class="language-sh">---- fusion::base::tests::maxmin::tests::test_mean_dim_2d stdout ---- thread 'fusion::base::tests::maxmin::tests::test_mean_dim_2d' panicked at mabor-wgpu/src/fusion/base.rs:185:5: assertion `left == right` failed left: Data { value: [1.0, 4.0], shape: Shape { dims: [2, 1] } } right: Data { value: [0.99999994, 3.9999998], shape: Shape { dims: [2, 1] } } ----
+
+tests::maxmin::tests::test_mean_dim_2d stdout ---- thread 'tests::maxmin::tests::test_mean_dim_2d' panicked at mabor-wgpu/src/lib.rs:49:5: assertion `left == right` failed left: Data { value: [1.0, 4.0], shape: Shape { dims: [2, 1] } } right: Data { value: [0.99999994, 3.9999998], shape: Shape { dims: [2, 1] } }
+</code></pre>
+<p>If you encounter this, swap out the <code>assert_eq!</code> in the failing test for
+<code>tensor1.to_data().assert_approx_eq</code> with <code>3</code> as the second argument. The second arguments specifies
+the level of precision: <code>3</code> is equivalent to a less than 10<sup>-3</sup> (0.001) difference between
+the elements of the two tensors.</p>
+<h2 id="mismatched-types-and-missing-functions"><a class="header" href="#mismatched-types-and-missing-functions">Mismatched types and missing functions</a></h2>
+<pre><code class="language-sh">error[E0308]: mismatched types --&gt; {mabor_dir}/target/debug/build/onnx-tests-fed12aaf3671687f/out/model/pow.rs:48:45 | 48 | let pow1_out1 = input1.clone().powf(input1); | ---- ^^^^^^ expected `f32`, found `Tensor&lt;B, 4&gt;` | | | arguments to this method are incorrect | = note: expected type `f32` found struct `Tensor&lt;B, 4&gt;`
+
+note: method defined here --&gt; {mabor_dir}/mabor-tensor/src/tensor/api/float.rs:65:12 | 65 | pub fn powf(self, value: f32) -&gt; Self { | ^^^^
+
+error[E0599]: no method named `powf_scalar` found for struct `Tensor` in the current scope --&gt; {mabor_dir}/target/debug/build/onnx-tests-fed12aaf3671687f/out/model/pow.rs:50:35 | 50 | let pow2_out1 = pow1_out1.powf_scalar(cast1_out1); | ^^^^^^^^^^^ method not found in `Tensor&lt;B, 4&gt;`
+
+error[E0599]: no method named `powi` found for struct `Tensor` in the current scope --&gt; {mabor_dir}/target/debug/build/onnx-tests-fed12aaf3671687f/out/model/pow_int.rs:49:40 | 49 | let pow1_out1 = input1.clone().powi(input1); | ^^^^ method not found in `Tensor&lt;B, 4, Int&gt;` Some errors have detailed explanations: E0308, E0599.
+For more information about an error, try `rustc --explain E0308`. error: could not compile `onnx-tests` (test "onnx_tests") due to 3 previous errors
+</code></pre>
+<p>If you are getting this error, you probably didn't implement your operator for the actual Tensor
+struct. This issue was encountered when adding the Pow operator. The operation was added to the
+<code>FloatTensorOps</code> and <code>IntTensorOp</code> traits, but not for the numeric trait (under
+<code>mabor-tensor/src/tensor/api/numeric.rs</code>). This, coupled with <code>powf</code> existing prior to the PR though
+only for scalar values (which had been renamed, just not in the right place), led to this confusing
+issue where it looked like the function was found, but the type was wrong. If that's the case, make
+sure that it's implemented for the appropriate type, in this case <code>Float</code> under
+<a href="https://github.com/tracel-ai/burn/blob/1235b06e25e39a6ee5a4ac59f7f1d3da2ddb9bc3/crates/burn-tensor/src/tensor/api/numeric.rs">crates/mabor-tensor/src/tensor/api/numeric.rs</a>,
+and calling the <code>TensorOp.foo_op</code> defined under
+<a href="https://github.com/tracel-ai/burn/blob/1235b06e25e39a6ee5a4ac59f7f1d3da2ddb9bc3/crates/burn-tensor/src/tensor/ops/tensor.rs">crates/mabor-tensor/src/ops/tensor.rs</a></p>
+
+                    </div></div></main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

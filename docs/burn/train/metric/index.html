@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="The metric module.">
+    <title>mabor::train::metric - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module metric</a></h2>
+                <h3><a href="#modules">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#modules" title="Modules">Modules</a></li>
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>train</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">train</a></div>
+                    <h1>Module <span>metric</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>The metric module.</p>
+                    </div>
+                </details>
+                <h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="mod" href="state/index.html" title="mod burn::train::metric::state">state</a></dt>
+                    <dd>State module.</dd>
+                    <dt><a class="mod" href="store/index.html" title="mod burn::train::metric::store">store</a></dt>
+                    <dd>Module responsible to save and exposes data collected during training.</dd>
+                </dl>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.AccuracyInput.html"
+                            title="struct burn::train::metric::AccuracyInput">Accuracy<wbr>Input</a></dt>
+                    <dd>The <a href="struct.AccuracyMetric.html"
+                            title="struct burn::train::metric::AccuracyMetric">accuracy metric</a> input type.</dd>
+                    <dt><a class="struct" href="struct.AccuracyMetric.html"
+                            title="struct burn::train::metric::AccuracyMetric">Accuracy<wbr>Metric</a></dt>
+                    <dd>The accuracy metric.</dd>
+                    <dt><a class="struct" href="struct.AurocInput.html"
+                            title="struct burn::train::metric::AurocInput">Auroc<wbr>Input</a></dt>
+                    <dd>The <a href="struct.AurocMetric.html" title="struct burn::train::metric::AurocMetric">AUROC
+                            metric</a> input type.</dd>
+                    <dt><a class="struct" href="struct.AurocMetric.html"
+                            title="struct burn::train::metric::AurocMetric">Auroc<wbr>Metric</a></dt>
+                    <dd>The Area Under the Receiver Operating Characteristic Curve (AUROC, also referred to as <a
+                            href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">ROC AUC</a>) for
+                        binary classification.</dd>
+                    <dt><a class="struct" href="struct.ConfusionStatsInput.html"
+                            title="struct burn::train::metric::ConfusionStatsInput">Confusion<wbr>Stats<wbr>Input</a>
+                    </dt>
+                    <dd>Input for confusion statistics error types.</dd>
+                    <dt><a class="struct" href="struct.CpuMemory.html"
+                            title="struct burn::train::metric::CpuMemory">CpuMemory</a></dt>
+                    <dd>Memory information</dd>
+                    <dt><a class="struct" href="struct.CpuTemperature.html"
+                            title="struct burn::train::metric::CpuTemperature">CpuTemperature</a></dt>
+                    <dd>CPU Temperature in celsius degrees</dd>
+                    <dt><a class="struct" href="struct.CpuUse.html"
+                            title="struct burn::train::metric::CpuUse">CpuUse</a></dt>
+                    <dd>General CPU Usage metric</dd>
+                    <dt><a class="struct" href="struct.CudaMetric.html"
+                            title="struct burn::train::metric::CudaMetric">Cuda<wbr>Metric</a></dt>
+                    <dd>Track basic cuda infos.</dd>
+                    <dt><a class="struct" href="struct.FBetaScoreMetric.html"
+                            title="struct burn::train::metric::FBetaScoreMetric">FBeta<wbr>Score<wbr>Metric</a></dt>
+                    <dd>The <a href="https://en.wikipedia.org/wiki/F-score">F-beta score</a> metric.</dd>
+                    <dt><a class="struct" href="struct.HammingScore.html"
+                            title="struct burn::train::metric::HammingScore">Hamming<wbr>Score</a></dt>
+                    <dd>The hamming score, sometimes referred to as multi-label or label-based accuracy.</dd>
+                    <dt><a class="struct" href="struct.HammingScoreInput.html"
+                            title="struct burn::train::metric::HammingScoreInput">Hamming<wbr>Score<wbr>Input</a></dt>
+                    <dd>The <a href="struct.HammingScore.html" title="struct burn::train::metric::HammingScore">hamming
+                            score</a> input type.</dd>
+                    <dt><a class="struct" href="struct.IterationSpeedMetric.html"
+                            title="struct burn::train::metric::IterationSpeedMetric">Iteration<wbr>Speed<wbr>Metric</a>
+                    </dt>
+                    <dd>The loss metric.</dd>
+                    <dt><a class="struct" href="struct.LearningRateMetric.html"
+                            title="struct burn::train::metric::LearningRateMetric">Learning<wbr>Rate<wbr>Metric</a></dt>
+                    <dd>Track the learning rate across iterations.</dd>
+                    <dt><a class="struct" href="struct.LossInput.html"
+                            title="struct burn::train::metric::LossInput">Loss<wbr>Input</a></dt>
+                    <dd>The <a href="struct.LossMetric.html" title="struct burn::train::metric::LossMetric">loss
+                            metric</a> input type.</dd>
+                    <dt><a class="struct" href="struct.LossMetric.html"
+                            title="struct burn::train::metric::LossMetric">Loss<wbr>Metric</a></dt>
+                    <dd>The loss metric.</dd>
+                    <dt><a class="struct" href="struct.MetricEntry.html"
+                            title="struct burn::train::metric::MetricEntry">Metric<wbr>Entry</a></dt>
+                    <dd>Data type that contains the current state of a metric at a given time.</dd>
+                    <dt><a class="struct" href="struct.MetricMetadata.html"
+                            title="struct burn::train::metric::MetricMetadata">Metric<wbr>Metadata</a></dt>
+                    <dd>Metric metadata that can be used when computing metrics.</dd>
+                    <dt><a class="struct" href="struct.PrecisionMetric.html"
+                            title="struct burn::train::metric::PrecisionMetric">Precision<wbr>Metric</a></dt>
+                    <dd>The Precision Metric</dd>
+                    <dt><a class="struct" href="struct.RecallMetric.html"
+                            title="struct burn::train::metric::RecallMetric">Recall<wbr>Metric</a></dt>
+                    <dd>The Recall Metric</dd>
+                    <dt><a class="struct" href="struct.TopKAccuracyInput.html"
+                            title="struct burn::train::metric::TopKAccuracyInput">TopK<wbr>Accuracy<wbr>Input</a></dt>
+                    <dd>The <a href="struct.TopKAccuracyMetric.html"
+                            title="struct burn::train::metric::TopKAccuracyMetric">top-k accuracy metric</a> input type.
+                    </dd>
+                    <dt><a class="struct" href="struct.TopKAccuracyMetric.html"
+                            title="struct burn::train::metric::TopKAccuracyMetric">TopK<wbr>Accuracy<wbr>Metric</a></dt>
+                    <dd>The Top-K accuracy metric.</dd>
+                </dl>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.ClassReduction.html"
+                            title="enum burn::train::metric::ClassReduction">Class<wbr>Reduction</a></dt>
+                    <dd>The reduction strategy for classification metrics.</dd>
+                    <dt><a class="enum" href="enum.NumericEntry.html"
+                            title="enum burn::train::metric::NumericEntry">Numeric<wbr>Entry</a></dt>
+                    <dd>Numeric metric entry.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.Adaptor.html"
+                            title="trait burn::train::metric::Adaptor">Adaptor</a></dt>
+                    <dd>Adaptor are used to transform types so that they can be used by metrics.</dd>
+                    <dt><a class="trait" href="trait.ItemLazy.html"
+                            title="trait burn::train::metric::ItemLazy">Item<wbr>Lazy</a></dt>
+                    <dd>Items that are lazy are not ready to be processed by metrics.</dd>
+                    <dt><a class="trait" href="trait.Metric.html" title="trait burn::train::metric::Metric">Metric</a>
+                    </dt>
+                    <dd>Metric trait.</dd>
+                    <dt><a class="trait" href="trait.Numeric.html"
+                            title="trait burn::train::metric::Numeric">Numeric</a></dt>
+                    <dd>Declare a metric to be numeric.</dd>
+                </dl>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.format_float.html"
+                            title="fn burn::train::metric::format_float">format_<wbr>float</a></dt>
+                    <dd>Format a float with the given precision. Will use scientific notation if necessary.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

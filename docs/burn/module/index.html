@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Module for the neural network module.">
+    <title>mabor::module - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module module</a></h2>
+                <h3><a href="#structs">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                    <li><a href="#types" title="Type Aliases">Type Aliases</a></li>
+                    <li><a href="#derives" title="Derive Macros">Derive Macros</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2 class="in-crate"><a href="../index.html">In crate mabor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a></div>
+                    <h1>Module <span>module</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Module for the neural network module.</p>
+                    </div>
+                </details>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.Attribute.html"
+                            title="struct burn::module::Attribute">Attribute</a></dt>
+                    <dd>Attribute to print in the display method.</dd>
+                    <dt><a class="struct" href="struct.ConstantRecord.html"
+                            title="struct burn::module::ConstantRecord">Constant<wbr>Record</a></dt>
+                    <dd>Record used for constant type implementing the <a href="trait.Module.html"
+                            title="trait burn::module::Module">module</a> trait.</dd>
+                    <dt><a class="struct" href="struct.Content.html" title="struct burn::module::Content">Content</a>
+                    </dt>
+                    <dd>Struct to store the attributes of a module for formatting.</dd>
+                    <dt><a class="struct" href="struct.DisplaySettings.html"
+                            title="struct burn::module::DisplaySettings">Display<wbr>Settings</a></dt>
+                    <dd>Custom module display settings.</dd>
+                    <dt><a class="struct" href="struct.Ignored.html" title="struct burn::module::Ignored">Ignored</a>
+                    </dt>
+                    <dd>Container to satisfy the Module trait for types that are not modules.</dd>
+                    <dt><a class="struct" href="struct.Param.html" title="struct burn::module::Param">Param</a></dt>
+                    <dd>Parameters are the fundamental building blocks of <a href="trait.Module.html"
+                            title="trait burn::module::Module">modules</a> where they
+                        serve as containers for <a href="../tensor/struct.Tensor.html"
+                            title="struct burn::tensor::Tensor">tensors</a> that can be updated during
+                        training, and loaded during inference. If you don’t want to save the tensors with a record
+                        and/or don’t want to update it during training, you don’t need this type to wrap your tensor.
+                    </dd>
+                    <dt><a class="struct" href="struct.ParamId.html" title="struct burn::module::ParamId">ParamId</a>
+                    </dt>
+                    <dd>Parameter ID.</dd>
+                    <dt><a class="struct" href="struct.Quantizer.html"
+                            title="struct burn::module::Quantizer">Quantizer</a></dt>
+                    <dd>Describes how to quantize a module.</dd>
+                    <dt><a class="struct" href="struct.Reinitializer.html"
+                            title="struct burn::module::Reinitializer">Reinitializer</a></dt>
+                    <dd>Overrides float and int tensors of <a href="trait.Module.html"
+                            title="trait burn::module::Module">mabor modules</a>.</dd>
+                    <dt><a class="struct" href="struct.RunningState.html"
+                            title="struct burn::module::RunningState">Running<wbr>State</a></dt>
+                    <dd>A state that can be updated during the forward pass while being thread safe.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.AutodiffModule.html"
+                            title="trait burn::module::AutodiffModule">Autodiff<wbr>Module</a></dt>
+                    <dd>Module with auto-differentiation backend.</dd>
+                    <dt><a class="trait" href="trait.Module.html" title="trait burn::module::Module">Module</a></dt>
+                    <dd>Trait for all neural network modules.</dd>
+                    <dt><a class="trait" href="trait.ModuleDisplay.html"
+                            title="trait burn::module::ModuleDisplay">Module<wbr>Display</a></dt>
+                    <dd>Trait to implement custom display settings for a module.</dd>
+                    <dt><a class="trait" href="trait.ModuleDisplayDefault.html"
+                            title="trait burn::module::ModuleDisplayDefault">Module<wbr>Display<wbr>Default</a></dt>
+                    <dd>Default display settings for a module.</dd>
+                    <dt><a class="trait" href="trait.ModuleMapper.html"
+                            title="trait burn::module::ModuleMapper">Module<wbr>Mapper</a></dt>
+                    <dd>Module mapper trait.</dd>
+                    <dt><a class="trait" href="trait.ModuleVisitor.html"
+                            title="trait burn::module::ModuleVisitor">Module<wbr>Visitor</a></dt>
+                    <dd>Module visitor trait.</dd>
+                    <dt><a class="trait" href="trait.Parameter.html" title="trait burn::module::Parameter">Parameter</a>
+                    </dt>
+                    <dd>Trait that defines what is necessary for a type to be a parameter.</dd>
+                </dl>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.extract_type_name.html"
+                            title="fn burn::module::extract_type_name">extract_<wbr>type_<wbr>name</a></dt>
+                    <dd>Extracts the short name of a type T</dd>
+                    <dt><a class="fn" href="fn.list_param_ids.html"
+                            title="fn burn::module::list_param_ids">list_<wbr>param_<wbr>ids</a></dt>
+                    <dd>List all the parameter ids in a module.</dd>
+                </dl>
+                <h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="type" href="type.Devices.html" title="type burn::module::Devices">Devices</a></dt>
+                    <dd>Type alias to <code>Vec&lt;B::Device&gt;</code> which supports <code>no_std</code> environments,
+                        but automatically using
+                        the <code>alloc</code> crate.</dd>
+                </dl>
+                <h2 id="derives" class="section-header">Derive Macros<a href="#derives" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="derive" href="derive.Module.html" title="derive burn::module::Module">Module</a></dt>
+                    <dd>Derive macro for the module.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

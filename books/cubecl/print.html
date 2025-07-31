@@ -1,0 +1,2119 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The CubeCL Book 🧊</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The CubeCL Book 🧊</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="overview"><a class="header" href="#overview">Overview</a></h1>
+<p>Welcome to the CubeCL Book 👋</p>
+<p>This book will help you get started with your high-performance computing project using CubeCL,
+making sure you leverage the most of any hardware.</p>
+<ul>
+<li><a href="motivation.html">Why CubeCL</a></li>
+<li><a href="getting-started/summary.html">Getting Started</a></li>
+<li><a href="core-features/summary.html">Core Features</a></li>
+<li><a href="language-support/summary.html">Language Support</a></li>
+<li><a href="algorithms/summary.html">Algorithm reference</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="why-cubecl-is-important"><a class="header" href="#why-cubecl-is-important">Why CubeCL is Important</a></h1>
+<p>In the current landscape of high-performance computing, developers face several significant
+challenges that CubeCL aims to address:</p>
+<h3 id="complexity-in-performance-optimization"><a class="header" href="#complexity-in-performance-optimization">Complexity in Performance Optimization</a></h3>
+<p>Optimizing compute kernels for different hardware is inherently complex. Developers must understand
+the intricacies of each platform’s architecture and API, leading to a steep learning curve and the
+risk of suboptimal performance. The need for manual tuning and platform-specific adjustments often
+results in code that is difficult to maintain and extend.</p>
+<p>The simplest way to solve this problem is to provide high-level abstractions that can be composed in
+a variety of ways. All of those variations can be autotuned to select the best settings for the
+current hardware and problem at hand.</p>
+<h3 id="lack-of-portability"><a class="header" href="#lack-of-portability">Lack of Portability</a></h3>
+<p>Portability remains a significant issue. Code written for one API or even for a single GPU
+architecture often cannot be easily transferred to another, hindering the ability to develop
+software that can run across diverse hardware environments.</p>
+<p>The GPU computing ecosystem is fragmented, with different hardware platforms like CUDA, ROCm, Metal,
+and Vulkan requiring their own specialized codebases. This fragmentation forces developers to write
+and maintain separate implementations for each platform, increasing both development time and
+complexity.</p>
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>In essence, these challenges underscore the need for a more unified and developer-friendly approach
+to high-performance computing. CubeCL seeks to bridge these gaps by addressing the core issues
+within the current ecosystem, offering a new direction for high-performance and portable computing
+solutions.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<p>In this section, we’ll walk through the installation process for CubeCL, explain the process of writing an optimized CubeCL kernel, and provide some examples to help you start experimenting
+with CubeCL. By the end, you'll have a solid understanding of how CubeCL integrates into your workflow and how to leverage its features for high-performance computing.</p>
+<h2 id="tutorial"><a class="header" href="#tutorial">Tutorial</a></h2>
+<ul>
+<li><a href="getting-started/installation.html">Installation</a></li>
+<li><a href="getting-started/simple_reduction.html">Simple Reduction</a></li>
+<li><a href="getting-started/benchmark.html">Benchmark</a></li>
+<li><a href="getting-started/parallel_reduction.html">Parallel Reduction</a></li>
+<li><a href="getting-started/vectorized_reduction.html">Vectorized Reduction</a></li>
+<li><a href="getting-started/parallel_reduction_3d.html">Parallel Reduction 3D</a></li>
+<li><a href="getting-started/examples.html">Examples</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Installing CubeCL is straightforward. It’s available as a Rust crate, and you can add it to your project by updating your Cargo.toml:</p>
+<pre><code class="language-toml">[dependencies]
+cubecl = {
+    version = "0.6.0",  # Replace with the latest version from crates.io
+    features = ["wgpu"]  # Enable desired runtime features (e.g., wgpu, cuda, hip)
+}
+</code></pre>
+<p>The more challenging aspect is ensuring that you have the necessary drivers to run the selected runtime.</p>
+<p>CubeCL supports multiple GPU runtimes, each requiring specific drivers or frameworks. Enable the appropriate feature flag in Cargo.toml and ensure the corresponding drivers are installed.</p>
+<div class="table-wrapper"><table><thead><tr><th>Platform</th><th>Runtime</th><th>Supported OS</th><th>Requirements</th><th>Installation/Notes</th><th>Feature Flag</th></tr></thead><tbody>
+<tr><td>WebGPU</td><td>wgpu</td><td>Linux, Windows, macOS, wasm</td><td>Vulkan drivers (typically pre-installed on modern OSes)</td><td>On linux install the vulkan driver.</td><td>wgpu</td></tr>
+<tr><td>CUDA</td><td>CUDA</td><td>Linux, Windows</td><td>NVIDIA CUDA drivers and toolkit</td><td>Download and install from the NVIDIA CUDA Downloads page. Verify installation with nvidia-smi.</td><td>cuda</td></tr>
+<tr><td>ROCm</td><td>HIP</td><td>Linux, Windows</td><td>AMD ROCm framework</td><td>Linux: Follow the ROCm Linux Quick Start. Windows: See the ROCm Windows Installation Guide.</td><td>hip</td></tr>
+<tr><td>Metal</td><td>wgpu</td><td>macOS</td><td>Apple device with Metal support (macOS 10.13 or later)</td><td>No additional drivers needed; Metal is built into macOS.</td><td>wgpu-msl</td></tr>
+<tr><td>Vulkan</td><td>wgpu</td><td>Linux, Windows</td><td>Vulkan drivers</td><td>On linux install via package manager, on windows it is typically included with GPU drivers (NVIDIA/AMD).</td><td>wgpu-spirv</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="simple-reduction"><a class="header" href="#simple-reduction">Simple Reduction</a></h1>
+<p>To get started with CubeCL, we will implement a simple reduction operation on a multidimensional array (tensor). This example will help you understand the basic concepts of CubeCL and how to use it to perform parallel computations on tensors.</p>
+<h2 id="an-example-of-a-cpu-reduction-in-rust-without-cubecl"><a class="header" href="#an-example-of-a-cpu-reduction-in-rust-without-cubecl">An example of a CPU reduction in Rust without CubeCL</a></h2>
+<p>This example demonstrates how to perform a simple reduction operation on a multidimensional array (tensor) using pure Rust. The code is designed to be easy to understand and serves as a starting point for more complex operations that can be parallelized with CubeCL. It is not optimized for performance, but it illustrates the basic concepts of working with tensors and performing reductions.</p>
+<h3 id="cputensor-struct"><a class="header" href="#cputensor-struct">CpuTensor Struct</a></h3>
+<p>Tensors are the basic data structure used in CubeCL to represent multidimensional arrays. Here is a simple implementation of a tensor in pure Rust. It is not optimized for performance, but it is easy to understand.</p>
+<pre><code class="language-rust ignore">/// Example of a naive multidimensional tensor in pure Rust
+#[derive(Debug, Clone)]
+pub struct CpuTensor {
+    /// Raw contiguous value buffer
+    pub data: Vec&lt;f32&gt;,
+    /// How many element are between each dimensions
+    pub strides: Vec&lt;usize&gt;,
+    /// Dimension of the tensor
+    pub shape: Vec&lt;usize&gt;,
+}
+
+/// Function to compute strides in a compact layout
+fn compact_strides(shape: &amp;[usize]) -&gt; Vec&lt;usize&gt; {
+    let rank = shape.len();
+    let mut strides = vec![1; rank];
+    for i in (0..rank - 1).rev() {
+        strides[i] = strides[i + 1] * shape[i + 1];
+    }
+    strides
+}
+
+impl CpuTensor {
+    /// Create a CpuTensor with a shape filled by number in order
+    pub fn arange(shape: Vec&lt;usize&gt;) -&gt; Self {
+        let size = shape.iter().product();
+        let data = (0..size).map(|i| i as f32).collect();
+        let strides = compact_strides(&amp;shape);
+        Self {
+            data,
+            strides,
+            shape,
+        }
+    }
+
+    /// Create an empty CpuTensor with a shape
+    pub fn empty(shape: Vec&lt;usize&gt;) -&gt; Self {
+        let size = shape.iter().product();
+        let data = vec![0.0; size];
+        let strides = compact_strides(&amp;shape);
+        Self {
+            data,
+            strides,
+            shape,
+        }
+    }
+
+    /// Read the inner data
+    pub fn read(self) -&gt; Vec&lt;f32&gt; {
+        self.data
+    }
+}</code></pre>
+<h3 id="reduce-function"><a class="header" href="#reduce-function">Reduce function</a></h3>
+<p>The following function is a naive implementation of a reduction operation on a matrix. It sums the values of each row and stores the result in a new tensor. The input tensor is expected to be a 2D matrix, and the output tensor will be a 1D vector containing the sum of each row.</p>
+<pre><code class="language-rust ignore">use cubecl_example::cpu_tensor::CpuTensor; // Change to the path of your own module containing the CpuTensor
+
+/// This function execute the reduction in the following way by reducing the last dimension with a sum over each row a 2D matrix
+/// [0 1 2]    [0 + 1 + 2]    [3 ]
+/// [3 4 5] -&gt; [3 + 4 + 5] -&gt; [12]
+/// [6 7 8]    [6 + 7 + 8]    [21]
+fn reduce_matrix(input: &amp;CpuTensor, output: &amp;mut CpuTensor) {
+    for i in 0..input.shape[0] {
+        let mut acc = 0.0f32;
+        for j in 0..input.shape[1] {
+            acc += input.data[i * input.strides[0] + j];
+        }
+        output.data[i] = acc;
+    }
+}</code></pre>
+<h3 id="launching-code"><a class="header" href="#launching-code">Launching code</a></h3>
+<p>The following code creates a 3x3 matrix, initializes the input tensor, and calls the <code>reduce_matrix</code> function to perform the reduction. The result is printed to the console.</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl_example::cpu_tensor::CpuTensor; // Change to the path of your own module containing the CpuTensor
+</span><span class="boring">
+</span><span class="boring">/// This function execute the reduction in the following way by reducing the last dimension with a sum over each row a 2D matrix
+</span><span class="boring">/// [0 1 2]    [0 + 1 + 2]    [3 ]
+</span><span class="boring">/// [3 4 5] -&gt; [3 + 4 + 5] -&gt; [12]
+</span><span class="boring">/// [6 7 8]    [6 + 7 + 8]    [21]
+</span><span class="boring">fn reduce_matrix(input: &amp;CpuTensor, output: &amp;mut CpuTensor) {
+</span><span class="boring">    for i in 0..input.shape[0] {
+</span><span class="boring">        let mut acc = 0.0f32;
+</span><span class="boring">        for j in 0..input.shape[1] {
+</span><span class="boring">            acc += input.data[i * input.strides[0] + j];
+</span><span class="boring">        }
+</span><span class="boring">        output.data[i] = acc;
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn launch() {
+    let input_shape = vec![3, 3];
+    let output_shape = vec![3];
+    let input = CpuTensor::arange(input_shape);
+    let mut output = CpuTensor::empty(output_shape);
+
+    reduce_matrix(&amp;input, &amp;mut output);
+
+    println!("Executed reduction =&gt; {:?}", output.read());
+}
+
+fn main() {
+    launch();
+}</code></pre>
+<h2 id="a-first-example-of-a-gpu-reduction-with-cubecl"><a class="header" href="#a-first-example-of-a-gpu-reduction-with-cubecl">A first example of a GPU reduction with CubeCL</a></h2>
+<p>This example demonstrates how to perform a simple reduction operation on a multidimensional array (tensor) using CubeCL. It is a simple implementation that will be used as a starting point to show how to use CubeCL in the next chapters.</p>
+<h2 id="gputensor-struct"><a class="header" href="#gputensor-struct">GpuTensor struct</a></h2>
+<p>The <code>GpuTensor</code> struct is a representation of a tensor that resides on the GPU. It contains the data handle, shape, strides, and marker types for the runtime and floating-point type. The <code>GpuTensor</code> struct provides methods to create tensors, read data from the GPU, and convert them into tensor arguments for kernel execution. Please note that it is generic over the runtime and floating-point type, allowing it to work with different CubeCL runtimes and floating-point types (e.g., <code>f16</code>, <code>f32</code>). Also, the strides can be computed using the <code>compact_strides</code> function from the <code>cubecl::std::tensor</code> module, which will compute the strides for a given shape with a compact representation.</p>
+<p>Another important concept is the <code>ComputeClient</code> trait, which define what a runtime should implement to be able to run kernels. Each runtime has their own implementation of the <code>ComputeClient</code> trait, which provides methods to create tensors and read data from the GPU. The <code>ComputeClient</code> can send compute task to a <code>Server</code> that will run the kernel on the GPU and schedule the tasks.</p>
+<pre><code class="language-rust ignore">use std::marker::PhantomData;</code></pre>
+<div class="warning">
+If you need a tensor library instead of defining your own kernel and tensor, you should use <a href="https://github.com/tracel-ai/burn" target="_blank">Mabor</a> directly instead.
+</div>
+<pre><code class="language-rust ignore">use std::marker::PhantomData;
+
+use cubecl::{prelude::*, server::Handle, std::tensor::compact_strides};
+
+/// Simple GpuTensor
+#[derive(Debug)]
+pub struct GpuTensor&lt;R: Runtime, F: Float + CubeElement&gt; {
+    data: Handle,
+    shape: Vec&lt;usize&gt;,
+    strides: Vec&lt;usize&gt;,
+    _r: PhantomData&lt;R&gt;,
+    _f: PhantomData&lt;F&gt;,
+}
+
+impl&lt;R: Runtime, F: Float + CubeElement&gt; Clone for GpuTensor&lt;R, F&gt; {
+    fn clone(&amp;self) -&gt; Self {
+        Self {
+            data: self.data.clone(), // Handle is a pointer to the data, so cloning it is cheap
+            shape: self.shape.clone(),
+            strides: self.strides.clone(),
+            _r: PhantomData,
+            _f: PhantomData,
+        }
+    }
+}
+
+impl&lt;R: Runtime, F: Float + CubeElement&gt; GpuTensor&lt;R, F&gt; {
+    /// Create a GpuTensor with a shape filled by number in order
+    pub fn arange(shape: Vec&lt;usize&gt;, client: &amp;ComputeClient&lt;R::Server, R::Channel&gt;) -&gt; Self {
+        let size = shape.iter().product();
+        let data: Vec&lt;F&gt; = (0..size).map(|i| F::from_int(i as i64)).collect();
+        let data = client.create(F::as_bytes(&amp;data));
+
+        let strides = compact_strides(&amp;shape);
+        Self {
+            data,
+            shape,
+            strides,
+            _r: PhantomData,
+            _f: PhantomData,
+        }
+    }
+
+    /// Create an empty GpuTensor with a shape
+    pub fn empty(shape: Vec&lt;usize&gt;, client: &amp;ComputeClient&lt;R::Server, R::Channel&gt;) -&gt; Self {
+        let size = shape.iter().product();
+        let data = client.empty(size);
+
+        let strides = compact_strides(&amp;shape);
+        Self {
+            data,
+            shape,
+            strides,
+            _r: PhantomData,
+            _f: PhantomData,
+        }
+    }
+
+    /// Create a TensorArg to pass to a kernel
+    pub fn into_tensor_arg(&amp;self, line_size: u8) -&gt; TensorArg&lt;'_, R&gt; {
+        unsafe { TensorArg::from_raw_parts::&lt;F&gt;(&amp;self.data, &amp;self.strides, &amp;self.shape, line_size) }
+    }
+
+    /// Return the data from the client
+    pub fn read(self, client: &amp;ComputeClient&lt;R::Server, R::Channel&gt;) -&gt; Vec&lt;F&gt; {
+        let bytes = client.read_one(self.data.binding());
+        F::from_bytes(&amp;bytes).to_vec()
+    }
+}</code></pre>
+<h2 id="reduce-function-1"><a class="header" href="#reduce-function-1">Reduce function</a></h2>
+<p>Compared to the previous example, this function is similar but uses CubeCL's <code>cube</code> macro to define the kernel. The kernel performs the same reduction operation, summing the values of each row and storing the result in a new tensor. The variable <code>F</code> is a generic type that implements the <code>Float</code> trait, allowing the function to work with different floating-point types (e.g., <code>f32</code>, <code>f64</code>). The tensor is provided by cubecl::prelude, which includes the necessary traits and types for using CubeCL.</p>
+<pre><code class="language-rust ignore">use cubecl::prelude::*;
+use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;F&gt;, output: &amp;mut Tensor&lt;F&gt;) {
+    for i in 0..input.shape(0) {
+        let mut acc = F::new(0.0f32);
+        for j in 0..input.shape(1) {
+            acc += input[i * input.stride(0) + j];
+        }
+        output[i] = acc;
+    }
+}</code></pre>
+<h3 id="launching-code-1"><a class="header" href="#launching-code-1">Launching code</a></h3>
+<p>Once the kernel is defined, we can launch it using CubeCL's runtime. The following code creates a 3x3 matrix, initializes the input tensor, and calls the <code>reduce_matrix</code> function to perform the reduction. The result is printed to the console. Note that this code uses the <code>cubecl::wgpu::WgpuRuntime</code> runtime, which is a CubeCL runtime for WebGPU. You can replace it with any other CubeCL runtime that you prefer.</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl::prelude::*;
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">#[cube(launch_unchecked)]
+</span><span class="boring">fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;F&gt;, output: &amp;mut Tensor&lt;F&gt;) {
+</span><span class="boring">    for i in 0..input.shape(0) {
+</span><span class="boring">        let mut acc = F::new(0.0f32);
+</span><span class="boring">        for j in 0..input.shape(1) {
+</span><span class="boring">            acc += input[i * input.stride(0) + j];
+</span><span class="boring">        }
+</span><span class="boring">        output[i] = acc;
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+    let client = R::client(device);
+
+    let input = GpuTensor::&lt;R, F&gt;::arange(vec![3, 3], &amp;client);
+    let output = GpuTensor::&lt;R, F&gt;::empty(vec![3, 3], &amp;client);
+
+    unsafe {
+        reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+            &amp;client,
+            CubeCount::Static(1, 1, 1),
+            CubeDim::new(1, 1, 1),
+            input.into_tensor_arg(1),
+            input.into_tensor_arg(1),
+        )
+    };
+
+    println!(
+        "Executed reduction with runtime {:?} =&gt; {:?}",
+        R::name(&amp;client),
+        output.read(&amp;client)
+    );
+}
+
+fn main() {
+    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="benchmarking-reduction"><a class="header" href="#benchmarking-reduction">Benchmarking reduction</a></h1>
+<p>Now that we have a basic understanding of how to perform a reduction operation, let's benchmark it to see how it performs in terms of speed and efficiency.</p>
+<h2 id="benchmarking-struct"><a class="header" href="#benchmarking-struct">Benchmarking struct</a></h2>
+<p>For benchmarking, we will create a struct that holds the necessary information for the benchmark, such as the input shape, device, and client. This struct will be used to run the benchmark tests and configure the benchmarking environment. Please note that the <code>Runtime</code> and <code>Float</code> traits are used to make the benchmark generic over different CubeCL runtimes and floating-point types. A <code>PhantomData</code> is used to indicate that the struct holds a type parameter <code>F</code> without actually storing a value of that type, which is useful for generic programming in Rust, for more information see the <a href="https://doc.rust-lang.org/std/marker/struct.PhantomData.html">Rust documentation</a> and in our case allows us to easily change the type of float used in the benchmark.</p>
+<pre><code class="language-rust ignore">use std::marker::PhantomData;
+
+use cubecl::benchmark::{Benchmark, TimingMethod};
+use cubecl::{future, prelude::*};
+use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+
+pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+    input_shape: Vec&lt;usize&gt;,
+    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+    _f: PhantomData&lt;F&gt;,
+}</code></pre>
+<h2 id="implementing-the-benchmark-trait"><a class="header" href="#implementing-the-benchmark-trait">Implementing the benchmark trait</a></h2>
+<p>To benchmark a CubeCL kernel, it is recommended to implement the <code>Benchmark</code> trait that defines the necessary methods for preparing, executing, and synchronizing the benchmark because GPUs are asynchronous and most benchmarking tools will not wait for the GPU to finish executing the kernel before measuring the time it takes to execute it with a sync.</p>
+<pre><code class="language-rust ignore">/// Benchmark trait.
+pub trait Benchmark {
+    /// Benchmark input arguments.
+    type Input: Clone;
+    /// The benchmark output.
+    type Output;
+
+    /// Prepare the benchmark, run anything that is essential for the benchmark, but shouldn't
+    /// count as included in the duration.
+    ///
+    /// # Notes
+    ///
+    /// This should not include warmup, the benchmark will be run at least one time without
+    /// measuring the execution time.
+    fn prepare(&amp;self) -&gt; Self::Input;
+
+    /// Execute the benchmark and returns the logical output of the task executed.
+    ///
+    /// It is important to return the output since otherwise deadcode optimization might optimize
+    /// away code that should be benchmarked.
+    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output;
+
+    /// Name of the benchmark, should be short and it should match the name
+    /// defined in the crate Cargo.toml
+    fn name(&amp;self) -&gt; String;
+
+    /// Wait for computation to complete.
+    fn sync(&amp;self);
+}
+</code></pre>
+<p>In the <code>prepare</code> method, we will create the input data and return a <code>GpuTensor</code> that will be used in the <code>execute</code> method. The <code>execute</code> method will launch the kernel and the <code>sync</code> method will wait for the GPU to finish executing the kernel before measuring the time it takes to execute it. Don't forget to add the function that we want to benchmark.</p>
+<pre><code class="language-rust ignore">use std::marker::PhantomData;
+
+use cubecl::benchmark::{Benchmark, TimingMethod};
+use cubecl::{future, prelude::*};
+use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+
+pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+    input_shape: Vec&lt;usize&gt;,
+    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+    _f: PhantomData&lt;F&gt;,
+}
+
+impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+    type Input = GpuTensor&lt;R, F&gt;;
+    type Output = GpuTensor&lt;R, F&gt;;
+
+    fn prepare(&amp;self) -&gt; Self::Input {
+        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+    }
+
+    fn name(&amp;self) -&gt; String {
+        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+    }
+
+    fn sync(&amp;self) {
+        future::block_on(self.client.sync())
+    }
+
+    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+
+        unsafe {
+            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+                &amp;self.client,
+                CubeCount::Static(1, 1, 1),
+                CubeDim::new(1, 1, 1),
+                input.into_tensor_arg(1),
+                output.into_tensor_arg(1),
+            );
+        }
+
+        output
+    }
+}
+
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;F&gt;, output: &amp;mut Tensor&lt;F&gt;) {
+    for i in 0..input.shape(0) {
+        let mut acc = F::new(0.0f32);
+        for j in 0..input.shape(1) {
+            acc += input[i * input.stride(0) + j];
+        }
+        output[i] = acc;
+    }
+}</code></pre>
+<h2 id="running-the-benchmark"><a class="header" href="#running-the-benchmark">Running the benchmark</a></h2>
+<p>Now that we have implemented the <code>Benchmark</code> trait, we can run the benchmark using the <code>Benchmark::run</code> method. This method will execute the benchmark and return the time it took to complete it.</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::marker::PhantomData;
+</span><span class="boring">
+</span><span class="boring">use cubecl::benchmark::{Benchmark, TimingMethod};
+</span><span class="boring">use cubecl::{future, prelude::*};
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+</span><span class="boring">    input_shape: Vec&lt;usize&gt;,
+</span><span class="boring">    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+</span><span class="boring">    _f: PhantomData&lt;F&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+</span><span class="boring">    type Input = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">    type Output = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">
+</span><span class="boring">    fn prepare(&amp;self) -&gt; Self::Input {
+</span><span class="boring">        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn name(&amp;self) -&gt; String {
+</span><span class="boring">        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn sync(&amp;self) {
+</span><span class="boring">        future::block_on(self.client.sync())
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+</span><span class="boring">        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+</span><span class="boring">        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+</span><span class="boring">
+</span><span class="boring">        unsafe {
+</span><span class="boring">            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+</span><span class="boring">                &amp;self.client,
+</span><span class="boring">                CubeCount::Static(1, 1, 1),
+</span><span class="boring">                CubeDim::new(1, 1, 1),
+</span><span class="boring">                input.into_tensor_arg(1),
+</span><span class="boring">                output.into_tensor_arg(1),
+</span><span class="boring">            );
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        output
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cube(launch_unchecked)]
+</span><span class="boring">fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;F&gt;, output: &amp;mut Tensor&lt;F&gt;) {
+</span><span class="boring">    for i in 0..input.shape(0) {
+</span><span class="boring">        let mut acc = F::new(0.0f32);
+</span><span class="boring">        for j in 0..input.shape(1) {
+</span><span class="boring">            acc += input[i * input.stride(0) + j];
+</span><span class="boring">        }
+</span><span class="boring">        output[i] = acc;
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+    let client = R::client(&amp;device);
+
+    let bench1 = ReductionBench::&lt;R, F&gt; {
+        input_shape: vec![512, 8 * 1024],
+        client: client.clone(),
+        _f: PhantomData,
+    };
+    let bench2 = ReductionBench::&lt;R, F&gt; {
+        input_shape: vec![128, 32 * 1024],
+        client: client.clone(),
+        _f: PhantomData,
+    };
+
+    for bench in [bench1, bench2] {
+        println!("{}", bench.name());
+        println!("{}", bench.run(TimingMethod::System));
+    }
+}
+
+fn main() {
+    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+}</code></pre>
+<h2 id="the-results"><a class="header" href="#the-results">The Results</a></h2>
+<p>When you run the above code, it will execute the reduction benchmark for two different input shapes and print the results to the console. The output will look something like this:</p>
+<pre><code>wgpu&lt;wgsl&gt;-reduction-[512, 8192]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        240.730ms
+  Variance    1.595µs
+  Median      240.310ms
+  Min         239.974ms
+  Max         244.374ms
+―――――――――――――――――――――――――
+wgpu&lt;wgsl&gt;-reduction-[128, 32768]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        241.018ms
+  Variance    1.068µs
+  Median      240.943ms
+  Min         239.734ms
+  Max         243.782ms
+―――――――――――――――――――――――――
+</code></pre>
+<p>As we will see in the next chapter, our time is not that good, but it is expected because we are using a very simple kernel that does not take advantage of the GPU parallelism. In the next chapter, we will see how to optimize our kernel to take advantage of the GPU parallelism and improve the performance of our reduction operation.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parallel-reduction"><a class="header" href="#parallel-reduction">Parallel Reduction</a></h1>
+<p>Before we dive into the code to implement parallel reduction, let's take a look at the constants that CubeCL provides to help us
+write efficient parallel reduction kernels.</p>
+<h2 id="cubecl-constants"><a class="header" href="#cubecl-constants">CubeCL Constants</a></h2>
+<p>CubeCL is designed around - you guessed it - Cubes! More specifically, it's based on cuboids,
+because not all axes are the same size. Since all compute APIs need to map to the hardware, which
+are tiles that can be accessed using a 3D representation, our topology can easily be mapped to
+concepts from other APIs.</p>
+<div align="center">
+<h3 id="cubecl---topology"><a class="header" href="#cubecl---topology">CubeCL - Topology</a></h3>
+<img src="getting-started/cubecl.drawio.svg" width="100%">
+<br>
+</div>
+<br>
+<p><em>A cube is composed of units, so a 3x3x3 cube has 27 units that can be accessed by their positions
+along the x, y, and z axes. Similarly, a hyper-cube is composed of cubes, just as a cube is composed
+of units. Each cube in the hyper-cube can be accessed by its position relative to the hyper-cube
+along the x, y, and z axes. Hence, a hyper-cube of 3x3x3 will have 27 cubes. In this example, the
+total number of working units would be 27 x 27 = 729.</em></p>
+<h3 id="topology-equivalence"><a class="header" href="#topology-equivalence">Topology Equivalence</a></h3>
+<p>Since all topology variables are constant within the kernel entry point, we chose to use the Rust
+constant syntax with capital letters. Often when creating kernels, we don't always care about the
+relative position of a unit within a cube along each axis, but often we only care about its position
+in general. Therefore, each kind of variable also has its own axis-independent variable, which is
+often not present in other languages, except WebGPU with <code>local_invocation_index</code>.</p>
+<br>
+<div class="table-wrapper"><table><thead><tr><th>CubeCL</th><th>CUDA</th><th>WebGPU</th></tr></thead><tbody>
+<tr><td>CUBE_COUNT</td><td>N/A</td><td>N/A</td></tr>
+<tr><td>CUBE_COUNT_X</td><td>gridDim.x</td><td>num_workgroups.x</td></tr>
+<tr><td>CUBE_COUNT_Y</td><td>gridDim.y</td><td>num_workgroups.y</td></tr>
+<tr><td>CUBE_COUNT_Z</td><td>gridDim.z</td><td>num_workgroups.z</td></tr>
+<tr><td>CUBE_POS</td><td>N/A</td><td>N/A</td></tr>
+<tr><td>CUBE_POS_X</td><td>blockIdx.x</td><td>workgroup.x</td></tr>
+<tr><td>CUBE_POS_Y</td><td>blockIdx.y</td><td>workgroup.y</td></tr>
+<tr><td>CUBE_POS_Z</td><td>blockIdx.z</td><td>workgroup.z</td></tr>
+<tr><td>CUBE_DIM</td><td>N/A</td><td>N/A</td></tr>
+<tr><td>CUBE_DIM_X</td><td>blockDim.x</td><td>workgroup_size.x</td></tr>
+<tr><td>CUBE_DIM_Y</td><td>blockDim.y</td><td>workgroup_size.y</td></tr>
+<tr><td>CUBE_DIM_Z</td><td>blockDim.z</td><td>workgroup_size.z</td></tr>
+<tr><td>UNIT_POS</td><td>N/A</td><td>local_invocation_index</td></tr>
+<tr><td>UNIT_POS_X</td><td>threadIdx.x</td><td>local_invocation_id.x</td></tr>
+<tr><td>UNIT_POS_Y</td><td>threadIdx.y</td><td>local_invocation_id.y</td></tr>
+<tr><td>UNIT_POS_Z</td><td>threadIdx.z</td><td>local_invocation_id.z</td></tr>
+<tr><td>PLANE_DIM</td><td>warpSize</td><td>subgroup_size</td></tr>
+<tr><td>ABSOLUTE_POS</td><td>N/A</td><td>N/A</td></tr>
+<tr><td>ABSOLUTE_POS_X</td><td>N/A</td><td>global_id.x</td></tr>
+<tr><td>ABSOLUTE_POS_Y</td><td>N/A</td><td>global_id.y</td></tr>
+<tr><td>ABSOLUTE_POS_Z</td><td>N/A</td><td>global_id.z</td></tr>
+</tbody></table>
+</div>
+<h2 id="parallel-reduction-example"><a class="header" href="#parallel-reduction-example">Parallel Reduction Example</a></h2>
+<p>Remembering the previous example, we will now implement a parallel reduction using CubeCL. The goal is to reduce a 2D matrix into a 1D vector by summing the elements of each row. Where can we parallelize this operation? We can parallelize the reduction of each row, allowing each thread to compute the sum of a row independently. We need to change the launch parameters to set the CubeDim to launch multiple invocation in parallel and we can just remove the outer loop and use the <code>UNIT_POS_X</code> to access the rows of the input tensor. Please note that it is important to worry about data races when parallelizing operations, so we need to ensure that each invocation writes to a different position in the output tensor, because each invocation run in parallel.</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::marker::PhantomData;
+</span><span class="boring">
+</span><span class="boring">use cubecl::benchmark::{Benchmark, TimingMethod};
+</span><span class="boring">use cubecl::{future, prelude::*};
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+</span><span class="boring">    input_shape: Vec&lt;usize&gt;,
+</span><span class="boring">    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+</span><span class="boring">    _f: PhantomData&lt;F&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+</span><span class="boring">    type Input = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">    type Output = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">
+</span><span class="boring">    fn prepare(&amp;self) -&gt; Self::Input {
+</span><span class="boring">        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn name(&amp;self) -&gt; String {
+</span><span class="boring">        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn sync(&amp;self) {
+</span><span class="boring">        future::block_on(self.client.sync())
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+</span><span class="boring">        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+</span>        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+
+        unsafe {
+            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+                &amp;self.client,
+                CubeCount::Static(1, 1, 1),
+                CubeDim::new(self.input_shape[0] as u32, 1, 1), // Add parallelization on the first dimension
+                input.into_tensor_arg(1),
+                output.into_tensor_arg(1),
+            );
+        }
+
+        output
+    }
+}
+
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;F&gt;, output: &amp;mut Tensor&lt;F&gt;) {
+    let mut acc = F::new(0.0f32);
+    for i in 0..input.shape(1) {
+        acc += input[UNIT_POS_X * input.stride(0) + i];
+    }
+    output[UNIT_POS_X] = acc;
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(&amp;device);
+</span><span class="boring">
+</span><span class="boring">    let bench1 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![512, 8 * 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">    let bench2 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![128, 32 * 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for bench in [bench1, bench2] {
+</span><span class="boring">        println!("{}", bench.name());
+</span><span class="boring">        println!("{}", bench.run(TimingMethod::System));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<h2 id="the-results-1"><a class="header" href="#the-results-1">The Results</a></h2>
+<p>Now that we have improved parallelism, the kernel is up to 70x faster for the first shape and up to 25x faster for the second shape. Why is the first shape faster than the second? Even though the two shape have the same number of elements, the first shape has more rows than the second shape, which means that more invocations can be used to compute the reduction in parallel. The second shape has fewer rows, so fewer invocations are available to compute the reduction in parallel.</p>
+<pre><code>wgpu&lt;wgsl&gt;-reduction-[512, 8192]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        3.369ms
+  Variance    48.000ns
+  Median      3.321ms
+  Min         3.177ms
+  Max         4.011ms
+―――――――――――――――――――――――――
+wgpu&lt;wgsl&gt;-reduction-[128, 32768]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        8.713ms
+  Variance    5.069µs
+  Median      8.507ms
+  Min         5.963ms
+  Max         12.301ms
+―――――――――――――――――――――――――
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="vectorized-reduction"><a class="header" href="#vectorized-reduction">Vectorized Reduction</a></h1>
+<p>In this section, we will explore how to implement a vectorized reduction operation using CubeCL. Vectorization is a powerful technique that allows us to process multiple data elements simultaneously, significantly improving performance for certain types of computations especially I/O operations.</p>
+<h2 id="what-is-vectorization"><a class="header" href="#what-is-vectorization">What is vectorization?</a></h2>
+<p>Vectorization is the process of converting scalar operations (which operate on single data elements) into vector operations (which operate on multiple data elements simultaneously). This is typically done using SIMD (Single Instruction, Multiple Data) instructions available in modern CPUs and GPUs. By leveraging vectorization, we can achieve significant performance improvements for operations that can be vectorized. For more information on vectorization in CubeCL, you can refer to <a href="core-features/vectorization.html">this section</a>.</p>
+<h2 id="application-to-the-reduction-problem"><a class="header" href="#application-to-the-reduction-problem">Application to the reduction problem</a></h2>
+<p>To apply vectorization to the reduction problem, we will modify our reduction kernel to process multiple elements at once. This means that instead of summing one element at a time, we will sum multiple elements with vectorization, which can lead to substantial performance gains. The number of element processed at a time is the line size. So to add vectorization we just needs to pass the <code>LINE_SIZE</code> to the <code>TensorArgs</code> and reduce the number of iteration of the <code>reduce_matrix</code>.</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::marker::PhantomData;
+</span><span class="boring">
+</span><span class="boring">use cubecl::benchmark::{Benchmark, TimingMethod};
+</span><span class="boring">use cubecl::{future, prelude::*};
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+</span><span class="boring">    input_shape: Vec&lt;usize&gt;,
+</span><span class="boring">    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+</span><span class="boring">    _f: PhantomData&lt;F&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span>const LINE_SIZE: u32 = 4;
+
+impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+    type Input = GpuTensor&lt;R, F&gt;;
+    type Output = GpuTensor&lt;R, F&gt;;
+
+    fn prepare(&amp;self) -&gt; Self::Input {
+        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+    }
+
+    fn name(&amp;self) -&gt; String {
+        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+    }
+
+    fn sync(&amp;self) {
+        future::block_on(self.client.sync())
+    }
+
+    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+
+        unsafe {
+            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+                &amp;self.client,
+                CubeCount::Static(1, 1, 1),
+                CubeDim::new(self.input_shape[0] as u32, 1, 1),
+                input.into_tensor_arg(LINE_SIZE as u8),
+                output.into_tensor_arg(LINE_SIZE as u8),
+            );
+        }
+
+        output
+    }
+}
+
+// Note the addition of the [Line] struct inside the tensor to guarantee that the data is contiguous and can be parallelized.
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;Line&lt;F&gt;&gt;, output: &amp;mut Tensor&lt;Line&lt;F&gt;&gt;) {
+    let mut acc = Line::new(F::new(0.0f32)); // A [Line] is also necessary here
+    for i in 0..input.shape(1) / LINE_SIZE {
+        acc = acc + input[UNIT_POS_X * input.stride(0) + i];
+    }
+    output[UNIT_POS_X] = acc;
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(&amp;device);
+</span><span class="boring">
+</span><span class="boring">    let bench1 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![512, 8 * 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">    let bench2 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![128, 32 * 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for bench in [bench1, bench2] {
+</span><span class="boring">        println!("{}", bench.name());
+</span><span class="boring">        println!("{}", bench.run(TimingMethod::System));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<h2 id="the-result"><a class="header" href="#the-result">The Result</a></h2>
+<p>The result of adding vectorization is an average of 3x speedup compared to the previous parallel reduction implementation. This is because we are now processing multiple elements at a time in each invocation, which reduces the time of running a single invocation.</p>
+<pre><code>wgpu&lt;wgsl&gt;-reduction-[512, 8192]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        1.085ms
+  Variance    14.000ns
+  Median      1.045ms
+  Min         998.981µs
+  Max         1.375ms
+―――――――――――――――――――――――――
+wgpu&lt;wgsl&gt;-reduction-[128, 32768]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        3.124ms
+  Variance    37.000ns
+  Median      3.061ms
+  Min         3.009ms
+  Max         3.670ms
+―――――――――――――――――――――――――
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parallel-reduction-3d"><a class="header" href="#parallel-reduction-3d">Parallel reduction 3D</a></h1>
+<p>The purpose of this example is to demonstrate how to perform a parallel reduction operation on a 3D tensor using CubeCL. The reduction will sum the elements along the last dimension (depth) of the tensor, resulting in a 2D tensor.</p>
+<h2 id="a-first-try"><a class="header" href="#a-first-try">A first try</a></h2>
+<p>We will start with a simple implementation of a parallel reduction on a 3D tensor. The goal is to reduce the tensor along the last dimension (depth) by summing the elements. This will result in a 2D tensor where each element is the sum of the corresponding elements in the depth dimension.</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::marker::PhantomData;
+</span><span class="boring">
+</span><span class="boring">use cubecl::benchmark::{Benchmark, TimingMethod};
+</span><span class="boring">use cubecl::{future, prelude::*};
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+</span><span class="boring">    input_shape: Vec&lt;usize&gt;,
+</span><span class="boring">    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+</span><span class="boring">    _f: PhantomData&lt;F&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">const LINE_SIZE: u32 = 4;
+</span><span class="boring">
+</span><span class="boring">impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+</span><span class="boring">    type Input = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">    type Output = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">
+</span><span class="boring">    fn prepare(&amp;self) -&gt; Self::Input {
+</span><span class="boring">        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn name(&amp;self) -&gt; String {
+</span><span class="boring">        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn sync(&amp;self) {
+</span><span class="boring">        future::block_on(self.client.sync())
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+
+        unsafe {
+            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+                &amp;self.client,
+                CubeCount::Static(1, 1, 1),
+                CubeDim::new(self.input_shape[0] as u32, self.input_shape[1] as u32, 1),
+                input.into_tensor_arg(LINE_SIZE as u8),
+                output.into_tensor_arg(LINE_SIZE as u8),
+            );
+        }
+
+        output
+    }
+}
+
+// Note the addition of the [Line] struct inside the tensor to guarantee that the data is contiguous and can be parallelized.
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;Line&lt;F&gt;&gt;, output: &amp;mut Tensor&lt;Line&lt;F&gt;&gt;) {
+    let mut acc = Line::new(F::new(0.0f32)); // A [Line] is also necessary here
+    for i in 0..input.shape(2) / LINE_SIZE {
+        acc = acc + input[UNIT_POS_X * input.stride(0) + UNIT_POS_Y * input.stride(1) + i];
+    }
+    output[UNIT_POS_X * input.stride(0) + UNIT_POS_Y] = acc;
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(&amp;device);
+</span><span class="boring">
+</span><span class="boring">    let bench1 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 256, 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">    let bench2 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 64, 4096],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for bench in [bench1, bench2] {
+</span><span class="boring">        println!("{}", bench.name());
+</span><span class="boring">        println!("{}", bench.run(TimingMethod::System));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<p>Let's try to run this code.</p>
+<pre><code>wgpu error: Validation Error
+
+Caused by:
+  In Device::create_compute_pipeline, label = 'reduce_matrix_f32'
+    Error matching shader requirements against the pipeline
+      Shader entry point's workgroup size [64, 256, 1] (16384 total invocations) must be less or equal to the per-dimension limit [1024, 1024, 1024] and the total invocation limit 1024
+</code></pre>
+<p>What happened? The error message indicates that the workgroup size exceeds the limits imposed by the WebGPU backend. The total number of invocations (64 * 256 * 1 = 16384) exceeds the maximum allowed invocations per workgroup, which is 1024. In other words, the CubeDim size is too large for the GPU to handle. We needs to find another way to parallelize the reduction operation without exceeding the limits.</p>
+<h2 id="a-better-approach"><a class="header" href="#a-better-approach">A better approach</a></h2>
+<p>To address the issue, we will parallelize with the <code>CUBE_COUNT</code> and <code>CUBE_POS</code> variables, which will allow us to launch multiple invocation in parallel without exceeding the limits of the <code>CUBE_DIM</code>. The <code>CUBE_COUNT</code> variable will determine how many invocation we will launch, and the <code>CUBE_POS</code> variable will determine the position of each invocation in the 3D tensor.</p>
+<pre><code class="language-rust ignore"><span class="boring">use std::marker::PhantomData;
+</span><span class="boring">
+</span><span class="boring">use cubecl::benchmark::{Benchmark, TimingMethod};
+</span><span class="boring">use cubecl::{future, prelude::*};
+</span><span class="boring">use cubecl_example::gpu_tensor::GpuTensor; // Change to the path of your own module containing the GpuTensor
+</span><span class="boring">
+</span><span class="boring">pub struct ReductionBench&lt;R: Runtime, F: Float + CubeElement&gt; {
+</span><span class="boring">    input_shape: Vec&lt;usize&gt;,
+</span><span class="boring">    client: ComputeClient&lt;R::Server, R::Channel&gt;,
+</span><span class="boring">    _f: PhantomData&lt;F&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">const LINE_SIZE: u32 = 4;
+</span><span class="boring">
+</span><span class="boring">impl&lt;R: Runtime, F: Float + CubeElement&gt; Benchmark for ReductionBench&lt;R, F&gt; {
+</span><span class="boring">    type Input = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">    type Output = GpuTensor&lt;R, F&gt;;
+</span><span class="boring">
+</span><span class="boring">    fn prepare(&amp;self) -&gt; Self::Input {
+</span><span class="boring">        GpuTensor::&lt;R, F&gt;::arange(self.input_shape.clone(), &amp;self.client)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn name(&amp;self) -&gt; String {
+</span><span class="boring">        format!("{}-reduction-{:?}", R::name(&amp;self.client), self.input_shape).to_lowercase()
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn sync(&amp;self) {
+</span><span class="boring">        future::block_on(self.client.sync())
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    fn execute(&amp;self, input: Self::Input) -&gt; Self::Output {
+        let output_shape: Vec&lt;usize&gt; = vec![self.input_shape[0]];
+        let output = GpuTensor::&lt;R, F&gt;::empty(output_shape, &amp;self.client);
+
+        unsafe {
+            reduce_matrix::launch_unchecked::&lt;F, R&gt;(
+                &amp;self.client,
+                CubeCount::Static(self.input_shape[0] as u32, 1, 1),
+                CubeDim::new(self.input_shape[1] as u32, 1, 1),
+                input.into_tensor_arg(LINE_SIZE as u8),
+                output.into_tensor_arg(LINE_SIZE as u8),
+            );
+        }
+
+        output
+    }
+}
+
+// Note the addition of the [Line] struct inside the tensor to guarantee that the data is contiguous and can be parallelized.
+#[cube(launch_unchecked)]
+fn reduce_matrix&lt;F: Float&gt;(input: &amp;Tensor&lt;Line&lt;F&gt;&gt;, output: &amp;mut Tensor&lt;Line&lt;F&gt;&gt;) {
+    let mut acc = Line::new(F::new(0.0f32)); // A [Line] is also necessary here
+    for i in 0..input.shape(2) / LINE_SIZE {
+        acc = acc + input[CUBE_POS_X * input.stride(0) + UNIT_POS_X * input.stride(1) + i];
+    }
+    output[CUBE_POS_X * output.stride(0) + UNIT_POS_X] = acc;
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(&amp;device);
+</span><span class="boring">
+</span><span class="boring">    let bench1 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 256, 1024],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">    let bench2 = ReductionBench::&lt;R, F&gt; {
+</span><span class="boring">        input_shape: vec![64, 64, 4096],
+</span><span class="boring">        client: client.clone(),
+</span><span class="boring">        _f: PhantomData,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for bench in [bench1, bench2] {
+</span><span class="boring">        println!("{}", bench.name());
+</span><span class="boring">        println!("{}", bench.run(TimingMethod::System));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<p>Now, let's run the code again.</p>
+<pre><code>wgpu&lt;wgsl&gt;-reduction-[64, 256, 1024]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        1.483ms
+  Variance    27.000ns
+  Median      1.535ms
+  Min         1.239ms
+  Max         1.808ms
+―――――――――――――――――――――――――
+wgpu&lt;wgsl&gt;-reduction-[64, 64, 4096]
+
+―――――――― Result ―――――――――
+  Timing      system
+  Samples     10
+  Mean        924.409µs
+  Variance    189.000ns
+  Median      945.270µs
+  Min         600.110µs
+  Max         2.098ms
+―――――――――――――――――――――――――
+</code></pre>
+<p>It runs and it is fast! The reduction operation is now parallelized across multiple invocations, and we can see that the performance is significantly improved compared to the previous implementation. The results show that the reduction operation is efficient and can handle larger tensors without exceeding the GPU limits. It's also almost the same speed as the 2D reduction, even if there's even more elements to reduce. This is because the reduction is now parallelized across multiple cubes and hyper-cubes, allowing the GPU to process the data more efficiently. See the <a href="getting-started/parallel_reduction.html">parallel reduction</a> if you need a refresher on the different parallelization level used in CubeCL. It is also worth noting that the performance and optimal <code>CUBE_COUNT</code> and <code>CUBE_DIM</code> values may vary depending on the GPU architecture and the specific workload. You may need to experiment with different values to find the best configuration for your use case.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
+<p>For now we only have a limited amount of examples listed in the table below. Note that you can also
+look at how the <a href="https://github.com/tracel-ai/cubecl/tree/main/crates/cubecl-matmul">matmul</a> is
+implemented. Don't hesitate to contribute more examples to the CubeCL repository!</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Example</th><th>Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><a href="https://github.com/tracel-ai/cubecl/tree/main/examples/gelu">GeLU</a></td><td>Implement the GeLU activation function using CubeCL.</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/tracel-ai/cubecl/tree/main/examples/sum_things">Sum Things</a></td><td>Sum some numbers using many different variations leveraging the CubeCL core features and trait support.</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/tracel-ai/cubecl/tree/main/examples/normalization">Normalization</a></td><td>Show how to use normalization on vectorized elements.</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/tracel-ai/cubecl/tree/main/examples/device_sharing">Device Sharing</a></td><td>Share a WGPU device with CubeCL and other service.</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/tracel-ai/cubecl/tree/main/examples/fusing">Fusing</a></td><td>Use comptime to select operation</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="core-features"><a class="header" href="#core-features">Core Features</a></h1>
+<p>In this section, we'll explore the core features of CubeCL and what sets it apart from other
+high-performance computing languages like CUDA, OpenCL, and HIP.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="comptime"><a class="header" href="#comptime">Comptime</a></h1>
+<p>CubeCL isn't just a new compute language: though it feels like you are writing GPU kernels, you are,
+in fact, writing compiler plugins that you can fully customize! Comptime is a way to modify the
+compiler IR at runtime when compiling a kernel for the first time.</p>
+<p>This enables a lot of optimizations and flexibility without having to write many separate variants
+of the same kernels to ensure maximal performance.</p>
+<h2 id="loop-unrolling"><a class="header" href="#loop-unrolling">Loop Unrolling</a></h2>
+<p>You can easily unroll loops in CubeCL using the <code>unroll</code> attribute on top of a for loop.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cube(launch)]
+fn sum&lt;F: Float&gt;(input: &amp;Array&lt;F&gt;, output: &amp;mut Array&lt;F&gt;, #[comptime] end: Option&lt;u32&gt;) {
+    let unroll = end.is_some();
+    let end = end.unwrap_or_else(|| input.len());
+    let mut sum = F::new(0.0);
+
+    #[unroll(unroll)]
+    for i in 0..end {
+        sum += input[i];
+    }
+
+    output[ABSOLUTE_POS] = sum;
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Note that if you provide a variable <code>end</code> that can't be determined at compile time, a panic will
+arise when trying to execute that kernel.</p>
+<h2 id="feature-specialization"><a class="header" href="#feature-specialization">Feature Specialization</a></h2>
+<p>You could also achieve the sum using plane operations. We will write a kernel that uses that
+instruction when available based on a comptime feature flag. When it isn't available, it will fall
+back on the previous implementation, essentially making it portable.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cube(launch)]
+fn sum_plane&lt;F: Float&gt;(
+    input: &amp;Array&lt;F&gt;,
+    output: &amp;mut Array&lt;F&gt;,
+    #[comptime] plane: bool,
+    #[comptime] end: Option&lt;u32&gt;,
+) {
+    if plane {
+        output[UNIT_POS] = plane_sum(input[UNIT_POS]);
+    } else {
+        sum_basic(input, output, end);
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Note that no branching will actually occur on the GPU, since three different kernels can be
+generated from the last code snippet. You can also use the
+<a href="language-support/trait.html">trait system</a> to achieve a similar behavior.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="vectorization"><a class="header" href="#vectorization">Vectorization</a></h1>
+<p>High-performance kernels should rely on SIMD instructions whenever possible, but doing so can
+quickly get pretty complicated! With CubeCL, you can specify the vectorization factor of each input
+variable when launching a kernel. Inside the kernel code, you still use only one type, which is
+dynamically vectorized and supports automatic broadcasting. The runtimes are able to compile kernels
+and have all the necessary information to use the best instructions! However, since the algorithmic
+behavior may depend on the vectorization factor, CubeCL allows you to access it directly in the
+kernel when needed, without any performance loss, using the comptime system!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="autotune"><a class="header" href="#autotune">Autotune</a></h1>
+<p>Autotuning drastically simplifies kernel selection by running small benchmarks at runtime to figure
+out the best kernels with the best configurations to run on the current hardware; an essential
+feature for portability. This feature combines gracefully with comptime to test the effect of
+different comptime values on performance; sometimes it can be surprising!</p>
+<p>Even if the benchmarks may add some overhead when running the application for the first time, the
+information gets cached on the device and will be reused. It is usually a no-brainer trade-off for
+throughput-oriented programs such as deep learning models. You can even ship the autotune cache with
+your program, reducing cold start time when you have more control over the deployment target.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="querying-hardware-features"><a class="header" href="#querying-hardware-features">Querying hardware features</a></h1>
+<p>Some features and datatypes are only supported on some hardware or some backends. They can be
+queried with:</p>
+<pre><code class="language-rust  ignore">client.properties().feature_enabled(feature)</code></pre>
+<p>Also see <a href="https://docs.rs/cubecl/latest/cubecl/enum.Feature.html"><code>Feature</code></a>.</p>
+<h2 id="overview-1"><a class="header" href="#overview-1">Overview</a></h2>
+<h3 id="features"><a class="header" href="#features">Features</a></h3>
+<p>Also requires device support</p>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>CUDA</th><th>ROCm</th><th>WGPU (WGSL)</th><th>WGPU (SPIR-V)</th></tr></thead><tbody>
+<tr><td>Plane</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+<tr><td>CMMA</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+</tbody></table>
+</div>
+<h3 id="datatypes"><a class="header" href="#datatypes">Datatypes</a></h3>
+<p><code>flex32</code> represented as <code>f32</code> everywhere except SPIR-V, with no reduced precision. <code>f64</code> not
+supported for all operations</p>
+<div class="table-wrapper"><table><thead><tr><th>Type</th><th>CUDA</th><th>ROCm</th><th>WGPU (WGSL)</th><th>WGPU (SPIR-V)</th></tr></thead><tbody>
+<tr><td>u8</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+<tr><td>u16</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+<tr><td>u32</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+<tr><td>u64</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+<tr><td>i8</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+<tr><td>i16</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+<tr><td>i32</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+<tr><td>i64</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+<tr><td>f16</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td></tr>
+<tr><td>bf16</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td></tr>
+<tr><td>flex32</td><td>❔</td><td>❔</td><td>❔</td><td>✔️</td></tr>
+<tr><td>tf32</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td></tr>
+<tr><td>f32</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+<tr><td>f64</td><td>❔</td><td>❔</td><td>❌</td><td>❔</td></tr>
+<tr><td>bool</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+</tbody></table>
+</div>
+<h2 id="datatype-details"><a class="header" href="#datatype-details">Datatype Details</a></h2>
+<h3 id="flex32"><a class="header" href="#flex32">Flex32</a></h3>
+<p>Relaxed precision 32-bit float. Minimum range and precision is equivalent to <code>f16</code>, but may be
+higher. Defaults to <code>f32</code> when relaxed precision isn't supported.</p>
+<h3 id="tensor-float32"><a class="header" href="#tensor-float32">Tensor-Float32</a></h3>
+<p>19-bit CUDA-only type that should only be used as a CMMA matrix type. May be able to reinterpret
+from <code>f32</code>, but officially undefined. Use <code>Cast::cast_from</code> to safely convert.</p>
+<h2 id="feature-details"><a class="header" href="#feature-details">Feature Details</a></h2>
+<h3 id="plane"><a class="header" href="#plane">Plane</a></h3>
+<p>Plane level operations, i.e.
+<a href="https://docs.rs/cubecl/latest/cubecl/frontend/fn.plane_sum.html"><code>plane_sum</code></a>,
+<a href="https://docs.rs/cubecl/latest/cubecl/frontend/fn.plane_elect.html"><code>plane_elect</code></a>.</p>
+<h3 id="cooperative-matrix-multiply-add-cmma"><a class="header" href="#cooperative-matrix-multiply-add-cmma">Cooperative Matrix Multiply-Add (CMMA)</a></h3>
+<p>Plane-level cooperative matrix multiply-add operations. Maps to <code>wmma</code> in CUDA and
+<code>CooperativeMatrixMultiply</code> in SPIR-V. Features are registered for each size and datatype that is
+supported by the hardware. For supported functions, see
+<a href="https://docs.rs/cubecl/latest/cubecl/frontend/cmma/index.html"><code>cmma</code></a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="language-support"><a class="header" href="#language-support">Language Support</a></h1>
+<p>In this section, we will highlight key language features of CubeCL and demonstrate how to use them
+in your kernels to enhance performance, portability, and maintainability.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="trait-support"><a class="header" href="#trait-support">Trait Support</a></h1>
+<p>CubeCL partially supports traits to modularize your kernel code without any overhead. For now most
+features are supported except stateful functions.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cube]
+trait MyTrait {
+    /// Supported
+    fn my_function(x: &amp;Array&lt;f32&gt;) -&gt; f32;
+    /// Unsupported
+    fn my_function_2(&amp;self, x: &amp;Array&lt;f32&gt;) -&gt; f32;
+}
+<span class="boring">}</span></code></pre></pre>
+<p>The trait system allows you to do specialization quite easily. Let's take the same example as in the
+<a href="core-features/comptime.html">comptime section</a>.</p>
+<p>First you can define your trait. Note that if you use your trait from the launch function, you will
+need to add <code>'static + Send + Sync</code>.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cube]
+trait SumKind: 'static + Send + Sync {
+    fn sum&lt;F: Float&gt;(input: &amp;Slice&lt;F&gt;, #[comptime] end: Option&lt;u32&gt;) -&gt; F;
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Then we can define some implementations:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct SumBasic;
+struct SumPlane;
+
+#[cube]
+impl SumKind for SumBasic {
+    fn sum&lt;F: Float&gt;(input: &amp;Slice&lt;F&gt;, #[comptime] end: Option&lt;u32&gt;) -&gt; F {
+        let unroll = end.is_some();
+        let end = end.unwrap_or_else(|| input.len());
+
+        let mut sum = F::new(0.0);
+
+        #[unroll(unroll)]
+        for i in 0..end {
+            sum += input[i];
+        }
+
+        sum
+    }
+}
+
+#[cube]
+impl SumKind for SumPlane {
+    fn sum&lt;F: Float&gt;(input: &amp;Slice&lt;F&gt;, #[comptime] _end: Option&lt;u32&gt;) -&gt; F {
+        plane_sum(input[UNIT_POS])
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p><a href="https://doc.rust-lang.org/book/ch20-02-advanced-traits.html#specifying-placeholder-types-in-trait-definitions-with-associated-types">Associated types</a> are also supported. Let's say you want to create a series from a sum.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cube]
+trait CreateSeries: 'static + Send + Sync {
+    type SumKind: SumKind;
+
+    fn execute&lt;F: Float&gt;(input: &amp;Slice&lt;F&gt;, #[comptime] end: Option&lt;u32&gt;) -&gt; F;
+}
+<span class="boring">}</span></code></pre></pre>
+<p>You may want to define what kind of series you want to create using an implementation.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct SumThenMul&lt;K: SumKind&gt; {
+    _p: PhantomData&lt;K&gt;,
+}
+
+#[cube]
+impl&lt;K: SumKind&gt; CreateSeries for SumThenMul&lt;K&gt; {
+    type SumKind = K;
+
+    fn execute&lt;F: Float&gt;(input: &amp;Slice&lt;F&gt;, #[comptime] end: Option&lt;u32&gt;) -&gt; F {
+        let val = Self::SumKind::sum(input, end);
+        val * input[UNIT_POS]
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>It's actually not the best example of using <a href="https://doc.rust-lang.org/book/ch20-02-advanced-traits.html#specifying-placeholder-types-in-trait-definitions-with-associated-types">associated types</a>,
+but it shows how they are totally supported with CubeCL.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="enum-support"><a class="header" href="#enum-support">Enum Support</a></h1>
+<p>CubeCL provides robust support for Rust enums, enabling you to express variant-based logic in your GPU kernels. Enums can be used as kernel arguments, returned from kernels, or as intermediate types within your GPU code. This allows you to write expressive, idiomatic Rust code that maps efficiently to GPU kernels.</p>
+<h2 id="defining-enums"><a class="header" href="#defining-enums">Defining enums</a></h2>
+<p>To use an enum in a CubeCL kernel, simply derive the required traits on the enum you want to use:</p>
+<ul>
+<li><code>CubeType</code> enables the enum to be used as a CubeCL type in a kernel.</li>
+<li><code>CubeLaunch</code> allows the enum to be used as a kernel argument or return type.</li>
+</ul>
+<p>Enums can also have data associated with their variants, as long as all fields implement the required CubeCL traits, here's an example that is available in cubecl-std:</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl::prelude::*;
+</span><span class="boring">
+</span>#[derive(CubeType, CubeLaunch)]
+pub enum CubeOption&lt;T: CubeLaunch + CubeType&gt; {
+    Some(T),
+    None,
+}</code></pre>
+<h2 id="using-enums-in-kernels"><a class="header" href="#using-enums-in-kernels">Using enums in kernels</a></h2>
+<p>Enums can be passed as kernel arguments, returned from kernels, or used as local variables:</p>
+<pre><code class="language-rust ignore">use cubecl::prelude::*;
+
+#[derive(CubeType, CubeLaunch, Clone, Copy)]
+pub enum Function {
+    AffineTransformation { a: f32, b: f32 },
+    Cos,
+    DivideScalar(f32),
+}
+
+#[cube(launch_unchecked)]
+pub fn kernel_enum_example(
+    input: &amp;Array&lt;Line&lt;f32&gt;&gt;,
+    output: &amp;mut Array&lt;Line&lt;f32&gt;&gt;,
+    function: Function,
+) {
+    output[UNIT_POS] = match function {
+        Function::AffineTransformation { a, b } =&gt; Line::new(a) * input[UNIT_POS] + Line::new(b),
+        Function::Cos =&gt; Line::cos(input[UNIT_POS]),
+        Function::DivideScalar(coef) =&gt; input[UNIT_POS] / Line::new(coef),
+    }
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(device);
+</span><span class="boring">    let input = client.create(f32::as_bytes(&amp;[1.0, -2.0, 0.5]));
+</span><span class="boring">    let output = client.empty(3 * core::mem::size_of::&lt;f32&gt;());
+</span><span class="boring">    unsafe {
+</span><span class="boring">        kernel_enum_example::launch_unchecked::&lt;R&gt;(
+</span><span class="boring">            &amp;client,
+</span><span class="boring">            CubeCount::Static(1, 1, 1),
+</span><span class="boring">            CubeDim::new(3, 1, 1),
+</span><span class="boring">            ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;input, 3, 2),
+</span><span class="boring">            ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;output, 3, 2),
+</span><span class="boring">            FunctionArgs::AffineTransformation {
+</span><span class="boring">                a: ScalarArg::new(1.0),
+</span><span class="boring">                b: ScalarArg::new(2.0),
+</span><span class="boring">            },
+</span><span class="boring">        )
+</span><span class="boring">    };
+</span><span class="boring">    println!(
+</span><span class="boring">        "Executed kernel_enum_example with runtime {:?} =&gt; {:?}",
+</span><span class="boring">        R::name(&amp;client),
+</span><span class="boring">        f32::from_bytes(&amp;client.read_one(output.binding()))
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<p>You can also use enums with data in pattern matching:</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl::prelude::*;
+</span><span class="boring">
+</span><span class="boring">#[derive(CubeType, CubeLaunch)]
+</span><span class="boring">pub enum CubeOption&lt;T: CubeType&gt; {
+</span><span class="boring">    Some(T),
+</span><span class="boring">    None,
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[cube(launch_unchecked)]
+pub fn kernel_enum_option(input: &amp;Array&lt;f32&gt;, output: &amp;mut Array&lt;f32&gt;, maybe: CubeOption&lt;Array&lt;f32&gt;&gt;) {
+    output[UNIT_POS] = match maybe {
+        CubeOption::Some(val) =&gt; input[UNIT_POS] + val[UNIT_POS],
+        CubeOption::None =&gt; input[UNIT_POS],
+    };
+}</code></pre>
+<h2 id="adding-methods-to-enums"><a class="header" href="#adding-methods-to-enums">Adding methods to enums</a></h2>
+<p>You can implement methods for enums using the <code>#[cube]</code> attribute on the <code>impl</code> block:</p>
+<pre><code class="language-rust ignore">use cubecl::prelude::*;
+
+#[derive(CubeType, CubeLaunch, Clone, Copy)]
+pub enum Function {
+    AffineTransformation { a: f32, b: f32 },
+    Cos,
+    DivideScalar(f32),
+}
+
+#[cube]
+impl Function {
+    pub fn apply(self, x: Line&lt;f32&gt;) -&gt; Line&lt;f32&gt; {
+        match self {
+            Function::AffineTransformation { a, b } =&gt; Line::new(a) * x + Line::new(b),
+            Function::Cos =&gt; Line::cos(x),
+            Function::DivideScalar(coef) =&gt; x / Line::new(coef),
+        }
+    }
+}
+
+#[cube(launch_unchecked)]
+pub fn kernel_enum_example(
+    input: &amp;Array&lt;Line&lt;f32&gt;&gt;,
+    output: &amp;mut Array&lt;Line&lt;f32&gt;&gt;,
+    function: Function,
+) {
+    output[UNIT_POS] = function.apply(input[UNIT_POS]);
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(device);
+</span><span class="boring">    let input = client.create(f32::as_bytes(&amp;[1.0, -2.0, 0.5]));
+</span><span class="boring">    let output = client.empty(3 * core::mem::size_of::&lt;f32&gt;());
+</span><span class="boring">    unsafe {
+</span><span class="boring">        kernel_enum_example::launch_unchecked::&lt;R&gt;(
+</span><span class="boring">            &amp;client,
+</span><span class="boring">            CubeCount::Static(1, 1, 1),
+</span><span class="boring">            CubeDim::new(3, 1, 1),
+</span><span class="boring">            ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;input, 3, 2),
+</span><span class="boring">            ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;output, 3, 2),
+</span><span class="boring">            FunctionArgs::AffineTransformation {
+</span><span class="boring">                a: ScalarArg::new(1.0),
+</span><span class="boring">                b: ScalarArg::new(2.0),
+</span><span class="boring">            },
+</span><span class="boring">        )
+</span><span class="boring">    };
+</span><span class="boring">    println!(
+</span><span class="boring">        "Executed kernel_enum_example with runtime {:?} =&gt; {:?}",
+</span><span class="boring">        R::name(&amp;client),
+</span><span class="boring">        f32::from_bytes(&amp;client.read_one(output.binding()))
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="struct-support"><a class="header" href="#struct-support">Struct Support</a></h1>
+<p>CubeCL provides robust support for Rust structs, allowing you to organize and modularize your kernel code with zero-cost abstractions. Structs can be used as kernel arguments, returned from kernels, or as intermediate types within your GPU code. This enables you to write idiomatic, maintainable Rust code that maps efficiently to GPU kernels.</p>
+<h2 id="defining-structs"><a class="header" href="#defining-structs">Defining structs</a></h2>
+<p>To use a struct in a CubeCL kernel, simply derive the required traits on the struct that you want to use:</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl::prelude::*;
+</span><span class="boring">
+</span>#[derive(CubeType, CubeLaunch)]
+pub struct Pair&lt;T: CubeLaunch&gt; {
+    pub left: T,
+    pub right: T,
+}</code></pre>
+<ul>
+<li><code>CubeType</code> enables the struct to be used as a CubeCL type in a kernel.</li>
+<li><code>CubeLaunch</code> allows the struct to be used as a kernel argument or return type.</li>
+</ul>
+<p>Structs can contain other structs, arrays, or generic parameters, as long as all fields implement the required CubeCL traits. Generics are also supported, allowing you to create reusable types that can be instantiated with different types.</p>
+<h2 id="using-structs-in-kernels"><a class="header" href="#using-structs-in-kernels">Using structs in kernels</a></h2>
+<p>Structs can be passed as kernel arguments if annotated with <code>CubeLaunch</code>, returned from kernels, or used as local variables:</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl::prelude::*;
+</span><span class="boring">
+</span><span class="boring">#[derive(CubeType, CubeLaunch)]
+</span><span class="boring">pub struct Pair&lt;T: CubeLaunch&gt; {
+</span><span class="boring">    pub left: T,
+</span><span class="boring">    pub right: T,
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[cube(launch_unchecked)]
+pub fn kernel_struct_example(pair: &amp;Pair&lt;Array&lt;f32&gt;&gt;, output: &amp;mut Array&lt;f32&gt;) {
+    output[UNIT_POS] = pair.left[UNIT_POS] + pair.right[UNIT_POS];
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(device);
+</span><span class="boring">
+</span><span class="boring">    let left = [f32::from_int(1)];
+</span><span class="boring">    let left = client.create(f32::as_bytes(&amp;left));
+</span><span class="boring">    let right = [f32::from_int(1)];
+</span><span class="boring">    let right = client.create(f32::as_bytes(&amp;right));
+</span><span class="boring">    let output = client.empty(core::mem::size_of::&lt;f32&gt;());
+</span><span class="boring">
+</span><span class="boring">    unsafe {
+</span><span class="boring">        kernel_struct_example::launch_unchecked::&lt;R&gt;(
+</span><span class="boring">            &amp;client,
+</span><span class="boring">            CubeCount::Static(1, 1, 1),
+</span><span class="boring">            CubeDim::new(1, 1, 1),
+</span><span class="boring">            PairLaunch::new(
+</span><span class="boring">                ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;left, 1, 1),
+</span><span class="boring">                ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;right, 1, 1),
+</span><span class="boring">            ),
+</span><span class="boring">            ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;output, 1, 1),
+</span><span class="boring">        )
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    println!(
+</span><span class="boring">        "Executed kernel_struct_example with runtime {:?} =&gt; {:?}",
+</span><span class="boring">        R::name(&amp;client),
+</span><span class="boring">        f32::from_bytes(&amp;client.read_one(output.binding()))
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<p>You can also mutate struct fields if the struct is passed as a mutable reference:</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl::prelude::*;
+</span><span class="boring">
+</span><span class="boring">#[derive(CubeType, CubeLaunch)]
+</span><span class="boring">pub struct Pair&lt;T: CubeLaunch&gt; {
+</span><span class="boring">    pub left: T,
+</span><span class="boring">    pub right: T,
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[cube(launch_unchecked)]
+pub fn kernel_struct_mut(output: &amp;mut Pair&lt;Array&lt;f32&gt;&gt;) {
+    output.left[UNIT_POS] = 42.0;
+    output.right[UNIT_POS] = 3.14;
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(device);
+</span><span class="boring">
+</span><span class="boring">    let left = [f32::from_int(1)];
+</span><span class="boring">    let left = client.create(f32::as_bytes(&amp;left));
+</span><span class="boring">    let right = [f32::from_int(1)];
+</span><span class="boring">    let right = client.create(f32::as_bytes(&amp;right));
+</span><span class="boring">
+</span><span class="boring">    unsafe {
+</span><span class="boring">        kernel_struct_mut::launch_unchecked::&lt;R&gt;(
+</span><span class="boring">            &amp;client,
+</span><span class="boring">            CubeCount::Static(1, 1, 1),
+</span><span class="boring">            CubeDim::new(1, 1, 1),
+</span><span class="boring">            PairLaunch::new(
+</span><span class="boring">                ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;left, 1, 1),
+</span><span class="boring">                ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;right, 1, 1),
+</span><span class="boring">            ),
+</span><span class="boring">        )
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    println!(
+</span><span class="boring">        "Executed kernel_struct_mut with runtime {:?} =&gt; ({:?}, {:?})",
+</span><span class="boring">        R::name(&amp;client),
+</span><span class="boring">        f32::from_bytes(&amp;client.read_one(left.binding())),
+</span><span class="boring">        f32::from_bytes(&amp;client.read_one(right.binding())),
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<h2 id="comptime-fields"><a class="header" href="#comptime-fields">Comptime fields</a></h2>
+<p>You can mark struct fields as comptime, which means their values are known at kernel compilation time and can be used for specialization:</p>
+<pre><code class="language-rust ignore"><span class="boring">use cubecl::prelude::*;
+</span><span class="boring">
+</span>#[derive(CubeType, CubeLaunch)]
+pub struct TaggedArray {
+    pub array: Array&lt;f32&gt;,
+    #[cube(comptime)]
+    pub tag: String,
+}
+
+#[cube(launch_unchecked)]
+pub fn kernel_with_tag(output: &amp;mut TaggedArray) {
+    if UNIT_POS == 0 {
+        if comptime! {&amp;output.tag == "zero"} {
+            output.array[0] = 0.0;
+        } else {
+            output.array[0] = 1.0;
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime, F: Float + CubeElement&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(device);
+</span><span class="boring">
+</span><span class="boring">    let output = client.empty(core::mem::size_of::&lt;F&gt;());
+</span><span class="boring">
+</span><span class="boring">    unsafe {
+</span><span class="boring">        kernel_with_tag::launch_unchecked::&lt;R&gt;(
+</span><span class="boring">            &amp;client,
+</span><span class="boring">            CubeCount::Static(1, 1, 1),
+</span><span class="boring">            CubeDim::new(1, 1, 1),
+</span><span class="boring">            TaggedArrayLaunch::new(
+</span><span class="boring">                ArrayArg::&lt;R&gt;::from_raw_parts::&lt;F&gt;(&amp;output, 1, 1),
+</span><span class="boring">                &amp;"not_zero".to_string(),
+</span><span class="boring">            ),
+</span><span class="boring">        )
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    println!(
+</span><span class="boring">        "Executed kernel_with_tag with runtime {:?} =&gt; {:?}",
+</span><span class="boring">        R::name(&amp;client),
+</span><span class="boring">        F::from_bytes(&amp;client.read_one(output.binding()))
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime, f32&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<h2 id="adding-methods-to-struct"><a class="header" href="#adding-methods-to-struct">Adding methods to struct</a></h2>
+<p>You can implement methods for structs using the <code>#[cube]</code> attribute. Please note that the <code>#[cube]</code> attribute must be on the impl block. Here's an example:</p>
+<pre><code class="language-rust ignore">use cubecl::prelude::*;
+
+#[derive(CubeType, CubeLaunch)]
+pub struct Pair&lt;T: CubeLaunch&gt; {
+    pub left: T,
+    pub right: T,
+}
+
+#[cube]
+impl Pair&lt;Array&lt;f32&gt;&gt; {
+    pub fn sum(&amp;self, index: u32) -&gt; f32 {
+        self.left[index] + self.right[index]
+    }
+}
+
+#[cube(launch_unchecked)]
+pub fn kernel_struct_example(pair: &amp;Pair&lt;Array&lt;f32&gt;&gt;, output: &amp;mut Array&lt;f32&gt;) {
+    output[UNIT_POS] = pair.sum(UNIT_POS);
+}
+<span class="boring">
+</span><span class="boring">pub fn launch&lt;R: Runtime&gt;(device: &amp;R::Device) {
+</span><span class="boring">    let client = R::client(device);
+</span><span class="boring">
+</span><span class="boring">    let left = [f32::from_int(1)];
+</span><span class="boring">    let left = client.create(f32::as_bytes(&amp;left));
+</span><span class="boring">    let right = [f32::from_int(1)];
+</span><span class="boring">    let right = client.create(f32::as_bytes(&amp;right));
+</span><span class="boring">    let output = client.empty(core::mem::size_of::&lt;f32&gt;());
+</span><span class="boring">
+</span><span class="boring">    unsafe {
+</span><span class="boring">        kernel_struct_example::launch_unchecked::&lt;R&gt;(
+</span><span class="boring">            &amp;client,
+</span><span class="boring">            CubeCount::Static(1, 1, 1),
+</span><span class="boring">            CubeDim::new(1, 1, 1),
+</span><span class="boring">            PairLaunch::new(
+</span><span class="boring">                ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;left, 1, 1),
+</span><span class="boring">                ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;right, 1, 1),
+</span><span class="boring">            ),
+</span><span class="boring">            ArrayArg::from_raw_parts::&lt;f32&gt;(&amp;output, 1, 1),
+</span><span class="boring">        )
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    println!(
+</span><span class="boring">        "Executed kernel_struct_example with runtime {:?} =&gt; {:?}",
+</span><span class="boring">        R::name(&amp;client),
+</span><span class="boring">        f32::from_bytes(&amp;client.read_one(output.binding()))
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    launch::&lt;cubecl::wgpu::WgpuRuntime&gt;(&amp;Default::default());
+</span><span class="boring">}</span></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advanced-usage"><a class="header" href="#advanced-usage">Advanced usage</a></h1>
+<p>This section contains useful information on advanced features of CubeCL.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuration"><a class="header" href="#configuration">Configuration</a></h1>
+<p>CubeCL provides a flexible and powerful configuration system to control logging, autotuning, profiling, and compilation behaviors.</p>
+<h2 id="overview-2"><a class="header" href="#overview-2">Overview</a></h2>
+<p>By default, CubeCL loads its configuration from a TOML file (<code>cubecl.toml</code> or <code>CubeCL.toml</code>) located in your current directory or any parent directory. If no configuration file is found, CubeCL falls back to sensible defaults.</p>
+<p>You can also override configuration options using environment variables, which is useful for CI, debugging, or deployment scenarios.</p>
+<h2 id="configuration-file-structure"><a class="header" href="#configuration-file-structure">Configuration File Structure</a></h2>
+<p>A typical <code>cubecl.toml</code> file might look like this:</p>
+<pre><code class="language-toml">[profiling]
+logger = { level = "basic", stdout = true }
+
+[autotune]
+level = "balanced"
+logger = { level = "minimal", stdout = true }
+
+[compilation]
+logger = { level = "basic", file = "cubecl.log", append = true }
+</code></pre>
+<p>Each section configures a different aspect of CubeCL:</p>
+<ul>
+<li><strong>profiling</strong>: Controls performance profiling and logging.</li>
+<li><strong>autotune</strong>: Configures the autotuning system, which benchmarks and selects optimal kernel parameters.</li>
+<li><strong>compilation</strong>: Manages kernel compilation logging and cache.</li>
+</ul>
+<h2 id="configuration-options"><a class="header" href="#configuration-options">Configuration Options</a></h2>
+<h3 id="profiling"><a class="header" href="#profiling">Profiling</a></h3>
+<p>The <code>[profiling]</code> section controls how CubeCL logs profiling information.</p>
+<p><strong>Log Levels:</strong></p>
+<ul>
+<li><code>disabled</code>: No profiling logs.</li>
+<li><code>minimal</code>: Only logs which kernels run.</li>
+<li><code>basic</code>: Adds basic profiling info.</li>
+<li><code>medium</code>: More detailed profiling.</li>
+<li><code>full</code>: Maximum detail.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-toml">[profiling]
+logger = { level = "basic", stdout = true }
+</code></pre>
+<h3 id="autotune-1"><a class="header" href="#autotune-1">Autotune</a></h3>
+<p>The <code>[autotune]</code> section configures how aggressively CubeCL autotunes kernels and where it stores autotune results.</p>
+<p><strong>Autotune Levels:</strong></p>
+<ul>
+<li><code>minimal</code>: Fastest, least thorough.</li>
+<li><code>balanced</code>: Good trade-off (default).</li>
+<li><code>extensive</code>: More thorough.</li>
+<li><code>full</code>: Most thorough, slowest.</li>
+</ul>
+<p><strong>Log Levels:</strong></p>
+<ul>
+<li><code>disabled</code>, <code>minimal</code>, <code>full</code></li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-toml">[autotune]
+level = "balanced"
+logger = { level = "minimal", stdout = true }
+</code></pre>
+<p><strong>Cache Location (if enabled):</strong></p>
+<ul>
+<li><code>local</code>: Current directory</li>
+<li><code>target</code>: Project's <code>target</code> directory (default)</li>
+<li><code>global</code>: System config directory</li>
+<li><code>file</code>: Custom path</li>
+</ul>
+<h3 id="compilation"><a class="header" href="#compilation">Compilation</a></h3>
+<p>The <code>[compilation]</code> section manages logging and caching for kernel compilation.</p>
+<p><strong>Log Levels:</strong></p>
+<ul>
+<li><code>disabled</code>: No logs.</li>
+<li><code>basic</code>: Logs when kernels are compiled.</li>
+<li><code>full</code>: Logs full details, including source code.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-toml">[compilation]
+logger = { level = "basic", file = "cubecl.log", append = true }
+</code></pre>
+<h2 id="environment-variable-overrides"><a class="header" href="#environment-variable-overrides">Environment Variable Overrides</a></h2>
+<p>CubeCL supports several environment variables to override configuration at runtime:</p>
+<ul>
+<li><code>CUBECL_DEBUG_LOG</code>: Controls logging output.
+<ul>
+<li><code>"stdout"</code>: Log to stdout.</li>
+<li><code>"stderr"</code>: Log to stderr.</li>
+<li><code>"1"</code>/<code>"true"</code>: Log to <code>/tmp/cubecl.log</code>.</li>
+<li><code>"0"</code>/<code>"false"</code>: Disable logging.</li>
+<li>Any other value: Treated as a file path.</li>
+</ul>
+</li>
+<li><code>CUBECL_DEBUG_OPTION</code>: Sets log verbosity.
+<ul>
+<li><code>"debug"</code>: Full compilation and autotune logs, medium profiling.</li>
+<li><code>"debug-full"</code>: Full logs for all.</li>
+<li><code>"profile"</code>, <code>"profile-medium"</code>, <code>"profile-full"</code>: Set profiling log level.</li>
+</ul>
+</li>
+<li><code>CUBECL_AUTOTUNE_LEVEL</code>: Sets autotune level.
+<ul>
+<li><code>"minimal"</code>/<code>"0"</code></li>
+<li><code>"balanced"</code>/<code>"1"</code></li>
+<li><code>"extensive"</code>/<code>"2"</code></li>
+<li><code>"full"</code>/<code>"3"</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Example (Linux/macOS):</strong></p>
+<pre><code class="language-sh">export CUBECL_DEBUG_LOG=stdout
+export CUBECL_AUTOTUNE_LEVEL=full
+</code></pre>
+<h2 id="programmatic-configuration"><a class="header" href="#programmatic-configuration">Programmatic Configuration</a></h2>
+<p>You can also set the global configuration from Rust code before CubeCL is initialized:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let config = cubecl::config::GlobalConfig {
+    profiling: ...,
+    autotune: ...,
+    compilation: ...,
+};
+cubecl::config::GlobalConfig::set(config);
+<span class="boring">}</span></code></pre></pre>
+<blockquote>
+<p><strong>Note:</strong> You must call <code>GlobalConfig::set</code> before any CubeCL operations, and only once per process.</p>
+</blockquote>
+<h2 id="logging"><a class="header" href="#logging">Logging</a></h2>
+<p>CubeCL supports logging to multiple destinations simultaneously:</p>
+<ul>
+<li>File (with append/overwrite)</li>
+<li>Stdout</li>
+<li>Stderr</li>
+<li>Rust <code>log</code> crate (for integration with other logging frameworks)</li>
+</ul>
+<p>You can configure these in the <code>logger</code> field for each section.</p>
+<h2 id="saving-the-default-configuration"><a class="header" href="#saving-the-default-configuration">Saving the Default Configuration</a></h2>
+<p>To generate a default configuration file:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>cubecl::config::GlobalConfig::save_default("cubecl.toml").unwrap();
+<span class="boring">}</span></code></pre></pre>
+<h2 id="example-full-configuration"><a class="header" href="#example-full-configuration">Example: Full Configuration</a></h2>
+<pre><code class="language-toml">[profiling]
+logger = { level = "medium", stdout = true }
+
+[autotune]
+level = "extensive"
+logger = { level = "full", file = "autotune.log", append = false }
+
+[compilation]
+logger = { level = "full", file = "compile.log", append = true }
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="algorithm-reference"><a class="header" href="#algorithm-reference">Algorithm reference</a></h1>
+<p>In this section,
+we introduce different algorithms provided by CubeCL.
+This is a best effort list and we focus first on nontrivial algorithms
+deserving more explanations than what is reasonable to put in the API documentation.
+This section is also a bit more technical compared to the others, as it serves two purposes.
+First, it is a reference for users interested in the lower-level details of CubeCL.
+Second, it is a reference for the developers who want to update the implementation as
+the algorithms often get obfuscated by optimization details.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quantized-matrix-multiplication"><a class="header" href="#quantized-matrix-multiplication">Quantized matrix multiplication</a></h1>
+<p>To make matrix multiplication faster,
+we replace floating-point arithmetic using <code>f32</code>
+with integer arithmetic using a mix of <code>u8</code>, <code>u16</code> and <code>i32</code>.
+The benefits are twofold.
+First,
+we replace <code>Tensor&lt;f32&gt;</code> with <code>Tensor&lt;u8&gt;</code> to reduce memory cost by a factor of 4.
+This leads to faster read and write operations into global memory.
+Second,
+integer operations are often faster than their floating-point counterparts.</p>
+<p>In this section,
+we start by presenting a more mathematical overview of the algorithm,
+before discussing implementation.</p>
+<h2 id="mathematical-formulation"><a class="header" href="#mathematical-formulation">Mathematical formulation</a></h2>
+<h3 id="scalar-quantization"><a class="header" href="#scalar-quantization">Scalar quantization</a></h3>
+<p>A real number \(a\) can be approximated by an integer \(q\) using the formula
+\[
+a \approx s(q - z).
+\]
+In this equation \(s\) is a scaling factor and is also a real number,
+while \(z\) is called the zero-offset and is an integer.
+In theory,
+with this approximation,
+we can represent exactly all real numbers that are integral multiples of \(s\).
+All other real numbers are rounded up to the closest representable value.
+However, in practice, the range of \(q\) is limited by its representation (e.g. <code>u8</code>, <code>i32</code>).
+Hence, the zero-offset \(z\) allows us to slide the interval of representable numbers toward
+an interval we are interested in a particular application.
+Also, by using the same type for \(q\) and \(z\),
+we assure that 0 is exactly representable.</p>
+<p>The multiplication of two real numbers is equivalent to
+\[
+a b = s_a s_b (q_a - z_a) (q_b - z_b).
+\]
+However,
+we are more interested in the quantized version \(q_c\) of \(c = ab \).
+Given we want to approximate \(c\) with scaling \(s_c\) and zero-offset \(z_c\),
+we have
+\[
+q_c =
+z_c + \frac{s_a s_b}{s_c} (q_a - z_a) (q_b - z_b).
+\]
+Except for the factor \( (s_a s_b) / s_c \), the above equation involves only integer arithmetic.
+However,
+we can always find two integers \(u, v\) such that
+\[
+\frac uv \approx \frac{s_a s_b}{s_c}
+\]
+is a satisfying approximation.
+This leads to the final approximation for quantized multiplication
+\[
+q_c \approx z_c + \frac uv (q_a - z_a)(q_b - z_b)
+\]
+requiring only integer arithmetic.</p>
+<h3 id="matrix-quantization"><a class="header" href="#matrix-quantization">Matrix quantization</a></h3>
+<p>The same idea holds for matrix multiplication.
+To distinguish matrices from scalars,
+we use capital letters for the former and lower letters for the latter.</p>
+<p>A real matrix \( A \) is approximated by an integer matrix \( Q \) using
+\[
+A \approx s (Q - z N).
+\]
+Here \( N \) is a matrix of ones the same size as \( A \).
+For two matrices \(A \) and \( B \) with respective shape \(m \times k\)
+and \(k \times n\) and their product \( C \) of shape \( m \times n \),
+we have, similar to the scalar case that
+\[
+Q_c \approx z_c N_c + \frac uv (Q_a - z_a N_a)(Q_b - z_b N_b).
+\]</p>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<p>As an example,
+we describe how to implement the quantized matrix multiplication
+where the elements of \(Q_a\), \(Q_b\) and \(Q_c\) and the zero-offsets are represented as <code>u8</code>.</p>
+<p>To compute \(Q_a - z_a N_a \),
+we first convert the values to <code>i16</code> before performing the subtraction.
+Then, we can compute the product \((Q_a - z_a N_a)(Q_b - z_b N_b)\)
+by converting the values to <code>i32</code> before multiplying.
+Of course,
+in practice, we perform all these conversions on-the-fly to avoid wastefully allocating new matrices.</p>
+<p>Now, suppose that \(x\) is a single element in the resulting matrix and \(y\)
+is the element with the same position in \(Q_c\).
+We still need to compute the following
+\[
+y = z_c + \frac uv \cdot x.
+\]
+The tricky part here is the product.
+First,
+we impose that \( v \) is a power of 2 so that dividing by \( v \)
+is equivalent to right-shifting the product \( u x \).
+Then, we need to find the best values \( u \) and \( v \)
+for the scaling factor \( \sigma = \frac{s_a s_b}{s_c} \).
+The trick is to cleverly multiply \( \sigma \) by 1, to get a form that allows us to work with powers of 2:
+\[
+\sigma = \frac{2^{31 - f}}{2^{31 - f}} \sigma
+\]
+where \(2^f\) is the smallest power of 2 larger than \(\sigma\).
+For example, if \(\sigma = 0.3\), then \(f = -1\) as \(2^{-1} = 0.5 &gt; 0.3 \)
+and \(2^{-2} = 0.25 &lt; 0.3\).
+From this, we deduce we that we can use \(u = 2^{31 - f} \sigma\) rounded to the
+nearest <code>i64</code> value and \(v = 2^{31 - f}\).
+This gives us a 31-bit approximation for multiplying by \(\sigma\), which is the best
+we can achieve when the other multiplicand is an <code>i32</code>.
+Indeed, we need to keep one bit for the sign.
+To properly round the product,
+one can add \(\frac v 2\) to the product before right shifting.</p>
+<p>A naive implementation of the above algorithm looks like the following.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn scaling_ratio(sigma: f32) -&gt; (i64, u32) {
+    let log = x.log2().ceil() as i32;
+    let u = (x * 2.0_f32.powi(31 - log)).round() as i64;
+    let v_shift = (31 - log) as u32;
+    (u, v_shift)
+}
+
+fn approx_mul(x: i32, u: i64, v_shift: u32) -&gt; i32 {
+    let prod = (x as i64) * u;
+    let rounding: i64 = 1 &lt;&lt; (v_shift - 1);
+    let prod_with_rounding = prod + self.rounding;
+    (prod_with_rounding &gt;&gt; self.shift) as i32
+}
+
+fn clamp_to_u8(x: i32) -&gt; u8 {
+    if x &lt; 0 {
+      0
+    } else if x &gt; u8::MAX as i32 {
+      u8::Max
+    } else {
+      x as u8
+    }
+}
+
+struct Matrix {
+  scaling: f32,
+  zero_offset: u8,
+  // ... other fields to store the matrix elements.
+}
+
+impl Matrix {
+  fn quantized_mul(&amp;self, other: &amp;Self, output: &amp;mut Self) -&gt; Self {
+      // assume the shapes of the matrices match.
+
+      let sigma = self.scaling * other.scaling / output.scaling;
+      let (u, v_shift) = scaling_ratio(sigma);
+
+      for row in 0..self.row_count() {
+          for col in 0..other.col_count() {
+              let mut sum: i32 = 0;
+              for middle in 0..self.col_count() {
+                  let a = self.get(row, middle) as i16 - self.zero_offset as i16;
+                  let b = other.get(middle, col) as i16 - other.zero_offset as i16;
+                  sum += (a as i32) * (b as i32);
+              }
+              sum = approx_mul(sum, u, v_shift);
+
+              output.update(row, col, clamp_to_u8(sum + output.zero_offset as i32))
+          }
+      }
+  }
+
+  // return the value at (row, col)
+  fn get(&amp;self, row: usize, col: usize) -&gt; u8 { /* ... */ }
+
+  // replace the value at (row, col) with the given value.
+  fn update(&amp;mut self, row: usize, col: usize, value: u8) { /* ... */ }
+
+  // return the number of rows of the matrix.
+  fn row_count(&amp;self) -&gt; usize { /* ... */ }
+
+  // return the number of columns of the matrix.
+  fn col_count(&amp;self) -&gt; usize { /* ... */ }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Of course,
+in CubeCL, we stride to provide the fastest implementation for GPU devices.
+As such, the example emphasizes the correct type casting to demonstrate how this is achieved in CubeCL.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

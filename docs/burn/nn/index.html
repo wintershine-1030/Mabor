@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Neural network module.">
+    <title>mabor::nn - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module nn</a></h2>
+                <h3><a href="#modules">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#modules" title="Modules">Modules</a></li>
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2 class="in-crate"><a href="../index.html">In crate mabor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a></div>
+                    <h1>Module <span>nn</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Neural network module.</p>
+                    </div>
+                </details>
+                <h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="mod" href="attention/index.html" title="mod burn::nn::attention">attention</a></dt>
+                    <dd>Attention module</dd>
+                    <dt><a class="mod" href="cache/index.html" title="mod burn::nn::cache">cache</a></dt>
+                    <dd>Cache module</dd>
+                    <dt><a class="mod" href="conv/index.html" title="mod burn::nn::conv">conv</a></dt>
+                    <dd>Convolution module</dd>
+                    <dt><a class="mod" href="gru/index.html" title="mod burn::nn::gru">gru</a></dt>
+                    <dd>Gated Recurrent Unit module.</dd>
+                    <dt><a class="mod" href="interpolate/index.html" title="mod burn::nn::interpolate">interpolate</a>
+                    </dt>
+                    <dd>Interpolate module</dd>
+                    <dt><a class="mod" href="loss/index.html" title="mod burn::nn::loss">loss</a></dt>
+                    <dd>Loss module</dd>
+                    <dt><a class="mod" href="lstm/index.html" title="mod burn::nn::lstm">lstm</a></dt>
+                    <dd>Long Short-Term Memory module.</dd>
+                    <dt><a class="mod" href="pool/index.html" title="mod burn::nn::pool">pool</a></dt>
+                    <dd>Pooling module</dd>
+                    <dt><a class="mod" href="transformer/index.html" title="mod burn::nn::transformer">transformer</a>
+                    </dt>
+                    <dd>Transformer module</dd>
+                </dl>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.BatchNorm.html"
+                            title="struct burn::nn::BatchNorm">Batch<wbr>Norm</a></dt>
+                    <dd>Applies Batch Normalization over a tensor as described in the paper <a
+                            href="https://arxiv.org/abs/1502.03167">Batch Normalization</a></dd>
+                    <dt><a class="struct" href="struct.BatchNormConfig.html"
+                            title="struct burn::nn::BatchNormConfig">Batch<wbr>Norm<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.BatchNorm.html"
+                            title="struct burn::nn::BatchNorm">BatchNorm</a> layer using the <a
+                            href="struct.BatchNormConfig.html#method.init"
+                            title="method burn::nn::BatchNormConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.BatchNormRecord.html"
+                            title="struct burn::nn::BatchNormRecord">Batch<wbr>Norm<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.BatchNormRecordItem.html"
+                            title="struct burn::nn::BatchNormRecordItem">Batch<wbr>Norm<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.BiLstm.html" title="struct burn::nn::BiLstm">BiLstm</a></dt>
+                    <dd>The BiLstm module. This implementation is for Bidirectional LSTM.</dd>
+                    <dt><a class="struct" href="struct.BiLstmConfig.html"
+                            title="struct burn::nn::BiLstmConfig">BiLstm<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.BiLstm.html"
+                            title="struct burn::nn::BiLstm">BiLstm</a> module using the <a
+                            href="struct.BiLstmConfig.html#method.init" title="method burn::nn::BiLstmConfig::init">init
+                            function</a>.</dd>
+                    <dt><a class="struct" href="struct.BiLstmRecord.html"
+                            title="struct burn::nn::BiLstmRecord">BiLstm<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.BiLstmRecordItem.html"
+                            title="struct burn::nn::BiLstmRecordItem">BiLstm<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Dropout.html" title="struct burn::nn::Dropout">Dropout</a></dt>
+                    <dd>Set at random some elements of the input tensor to zero during training.</dd>
+                    <dt><a class="struct" href="struct.DropoutConfig.html"
+                            title="struct burn::nn::DropoutConfig">Dropout<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.Dropout.html"
+                            title="struct burn::nn::Dropout">Dropout</a> layer using the <a
+                            href="struct.DropoutConfig.html#method.init"
+                            title="method burn::nn::DropoutConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.Embedding.html" title="struct burn::nn::Embedding">Embedding</a>
+                    </dt>
+                    <dd>Lookup table to store a fix number of vectors.</dd>
+                    <dt><a class="struct" href="struct.EmbeddingConfig.html"
+                            title="struct burn::nn::EmbeddingConfig">Embedding<wbr>Config</a></dt>
+                    <dd>Configuration to create an <a href="struct.Embedding.html"
+                            title="struct burn::nn::Embedding">Embedding</a> layer using the <a
+                            href="struct.EmbeddingConfig.html#method.init"
+                            title="method burn::nn::EmbeddingConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.EmbeddingRecord.html"
+                            title="struct burn::nn::EmbeddingRecord">Embedding<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.EmbeddingRecordItem.html"
+                            title="struct burn::nn::EmbeddingRecordItem">Embedding<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.GateController.html"
+                            title="struct burn::nn::GateController">Gate<wbr>Controller</a></dt>
+                    <dd>A GateController represents a gate in an LSTM cell. An
+                        LSTM cell generally contains three gates: an input gate,
+                        forget gate, and output gate. Additionally, cell gate
+                        is just used to compute the cell state.</dd>
+                    <dt><a class="struct" href="struct.GateControllerRecord.html"
+                            title="struct burn::nn::GateControllerRecord">Gate<wbr>Controller<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.GateControllerRecordItem.html"
+                            title="struct burn::nn::GateControllerRecordItem">Gate<wbr>Controller<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Gelu.html" title="struct burn::nn::Gelu">Gelu</a></dt>
+                    <dd>Applies the Gaussian Error Linear Units function element-wise.
+                        See also <a href="../tensor/activation/fn.gelu.html"
+                            title="fn burn::tensor::activation::gelu">gelu</a></dd>
+                    <dt><a class="struct" href="struct.GroupNorm.html"
+                            title="struct burn::nn::GroupNorm">Group<wbr>Norm</a></dt>
+                    <dd>Applies Group Normalization over a mini-batch of inputs as described in the paper <a
+                            href="https://arxiv.org/abs/1803.08494">Group Normalization</a>.</dd>
+                    <dt><a class="struct" href="struct.GroupNormConfig.html"
+                            title="struct burn::nn::GroupNormConfig">Group<wbr>Norm<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.GroupNorm.html"
+                            title="struct burn::nn::GroupNorm">GroupNorm</a> layer using the <a
+                            href="struct.GroupNormConfig.html#method.init"
+                            title="method burn::nn::GroupNormConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.GroupNormRecord.html"
+                            title="struct burn::nn::GroupNormRecord">Group<wbr>Norm<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.GroupNormRecordItem.html"
+                            title="struct burn::nn::GroupNormRecordItem">Group<wbr>Norm<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.HardSigmoid.html"
+                            title="struct burn::nn::HardSigmoid">Hard<wbr>Sigmoid</a></dt>
+                    <dd>Hard Sigmoid layer.</dd>
+                    <dt><a class="struct" href="struct.HardSigmoidConfig.html"
+                            title="struct burn::nn::HardSigmoidConfig">Hard<wbr>Sigmoid<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.HardSigmoid.html"
+                            title="struct burn::nn::HardSigmoid">Hard Sigmoid</a> layer using the <a
+                            href="struct.HardSigmoidConfig.html#method.init"
+                            title="method burn::nn::HardSigmoidConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.InstanceNorm.html"
+                            title="struct burn::nn::InstanceNorm">Instance<wbr>Norm</a></dt>
+                    <dd>Applies Instance Normalization over a tensor as described in the paper <a
+                            href="https://arxiv.org/abs/1607.08022">Instance Normalization</a></dd>
+                    <dt><a class="struct" href="struct.InstanceNormConfig.html"
+                            title="struct burn::nn::InstanceNormConfig">Instance<wbr>Norm<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.InstanceNorm.html"
+                            title="struct burn::nn::InstanceNorm">InstanceNorm</a> layer using the <a
+                            href="struct.InstanceNormConfig.html#method.init"
+                            title="method burn::nn::InstanceNormConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.InstanceNormRecord.html"
+                            title="struct burn::nn::InstanceNormRecord">Instance<wbr>Norm<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.InstanceNormRecordItem.html"
+                            title="struct burn::nn::InstanceNormRecordItem">Instance<wbr>Norm<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.LayerNorm.html"
+                            title="struct burn::nn::LayerNorm">Layer<wbr>Norm</a></dt>
+                    <dd>Applies Layer Normalization over an input tensor as described in the paper <a
+                            href="https://arxiv.org/abs/1607.06450">Layer Normalization</a>.</dd>
+                    <dt><a class="struct" href="struct.LayerNormConfig.html"
+                            title="struct burn::nn::LayerNormConfig">Layer<wbr>Norm<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.LayerNorm.html"
+                            title="struct burn::nn::LayerNorm">LayerNorm</a> layer using the <a
+                            href="struct.LayerNormConfig.html#method.init"
+                            title="method burn::nn::LayerNormConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.LayerNormRecord.html"
+                            title="struct burn::nn::LayerNormRecord">Layer<wbr>Norm<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.LayerNormRecordItem.html"
+                            title="struct burn::nn::LayerNormRecordItem">Layer<wbr>Norm<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.LeakyRelu.html"
+                            title="struct burn::nn::LeakyRelu">Leaky<wbr>Relu</a></dt>
+                    <dd>Leaky ReLu layer.</dd>
+                    <dt><a class="struct" href="struct.LeakyReluConfig.html"
+                            title="struct burn::nn::LeakyReluConfig">Leaky<wbr>Relu<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.LeakyRelu.html"
+                            title="struct burn::nn::LeakyRelu">Leaky Relu</a> layer using the <a
+                            href="struct.LeakyReluConfig.html#method.init"
+                            title="method burn::nn::LeakyReluConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.Linear.html" title="struct burn::nn::Linear">Linear</a></dt>
+                    <dd>Applies a linear transformation to the input tensor.</dd>
+                    <dt><a class="struct" href="struct.LinearConfig.html"
+                            title="struct burn::nn::LinearConfig">Linear<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.Linear.html"
+                            title="struct burn::nn::Linear">Linear</a> layer using the <a
+                            href="struct.LinearConfig.html#method.init" title="method burn::nn::LinearConfig::init">init
+                            function</a>.</dd>
+                    <dt><a class="struct" href="struct.LinearRecord.html"
+                            title="struct burn::nn::LinearRecord">Linear<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.LinearRecordItem.html"
+                            title="struct burn::nn::LinearRecordItem">Linear<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Lstm.html" title="struct burn::nn::Lstm">Lstm</a></dt>
+                    <dd>The Lstm module. This implementation is for a unidirectional, stateless, Lstm.</dd>
+                    <dt><a class="struct" href="struct.LstmConfig.html"
+                            title="struct burn::nn::LstmConfig">Lstm<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.Lstm.html" title="struct burn::nn::Lstm">Lstm</a>
+                        module using the <a href="struct.LstmConfig.html#method.init"
+                            title="method burn::nn::LstmConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.LstmRecord.html"
+                            title="struct burn::nn::LstmRecord">Lstm<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.LstmRecordItem.html"
+                            title="struct burn::nn::LstmRecordItem">Lstm<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.LstmState.html"
+                            title="struct burn::nn::LstmState">Lstm<wbr>State</a></dt>
+                    <dd>A LstmState is used to store cell state and hidden state in LSTM.</dd>
+                    <dt><a class="struct" href="struct.PRelu.html" title="struct burn::nn::PRelu">PRelu</a></dt>
+                    <dd>Parametric Relu layer.</dd>
+                    <dt><a class="struct" href="struct.PReluConfig.html"
+                            title="struct burn::nn::PReluConfig">PRelu<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.PRelu.html" title="struct burn::nn::PRelu">Parametric
+                            Relu</a> layer using the <a href="struct.PReluConfig.html#method.init"
+                            title="method burn::nn::PReluConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.PReluRecord.html"
+                            title="struct burn::nn::PReluRecord">PRelu<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.PReluRecordItem.html"
+                            title="struct burn::nn::PReluRecordItem">PRelu<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.PositionalEncoding.html"
+                            title="struct burn::nn::PositionalEncoding">Positional<wbr>Encoding</a></dt>
+                    <dd>Positional encoding layer for transformer models.</dd>
+                    <dt><a class="struct" href="struct.PositionalEncodingConfig.html"
+                            title="struct burn::nn::PositionalEncodingConfig">Positional<wbr>Encoding<wbr>Config</a>
+                    </dt>
+                    <dd>Configuration to create a <a href="struct.PositionalEncoding.html"
+                            title="struct burn::nn::PositionalEncoding">PositionalEncoding</a> layer using the <a
+                            href="struct.PositionalEncodingConfig.html#method.init"
+                            title="method burn::nn::PositionalEncodingConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.PositionalEncodingRecord.html"
+                            title="struct burn::nn::PositionalEncodingRecord">Positional<wbr>Encoding<wbr>Record</a>
+                    </dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.PositionalEncodingRecordItem.html"
+                            title="struct burn::nn::PositionalEncodingRecordItem">Positional<wbr>Encoding<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Relu.html" title="struct burn::nn::Relu">Relu</a></dt>
+                    <dd>Applies the rectified linear unit function element-wise
+                        See also <a href="../tensor/activation/fn.relu.html"
+                            title="fn burn::tensor::activation::relu">relu</a></dd>
+                    <dt><a class="struct" href="struct.RmsNorm.html" title="struct burn::nn::RmsNorm">RmsNorm</a></dt>
+                    <dd>Applies RMS Normalization over an input tensor along the last dimension.</dd>
+                    <dt><a class="struct" href="struct.RmsNormConfig.html"
+                            title="struct burn::nn::RmsNormConfig">RmsNorm<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.RmsNorm.html" title="struct burn::nn::RmsNorm">RMS
+                            Norm</a> layer using the <a href="struct.RmsNormConfig.html#method.init"
+                            title="method burn::nn::RmsNormConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.RmsNormRecord.html"
+                            title="struct burn::nn::RmsNormRecord">RmsNorm<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.RmsNormRecordItem.html"
+                            title="struct burn::nn::RmsNormRecordItem">RmsNorm<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.RotaryEncoding.html"
+                            title="struct burn::nn::RotaryEncoding">Rotary<wbr>Encoding</a></dt>
+                    <dd>A module that applies rotary positional encoding to a tensor.
+                        Rotary Position Encoding or Embedding (RoPE), is a type of position embedding which encodes
+                        absolute positional information with rotation matrix and naturally incorporates
+                        explicit relative position dependency in self-attention formulation.</dd>
+                    <dt><a class="struct" href="struct.RotaryEncodingConfig.html"
+                            title="struct burn::nn::RotaryEncodingConfig">Rotary<wbr>Encoding<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.RotaryEncoding.html"
+                            title="struct burn::nn::RotaryEncoding">RotaryEncoding</a> layer using the <a
+                            href="struct.RotaryEncodingConfig.html#method.init"
+                            title="method burn::nn::RotaryEncodingConfig::init">init function</a>.</dd>
+                    <dt><a class="struct" href="struct.RotaryEncodingRecord.html"
+                            title="struct burn::nn::RotaryEncodingRecord">Rotary<wbr>Encoding<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.RotaryEncodingRecordItem.html"
+                            title="struct burn::nn::RotaryEncodingRecordItem">Rotary<wbr>Encoding<wbr>Record<wbr>Item</a>
+                    </dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Sigmoid.html" title="struct burn::nn::Sigmoid">Sigmoid</a></dt>
+                    <dd>Applies the sigmoid function element-wise
+                        See also <a href="../tensor/activation/fn.sigmoid.html"
+                            title="fn burn::tensor::activation::sigmoid">sigmoid</a></dd>
+                    <dt><a class="struct" href="struct.SwiGlu.html" title="struct burn::nn::SwiGlu">SwiGlu</a></dt>
+                    <dd>Applies the SwiGLU or Swish Gated Linear Unit to the input tensor.
+                        The SwiGLU activation function is defined as:
+                        <code>SwiGLU(x) = Swish(W_inner * x + b_inner) * (W_outer * x + b_outer)</code>
+                    </dd>
+                    <dt><a class="struct" href="struct.SwiGluConfig.html"
+                            title="struct burn::nn::SwiGluConfig">SwiGlu<wbr>Config</a></dt>
+                    <dd>Configuration to create a <a href="struct.SwiGlu.html"
+                            title="struct burn::nn::SwiGlu">SwiGlu</a> activation layer using the <a
+                            href="struct.SwiGluConfig.html#method.init" title="method burn::nn::SwiGluConfig::init">init
+                            function</a>.</dd>
+                    <dt><a class="struct" href="struct.SwiGluRecord.html"
+                            title="struct burn::nn::SwiGluRecord">SwiGlu<wbr>Record</a></dt>
+                    <dd>The record type for the module.</dd>
+                    <dt><a class="struct" href="struct.SwiGluRecordItem.html"
+                            title="struct burn::nn::SwiGluRecordItem">SwiGlu<wbr>Record<wbr>Item</a></dt>
+                    <dd>The record item type for the module.</dd>
+                    <dt><a class="struct" href="struct.Tanh.html" title="struct burn::nn::Tanh">Tanh</a></dt>
+                    <dd>Applies the tanh activation function element-wise
+                        See also <a href="../tensor/activation/fn.tanh.html"
+                            title="fn burn::tensor::activation::tanh">tanh</a></dd>
+                    <dt><a class="struct" href="struct.Unfold4d.html" title="struct burn::nn::Unfold4d">Unfold4d</a>
+                    </dt>
+                    <dd>Four-dimensional unfolding.</dd>
+                    <dt><a class="struct" href="struct.Unfold4dConfig.html"
+                            title="struct burn::nn::Unfold4dConfig">Unfold4d<wbr>Config</a></dt>
+                    <dd>Configuration to create an <a href="struct.Unfold4d.html"
+                            title="struct burn::nn::Unfold4d">unfold 4d</a> layer using the <a
+                            href="struct.Unfold4dConfig.html#method.init"
+                            title="method burn::nn::Unfold4dConfig::init">init function</a>.</dd>
+                </dl>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.Initializer.html" title="enum burn::nn::Initializer">Initializer</a>
+                    </dt>
+                    <dd>Enum specifying with what values a tensor should be initialized</dd>
+                    <dt><a class="enum" href="enum.PaddingConfig1d.html"
+                            title="enum burn::nn::PaddingConfig1d">Padding<wbr>Config1d</a></dt>
+                    <dd>Padding configuration for 1D operators.</dd>
+                    <dt><a class="enum" href="enum.PaddingConfig2d.html"
+                            title="enum burn::nn::PaddingConfig2d">Padding<wbr>Config2d</a></dt>
+                    <dd>Padding configuration for 2D operators.</dd>
+                    <dt><a class="enum" href="enum.PaddingConfig3d.html"
+                            title="enum burn::nn::PaddingConfig3d">Padding<wbr>Config3d</a></dt>
+                    <dd>Padding configuration for 3D operators.</dd>
+                </dl>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.generate_sinusoids.html"
+                            title="fn burn::nn::generate_sinusoids">generate_<wbr>sinusoids</a></dt>
+                    <dd>Returns sinusoids for positional embedding introduced in
+                        <a href="https://arxiv.org/abs/1706.03762">Attention is all you need</a>.
+                    </dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

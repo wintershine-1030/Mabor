@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Mabor">
+    <title>mabor - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="burn"
+        data-themes="burn" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)"
+        data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js">
+    <script src="../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../crates.js"></script>
+    <script defer="" src="../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod crate">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <ul class="block">
+                <li><a id="all-types" href="all.html">All Items</a></li>
+            </ul>
+            <section id="rustdoc-toc">
+                <h3><a href="#">Sections</a></h3>
+                <ul class="block top-toc">
+                    <li><a href="#burn" title="Burn">Mabor</a>
+                        <ul>
+                            <li><a href="#performance" title="Performance">Performance</a></li>
+                            <li><a href="#training--inference" title="Training &#38; Inference">Training &amp;
+                                    Inference</a></li>
+                            <li><a href="#backends" title="Backends">Backends</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#quantization-beta" title="Quantization (Beta)">Quantization (Beta)</a>
+                        <ul>
+                            <li><a href="#feature-flags" title="Feature Flags">Feature Flags</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3><a href="#modules">Crate Items</a></h3>
+                <ul class="block">
+                    <li><a href="#modules" title="Modules">Modules</a></li>
+                    <li><a href="#macros" title="Macros">Macros</a></li>
+                    <li><a href="#types" title="Type Aliases">Type Aliases</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav"></div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <h1>Crate <span>mabor</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a
+                            class="src" href="../src/burn/lib.rs.html#1-115">Source</a> </span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <h2 id="burn"><a class="doc-anchor" href="#burn">§</a>Mabor</h2>
+                        <p>Mabor is a new comprehensive dynamic Deep Learning Framework built using Rust
+                            with extreme flexibility, compute efficiency and portability as its primary goals.</p>
+                        <h3 id="performance"><a class="doc-anchor" href="#performance">§</a>Performance</h3>
+                        <p>Because we believe the goal of a deep learning framework is to convert computation
+                            into useful intelligence, we have made performance a core pillar of Mabor.
+                            We strive to achieve top efficiency by leveraging multiple optimization techniques:</p>
+                        <ul>
+                            <li>Automatic kernel fusion</li>
+                            <li>Asynchronous execution</li>
+                            <li>Thread-safe building blocks</li>
+                            <li>Intelligent memory management</li>
+                            <li>Automatic kernel selection</li>
+                            <li>Hardware specific features</li>
+                            <li>Custom Backend Extension</li>
+                        </ul>
+                        <h3 id="training--inference"><a class="doc-anchor" href="#training--inference">§</a>Training
+                            &amp; Inference</h3>
+                        <p>The whole deep learning workflow is made easy with Mabor, as you can monitor your training
+                            progress
+                            with an ergonomic dashboard, and run inference everywhere from embedded devices to large GPU
+                            clusters.</p>
+                        <p>Mabor was built from the ground up with training and inference in mind. It’s also worth noting
+                            how Mabor,
+                            in comparison to frameworks like PyTorch, simplifies the transition from training to
+                            deployment,
+                            eliminating the need for code changes.</p>
+                        <h3 id="backends"><a class="doc-anchor" href="#backends">§</a>Backends</h3>
+                        <p>Mabor strives to be as fast as possible on as many hardwares as possible, with robust
+                            implementations.
+                            We believe this flexibility is crucial for modern needs where you may train your models in
+                            the cloud,
+                            then deploy on customer hardwares, which vary from user to user.</p>
+                        <p>Compared to other frameworks, Mabor has a very different approach to supporting many backends.
+                            By design, most code is generic over the Backend trait, which allows us to build Mabor with
+                            swappable backends.
+                            This makes composing backend possible, augmenting them with additional functionalities such
+                            as
+                            autodifferentiation and automatic kernel fusion.</p>
+                        <ul>
+                            <li>WGPU (WebGPU): Cross-Platform GPU Backend</li>
+                            <li>Candle: Backend using the Candle bindings</li>
+                            <li>LibTorch: Backend using the LibTorch bindings</li>
+                            <li>NdArray: Backend using the NdArray primitive as data structure</li>
+                            <li>Autodiff: Backend decorator that brings backpropagation to any backend</li>
+                            <li>Fusion: Backend decorator that brings kernel fusion to backends that support it</li>
+                        </ul>
+                        <h2 id="quantization-beta"><a class="doc-anchor" href="#quantization-beta">§</a>Quantization
+                            (Beta)</h2>
+                        <p>Quantization techniques perform computations and store tensors in lower precision data types
+                            like 8-bit integer
+                            instead of floating point precision. There are multiple approaches to quantize a deep
+                            learning model. In most cases,
+                            the model is trained in floating point precision and later converted to the lower precision
+                            data type. This is called
+                            post-training quantization (PTQ). On the other hand, quantization aware training (QAT)
+                            models the effects of quantization
+                            during training. Quantization errors are thus modeled in the forward and backward passes,
+                            which helps the model learn
+                            representations that are more robust to the reduction in precision.</p>
+                        <p>Quantization support in Mabor is currently in active development. It supports the following
+                            modes on some backends:</p>
+                        <ul>
+                            <li>Static per-tensor quantization to signed 8-bit integer (<code>i8</code>)</li>
+                        </ul>
+                        <h3 id="feature-flags"><a class="doc-anchor" href="#feature-flags">§</a>Feature Flags</h3>
+                        <p>The following feature flags are available.
+                            By default, the feature <code>std</code> is activated.</p>
+                        <ul>
+                            <li>Training
+                                <ul>
+                                    <li><code>train</code>: Enables features <code>dataset</code> and
+                                        <code>autodiff</code> and provides a training environment</li>
+                                    <li><code>tui</code>: Includes Text UI with progress bar and plots</li>
+                                    <li><code>metrics</code>: Includes system info metrics (CPU/GPU usage, etc.)</li>
+                                </ul>
+                            </li>
+                            <li>Dataset
+                                <ul>
+                                    <li><code>dataset</code>: Includes a datasets library</li>
+                                    <li><code>audio</code>: Enables audio datasets (SpeechCommandsDataset)</li>
+                                    <li><code>sqlite</code>: Stores datasets in SQLite database</li>
+                                    <li><code>sqlite_bundled</code>: Use bundled version of SQLite</li>
+                                    <li><code>vision</code>: Enables vision datasets (MnistDataset)</li>
+                                </ul>
+                            </li>
+                            <li>Backends
+                                <ul>
+                                    <li><code>wgpu</code>: Makes available the WGPU backend</li>
+                                    <li><code>webgpu</code>: Makes available the <code>wgpu</code> backend with the
+                                        WebGPU Shading Language (WGSL) compiler</li>
+                                    <li><code>vulkan</code>: Makes available the <code>wgpu</code> backend with the
+                                        alternative SPIR-V compiler</li>
+                                    <li><code>cuda</code>: Makes available the CUDA backend</li>
+                                    <li><code>rocm</code>: Makes available the ROCm backend</li>
+                                    <li><code>candle</code>: Makes available the Candle backend</li>
+                                    <li><code>tch</code>: Makes available the LibTorch backend</li>
+                                    <li><code>ndarray</code>: Makes available the NdArray backend</li>
+                                </ul>
+                            </li>
+                            <li>Backend specifications
+                                <ul>
+                                    <li><code>accelerate</code>: If supported, Accelerate will be used</li>
+                                    <li><code>blas-netlib</code>: If supported, Blas Netlib will be use</li>
+                                    <li><code>openblas</code>: If supported, Openblas will be use</li>
+                                    <li><code>openblas-system</code>: If supported, Openblas installed on the system
+                                        will be use</li>
+                                    <li><code>autotune</code>: Enable running benchmarks to select the best kernel in
+                                        backends that support it.</li>
+                                    <li><code>fusion</code>: Enable operation fusion in backends that support it.</li>
+                                </ul>
+                            </li>
+                            <li>Backend decorators
+                                <ul>
+                                    <li><code>autodiff</code>: Makes available the Autodiff backend</li>
+                                </ul>
+                            </li>
+                            <li>Others:
+                                <ul>
+                                    <li><code>std</code>: Activates the standard library (deactivate for no_std)</li>
+                                    <li><code>server</code>: Enables the remote server.</li>
+                                    <li><code>network</code>: Enables network utilities (currently, only a file
+                                        downloader with progress bar)</li>
+                                    <li><code>experimental-named-tensor</code>: Enables named tensors (experimental)
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>You can also check the details in sub-crates <a
+                                href="https://docs.rs/burn-core"><code>mabor-core</code></a> and <a
+                                href="https://docs.rs/burn-train"><code>mabor-train</code></a>.</p>
+                    </div>
+                </details>
+                <h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="mod" href="backend/index.html" title="mod burn::backend">backend</a></dt>
+                    <dd>Backend module.</dd>
+                    <dt><a class="mod" href="config/index.html" title="mod burn::config">config</a></dt>
+                    <dd>The configuration module.</dd>
+                    <dt><a class="mod" href="data/index.html" title="mod burn::data">data</a></dt>
+                    <dd>Data module.</dd>
+                    <dt><a class="mod" href="grad_clipping/index.html"
+                            title="mod burn::grad_clipping">grad_<wbr>clipping</a></dt>
+                    <dd>Gradient clipping module.</dd>
+                    <dt><a class="mod" href="lr_scheduler/index.html"
+                            title="mod burn::lr_scheduler">lr_<wbr>scheduler</a></dt>
+                    <dd>Learning rate scheduler module.</dd>
+                    <dt><a class="mod" href="module/index.html" title="mod burn::module">module</a></dt>
+                    <dd>Module for the neural network module.</dd>
+                    <dt><a class="mod" href="nn/index.html" title="mod burn::nn">nn</a></dt>
+                    <dd>Neural network module.</dd>
+                    <dt><a class="mod" href="optim/index.html" title="mod burn::optim">optim</a></dt>
+                    <dd>Optimizer module.</dd>
+                    <dt><a class="mod" href="prelude/index.html" title="mod burn::prelude">prelude</a></dt>
+                    <dd>Structs and macros used by most projects. Add <code>use mabor::prelude::*</code> to your code to
+                        quickly get started with
+                        Mabor.</dd>
+                    <dt><a class="mod" href="record/index.html" title="mod burn::record">record</a></dt>
+                    <dd>Module for the recorder.</dd>
+                    <dt><a class="mod" href="serde/index.html" title="mod burn::serde">serde</a></dt>
+                    <dd>Serde</dd>
+                    <dt><a class="mod" href="tensor/index.html" title="mod burn::tensor">tensor</a></dt>
+                    <dd>Module for the tensor.</dd>
+                    <dt><a class="mod" href="train/index.html" title="mod burn::train">train</a></dt>
+                    <dd>Train module</dd>
+                </dl>
+                <h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="macro" href="macro.constant.html" title="macro burn::constant">constant</a></dt>
+                    <dd>Constant macro.</dd>
+                </dl>
+                <h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="type" href="type.LearningRate.html"
+                            title="type burn::LearningRate">Learning<wbr>Rate</a></dt>
+                    <dd>Type alias for the learning rate.</dd>
+                </dl>
+                <script type="text/json"
+                    id="notable-traits-data">{"&<Vec<T, A> as Index<I>>::Output":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","&mut <Vec<T, A> as Index<I>>::Output":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<(K, V)> as StoreIntoIterator<K, V>>::KeyValueIntoIter":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<(K, V)> as StoreIterable<'a, K, V>>::KeyValueIter":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<(K, V)> as StoreIterableMut<'a, K, V>>::KeyValueIterMut":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<T, A> as IntoIterator>::IntoIter":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<T> as AutodiffModule<B>>::InnerModule":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<T> as IntoDeserializer<'de, E>>::Deserializer":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<T> as IntoParallelIterator>::Iter":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<T> as Module<B>>::Record":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<T> as Record<B>>::Item<S>":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","<Vec<usize> as IntoDimension>::Dim":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>","Vec<u8>":"<h3>Notable traits for <code><a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;</code></h3><pre><code><div class=\"where\">impl&lt;A&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Write.html\" title=\"trait std::io::Write\">Write</a> for <a class=\"struct\" href=\"https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html\" title=\"struct alloc::vec::Vec\">Vec</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.u8.html\">u8</a>, A&gt;<div class=\"where\">where\n    A: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/alloc/trait.Allocator.html\" title=\"trait core::alloc::Allocator\">Allocator</a>,</div></div>"}</script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

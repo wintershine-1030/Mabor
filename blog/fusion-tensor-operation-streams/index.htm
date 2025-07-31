@@ -1,0 +1,811 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="
+This post explores Mabor's tensor operation stream strategy, optimizing models through an eager API by creating custom kernels with fused operations.
+Our cusotm GELU experiment reveals a remarkable improvement of up to 78 times on our WGPU backend.
+">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Optimal Performance without Static Graphs by Fusing Tensor Operation Streams">
+  <meta property="og:description" content="
+This post explores Mabor's tensor operation stream strategy, optimizing models through an eager API by creating custom kernels with fused operations.
+Our cusotm GELU experiment reveals a remarkable improvement of up to 78 times on our WGPU backend.
+">
+  <meta property="og:author" content="Nathaniel Simard">
+  <meta property="og:image" content="/_astro/banner.CvaHBVAQ_1YwHaN.webp">
+  <meta property="article:published_time" content="2024-03-19T18:00:00.000Z">
+  <link rel="sitemap" href="../../sitemap-index.xml">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <meta name="generator" content="Astro v5.10.1">
+  <link rel="canonical" href="../../index.htm">
+  <title>Optimal Performance without Static Graphs by Fusing Tensor Operation Streams</title>
+  <script
+    type="module">try { const t = window._paq = window._paq || []; t.push(["trackPageView"]), t.push(["enableLinkTracking"]), function () { t.push(["setTrackerUrl", "https://burndev.matomo.cloud/" + "matomo.php"]), t.push(["setSiteId", "1"]); const o = document, e = o.createElement("script"), c = o.getElementsByTagName("script")[0]; e.async = !0, e.src = "https://cdn.matomo.cloud/burndev.matomo.cloud/matomo.js", c?.parentNode?.insertBefore(e, c) }() } catch { }</script>
+  <script type="text/partytown" src="../../gtag/js?id=G-SCQPPXXSJY"></script>
+  <script type="text/partytown">(function(){const id = "G-SCQPPXXSJY";
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag("config", id);
+  })();</script>
+  <link rel="stylesheet" href="../../_astro/_blog_.DvB2Xm2x.css">
+  <link rel="stylesheet" href="../../_astro/_blog_.CLbeXEfv.css">
+  <script>!(function (w, p, f, c) { if (!window.crossOriginIsolated && !navigator.serviceWorker) return; c = w[p] = Object.assign(w[p] || {}, { "lib": "/~partytown/", "debug": false }); c[f] = (c[f] || []).concat(["dataLayer.push"]) })(window, 'partytown', 'forward');/* Partytown 0.11.1 - MIT QwikDev */
+    const t = { preserveBehavior: !1 }, e = e => { if ("string" == typeof e) return [e, t]; const [n, r = t] = e; return [n, { ...t, ...r }] }, n = Object.freeze((t => { const e = new Set; let n = []; do { Object.getOwnPropertyNames(n).forEach((t => { "function" == typeof n[t] && e.add(t) })) } while ((n = Object.getPrototypeOf(n)) !== Object.prototype); return Array.from(e) })()); !function (t, r, o, i, a, s, c, l, d, p, u = t, f) { function h() { f || (f = 1, "/" == (c = (s.lib || "/~partytown/") + (s.debug ? "debug/" : ""))[0] && (d = r.querySelectorAll('script[type="text/partytown"]'), i != t ? i.dispatchEvent(new CustomEvent("pt1", { detail: t })) : (l = setTimeout(v, (null == s ? void 0 : s.fallbackTimeout) || 1e4), r.addEventListener("pt0", w), a ? y(1) : o.serviceWorker ? o.serviceWorker.register(c + (s.swPath || "partytown-sw.js"), { scope: c }).then((function (t) { t.active ? y() : t.installing && t.installing.addEventListener("statechange", (function (t) { "activated" == t.target.state && y() })) }), console.error) : v()))) } function y(e) { p = r.createElement(e ? "script" : "iframe"), t._pttab = Date.now(), e || (p.style.display = "block", p.style.width = "0", p.style.height = "0", p.style.border = "0", p.style.visibility = "hidden", p.setAttribute("aria-hidden", !0)), p.src = c + "partytown-" + (e ? "atomics.js?v=0.11.1" : "sandbox-sw.html?" + t._pttab), r.querySelector(s.sandboxParent || "body").appendChild(p) } function v(n, o) { for (w(), i == t && (s.forward || []).map((function (n) { const [r] = e(n); delete t[r.split(".")[0]] })), n = 0; n < d.length; n++)(o = r.createElement("script")).innerHTML = d[n].innerHTML, o.nonce = s.nonce, r.head.appendChild(o); p && p.parentNode.removeChild(p) } function w() { clearTimeout(l) } s = t.partytown || {}, i == t && (s.forward || []).map((function (r) { const [o, { preserveBehavior: i }] = e(r); u = t, o.split(".").map((function (e, r, o) { var a; u = u[o[r]] = r + 1 < o.length ? u[o[r]] || (a = o[r + 1], n.includes(a) ? [] : {}) : (() => { let e = null; if (i) { const { methodOrProperty: n, thisObject: r } = ((t, e) => { let n = t; for (let t = 0; t < e.length - 1; t += 1)n = n[e[t]]; return { thisObject: n, methodOrProperty: e.length > 0 ? n[e[e.length - 1]] : void 0 } })(t, o); "function" == typeof n && (e = (...t) => n.apply(r, ...t)) } return function () { let n; return e && (n = e(arguments)), (t._ptf = t._ptf || []).push(o, arguments), n } })() })) })), "complete" == r.readyState ? h() : (t.addEventListener("DOMContentLoaded", h), t.addEventListener("load", h)) }(window, document, navigator, top, window.crossOriginIsolated);; (e => { e.addEventListener("astro:before-swap", e => { let r = document.body.querySelector("iframe[src*='/~partytown/']"); if (r) e.newDocument.body.append(r) }) })(document);</script>
+</head>
+
+<body
+  class="flex flex-col text-primary-content default:sections:mx-auto [&#38;>nav]:order-last default:sections:max-w-[1500px] bg-[#0D1117]">
+  <script type="module" src="../../_astro/Layout.astro_astro_type_script_index_0_lang.W5886xPT.js"></script>
+  <style>
+    astro-island,
+    astro-slot,
+    astro-static-slot {
+      display: contents
+    }
+  </style>
+  <script>(() => { var e = async t => { await (await t())() }; (self.Astro || (self.Astro = {})).load = e; window.dispatchEvent(new Event("astro:load")); })();</script>
+  <script>(() => { var A = Object.defineProperty; var g = (i, o, a) => o in i ? A(i, o, { enumerable: !0, configurable: !0, writable: !0, value: a }) : i[o] = a; var d = (i, o, a) => g(i, typeof o != "symbol" ? o + "" : o, a); { let i = { 0: t => m(t), 1: t => a(t), 2: t => new RegExp(t), 3: t => new Date(t), 4: t => new Map(a(t)), 5: t => new Set(a(t)), 6: t => BigInt(t), 7: t => new URL(t), 8: t => new Uint8Array(t), 9: t => new Uint16Array(t), 10: t => new Uint32Array(t), 11: t => 1 / 0 * t }, o = t => { let [l, e] = t; return l in i ? i[l](e) : void 0 }, a = t => t.map(o), m = t => typeof t != "object" || t === null ? t : Object.fromEntries(Object.entries(t).map(([l, e]) => [l, o(e)])); class y extends HTMLElement { constructor() { super(...arguments); d(this, "Component"); d(this, "hydrator"); d(this, "hydrate", async () => { var b; if (!this.hydrator || !this.isConnected) return; let e = (b = this.parentElement) == null ? void 0 : b.closest("astro-island[ssr]"); if (e) { e.addEventListener("astro:hydrate", this.hydrate, { once: !0 }); return } let c = this.querySelectorAll("astro-slot"), n = {}, h = this.querySelectorAll("template[data-astro-template]"); for (let r of h) { let s = r.closest(this.tagName); s != null && s.isSameNode(this) && (n[r.getAttribute("data-astro-template") || "default"] = r.innerHTML, r.remove()) } for (let r of c) { let s = r.closest(this.tagName); s != null && s.isSameNode(this) && (n[r.getAttribute("name") || "default"] = r.innerHTML) } let p; try { p = this.hasAttribute("props") ? m(JSON.parse(this.getAttribute("props"))) : {} } catch (r) { let s = this.getAttribute("component-url") || "<unknown>", v = this.getAttribute("component-export"); throw v && (s += ` (export ${v})`), console.error(`[hydrate] Error parsing props for component ${s}`, this.getAttribute("props"), r), r } let u; await this.hydrator(this)(this.Component, p, n, { client: this.getAttribute("client") }), this.removeAttribute("ssr"), this.dispatchEvent(new CustomEvent("astro:hydrate")) }); d(this, "unmount", () => { this.isConnected || this.dispatchEvent(new CustomEvent("astro:unmount")) }) } disconnectedCallback() { document.removeEventListener("astro:after-swap", this.unmount), document.addEventListener("astro:after-swap", this.unmount, { once: !0 }) } connectedCallback() { if (!this.hasAttribute("await-children") || document.readyState === "interactive" || document.readyState === "complete") this.childrenConnectedCallback(); else { let e = () => { document.removeEventListener("DOMContentLoaded", e), c.disconnect(), this.childrenConnectedCallback() }, c = new MutationObserver(() => { var n; ((n = this.lastChild) == null ? void 0 : n.nodeType) === Node.COMMENT_NODE && this.lastChild.nodeValue === "astro:end" && (this.lastChild.remove(), e()) }); c.observe(this, { childList: !0 }), document.addEventListener("DOMContentLoaded", e) } } async childrenConnectedCallback() { let e = this.getAttribute("before-hydration-url"); e && await import(e), this.start() } async start() { let e = JSON.parse(this.getAttribute("opts")), c = this.getAttribute("client"); if (Astro[c] === void 0) { window.addEventListener(`astro:${c}`, () => this.start(), { once: !0 }); return } try { await Astro[c](async () => { let n = this.getAttribute("renderer-url"), [h, { default: p }] = await Promise.all([import(this.getAttribute("component-url")), n ? import(n) : () => () => { }]), u = this.getAttribute("component-export") || "default"; if (!u.includes(".")) this.Component = h[u]; else { this.Component = h; for (let f of u.split(".")) this.Component = this.Component[f] } return this.hydrator = p, this.hydrate }, e, this) } catch (n) { console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`, n) } } attributeChangedCallback() { this.hydrate() } } d(y, "observedAttributes", ["props"]), customElements.get("astro-island") || customElements.define("astro-island", y) } })();</script>
+  <script>window._$HY || (e => { let t = e => e && e.hasAttribute && (e.hasAttribute("data-hk") ? e : t(e.host && e.host.nodeType ? e.host : e.parentNode));["click", "input"].forEach((o => document.addEventListener(o, (o => { if (!e.events) return; let s = t(o.composedPath && o.composedPath()[0] || o.target); s && !e.completed.has(s) && e.events.push([s, o]) })))) })(_$HY = { events: [], completed: new WeakSet, r: {}, fe() { } });</script>
+  <!--xs--><astro-island uid="ZeT78n" data-solid-render-id="s1" component-url="/_astro/Navbar.xVaj7tQm.js"
+    component-export="Navbar" renderer-url="/_astro/client.C-0b9Jot.js"
+    props="{&quot;links&quot;:[0,{&quot;home&quot;:[0,{&quot;href&quot;:[0,&quot;/&quot;],&quot;title&quot;:[0,&quot;Home&quot;]}],&quot;getStarted&quot;:[0,{&quot;href&quot;:[0,&quot;/get-started&quot;],&quot;title&quot;:[0,&quot;Get Started&quot;],&quot;description&quot;:[0,&quot;Begin your journey&quot;]}],&quot;learn&quot;:[0,{&quot;href&quot;:[0,&quot;/learn&quot;],&quot;title&quot;:[0,&quot;Learn&quot;]}],&quot;blog&quot;:[0,{&quot;href&quot;:[0,&quot;/blog&quot;],&quot;title&quot;:[0,&quot;Blog&quot;]}],&quot;benchmarks&quot;:[0,{&quot;href&quot;:[0,&quot;/benchmarks/community-benchmarks&quot;],&quot;title&quot;:[0,&quot;Benchmarks&quot;]}]}]}"
+    ssr="" client="load" opts="{&quot;name&quot;:&quot;Navbar&quot;,&quot;value&quot;:true}" await-children="">
+    <nav data-hk="s10000"
+      class="fixed left-1/2 top-[10px] z-30 h-[70px] w-[90%] max-w-[1200px] -translate-x-1/2 rounded-[100px] border border-white/10 bg-[#1E212A99] px-[30px] py-[20px] text-center shadow-[0px_10px_15px_3px_#5865F21A] backdrop-blur-2xl">
+      <div class="flex flex-1 items-center justify-between gap-4">
+        <div class="flex">
+          <details class="group block hover:cursor-pointer lg:invisible lg:hidden" id="navbar-menu">
+            <summary class="list-none px-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 20 21"
+                class="inline-block h-7 w-8 stroke-current group-open:hidden">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                </path>
+              </svg></summary>
+            <div
+              class="absolute left-[-10%] top-[-16px] h-[calc(100vh+16px)] w-[110vw] bg-[#1E212A99]/95 backdrop-blur-2xl">
+              <div class="pt-10 pl-[calc(10%+30px)]"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewbox="0 0 24 24" class="h-7 w-8 stroke-current group-open:block">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg></div>
+              <ul class="mt-6 flex-col justify-evenly whitespace-nowrap">
+                <li data-hk="s100010" class="border-white p-4 text-3xl"><a data-hk="s1000110" title="Home"
+                    href="../../index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a>
+                </li>
+                <li data-hk="s100012" class="border-white p-4 text-3xl"><a data-hk="s1000130" title="Get Started"
+                    href="../../get-started/index.htm" aria-description="Begin your journey"
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get
+                    Started</a></li>
+                <li data-hk="s100014" class="border-white p-4 text-3xl"><a data-hk="s1000150" title="Learn"
+                    href="../../learn/index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a>
+                </li>
+                <li data-hk="s100016" class="border-white p-4 text-3xl"><a data-hk="s1000170" title="Blog"
+                    href="../index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a>
+                </li>
+                <li data-hk="s100018" class="border-white p-4 text-3xl"><a data-hk="s1000190" title="Benchmarks"
+                    href="../../benchmarks/community-benchmarks/index.htm" aria-description=""
+                    class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a>
+                </li>
+              </ul>
+            </div>
+          </details>
+          <div class="hidden lg:block"><astro-slot name="left">
+              <div> <img src="../../_astro/burn-flame-white.D0NuVaYR_Z1ywDjw.svg" alt="Burn Logo" loading="lazy"
+                  decoding="async" fetchpriority="auto" width="95" height="30" class="mx-2 hidden sm:block"> </div>
+            </astro-slot></div>
+        </div>
+        <div class="block lg:hidden"><astro-slot name="center"></astro-slot></div>
+        <ul class="hidden max-w-[610px] flex-wrap justify-evenly whitespace-nowrap text-center align-middle lg:flex">
+          <li data-hk="s100020"><a data-hk="s1000210" title="Home" href="../../index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a>
+          </li>
+          <li data-hk="s100022"><a data-hk="s1000230" title="Get Started" href="../../get-started/index.htm"
+              aria-description="Begin your journey"
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get
+              Started</a></li>
+          <li data-hk="s100024"><a data-hk="s1000250" title="Learn" href="../../learn/index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a>
+          </li>
+          <li data-hk="s100026"><a data-hk="s1000270" title="Blog" href="../index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a>
+          </li>
+          <li data-hk="s100028"><a data-hk="s1000290" title="Benchmarks"
+              href="../../benchmarks/community-benchmarks/index.htm" aria-description=""
+              class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a>
+          </li>
+        </ul><!--$--><astro-slot name="right">
+          <div class="flex flex-row gap-2 pr-3"> <a href="https://github.com/tracel-ai/burn" class="h-[30px]"> <svg
+                fill="currentColor" width="30" height="30" viewbox="0 0 16 16">
+                <path
+                  d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8">
+                </path>
+              </svg> </a> <a href="https://x.com/yourprofile" target="_blank" aria-label="X (Twitter)">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 120 120" fill="none">
+    <rect width="120" height="120" rx="24" fill="black"/>
+    <path d="M81.6 31.2H68.88L58.08 45.36 47.28 31.2H34.56l17.28 22.8L34 88.8h12.72l10.56-13.92 10.56 13.92h12.72L62.4 54l19.2-22.8zM66.96 75.12l-8.88-11.76-8.88 11.76h-3.12L58.08 58.8l11.04 16.32h-2.16z" fill="white"/>
+  </svg>
+</a>
+</div>
+        </astro-slot><!--/-->
+      </div>
+    </nav><!--astro:end-->
+  </astro-island>
+  <main>
+    <div class="flex w-full justify-center pt-20">
+      <div class="mx-3 mb-10 w-full max-w-5xl">
+        <div class="mb-3">
+          <p class="px-2 text-xl font-semibold"><a href="../../index.htm"
+              class="hover:text-[#edc567]">home</a><span><span> · </span><a href="../index.htm"
+                class="hover:text-[#edc567]">blog</a></span><span><span> · </span><a href="index.htm"
+                class="hover:text-[#edc567]">fusion-tensor-operation-streams</a></span></p>
+        </div>
+        <article class="blog rounded-lg bg-white/5 pt-4">
+          <div>
+            <h1 class="!text-[30px] sm:!text-[48px] font-bold !leading-normal px-3 sm:px-8">Optimal Performance without
+              Static Graphs by Fusing Tensor Operation Streams</h1>
+            <div class="px-3 pb-4 sm:px-8"><img class="mr-3 h-48 w-full rounded-lg object-cover object-top"
+                src="../../_astro/banner.CvaHBVAQ_1YwHaN.webp" alt="Space digital art generated by stable diffusion.">
+            </div>
+            <div class="flex px-3 sm:px-8">
+              <div class="flex">
+                <div class="i-mdi-clipboard-text-clock size-5"></div><span class="px-2 font-normal">Tue, Mar 19,
+                  2024</span>
+              </div><!--$--><a class="flex pl-2" href="https://x.com/nath_simard" target="_blank">
+                <div class="i-mdi-account-edit size-5"></div><span class="px-2 font-normal">Nathaniel Simard</span>
+              </a><!--/-->
+            </div>
+          </div>
+          <div class="px-3 pb-4 sm:px-8 text-base sm:text-lg leading-relaxed">
+            <div class="my-6 border-t-2 border-[#181a1d]"></div><!--$-->
+            <div>
+              <h2>Introduction</h2>
+              <p>
+                There are three things that are crucial for performance when
+                implementing a Deep Learning framework: reducing to a minimum the
+                movement of data that isn’t strictly required, using the hardware to
+                the fullest with specific instructions for calculations, and reducing
+                the overhead created by the framework itself that is not related to
+                executing tensor operations.
+              </p>
+              <p>
+                Minimizing the movement of data is actually the most sensitive part of
+                those three since it is tightly linked to the framework architecture,
+                as well as model architectures and other strategies like gradient
+                checkpointing. Using the most efficient instructions of the GPU or CPU
+                isn’t particularly hard, but requires a lot of human effort to
+                implement and optimize most kernels. Finally, reducing the overhead of
+                the framework is probably the easiest part, since lazy evaluation of
+                kernels means that the extra computation done by the framework isn’t
+                blocking the flow of tensor operations and is supposed to be minimal.
+                While it might become the bottleneck for very small networks, it is quite unlikely with the current Deep
+                Learning approach. This explains
+                why current frameworks written in Python such as PyTorch<span class="reference px-1">[<!--$--><a
+                    class="hover:text-[#69b8e1]" href="#reference-1">1</a><!--/-->]</span> and TensorFlow<span
+                  class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-2">2</a><!--/-->]</span> are
+                still very fast even if Python can be hundreds of times slower than C++
+                or Rust. If you are interested into going deeper on the subject, there
+                is an excellent blog post<span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-3">3</a><!--/-->]</span> that goes over the process of optimizing deep learning
+                models.
+              </p>
+              <p>
+                Current approaches to minimizing memory movement normally require a
+                static graph, where all information about a model is gathered at
+                compile time, making it possible for a framework to optimize the graph
+                by creating custom kernels and removing the need to create
+                intermediary tensors. The disadvantage is that it's impossible to
+                modify the graph at runtime and execute something else than the
+                specified instructions during the forward pass. In other words, it
+                forces users to configure a graph instead of coding their model. This
+                is why PyTorch has been the most popular framework until now: a
+                programmable Deep Learning framework will always have a better
+                developer experience than a configurable graph.
+              </p>
+              <p>
+                However, the drawback of an Eager-first framework is its sub-optimal
+                performance. Is it something that can be fixed? Well, yes, and this is
+                what this blog is all about!
+              </p>
+              <h2>Memory Movement</h2>
+              <p>
+                First, we have to understand what the actual problem is! What do I
+                mean by memory movements and why is it important? Let’s start with a
+                simple example: multiple element-wise operations done on tensors. So
+                let’s say you do the following:
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#C792EA">  let</span><span style="color:#EEFFFF"> x </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">random</span><span style="color:#89DDFF">([</span><span style="color:#F78C6C">32</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 32</span><span style="color:#89DDFF">]);</span></span>
+<span class="line"><span style="color:#C792EA">  let</span><span style="color:#EEFFFF"> y </span><span style="color:#89DDFF">=</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">random</span><span style="color:#89DDFF">([</span><span style="color:#F78C6C">32</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 32</span><span style="color:#89DDFF">]);</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#C792EA">  let</span><span style="color:#EEFFFF"> tmp1 </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> x</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> +</span><span style="color:#EEFFFF"> y</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#C792EA">  let</span><span style="color:#EEFFFF"> tmp2 </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> tmp1 </span><span style="color:#89DDFF">*</span><span style="color:#EEFFFF"> x</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">  let</span><span style="color:#EEFFFF"> out </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> tmp2 </span><span style="color:#89DDFF">*</span><span style="color:#EEFFFF"> y</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#82AAFF">  println!</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">“</span><span style="color:#89DDFF">{</span><span style="color:#EEFFFF">out</span><span style="color:#89DDFF">}</span><span style="color:#EEFFFF">”</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span></code></pre>
+              </div>
+              <p>
+                In this small code snippet, we created two tensors <code>x</code> and <code>y</code>, added them
+                together to create a new temporary tensor <code>tmp1</code>, then multiplied the new temporary tensor
+                with <code>x</code> followed
+                by <code>y</code>. In a fully eager mode framework, we would normally
+                launch one kernel for each operation, while allocating data for the
+                new tensor created by each operation. In this simple case, we would
+                allocate <code>x</code>, <code>y</code>, <code>tmp1</code>, <code>tmp2</code>, and <code>out</code>. In
+                addition, for each of those new temporary
+                tensors, a GPU kernel will need to write to the global GPU memory.
+                Then, for all operations, a kernel must read both the left hand side
+                and right hand side tensors from the global memory. To summarize:
+              </p>
+              <div class="w-full overflow-auto px-6 pb-8">
+                <div class="w-full px-6 py-2 text-center text-xl font-bold">Eager: Ressource Usage</div>
+                <table class="w-full">
+                  <thead>
+                    <tr>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Tensor Allocations (Bytes)</div>
+                        </div>
+                      </th>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Global Memory Reads (Bytes)</div>
+                        </div>
+                      </th>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Global Memory Writes (Bytes)</div>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">20,480</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">24,576</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">20,480</span></td>
+                    </tr>
+                  </tbody>
+                </table><!--$-->
+                <div class="w-full px-6 py-2 text-center font-normal font-serif">The number of ressources required to
+                  run the code snippet presented above in eager mode.</div><!--/-->
+              </div>
+              <p>
+                Now, let’s say we want to optimize this operation. We could write our
+                own GPU kernel to fuse the 3 operations together. In this case, we
+                would reduce the number of reads to only 2 and the number of writes to
+                3 since we remove all temporary tensors. So we would have:
+              </p>
+              <div class="w-full overflow-auto px-6 pb-8">
+                <div class="w-full px-6 py-2 text-center text-xl font-bold">Fusion: Ressource Usage</div>
+                <table class="w-full">
+                  <thead>
+                    <tr>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Tensor Allocations (Bytes)</div>
+                        </div>
+                      </th>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Global Memory Reads (Bytes)</div>
+                        </div>
+                      </th>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Global Memory Writes (Bytes)</div>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">12,288</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">8,192</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">12,288</span></td>
+                    </tr>
+                  </tbody>
+                </table><!--$-->
+                <div class="w-full px-6 py-2 text-center font-normal font-serif">The number of ressources required to
+                  run the code snippet presented above in fusion mode.</div><!--/-->
+              </div>
+              <p>
+                This is what we mean when we say a framework should minimize memory
+                movement: fewer reads, fewer writes, and fewer allocations! When a
+                tensor contains millions of elements, most of the time is spent on
+                memory movements instead of actually performing computations, so it’s
+                crucial for a framework to optimize those scenarios.
+              </p>
+              <h2>Tensor Operation Streams</h2>
+              <p>
+                Mabor optimizes memory in a very unique way that allows for extremely
+                dynamic models, while keeping optimal performance. Even with edge case
+                scenarios like calling a database inside a model, Mabor will still
+                optimize it. But how do we do it?
+              </p>
+              <p>
+Mabor                stream is an endless sequence of tensor operations. This is really
+                different from standard frameworks where the computation is actually
+                stored into a finite graph. In order to optimize a stream, we have to
+                gather all information related to the tensor dynamic lifetime; in
+                other words, we need to know for sure when a tensor is symbolically
+                read-only, or modifiable because it won’t be reused later. This is
+                where Rust is crucial, since it does not rely on the end of the scope
+                to release memory. Instead, it relies on an ownership system, which
+                makes it really easy to capture the dynamic lifetime, using reference
+                counting.
+              </p>
+              <p>
+                The next step is to capture the stream into an internal
+                representation, detecting patterns that we can optimize, and
+                forwarding that representation into a just-in-time compiler to create
+                a highly optimized kernel.
+              </p>
+              <p>
+                You might wonder if this introduces any framework overhead, and you
+                are right to ask! Yes, there are some overheads associated with
+                capturing operation streams, ranking optimizations, compiling them,
+                and autotuning <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-4">4</a><!--/-->]</span>
+                the generated code. However, we have a clever multi-level caching system
+                where we exploit the fact that tensor streams have a lot of regularity.
+                Therefore, an optimization on the same stream of operations that were already
+                optimized can be reused, making the overhead extremely light. In the following
+                sections, we will dig deeper into the solution and see how it all works!
+              </p>
+              <h2 class="text-9xl">Mabor Fusion</h2>
+              <p>
+                Although Mabor handles multiple streams concurrently based on the
+                device and thread IDs, for simplification we will assume only one
+                stream. Each stream is composed of an operation queue as well as a
+                stream segment processor. A segment is a finite list of operations
+                that can be executed given an execution plan ID and a store, which we
+                will explain in more detail later.
+              </p>
+              <h3>Operation Queue</h3>
+              <p>
+                The operation queue is responsible for keeping an updated list of
+                growing tensor operations. However, since a stream is an endless
+                sequence of operations, the tensor ID and the shapes might be
+                different even if the operations are semantically the same. This is
+                why the queue is actually keeping two versions of the stream: one with
+                relative tensor ID and shapes, and another with the real tensor ID and
+                shapes. The fusion backend is responsible for creating executable
+                operations that work with any shapes, but can still use the runtime
+                shape information to create specialized kernels; it’s just a different
+                level of optimization. It is important to have a shape-agnostic stream
+                representation since it doesn’t impact which operations can be fused.
+              </p>
+              <h3>Segment Processor</h3>
+              <p>
+                The segment processor is where the most interesting stuff happens.
+                Three actions are possible when processing a segment: exploring new
+                potential optimizations, deferring any calculation, or executing an
+                existing optimization. When a model is hot, meaning that all potential
+                optimizations have already been found, the policy will only generate
+                actions to defer the calculation and run an execution plan. This
+                minimizes the overhead significantly, as the only additional tasks
+                involve keeping the operation queue up to date, along with the minor
+                calculations performed by the policy. On the other hand, when the
+                model isn’t hot, we will have to explore new optimizations.
+              </p>
+              <p>
+                The exploration part is quite simple: the goal is to create an
+                execution plan that we can store a reuse later to avoid doing the
+                exploration again. The execution plan is found by using optimization
+                builders that receive one operation after another until they can’t
+                optimize the segment further. Since we have multiple optimization
+                builders, we simply explore until all of them are finished and choose
+                the best one following a simple scoring algorithm.
+              </p>
+              <p>
+                Now, the beautiful part about the execution plans is that they are
+                stored in memory for the policy but can also be serialized to disk to
+                reduce cold start. Yes, we thought about this too, knowing that cold
+                start is always a drawback with Just-In-Time compilers. But you might
+                still wonder: how efficient is our policy algorithm for detecting the
+                right execution plan based on a stream segment?
+              </p>
+              <p>
+                The most straightforward approach would be to keep a key-value map
+                where the key is the hash value of a segment and the value is the
+                execution plan; however, it would require us to keep a version of the
+                hash for each new operation added, which scales really badly with long
+                segments. Instead, we reformulated the problem as invalidating
+                multiple potential execution plans based on the next operation. When
+                starting a new segment, the policy searches in the store for all
+                possible executions where the segment starts with the current
+                operation. Then, as new operations are added to the segment, we
+                invalidate the ones that diverge. Instead of scaling with the number
+                of operations per execution plan, it scales with the number of
+                potential candidate execution plans for the starting point of a
+                segment, which is never supposed to be large at any time.
+              </p>
+              <div class="flex justify-center pt-4 pb-8">
+                <div class="w-full">
+                  <div class="flex justify-center"> <span class="w-full text-center text-xl" .="">
+                      Major Components of Tensor Stream Fusion
+                    </span> </div> <img class="bg-primary p-2 rounded-xl w-full"
+                    src="../../_astro/fusion.BcSg6v5s_ZQ4QlU.svg">
+                </div>
+              </div>
+              <p>
+                In the figure above, we see an overview of the most important
+                components of the tensor stream fusion system. We can observe the
+                procedure where the segment processor discovers new optimizations
+                while also applying previously discovered ones through the policy and
+                the explorer. The resulting execution plans are stored and then reused
+                by the operation queue, modifying the execution context which stores
+                the tensor handles. Note that the relative segment of the operation
+                queue will always match the relative segment of an execution plan.
+                Thus, we can also summarize that the policy's job is to find the
+                execution plan which matches the relative segment of the operation
+                queue in the most efficient way.
+              </p>
+              <h2>Benchmark</h2>
+              <p>
+                As always, the real impact of optimizations should be measured
+                empirically. At the time of writing, Mabor hasn't implemented all
+                possible optimizations to reduce memory movements. We focused our
+                effort into creating a robust implementation for element-wise
+                operations. This includes most math operators, but excludes matrix
+                multiplications, reductions, convolutions and pooling. We plan to work
+                on those after we stabilize our multi-target Just-In-Time compiler to
+                bring our optimizations to other graphics APIs than WebGPU.
+              </p>
+              <p>
+                Now let's create a benchmark that uses basic math operators to
+                implement the GELU activation function<span class="reference px-1">[<!--$--><a
+                    class="hover:text-[#69b8e1]" href="#reference-5">5</a><!--/-->]</span>. To test our fused tensor
+                stream, we will compare GELU
+                implementations using our WebGPU backend<span class="reference px-1">[<!--$--><a
+                    class="hover:text-[#69b8e1]" href="#reference-6">6</a><!--/-->]</span>, both without fusion and with
+                fusion, and the LibTorch CUDA backend<span class="reference px-1">[<!--$--><a
+                    class="hover:text-[#69b8e1]" href="#reference-7">7</a><!--/-->]</span>.
+              </p>
+              <p>
+                We will compare three GELU implementations: the reference
+                implementation, one using math operators and the error function, and
+                one using a custom implementation of the error function<span class="reference px-1">[<!--$--><a
+                    class="hover:text-[#69b8e1]" href="#reference-8">8</a><!--/-->]</span> using the high-level tensor
+                API. Below is the code used for the experiment
+                followed by the results.
+              </p>
+              <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium">
+                <pre class="astro-code material-theme-darker"
+                  style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#C792EA">  enum</span><span style="color:#FFCB6B"> GeluKind</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#FFCB6B">      Reference</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#FFCB6B">      WithReferenceErf</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#FFCB6B">      WithCustomErf</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#F78C6C">  fn</span><span style="color:#82AAFF"> gelu</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">,</span><span style="color:#C792EA"> const</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">>(</span><span style="color:#EEFFFF">tensor</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">>,</span><span style="color:#EEFFFF"> kind</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> GeluKind</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF;font-style:italic">      match</span><span style="color:#EEFFFF"> kind </span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#FFCB6B">          GeluKind</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">Reference</span><span style="color:#89DDFF"> =></span><span style="color:#FFCB6B"> mabor</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">tensor</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">activation</span><span style="color:#89DDFF">::</span><span style="color:#82AAFF">gelu</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">tensor</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#FFCB6B">          GeluKind</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">WithReferenceErf</span><span style="color:#89DDFF"> =></span><span style="color:#82AAFF"> gelu_custom</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">tensor</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">::</span><span style="color:#EEFFFF">erf</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#FFCB6B">          GeluKind</span><span style="color:#89DDFF">::</span><span style="color:#FFCB6B">WithCustomErf</span><span style="color:#89DDFF"> =></span><span style="color:#82AAFF"> gelu_custom</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">tensor</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> erf_custom</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#89DDFF">      };</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#F78C6C">  fn</span><span style="color:#82AAFF"> gelu_custom</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">,</span><span style="color:#C792EA"> const</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> Erf</span><span style="color:#89DDFF">>(</span><span style="color:#EEFFFF">x</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">>,</span><span style="color:#EEFFFF"> erf</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Erf</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">></span></span>
+<span class="line"><span style="color:#F78C6C">  where</span></span>
+<span class="line"><span style="color:#FFCB6B">      Erf</span><span style="color:#89DDFF">:</span><span style="color:#82AAFF"> Fn</span><span style="color:#89DDFF">(</span><span style="color:#FFCB6B">Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">>)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">>,</span></span>
+<span class="line"><span style="color:#89DDFF">  {</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> x </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> x</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> *</span><span style="color:#89DDFF"> (</span><span style="color:#82AAFF">erf</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">x </span><span style="color:#89DDFF">/</span><span style="color:#EEFFFF"> SQRT_2</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> +</span><span style="color:#F78C6C"> 1</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#EEFFFF">      x </span><span style="color:#89DDFF">/</span><span style="color:#F78C6C"> 2</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#F78C6C">  fn</span><span style="color:#82AAFF"> erf_custom</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">,</span><span style="color:#C792EA"> const</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">>(</span><span style="color:#EEFFFF">x</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">>)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> x1 </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> -</span><span style="color:#82AAFF">erf_positive</span><span style="color:#89DDFF">(-</span><span style="color:#EEFFFF">x</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">());</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> x2 </span><span style="color:#89DDFF">=</span><span style="color:#82AAFF"> erf_positive</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">x</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">());</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> mask </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> x</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">greater_elem</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">0</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#EEFFFF">      x1</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">mask_where</span><span style="color:#89DDFF">(</span><span style="color:#EEFFFF">mask</span><span style="color:#89DDFF">,</span><span style="color:#EEFFFF"> x2</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#F78C6C">  fn</span><span style="color:#82AAFF"> erf_positive</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Backend</span><span style="color:#89DDFF">,</span><span style="color:#C792EA"> const</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">>(</span><span style="color:#EEFFFF">x</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">>)</span><span style="color:#89DDFF"> -></span><span style="color:#FFCB6B"> Tensor</span><span style="color:#89DDFF">&#x3C;</span><span style="color:#FFCB6B">B</span><span style="color:#89DDFF">,</span><span style="color:#FFCB6B"> D</span><span style="color:#89DDFF">></span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> p </span><span style="color:#89DDFF">=</span><span style="color:#F78C6C"> 0</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">3275911</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> a1 </span><span style="color:#89DDFF">=</span><span style="color:#F78C6C"> 0</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">254829592</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> a2 </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> -</span><span style="color:#F78C6C">0</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">284496736</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> a3 </span><span style="color:#89DDFF">=</span><span style="color:#F78C6C"> 1</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">421413741</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> a4 </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> -</span><span style="color:#F78C6C">1</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">453152027</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> a5 </span><span style="color:#89DDFF">=</span><span style="color:#F78C6C"> 1</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">061405429</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> x1 </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> x</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">().</span><span style="color:#82AAFF">abs</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> *</span><span style="color:#EEFFFF"> p </span><span style="color:#89DDFF">+</span><span style="color:#F78C6C"> 1</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> t </span><span style="color:#89DDFF">=</span><span style="color:#EEFFFF"> x1</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">recip</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#C792EA">      let</span><span style="color:#EEFFFF"> tmp </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> (((((</span><span style="color:#EEFFFF">t</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> *</span><span style="color:#EEFFFF"> a5</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> +</span><span style="color:#EEFFFF"> a4</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> *</span><span style="color:#EEFFFF"> t</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">())</span><span style="color:#89DDFF"> +</span><span style="color:#EEFFFF"> a3</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> *</span><span style="color:#EEFFFF"> t</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> +</span><span style="color:#EEFFFF"> a2</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> *</span><span style="color:#EEFFFF"> t</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> +</span><span style="color:#EEFFFF"> a1</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span>
+<span class="line"><span style="color:#89DDFF">      -(</span><span style="color:#EEFFFF">tmp </span><span style="color:#89DDFF">*</span><span style="color:#EEFFFF"> t </span><span style="color:#89DDFF">*</span><span style="color:#89DDFF"> (-</span><span style="color:#EEFFFF">x</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">clone</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> *</span><span style="color:#EEFFFF"> x</span><span style="color:#89DDFF">).</span><span style="color:#82AAFF">exp</span><span style="color:#89DDFF">())</span><span style="color:#89DDFF"> +</span><span style="color:#F78C6C"> 1</span><span style="color:#89DDFF">.</span><span style="color:#F78C6C">0</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span></code></pre>
+              </div>
+              <div class="w-full overflow-auto px-6 pb-8">
+                <div class="w-full px-6 py-2 text-center text-xl font-bold">Gelu: Benchmarks with different
+                  implementations</div>
+                <table class="w-full">
+                  <thead>
+                    <tr>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Backend</div>
+                        </div>
+                      </th>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Reference (ms)</div>
+                        </div>
+                      </th>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Custom with Erf Reference (ms)</div>
+                        </div>
+                      </th>
+                      <th class="border border-[#586473] bg-[#1f2835] p-2 text-center">
+                        <div>
+                          <div>Custom with Custom Erf (ms)</div>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">WGPU Vulkan</span>
+                      </td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">6.96</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">6.91</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">67.23</span></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">WGPU Vulkan with
+                          Fusion</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">0.838</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-bold">0.819</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-bold">0.858</span></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">LibTorch CUDA</span>
+                      </td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-bold">0.653</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">3.86</span></td>
+                      <td class="border border-[#586473] p-2 text-center"><span class="font-thin">37.89</span></td>
+                    </tr>
+                  </tbody>
+                </table><!--$-->
+                <div class="w-full px-6 py-2 text-center font-normal font-serif">
+                  Benchmarks of three GELU implementations with three different backends.
+                  Note that the reference GELU and the 'Custom with Erf Reference' are actually implemented the same way
+                  with the WGPU backend.
+                  Each function was executed 10 times with 3 warmups on an Nvidia RTX 3070.
+                  The tensor shape used was (32, 512, 2048).
+                </div><!--/-->
+              </div>
+              <p>
+                As we can see in the benchmark, the fusion backend improved the
+                execution of the fully custom gelu implementation from 67.23 ms down
+                to 0.858 ms, which is almost as fast as the highly optimized reference
+                implementation used in LibTorch and over 78 times faster than the
+                fully eager execution using the same graphics API (Vulkan). Of course,
+                this is a synthetic benchmark and nobody in their right mind would use
+                a gelu implementation with a custom error function approximation, but
+                it just goes to show that you wouldn't need to write your own custom
+                GPU kernel if you wanted to research a new activation function. It
+                also shows that our tensor stream approach effectively creates custom
+                GPU kernels without adding too much overhead that would affect the
+                speed of execution of operations.
+              </p>
+              <h2>Conclusion</h2>
+              <p>
+                In this blog post, we summarized our tensor operation stream strategy
+                to create highly optimized kernels based on a fully eager API.
+                However, we didn’t go through how the compiler and runtime are built
+                in Mabor. This will be covered in a following blog post to detail how
+                we can leverage runtime and compile-time information in our
+                just-in-time compiler to create highly optimized kernels specialized
+                for the current hardware in use. We believe that creating a
+                programmable and flexible framework is crucial for research and
+                applied AI. This is important not only to unlock new model
+                architectures but also to achieve optimal performance. Some
+                optimizations are very dynamic in nature, like the one explored in
+                "BranchyNet: Fast Inference via Early Exiting from Deep Neural
+                Networks"<span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]"
+                    href="#reference-9">9</a><!--/-->]</span> and others
+                <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-10">10,</a><a
+                    class="hover:text-[#69b8e1]" href="#reference-11">11,</a><a class="hover:text-[#69b8e1]"
+                    href="#reference-12">12</a><!--/-->]</span>
+                that gives the control back to the model to modify its computation graph
+                dynamically, reducing the total number of computations required. That kind
+                of optimization is pretty hard to achieve, if even possible, with a static
+                graph-focused framework, while totally intuitive with an eager API. The
+                pursuit of dynamic optimization techniques underscores the importance of
+                flexible frameworks in advancing the capabilities of AI models, a vision
+                we are firmly dedicated to achieve with Mabor.
+              </p>
+            </div> <!--/--><!--$-->
+            <div>
+              <h2>References</h2><!--$-->
+              <div>
+                <div id="reference-1"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://arxiv.org/abs/1912.01703"
+                      target="_blank">1</a>]</span><span class="font-light font-serif">PyTorch: An Imperative Style,
+                    High-Performance Deep Learning Library</span></div>
+                <div id="reference-2"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://arxiv.org/abs/1605.08695"
+                      target="_blank">2</a>]</span><span class="font-light font-serif">TensorFlow: A system for
+                    large-scale machine learning</span></div>
+                <div id="reference-3"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://horace.io/brrr_intro.html"
+                      target="_blank">3</a>]</span><span class="font-light font-serif">Making Deep Learning Go Brrrr
+                    From First Principles</span></div>
+                <div id="reference-4"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="../autotune-for-gpu-kernels/index.htm"
+                      target="_blank">4</a>]</span><span class="font-light font-serif">Autotune for GPU Kernels:
+                    Ensuring Consistent Peak Performance</span></div>
+                <div id="reference-5"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://arxiv.org/abs/1606.08415"
+                      target="_blank">5</a>]</span><span class="font-light font-serif">Gaussian Error Linear Units
+                    (GELUs)</span></div>
+                <div id="reference-6"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://github.com/tracel-ai/burn/tree/main/crates/burn-wgpu"
+                      target="_blank">6</a>]</span><span class="font-light font-serif">Mabor: Wgpu backend</span></div>
+                <div id="reference-7"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://github.com/tracel-ai/burn/tree/main/crates/burn-tch"
+                      target="_blank">7</a>]</span><span class="font-light font-serif">Mabor: LibTorch backend</span>
+                </div>
+                <div id="reference-8"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold"
+                      href="https://en.wikipedia.org/wiki/Error_function#Numerical_approximations"
+                      target="_blank">8</a>]</span><span class="font-light font-serif">Wikipedia: Error function -
+                    Numerical approximations - Approximation with elementary functions</span></div>
+                <div id="reference-9"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://arxiv.org/abs/1709.01686v1"
+                      target="_blank">9</a>]</span><span class="font-light font-serif">BranchyNet: Fast Inference via
+                    Early Exiting from Deep Neural Networks</span></div>
+                <div id="reference-10"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://arxiv.org/abs/2312.04916"
+                      target="_blank">10</a>]</span><span class="font-light font-serif">EE-LLM: Large-Scale Training and
+                    Inference of Early-Exit Large Language Models with 3D Parallelism</span></div>
+                <div id="reference-11"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://arxiv.org/abs/2403.02181"
+                      target="_blank">11</a>]</span><span class="font-light font-serif">Not all Layers of LLMs are
+                    Necessary during Inference</span></div>
+                <div id="reference-12"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a
+                      class="text-[#69b8e1] hover:font-bold" href="https://arxiv.org/abs/2311.15436"
+                      target="_blank">12</a>]</span><span class="font-light font-serif">Learning to Skip for Language
+                    Modeling</span></div>
+              </div><!--/-->
+            </div><!--/-->
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+  <dialog
+    class="items-center text-balance rounded-2xl border bg-transparent p-8 text-center backdrop-blur-md backdrop:bg-black/70 max-sm:mx-6 overflow-hidden"
+    id="stay-connected-dialog">
+    <h2 class="text-v2h2">Join the mailing list</h2>
+    <p class="py-4 font-mono text-body"> Join our community! We&#39;d love to keep you in the loop with our newsletter.
+    </p>
+    <script>(() => { var a = (s, i, o) => { let r = async () => { await (await s())() }, t = typeof i.value == "object" ? i.value : void 0, c = { rootMargin: t == null ? void 0 : t.rootMargin }, n = new IntersectionObserver(e => { for (let l of e) if (l.isIntersecting) { n.disconnect(), r(); break } }, c); for (let e of o.children) n.observe(e) }; (self.Astro || (self.Astro = {})).visible = a; window.dispatchEvent(new Event("astro:visible")); })();</script>
+    <astro-island uid="Z1fPhRT" data-solid-render-id="s0" component-url="/_astro/EmailCollector.BqSZQ7nP.js"
+      component-export="EmailCollector" renderer-url="/_astro/client.C-0b9Jot.js"
+      props="{&quot;website&quot;:[0,&quot;burn&quot;],&quot;inputId&quot;:[0,&quot;stay-connected&quot;],&quot;title&quot;:[0,&quot;Stay connected&quot;],&quot;submitTitle&quot;:[0,&quot;submit email&quot;],&quot;inputLabel&quot;:[0,&quot;email address&quot;],&quot;placeholder&quot;:[0,&quot;your em@il&quot;],&quot;bgAlt&quot;:[0,&quot;stay connected background&quot;],&quot;subscribed&quot;:[0,&quot;subscribed&quot;],&quot;unsubscribed&quot;:[0,&quot;unsubscribed&quot;],&quot;firebaseConfig&quot;:[0,{&quot;apiKey&quot;:[0,&quot;AIzaSyDtXjGAc35AxrqEa8Fdmz3E1sKIX7MfgzU&quot;],&quot;authDomain&quot;:[0,&quot;tracel-website.firebaseapp.com&quot;],&quot;projectId&quot;:[0,&quot;tracel-website&quot;],&quot;storageBucket&quot;:[0,&quot;tracel-website.appspot.com&quot;],&quot;messagingSenderId&quot;:[0,&quot;278977725843&quot;],&quot;appId&quot;:[0,&quot;1:278977725843:web:be459a460a35c455cb9466&quot;]}]}"
+      ssr="" client="visible" opts="{&quot;name&quot;:&quot;EmailCollector&quot;,&quot;value&quot;:true}"
+      await-children="">
+      <form data-hk="s00000" name="stay-connected"><span class="flex items-center rounded-lg gap-2">
+          <div class="relative w-full"><input
+              class="w-full h-12 flex-1 rounded-md bg-black/20 pl-2 pr-6 text-xs transition-border-duration-700 placeholder:text-primary-content/40 focus:outline-2 border border-primary-content"
+              id="stay-connected" placeholder="your em@il" name="email" autocomplete="email" type="email"
+              aria-label="email address" required=""><output class="absolute right-5 top-1/2 -translate-y-1/2"
+              name="subscribeStatus" for="stay-connected"><svg width="16px" viewbox="2 -11 9 10"
+                xmlns="http://www.w3.org/2000/svg">
+                <title>unsubscribed</title><text x="0" y="0" class="fill-green-700"></text>
+              </svg></output></div><button class="primary-button rounded-md px-2 text-xl h-12 w-20 border border-white"
+            title="submit email" type="submit">⇥</button>
+        </span></form><!--astro:end-->
+    </astro-island>
+    <form class="absolute right-0 top-0" method="dialog"> <button class="rounded-md p-4" title="dismiss">
+        ✕
+      </button> </form>
+  </dialog>
+  <script>(function () {
+      const id = "stay-connected";
+
+      /* eslint-env browser */
+      const setupModal = () => {
+        if (location.hash === `#${id}`) {
+          const dialog = document.getElementById(`${id}-dialog`);
+          dialog.addEventListener(
+            "close",
+            () => {
+              history.pushState(
+                "",
+                document.title,
+                window.location.pathname + window.location.search,
+              );
+            },
+            { once: true },
+          );
+
+          dialog.addEventListener("click", (e) => {
+            const dialogDimensions = dialog.getBoundingClientRect();
+            if (
+              e.clientX < dialogDimensions.left ||
+              e.clientX > dialogDimensions.right ||
+              e.clientY < dialogDimensions.top ||
+              e.clientY > dialogDimensions.bottom
+            ) {
+              dialog.close();
+            }
+          });
+
+          dialog.showModal();
+        }
+      };
+
+      document.addEventListener("readystatechange", (e) => {
+        if (e.target.readyState === "interactive") {
+          setupModal();
+          window.addEventListener("popstate", setupModal);
+        }
+      });
+    })();</script>
+  <div class="flex w-full flex-col items-center gap-8 py-10 text-mid">
+    <div class="w-full max-w-[1360px] px-8 md:px-20">
+      <div
+        class="grid w-full grid-cols-1 gap-8 md:gap-20 [@media(min-width:400px)]:grid-cols-2 [@media(min-width:768px)]:grid-cols-4">
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Resources</h3> <a href="../../index.htm"
+            class="text-body text-grey-accent hover:text-light"> Home </a><a href="../../get-started/index.htm"
+            class="text-body text-grey-accent hover:text-light"> Get Started </a><a
+            href="../../benchmarks/community-benchmarks/index.htm" class="text-body text-grey-accent hover:text-light">
+            Benchmarks </a><a href="../index.htm" class="text-body text-grey-accent hover:text-light"> Blog </a><a
+            href="../../learn/index.htm" class="text-body text-grey-accent hover:text-light"> Learn </a><a
+            href="../../docs/burn/index.htm" class="text-body text-grey-accent hover:text-light"> Docs </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Community</h3> <a href="https://github.com/tracel-ai/burn"
+            class="text-body text-grey-accent hover:text-light"> Github </a><a href="https://discord.gg/uPEBbYYDB6"
+            class="text-body text-grey-accent hover:text-light"> Discord </a><a href="#stay-connected"
+            class="text-body text-grey-accent hover:text-light"> Mailing list </a><a href="https://tracel.ai"
+            class="text-body text-grey-accent hover:text-light"> Tracel </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Projects</h3> <a href="https://crates.io/crates/burn"
+            class="text-body text-grey-accent hover:text-light"> Mabor Crate </a><a
+            href="https://github.com/tracel-ai/burn" class="text-body text-grey-accent hover:text-light"> Mabor GitHub
+          </a><a href="https://crates.io/crates/cubecl" class="text-body text-grey-accent hover:text-light"> CubeCL
+            Crate </a><a href="https://github.com/tracel-ai/cubecl" class="text-body text-grey-accent hover:text-light">
+            CubeCL GitHub </a>
+        </div>
+        <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left">
+          <h3 class="text-nowrap text-h3 text-light">Company</h3> <a href="https://tracel.ai/"
+            class="text-body text-grey-accent hover:text-light"> Tracel AI </a><a
+            href="https://www.linkedin.com/company/tracel-technologies"
+            class="text-body text-grey-accent hover:text-light"> LinkedIn </a><a href="https://x.com/tracel_ai"
+            class="text-body text-grey-accent hover:text-light"> X </a>
+        </div>
+      </div>
+    </div>
+    <p class="mt-6 text-center font-mono text-b2 text-mid md:flex"> Copyright 2025 © Mabor | Tracel Inc. All rights
+      reserved. Design by Perdomo </p>
+  </div>
+</body>
+
+</html>

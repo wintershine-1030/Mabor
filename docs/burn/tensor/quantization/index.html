@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Tensor quantization module.">
+    <title>mabor::tensor::quantization - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module quantization</a></h2>
+                <h3><a href="#structs">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                    <li><a href="#types" title="Type Aliases">Type Aliases</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>tensor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">tensor</a></div>
+                    <h1>Module <span>quantization</span><button id="copy-path" title="Copy item path to clipboard">Copy
+                            item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Tensor quantization module.</p>
+                    </div>
+                </details>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.CalibrationRange.html"
+                            title="struct burn::tensor::quantization::CalibrationRange">Calibration<wbr>Range</a></dt>
+                    <dd>The observed input calibration range.</dd>
+                    <dt><a class="struct" href="struct.QParams.html"
+                            title="struct burn::tensor::quantization::QParams">QParams</a></dt>
+                    <dd>The quantization tensor data parameters.</dd>
+                    <dt><a class="struct" href="struct.QuantScheme.html"
+                            title="struct burn::tensor::quantization::QuantScheme">Quant<wbr>Scheme</a></dt>
+                    <dd>Describes a quantization scheme/configuration.</dd>
+                    <dt><a class="struct" href="struct.QuantizationParametersPrimitive.html"
+                            title="struct burn::tensor::quantization::QuantizationParametersPrimitive">Quantization<wbr>Parameters<wbr>Primitive</a>
+                    </dt>
+                    <dd>The quantization parameters primitive.</dd>
+                    <dt><a class="struct" href="struct.QuantizedBytes.html"
+                            title="struct burn::tensor::quantization::QuantizedBytes">Quantized<wbr>Bytes</a></dt>
+                    <dd>Quantized data bytes representation.</dd>
+                    <dt><a class="struct" href="struct.SymmetricQuantization.html"
+                            title="struct burn::tensor::quantization::SymmetricQuantization">Symmetric<wbr>Quantization</a>
+                    </dt>
+                    <dd>Symmetric quantization scheme.</dd>
+                </dl>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.Calibration.html"
+                            title="enum burn::tensor::quantization::Calibration">Calibration</a></dt>
+                    <dd>Calibration method used to compute the quantization range mapping.</dd>
+                    <dt><a class="enum" href="enum.QuantAccPrecision.html"
+                            title="enum burn::tensor::quantization::QuantAccPrecision">Quant<wbr>AccPrecision</a></dt>
+                    <dd>Quantization accumulator precision. This is the precision to used when accumulating values
+                        while executing algorithms such as matmul.</dd>
+                    <dt><a class="enum" href="enum.QuantInputType.html"
+                            title="enum burn::tensor::quantization::QuantInputType">Quant<wbr>Input<wbr>Type</a></dt>
+                    <dd>Data type used to represent quantized values.</dd>
+                    <dt><a class="enum" href="enum.QuantLevel.html"
+                            title="enum burn::tensor::quantization::QuantLevel">Quant<wbr>Level</a></dt>
+                    <dd>Level or granularity of quantization.</dd>
+                    <dt><a class="enum" href="enum.QuantMode.html"
+                            title="enum burn::tensor::quantization::QuantMode">Quant<wbr>Mode</a></dt>
+                    <dd>Strategy used to quantize values.</dd>
+                    <dt><a class="enum" href="enum.QuantPropagation.html"
+                            title="enum burn::tensor::quantization::QuantPropagation">Quant<wbr>Propagation</a></dt>
+                    <dd>Specify if the output of an operation is quantized using the scheme of the input
+                        or returned unquantized.</dd>
+                    <dt><a class="enum" href="enum.QuantizationStrategy.html"
+                            title="enum burn::tensor::quantization::QuantizationStrategy">Quantization<wbr>Strategy</a>
+                    </dt>
+                    <dd>Quantization strategy.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.QTensorPrimitive.html"
+                            title="trait burn::tensor::quantization::QTensorPrimitive">QTensor<wbr>Primitive</a></dt>
+                    <dd>Quantized tensor primitive.</dd>
+                    <dt><a class="trait" href="trait.Quantization.html"
+                            title="trait burn::tensor::quantization::Quantization">Quantization</a></dt>
+                    <dd>Quantization scheme to convert elements of a higher precision data type <code>E</code> to a
+                        lower precision
+                        data type <code>Q</code> and vice-versa.</dd>
+                </dl>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.pack_i8s_to_u32s.html"
+                            title="fn burn::tensor::quantization::pack_i8s_to_u32s">pack_<wbr>i8s_<wbr>to_<wbr>u32s</a>
+                    </dt>
+                    <dd>Pack signed 8-bit integer values into a sequence of unsigned 32-bit integers.</dd>
+                    <dt><a class="fn" href="fn.unpack_u32s_to_i8s.html"
+                            title="fn burn::tensor::quantization::unpack_u32s_to_i8s">unpack_<wbr>u32s_<wbr>to_<wbr>i8s</a>
+                    </dt>
+                    <dd>Unpack 32-bit unsigned integer values into a sequence of signed 8-bit integers.</dd>
+                </dl>
+                <h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="type" href="type.QuantizationParameters.html"
+                            title="type burn::tensor::quantization::QuantizationParameters">Quantization<wbr>Parameters</a>
+                    </dt>
+                    <dd>The tensor quantization parameters.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

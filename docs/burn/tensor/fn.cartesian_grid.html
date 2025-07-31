@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description"
+        content="Generates a cartesian grid for the given tensor shape on the specified device. The generated tensor is of dimension `D2 = D + 1`, where each element at dimension D contains the cartesian grid coordinates for that element.">
+    <title>cartesian_grid in mabor::tensor - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc fn">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">cartesian_<wbr>grid</a></h2>
+                <h3><a href="#">Sections</a></h3>
+                <ul class="block top-toc">
+                    <li><a href="#arguments" title="Arguments">Arguments</a></li>
+                    <li><a href="#panics" title="Panics">Panics</a></li>
+                    <li><a href="#examples" title="Examples">Examples</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>tensor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">burn</a>::<wbr><a
+                            href="index.html">tensor</a></div>
+                    <h1>Function <span class="fn">cartesian_grid</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre
+                    class="rust item-decl"><code>pub fn cartesian_grid&lt;B, S, const D: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>, const D2: <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.usize.html">usize</a>&gt;(
+    shape: S,
+    device: &amp;&lt;B as <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>&gt;::<a class="associatedtype" href="../prelude/trait.Backend.html#associatedtype.Device" title="type burn::prelude::Backend::Device">Device</a>,
+) -&gt; <a class="struct" href="struct.Tensor.html" title="struct burn::tensor::Tensor">Tensor</a>&lt;B, D2, <a class="struct" href="struct.Int.html" title="struct burn::tensor::Int">Int</a>&gt;<div class="where">where
+    B: <a class="trait" href="../prelude/trait.Backend.html" title="trait burn::prelude::Backend">Backend</a>,
+    S: <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="struct.Shape.html" title="struct burn::tensor::Shape">Shape</a>&gt;,</div></code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Generates a cartesian grid for the given tensor shape on the specified device.
+                            The generated tensor is of dimension <code>D2 = D + 1</code>, where each element at
+                            dimension D contains the cartesian grid coordinates for that element.</p>
+                        <h2 id="arguments"><a class="doc-anchor" href="#arguments">§</a>Arguments</h2>
+                        <ul>
+                            <li><code>shape</code> - The shape specifying the dimensions of the tensor.</li>
+                            <li><code>device</code> - The device to create the tensor on.</li>
+                        </ul>
+                        <h2 id="panics"><a class="doc-anchor" href="#panics">§</a>Panics</h2>
+                        <p>Panics if <code>D2</code> is not equal to <code>D+1</code>.</p>
+                        <h2 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h2>
+                        <div class="example-wrap">
+                            <pre class="rust rust-example-rendered"><code>   <span class="kw">use </span>mabor_tensor::Int;
+   <span class="kw">use </span>mabor_tensor::{backend::Backend, Shape, Tensor};
+   <span class="kw">fn </span>example&lt;B: Backend&gt;() {
+       <span class="kw">let </span>device = Default::default();
+       <span class="kw">let </span>result: Tensor&lt;B, <span class="number">3</span>, <span class="kw">_</span>&gt; = Tensor::&lt;B, <span class="number">2</span>, Int&gt;::cartesian_grid([<span class="number">2</span>, <span class="number">3</span>], <span class="kw-2">&amp;</span>device);
+       <span class="macro">println!</span>(<span class="string">"{}"</span>, result);
+   }</code></pre>
+                        </div>
+                    </div>
+                </details>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

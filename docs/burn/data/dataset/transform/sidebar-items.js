@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["ComposedDataset","MapperDataset","PartialDataset","SamplerDataset","ShuffledDataset","WindowsDataset","WindowsIterator"],"trait":["Mapper","Window","Windows"]};

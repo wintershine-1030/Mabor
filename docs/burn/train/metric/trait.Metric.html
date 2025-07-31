@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Metric trait.">
+    <title>Metric in mabor::train::metric - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Metric</a></h2>
+                <h3><a href="#">Sections</a></h3>
+                <ul class="block top-toc">
+                    <li><a href="#notes" title="Notes">Notes</a></li>
+                </ul>
+                <h3><a href="#required-associated-types">Required Associated Types</a></h3>
+                <ul class="block">
+                    <li><a href="#associatedtype.Input" title="Input">Input</a></li>
+                </ul>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.clear" title="clear">clear</a></li>
+                    <li><a href="#tymethod.name" title="name">name</a></li>
+                    <li><a href="#tymethod.update" title="update">update</a></li>
+                </ul>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>train::<wbr>metric</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">train</a>::<wbr><a href="index.html">metric</a></div>
+                    <h1>Trait <span class="trait">Metric</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait Metric: <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> {
+    type <a href="#associatedtype.Input" class="associatedtype">Input</a>;
+
+    // Required methods
+    fn <a href="#tymethod.name" class="fn">name</a>(&amp;self) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.update" class="fn">update</a>(
+        &amp;mut self,
+        item: &amp;Self::<a class="associatedtype" href="trait.Metric.html#associatedtype.Input" title="type burn::train::metric::Metric::Input">Input</a>,
+        metadata: &amp;<a class="struct" href="struct.MetricMetadata.html" title="struct burn::train::metric::MetricMetadata">MetricMetadata</a>,
+    ) -&gt; <a class="struct" href="struct.MetricEntry.html" title="struct burn::train::metric::MetricEntry">MetricEntry</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.clear" class="fn">clear</a>(&amp;mut self);
+}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Metric trait.</p>
+                        <h2 id="notes"><a class="doc-anchor" href="#notes">§</a>Notes</h2>
+                        <p>Implementations should define their own input type only used by the metric.
+                            This is important since some conflict may happen when the model output is adapted for each
+                            metric’s input type.</p>
+                    </div>
+                </details>
+                <h2 id="required-associated-types" class="section-header">Required Associated Types<a
+                        href="#required-associated-types" class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle" open="">
+                        <summary>
+                            <section id="associatedtype.Input" class="method">
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>The input type of the metric.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.name" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.name" class="fn">name</a>(&amp;self) -&gt;
+                                    <a class="struct"
+                                        href="https://doc.rust-lang.org/1.88.0/alloc/string/struct.String.html"
+                                        title="struct alloc::string::String">String</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>The parameterized name of the metric.</p>
+                            <p>This should be unique, so avoid using short generic names, prefer using the long name.
+                            </p>
+                            <p>For a metric that can exist at different parameters (e.g., top-k accuracy for different
+                                values of k), the name should be unique for each instance.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.update" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.update" class="fn">update</a>(
+                                    &amp;mut self,
+                                    item: &amp;Self::<a class="associatedtype"
+                                        href="trait.Metric.html#associatedtype.Input"
+                                        title="type burn::train::metric::Metric::Input">Input</a>,
+                                    metadata: &amp;<a class="struct" href="struct.MetricMetadata.html"
+                                        title="struct burn::train::metric::MetricMetadata">MetricMetadata</a>,
+                                    ) -&gt; <a class="struct" href="struct.MetricEntry.html"
+                                        title="struct burn::train::metric::MetricEntry">MetricEntry</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Update the metric state and returns the current metric entry.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.clear" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.clear" class="fn">clear</a>(&amp;mut self)
+                                </h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Clear the metric state.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-CpuMemory" class="impl"><a href="#impl-Metric-for-CpuMemory"
+                                    class="anchor">§</a>
+                                <h3 class="code-header">impl <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.CpuMemory.html"
+                                        title="struct burn::train::metric::CpuMemory">CpuMemory</a></h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-1" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-1" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-CpuTemperature" class="impl"><a
+                                    href="#impl-Metric-for-CpuTemperature" class="anchor">§</a>
+                                <h3 class="code-header">impl <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.CpuTemperature.html"
+                                        title="struct burn::train::metric::CpuTemperature">CpuTemperature</a></h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-2" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-2" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-CpuUse" class="impl"><a href="#impl-Metric-for-CpuUse"
+                                    class="anchor">§</a>
+                                <h3 class="code-header">impl <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.CpuUse.html" title="struct burn::train::metric::CpuUse">CpuUse</a>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-3" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-3" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-CudaMetric" class="impl"><a href="#impl-Metric-for-CudaMetric"
+                                    class="anchor">§</a>
+                                <h3 class="code-header">impl <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.CudaMetric.html"
+                                        title="struct burn::train::metric::CudaMetric">CudaMetric</a></h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-4" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-4" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-IterationSpeedMetric" class="impl"><a
+                                    href="#impl-Metric-for-IterationSpeedMetric" class="anchor">§</a>
+                                <h3 class="code-header">impl <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.IterationSpeedMetric.html"
+                                        title="struct burn::train::metric::IterationSpeedMetric">IterationSpeedMetric</a>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-5" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-5" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-LearningRateMetric" class="impl"><a
+                                    href="#impl-Metric-for-LearningRateMetric" class="anchor">§</a>
+                                <h3 class="code-header">impl <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.LearningRateMetric.html"
+                                        title="struct burn::train::metric::LearningRateMetric">LearningRateMetric</a>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-6" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-6" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.unit.html">()</a></h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-AccuracyMetric%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-AccuracyMetric%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.AccuracyMetric.html"
+                                        title="struct burn::train::metric::AccuracyMetric">AccuracyMetric</a>&lt;B&gt;
+                                    <div class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-7" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-7" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.AccuracyInput.html"
+                                        title="struct burn::train::metric::AccuracyInput">AccuracyInput</a>&lt;B&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-AurocMetric%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-AurocMetric%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.AurocMetric.html"
+                                        title="struct burn::train::metric::AurocMetric">AurocMetric</a>&lt;B&gt;<div
+                                        class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-8" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-8" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.AurocInput.html"
+                                        title="struct burn::train::metric::AurocInput">AurocInput</a>&lt;B&gt;</h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-FBetaScoreMetric%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-FBetaScoreMetric%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.FBetaScoreMetric.html"
+                                        title="struct burn::train::metric::FBetaScoreMetric">FBetaScoreMetric</a>&lt;B&gt;
+                                    <div class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-9" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-9" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.ConfusionStatsInput.html"
+                                        title="struct burn::train::metric::ConfusionStatsInput">ConfusionStatsInput</a>&lt;B&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-HammingScore%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-HammingScore%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.HammingScore.html"
+                                        title="struct burn::train::metric::HammingScore">HammingScore</a>&lt;B&gt;<div
+                                        class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-10" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-10" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.HammingScoreInput.html"
+                                        title="struct burn::train::metric::HammingScoreInput">HammingScoreInput</a>&lt;B&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-LossMetric%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-LossMetric%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.LossMetric.html"
+                                        title="struct burn::train::metric::LossMetric">LossMetric</a>&lt;B&gt;<div
+                                        class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-11" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-11" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.LossInput.html"
+                                        title="struct burn::train::metric::LossInput">LossInput</a>&lt;B&gt;</h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-PrecisionMetric%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-PrecisionMetric%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.PrecisionMetric.html"
+                                        title="struct burn::train::metric::PrecisionMetric">PrecisionMetric</a>&lt;B&gt;
+                                    <div class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-12" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-12" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.ConfusionStatsInput.html"
+                                        title="struct burn::train::metric::ConfusionStatsInput">ConfusionStatsInput</a>&lt;B&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-RecallMetric%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-RecallMetric%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.RecallMetric.html"
+                                        title="struct burn::train::metric::RecallMetric">RecallMetric</a>&lt;B&gt;<div
+                                        class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-13" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-13" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.ConfusionStatsInput.html"
+                                        title="struct burn::train::metric::ConfusionStatsInput">ConfusionStatsInput</a>&lt;B&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                    <details class="toggle implementors-toggle">
+                        <summary>
+                            <section id="impl-Metric-for-TopKAccuracyMetric%3CB%3E" class="impl"><a
+                                    href="#impl-Metric-for-TopKAccuracyMetric%3CB%3E" class="anchor">§</a>
+                                <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Metric.html"
+                                        title="trait burn::train::metric::Metric">Metric</a> for <a class="struct"
+                                        href="struct.TopKAccuracyMetric.html"
+                                        title="struct burn::train::metric::TopKAccuracyMetric">TopKAccuracyMetric</a>&lt;B&gt;
+                                    <div class="where">where
+                                        B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                            title="trait burn::prelude::Backend">Backend</a>,</div>
+                                </h3>
+                            </section>
+                        </summary>
+                        <div class="impl-items">
+                            <section id="associatedtype.Input-14" class="associatedtype trait-impl"><a
+                                    href="#associatedtype.Input-14" class="anchor">§</a>
+                                <h4 class="code-header">type <a href="#associatedtype.Input"
+                                        class="associatedtype">Input</a> = <a class="struct"
+                                        href="struct.TopKAccuracyInput.html"
+                                        title="struct burn::train::metric::TopKAccuracyInput">TopKAccuracyInput</a>&lt;B&gt;
+                                </h4>
+                            </section>
+                        </div>
+                    </details>
+                </div>
+                <script src="../../../trait.impl/burn_train/metric/base/trait.Metric.js"
+                    data-ignore-extern-crates="burn_train" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

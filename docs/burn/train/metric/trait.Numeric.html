@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Declare a metric to be numeric.">
+    <title>Numeric in mabor::train::metric - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Numeric</a></h2>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.value" title="value">value</a></li>
+                </ul>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>train::<wbr>metric</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">train</a>::<wbr><a href="index.html">metric</a></div>
+                    <h1>Trait <span class="trait">Numeric</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait Numeric {
+    // Required method
+    fn <a href="#tymethod.value" class="fn">value</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.f64.html">f64</a>;
+}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Declare a metric to be numeric.</p>
+                        <p>This is useful to plot the values of a metric during training.</p>
+                    </div>
+                </details>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.value" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.value" class="fn">value</a>(&amp;self)
+                                    -&gt; <a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.f64.html">f64</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Returns the numeric value of the metric.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <section id="impl-Numeric-for-NumericMetricState" class="impl"><a
+                            href="#impl-Numeric-for-NumericMetricState" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="state/struct.NumericMetricState.html"
+                                title="struct burn::train::metric::state::NumericMetricState">NumericMetricState</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-CpuMemory" class="impl"><a href="#impl-Numeric-for-CpuMemory"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.CpuMemory.html" title="struct burn::train::metric::CpuMemory">CpuMemory</a>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-CpuTemperature" class="impl"><a
+                            href="#impl-Numeric-for-CpuTemperature" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.CpuTemperature.html"
+                                title="struct burn::train::metric::CpuTemperature">CpuTemperature</a></h3>
+                    </section>
+                    <section id="impl-Numeric-for-CpuUse" class="impl"><a href="#impl-Numeric-for-CpuUse"
+                            class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.CpuUse.html" title="struct burn::train::metric::CpuUse">CpuUse</a></h3>
+                    </section>
+                    <section id="impl-Numeric-for-IterationSpeedMetric" class="impl"><a
+                            href="#impl-Numeric-for-IterationSpeedMetric" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.IterationSpeedMetric.html"
+                                title="struct burn::train::metric::IterationSpeedMetric">IterationSpeedMetric</a></h3>
+                    </section>
+                    <section id="impl-Numeric-for-LearningRateMetric" class="impl"><a
+                            href="#impl-Numeric-for-LearningRateMetric" class="anchor">§</a>
+                        <h3 class="code-header">impl <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.LearningRateMetric.html"
+                                title="struct burn::train::metric::LearningRateMetric">LearningRateMetric</a></h3>
+                    </section>
+                    <section id="impl-Numeric-for-AccuracyMetric%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-AccuracyMetric%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.AccuracyMetric.html"
+                                title="struct burn::train::metric::AccuracyMetric">AccuracyMetric</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-AurocMetric%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-AurocMetric%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.AurocMetric.html"
+                                title="struct burn::train::metric::AurocMetric">AurocMetric</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-FBetaScoreMetric%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-FBetaScoreMetric%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.FBetaScoreMetric.html"
+                                title="struct burn::train::metric::FBetaScoreMetric">FBetaScoreMetric</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-HammingScore%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-HammingScore%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.HammingScore.html"
+                                title="struct burn::train::metric::HammingScore">HammingScore</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-LossMetric%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-LossMetric%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.LossMetric.html"
+                                title="struct burn::train::metric::LossMetric">LossMetric</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-PrecisionMetric%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-PrecisionMetric%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.PrecisionMetric.html"
+                                title="struct burn::train::metric::PrecisionMetric">PrecisionMetric</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-RecallMetric%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-RecallMetric%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.RecallMetric.html"
+                                title="struct burn::train::metric::RecallMetric">RecallMetric</a>&lt;B&gt;<div
+                                class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                    <section id="impl-Numeric-for-TopKAccuracyMetric%3CB%3E" class="impl"><a
+                            href="#impl-Numeric-for-TopKAccuracyMetric%3CB%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;B&gt; <a class="trait" href="trait.Numeric.html"
+                                title="trait burn::train::metric::Numeric">Numeric</a> for <a class="struct"
+                                href="struct.TopKAccuracyMetric.html"
+                                title="struct burn::train::metric::TopKAccuracyMetric">TopKAccuracyMetric</a>&lt;B&gt;
+                            <div class="where">where
+                                B: <a class="trait" href="../../prelude/trait.Backend.html"
+                                    title="trait burn::prelude::Backend">Backend</a>,</div>
+                        </h3>
+                    </section>
+                </div>
+                <script src="../../../trait.impl/burn_train/metric/base/trait.Numeric.js"
+                    data-ignore-extern-crates="burn_train" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

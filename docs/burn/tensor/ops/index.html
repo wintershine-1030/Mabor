@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Operations on tensors module.">
+    <title>mabor::tensor::ops - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module ops</a></h2>
+                <h3><a href="#modules">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#modules" title="Modules">Modules</a></li>
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                    <li><a href="#functions" title="Functions">Functions</a></li>
+                    <li><a href="#types" title="Type Aliases">Type Aliases</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="../index.html">In mabor::<wbr>tensor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">tensor</a></div>
+                    <h1>Module <span>ops</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Operations on tensors module.</p>
+                    </div>
+                </details>
+                <h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="mod" href="conv/index.html" title="mod burn::tensor::ops::conv">conv</a></dt>
+                    <dd>Module with convolution operations.</dd>
+                    <dt><a class="mod" href="pool/index.html" title="mod burn::tensor::ops::pool">pool</a></dt>
+                    <dd>Module with pooling operations.</dd>
+                </dl>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.Conv2dBackward.html"
+                            title="struct burn::tensor::ops::Conv2dBackward">Conv2d<wbr>Backward</a></dt>
+                    <dd>Gradient computed during the backward pass for each tensor used by <a
+                            href="trait.ModuleOps.html#tymethod.conv2d"
+                            title="associated function burn::tensor::ops::ModuleOps::conv2d">conv2d</a>.</dd>
+                    <dt><a class="struct" href="struct.Conv3dBackward.html"
+                            title="struct burn::tensor::ops::Conv3dBackward">Conv3d<wbr>Backward</a></dt>
+                    <dd>Gradient computed during the backward pass for each tensor used by <a
+                            href="trait.ModuleOps.html#tymethod.conv3d"
+                            title="associated function burn::tensor::ops::ModuleOps::conv3d">conv3d</a>.</dd>
+                    <dt><a class="struct" href="struct.ConvOptions.html"
+                            title="struct burn::tensor::ops::ConvOptions">Conv<wbr>Options</a></dt>
+                    <dd>Convolution options.</dd>
+                    <dt><a class="struct" href="struct.ConvTransposeOptions.html"
+                            title="struct burn::tensor::ops::ConvTransposeOptions">Conv<wbr>Transpose<wbr>Options</a>
+                    </dt>
+                    <dd>Transposed convolution options.</dd>
+                    <dt><a class="struct" href="struct.DeformConv2dBackward.html"
+                            title="struct burn::tensor::ops::DeformConv2dBackward">Deform<wbr>Conv2d<wbr>Backward</a>
+                    </dt>
+                    <dd>Gradient computed during the backward pass for each tensor used by <a
+                            href="trait.ModuleOps.html#tymethod.deform_conv2d"
+                            title="associated function burn::tensor::ops::ModuleOps::deform_conv2d">deform_conv2d</a>.
+                    </dd>
+                    <dt><a class="struct" href="struct.DeformConvOptions.html"
+                            title="struct burn::tensor::ops::DeformConvOptions">Deform<wbr>Conv<wbr>Options</a></dt>
+                    <dd>Convolution options.</dd>
+                    <dt><a class="struct" href="struct.InterpolateBackward.html"
+                            title="struct burn::tensor::ops::InterpolateBackward">Interpolate<wbr>Backward</a></dt>
+                    <dd>Gradient computed during the backward pass for each tensor used by <a
+                            href="trait.ModuleOps.html#tymethod.interpolate"
+                            title="associated function burn::tensor::ops::ModuleOps::interpolate">interpolate</a>.</dd>
+                    <dt><a class="struct" href="struct.InterpolateOptions.html"
+                            title="struct burn::tensor::ops::InterpolateOptions">Interpolate<wbr>Options</a></dt>
+                    <dd>Interpolation options.</dd>
+                    <dt><a class="struct" href="struct.MaxPool1dBackward.html"
+                            title="struct burn::tensor::ops::MaxPool1dBackward">MaxPool1d<wbr>Backward</a></dt>
+                    <dd>Gradient computed during the backward pass for each tensor used by <a
+                            href="trait.ModuleOps.html#method.max_pool1d"
+                            title="associated function burn::tensor::ops::ModuleOps::max_pool1d">max_pool1d</a>.</dd>
+                    <dt><a class="struct" href="struct.MaxPool1dWithIndices.html"
+                            title="struct burn::tensor::ops::MaxPool1dWithIndices">MaxPool1d<wbr>With<wbr>Indices</a>
+                    </dt>
+                    <dd>Results from <a href="trait.ModuleOps.html#method.max_pool1d_with_indices"
+                            title="associated function burn::tensor::ops::ModuleOps::max_pool1d_with_indices">max_pool1d</a>.
+                    </dd>
+                    <dt><a class="struct" href="struct.MaxPool2dBackward.html"
+                            title="struct burn::tensor::ops::MaxPool2dBackward">MaxPool2d<wbr>Backward</a></dt>
+                    <dd>Gradient computed during the backward pass for each tensor used by <a
+                            href="trait.ModuleOps.html#tymethod.max_pool2d"
+                            title="associated function burn::tensor::ops::ModuleOps::max_pool2d">max_pool2d</a>.</dd>
+                    <dt><a class="struct" href="struct.MaxPool2dWithIndices.html"
+                            title="struct burn::tensor::ops::MaxPool2dWithIndices">MaxPool2d<wbr>With<wbr>Indices</a>
+                    </dt>
+                    <dd>Results from <a href="trait.ModuleOps.html#tymethod.max_pool2d_with_indices"
+                            title="associated function burn::tensor::ops::ModuleOps::max_pool2d_with_indices">max_pool2d</a>.
+                    </dd>
+                    <dt><a class="struct" href="struct.TransactionPrimitive.html"
+                            title="struct burn::tensor::ops::TransactionPrimitive">Transaction<wbr>Primitive</a></dt>
+                    <dd>Contains all tensor primitives that are going to be read.</dd>
+                    <dt><a class="struct" href="struct.TransactionPrimitiveResult.html"
+                            title="struct burn::tensor::ops::TransactionPrimitiveResult">Transaction<wbr>Primitive<wbr>Result</a>
+                    </dt>
+                    <dd>Contains all <a href="../struct.TensorData.html"
+                            title="struct burn::tensor::TensorData">data</a> related to a <a
+                            href="struct.TransactionPrimitive.html"
+                            title="struct burn::tensor::ops::TransactionPrimitive">transaction</a>.</dd>
+                    <dt><a class="struct" href="struct.UnfoldOptions.html"
+                            title="struct burn::tensor::ops::UnfoldOptions">Unfold<wbr>Options</a></dt>
+                    <dd>Unfold operation options.</dd>
+                </dl>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.InterpolateMode.html"
+                            title="enum burn::tensor::ops::InterpolateMode">Interpolate<wbr>Mode</a></dt>
+                    <dd>Algorithm used for upsampling.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.ActivationOps.html"
+                            title="trait burn::tensor::ops::ActivationOps">Activation<wbr>Ops</a></dt>
+                    <dd>Activation function operations.</dd>
+                    <dt><a class="trait" href="trait.BoolTensorOps.html"
+                            title="trait burn::tensor::ops::BoolTensorOps">Bool<wbr>Tensor<wbr>Ops</a></dt>
+                    <dd>Bool Tensor API for basic operations, see <a href="../struct.Tensor.html"
+                            title="struct burn::tensor::Tensor">tensor</a>
+                        for documentation on each function.</dd>
+                    <dt><a class="trait" href="trait.FloatTensorOps.html"
+                            title="trait burn::tensor::ops::FloatTensorOps">Float<wbr>Tensor<wbr>Ops</a></dt>
+                    <dd>Operations on float tensors.</dd>
+                    <dt><a class="trait" href="trait.IntTensorOps.html"
+                            title="trait burn::tensor::ops::IntTensorOps">IntTensor<wbr>Ops</a></dt>
+                    <dd>Int Tensor API for basic and numeric operations, see <a href="../struct.Tensor.html"
+                            title="struct burn::tensor::Tensor">tensor</a>
+                        for documentation on each function.</dd>
+                    <dt><a class="trait" href="trait.ModuleOps.html"
+                            title="trait burn::tensor::ops::ModuleOps">Module<wbr>Ops</a></dt>
+                    <dd>Module operations trait.</dd>
+                    <dt><a class="trait" href="trait.QTensorOps.html"
+                            title="trait burn::tensor::ops::QTensorOps">QTensor<wbr>Ops</a></dt>
+                    <dd>Operations on quantized tensors.</dd>
+                    <dt><a class="trait" href="trait.TransactionOps.html"
+                            title="trait burn::tensor::ops::TransactionOps">Transaction<wbr>Ops</a></dt>
+                    <dd>Operations that are sync by nature and that can be batch together in transactions to improve
+                        compute utilization with efficient laziness.</dd>
+                </dl>
+                <h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="fn" href="fn.binary_ops_shape.html"
+                            title="fn burn::tensor::ops::binary_ops_shape">binary_<wbr>ops_<wbr>shape</a></dt>
+                    <dd>Computes the output shape for binary operations with broadcasting support.</dd>
+                </dl>
+                <h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="type" href="type.BoolTensor.html"
+                            title="type burn::tensor::ops::BoolTensor">Bool<wbr>Tensor</a></dt>
+                    <dd>Boolean tensor primitive type used by the backend.</dd>
+                    <dt><a class="type" href="type.Device.html" title="type burn::tensor::ops::Device">Device</a></dt>
+                    <dd>Device type used by the backend.</dd>
+                    <dt><a class="type" href="type.FloatElem.html"
+                            title="type burn::tensor::ops::FloatElem">Float<wbr>Elem</a></dt>
+                    <dd>Float element type used by backend.</dd>
+                    <dt><a class="type" href="type.FloatTensor.html"
+                            title="type burn::tensor::ops::FloatTensor">Float<wbr>Tensor</a></dt>
+                    <dd>Float tensor primitive type used by the backend.</dd>
+                    <dt><a class="type" href="type.IntElem.html" title="type burn::tensor::ops::IntElem">IntElem</a>
+                    </dt>
+                    <dd>Integer element type used by backend.</dd>
+                    <dt><a class="type" href="type.IntTensor.html"
+                            title="type burn::tensor::ops::IntTensor">IntTensor</a></dt>
+                    <dd>Integer tensor primitive type used by the backend.</dd>
+                    <dt><a class="type" href="type.QuantizedTensor.html"
+                            title="type burn::tensor::ops::QuantizedTensor">Quantized<wbr>Tensor</a></dt>
+                    <dd>Quantized tensor primitive type used by the backend.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

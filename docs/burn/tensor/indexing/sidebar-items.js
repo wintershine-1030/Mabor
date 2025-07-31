@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["canonicalize_dim","canonicalize_index","wrap_index"],"trait":["AsIndex"]};

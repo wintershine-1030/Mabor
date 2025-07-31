@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Train module">
+    <title>mabor::train - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="../sidebar-items.js"></script>
+    <script defer="" src="../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc mod">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Module train</a></h2>
+                <h3><a href="#modules">Module Items</a></h3>
+                <ul class="block">
+                    <li><a href="#modules" title="Modules">Modules</a></li>
+                    <li><a href="#structs" title="Structs">Structs</a></li>
+                    <li><a href="#enums" title="Enums">Enums</a></li>
+                    <li><a href="#traits" title="Traits">Traits</a></li>
+                </ul>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2 class="in-crate"><a href="../index.html">In crate mabor</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../index.html">mabor</a></div>
+                    <h1>Module <span>train</span><button id="copy-path" title="Copy item path to clipboard">Copy item
+                            path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a
+                            class="src" href="../../src/burn/lib.rs.html#107">Source</a> </span>
+                </div>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Train module</p>
+                    </div>
+                </details>
+                <h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="mod" href="checkpoint/index.html" title="mod burn::train::checkpoint">checkpoint</a>
+                    </dt>
+                    <dd>The checkpoint module.</dd>
+                    <dt><a class="mod" href="logger/index.html" title="mod burn::train::logger">logger</a></dt>
+                    <dd>The logger module.</dd>
+                    <dt><a class="mod" href="metric/index.html" title="mod burn::train::metric">metric</a></dt>
+                    <dd>The metric module.</dd>
+                    <dt><a class="mod" href="renderer/index.html" title="mod burn::train::renderer">renderer</a></dt>
+                    <dd>Renderer modules to display metrics and training information.</dd>
+                    <dt><a class="mod" href="train/index.html" title="mod burn::train::train">train</a></dt>
+                    <dd>The trainer module.</dd>
+                </dl>
+                <h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="struct" href="struct.ClassificationOutput.html"
+                            title="struct burn::train::ClassificationOutput">Classification<wbr>Output</a></dt>
+                    <dd>Simple classification output adapted for multiple metrics.</dd>
+                    <dt><a class="struct" href="struct.FileApplicationLoggerInstaller.html"
+                            title="struct burn::train::FileApplicationLoggerInstaller">File<wbr>Application<wbr>Logger<wbr>Installer</a>
+                    </dt>
+                    <dd>This struct is used to install a local file application logger to output logs to a given file
+                        path.</dd>
+                    <dt><a class="struct" href="struct.Learner.html" title="struct burn::train::Learner">Learner</a>
+                    </dt>
+                    <dd>Learner struct encapsulating all components necessary to train a Neural Network model.</dd>
+                    <dt><a class="struct" href="struct.LearnerBuilder.html"
+                            title="struct burn::train::LearnerBuilder">Learner<wbr>Builder</a></dt>
+                    <dd>Struct to configure and create a <a href="struct.Learner.html"
+                            title="struct burn::train::Learner">learner</a>.</dd>
+                    <dt><a class="struct" href="struct.LearnerSummary.html"
+                            title="struct burn::train::LearnerSummary">Learner<wbr>Summary</a></dt>
+                    <dd>Detailed training summary.</dd>
+                    <dt><a class="struct" href="struct.MetricEarlyStoppingStrategy.html"
+                            title="struct burn::train::MetricEarlyStoppingStrategy">Metric<wbr>Early<wbr>Stopping<wbr>Strategy</a>
+                    </dt>
+                    <dd>An <a href="trait.EarlyStoppingStrategy.html"
+                            title="trait burn::train::EarlyStoppingStrategy">early stopping strategy</a> based on a
+                        metrics collected
+                        during training or validation.</dd>
+                    <dt><a class="struct" href="struct.MetricEntry.html"
+                            title="struct burn::train::MetricEntry">Metric<wbr>Entry</a></dt>
+                    <dd>Contains the metric value at a given time.</dd>
+                    <dt><a class="struct" href="struct.MetricSummary.html"
+                            title="struct burn::train::MetricSummary">Metric<wbr>Summary</a></dt>
+                    <dd>Contains the summary of recorded values for a given metric.</dd>
+                    <dt><a class="struct" href="struct.MultiDevicesTrainStep.html"
+                            title="struct burn::train::MultiDevicesTrainStep">Multi<wbr>Devices<wbr>Train<wbr>Step</a>
+                    </dt>
+                    <dd>Multi devices train step.</dd>
+                    <dt><a class="struct" href="struct.MultiLabelClassificationOutput.html"
+                            title="struct burn::train::MultiLabelClassificationOutput">Multi<wbr>Label<wbr>Classification<wbr>Output</a>
+                    </dt>
+                    <dd>Multi-label classification output adapted for multiple metrics.</dd>
+                    <dt><a class="struct" href="struct.RegressionOutput.html"
+                            title="struct burn::train::RegressionOutput">Regression<wbr>Output</a></dt>
+                    <dd>Simple regression output adapted for multiple metrics.</dd>
+                    <dt><a class="struct" href="struct.SummaryMetrics.html"
+                            title="struct burn::train::SummaryMetrics">Summary<wbr>Metrics</a></dt>
+                    <dd>Contains the summary of recorded metrics for the training and validation steps.</dd>
+                    <dt><a class="struct" href="struct.TrainEpoch.html"
+                            title="struct burn::train::TrainEpoch">Train<wbr>Epoch</a></dt>
+                    <dd>A training epoch.</dd>
+                    <dt><a class="struct" href="struct.TrainOutput.html"
+                            title="struct burn::train::TrainOutput">Train<wbr>Output</a></dt>
+                    <dd>A training output.</dd>
+                    <dt><a class="struct" href="struct.TrainingInterrupter.html"
+                            title="struct burn::train::TrainingInterrupter">Training<wbr>Interrupter</a></dt>
+                    <dd>A handle that allows aborting the training process early.</dd>
+                    <dt><a class="struct" href="struct.ValidEpoch.html"
+                            title="struct burn::train::ValidEpoch">Valid<wbr>Epoch</a></dt>
+                    <dd>A validation epoch.</dd>
+                </dl>
+                <h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="enum" href="enum.StoppingCondition.html"
+                            title="enum burn::train::StoppingCondition">Stopping<wbr>Condition</a></dt>
+                    <dd>The condition that <a href="trait.EarlyStoppingStrategy.html"
+                            title="trait burn::train::EarlyStoppingStrategy">early stopping strategies</a> should
+                        follow.</dd>
+                </dl>
+                <h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2>
+                <dl class="item-table">
+                    <dt><a class="trait" href="trait.ApplicationLoggerInstaller.html"
+                            title="trait burn::train::ApplicationLoggerInstaller">Application<wbr>Logger<wbr>Installer</a>
+                    </dt>
+                    <dd>This trait is used to install an application logger.</dd>
+                    <dt><a class="trait" href="trait.EarlyStoppingStrategy.html"
+                            title="trait burn::train::EarlyStoppingStrategy">Early<wbr>Stopping<wbr>Strategy</a></dt>
+                    <dd>A strategy that checks if the training should be stopped.</dd>
+                    <dt><a class="trait" href="trait.TrainStep.html"
+                            title="trait burn::train::TrainStep">Train<wbr>Step</a></dt>
+                    <dd>Trait to be implemented for training models.</dd>
+                    <dt><a class="trait" href="trait.ValidStep.html"
+                            title="trait burn::train::ValidStep">Valid<wbr>Step</a></dt>
+                    <dd>Trait to be implemented for validating models.</dd>
+                </dl>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

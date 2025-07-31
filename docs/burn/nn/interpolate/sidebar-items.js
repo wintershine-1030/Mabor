@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["InterpolateMode"],"struct":["Interpolate1d","Interpolate1dConfig","Interpolate2d","Interpolate2dConfig"]};

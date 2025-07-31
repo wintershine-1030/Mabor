@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description"
+        content="Quantization scheme to convert elements of a higher precision data type `E` to a lower precision data type `Q` and vice-versa.">
+    <title>Quantization in mabor::tensor::quantization - Rust</title>
+    <script>if (window.location.protocol !== "file:") document.head.insertAdjacentHTML("beforeend", "SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f => `<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script>
+    <link rel="stylesheet" href="../../../static.files/normalize-9960930a.css">
+    <link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css">
+    <script id="default-settings" data-use_system_theme="false" data-theme="burn"></script>
+    <meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/"
+        data-current-crate="burn" data-themes="burn" data-resource-suffix=""
+        data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js"
+        data-settings-js="settings-5514c975.js">
+    <script src="../../../static.files/storage-4e99c027.js"></script>
+    <script defer="" src="sidebar-items.js"></script>
+    <script defer="" src="../../../static.files/main-7ef8a74a.js"></script><noscript>
+        <link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css">
+    </noscript>
+    <link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png">
+    <link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg">
+</head>
+
+<body class="rustdoc trait">
+    <!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+    <nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav>
+    <nav class="sidebar">
+        <div class="sidebar-crate">
+            <h2><a href="../../index.html">mabor</a><span class="version">0.18.0</span></h2>
+        </div>
+        <div class="sidebar-elems">
+            <section id="rustdoc-toc">
+                <h2 class="location"><a href="#">Quantization</a></h2>
+                <h3><a href="#required-methods">Required Methods</a></h3>
+                <ul class="block">
+                    <li><a href="#tymethod.dequantize" title="dequantize">dequantize</a></li>
+                    <li><a href="#tymethod.dequantize_one" title="dequantize_one">dequantize_one</a></li>
+                    <li><a href="#tymethod.new" title="new">new</a></li>
+                    <li><a href="#tymethod.quantize" title="quantize">quantize</a></li>
+                    <li><a href="#tymethod.quantize_one" title="quantize_one">quantize_one</a></li>
+                    <li><a href="#tymethod.range" title="range">range</a></li>
+                </ul>
+                <h3><a href="#dyn-compatibility">Dyn Compatibility</a></h3>
+                <h3><a href="#implementors">Implementors</a></h3>
+            </section>
+            <div id="rustdoc-modnav">
+                <h2><a href="index.html">In mabor::<wbr>tensor::<wbr>quantization</a></h2>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-resizer"></div>
+    <main>
+        <div class="width-limiter"><rustdoc-search></rustdoc-search>
+            <section id="main-content" class="content">
+                <div class="main-heading">
+                    <div class="rustdoc-breadcrumbs"><a href="../../index.html">mabor</a>::<wbr><a
+                            href="../index.html">tensor</a>::<wbr><a href="index.html">quantization</a></div>
+                    <h1>Trait <span class="trait">Quantization</span><button id="copy-path"
+                            title="Copy item path to clipboard">Copy item path</button></h1>
+                    <rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span>
+                </div>
+                <pre class="rust item-decl"><code>pub trait Quantization&lt;E, Q&gt;<div class="where">where
+    E: <a class="trait" href="https://docs.rs/num-traits/0.2/num_traits/float/trait.Float.html" title="trait num_traits::float::Float">Float</a> + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a>,
+    Q: <a class="trait" href="https://docs.rs/num-traits/0.2/num_traits/int/trait.PrimInt.html" title="trait num_traits::int::PrimInt">PrimInt</a> + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + <a class="trait" href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a>,</div>{
+    // Required methods
+    fn <a href="#tymethod.range" class="fn">range</a>() -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(Q, Q)</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.new" class="fn">new</a>(alpha: E, beta: E) -&gt; Self;
+<span class="item-spacer"></span>    fn <a href="#tymethod.quantize" class="fn">quantize</a>(&amp;self, values: &amp;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.slice.html">[E]</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;Q&gt;;
+<span class="item-spacer"></span>    fn <a href="#tymethod.quantize_one" class="fn">quantize_one</a>(&amp;self, value: E) -&gt; Q;
+<span class="item-spacer"></span>    fn <a href="#tymethod.dequantize" class="fn">dequantize</a>(&amp;self, values: &amp;<a class="primitive" href="https://doc.rust-lang.org/1.88.0/std/primitive.slice.html">[Q]</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;E&gt;;
+<span class="item-spacer"></span>    fn <a href="#tymethod.dequantize_one" class="fn">dequantize_one</a>(&amp;self, value: Q) -&gt; E;
+}</code></pre>
+                <details class="toggle top-doc" open="">
+                    <summary class="hideme"><span>Expand description</span></summary>
+                    <div class="docblock">
+                        <p>Quantization scheme to convert elements of a higher precision data type <code>E</code> to a
+                            lower precision
+                            data type <code>Q</code> and vice-versa.</p>
+                    </div>
+                </details>
+                <h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods"
+                        class="anchor">§</a></h2>
+                <div class="methods">
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.range" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.range" class="fn">range</a>() -&gt; <a
+                                        class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.tuple.html">(Q, Q)</a></h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Returns the quantization range <code>[a, b]</code>.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.new" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.new" class="fn">new</a>(alpha: E, beta: E)
+                                    -&gt; Self</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Create a new quantization scheme for an input range <code>[alpha, beta]</code>.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.quantize" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.quantize"
+                                        class="fn">quantize</a>(&amp;self, values: &amp;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.slice.html">[E]</a>) -&gt;
+                                    <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html"
+                                        title="struct alloc::vec::Vec">Vec</a>&lt;Q&gt;</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Convert the values to a lower precision data type.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.quantize_one" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.quantize_one"
+                                        class="fn">quantize_one</a>(&amp;self, value: E) -&gt; Q</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Convert a single value to a lower precision data type.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.dequantize" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.dequantize"
+                                        class="fn">dequantize</a>(&amp;self, values: &amp;<a class="primitive"
+                                        href="https://doc.rust-lang.org/1.88.0/std/primitive.slice.html">[Q]</a>) -&gt;
+                                    <a class="struct" href="https://doc.rust-lang.org/1.88.0/alloc/vec/struct.Vec.html"
+                                        title="struct alloc::vec::Vec">Vec</a>&lt;E&gt;</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Convert the values back to a higher precision data type.</p>
+                        </div>
+                    </details>
+                    <details class="toggle method-toggle" open="">
+                        <summary>
+                            <section id="tymethod.dequantize_one" class="method">
+                                <h4 class="code-header">fn <a href="#tymethod.dequantize_one"
+                                        class="fn">dequantize_one</a>(&amp;self, value: Q) -&gt; E</h4>
+                            </section>
+                        </summary>
+                        <div class="docblock">
+                            <p>Convert a single value back to a higher precision data type.</p>
+                        </div>
+                    </details>
+                </div>
+                <h2 id="dyn-compatibility" class="section-header">Dyn Compatibility<a href="#dyn-compatibility"
+                        class="anchor">§</a></h2>
+                <div class="dyn-compatibility-info">
+                    <p>This trait is <b>not</b> <a
+                            href="https://doc.rust-lang.org/1.88.0/reference/items/traits.html#dyn-compatibility">dyn
+                            compatible</a>.</p>
+                    <p><i>In older versions of Rust, dyn compatibility was called "object safety", so this trait is not
+                            object safe.</i></p>
+                </div>
+                <h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a>
+                </h2>
+                <div id="implementors-list">
+                    <section id="impl-Quantization%3CE,+Q%3E-for-SymmetricQuantization%3CE,+Q%3E" class="impl"><a
+                            href="#impl-Quantization%3CE,+Q%3E-for-SymmetricQuantization%3CE,+Q%3E" class="anchor">§</a>
+                        <h3 class="code-header">impl&lt;E, Q&gt; <a class="trait" href="trait.Quantization.html"
+                                title="trait burn::tensor::quantization::Quantization">Quantization</a>&lt;E, Q&gt; for
+                            <a class="struct" href="struct.SymmetricQuantization.html"
+                                title="struct burn::tensor::quantization::SymmetricQuantization">SymmetricQuantization</a>&lt;E,
+                            Q&gt;<div class="where">where
+                                E: <a class="trait"
+                                    href="https://docs.rs/num-traits/0.2/num_traits/float/trait.Float.html"
+                                    title="trait num_traits::float::Float">Float</a> + <a class="trait"
+                                    href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html"
+                                    title="trait core::marker::Send">Send</a> + <a class="trait"
+                                    href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sync.html"
+                                    title="trait core::marker::Sync">Sync</a>,
+                                Q: <a class="trait"
+                                    href="https://docs.rs/num-traits/0.2/num_traits/int/trait.PrimInt.html"
+                                    title="trait num_traits::int::PrimInt">PrimInt</a> + <a class="trait"
+                                    href="https://docs.rs/num-traits/0.2/num_traits/sign/trait.Signed.html"
+                                    title="trait num_traits::sign::Signed">Signed</a> + <a class="trait"
+                                    href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Send.html"
+                                    title="trait core::marker::Send">Send</a> + <a class="trait"
+                                    href="https://doc.rust-lang.org/1.88.0/core/marker/trait.Sync.html"
+                                    title="trait core::marker::Sync">Sync</a>,</div>
+                        </h3>
+                    </section>
+                </div>
+                <script src="../../../trait.impl/burn_tensor/tensor/quantization/strategy/trait.Quantization.js"
+                    data-ignore-extern-crates="burn_tensor" async=""></script>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

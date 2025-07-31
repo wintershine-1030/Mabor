@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Crafting high-performance GPU kernels for common deep learning operations, such as matrix multiplication (matmul) and reduction, requires finesse. The speed of these kernels varies depending on input shapes and the GPU device in use, meaning the fastest one may change based on the context. In Mabor, Autotune automates the task of dynamically performing kernel selection, allowing one to create a plethora of kernel variations with confidence that the best-performing one will be executed in every situation."><meta property="og:type" content="article"><meta property="og:title" content="Autotune for GPU Kernels: Ensuring Consistent Peak Performance"><meta property="og:description" content="Crafting high-performance GPU kernels for common deep learning operations, such as matrix multiplication (matmul) and reduction, requires finesse. The speed of these kernels varies depending on input shapes and the GPU device in use, meaning the fastest one may change based on the context. In Mabor, Autotune automates the task of dynamically performing kernel selection, allowing one to create a plethora of kernel variations with confidence that the best-performing one will be executed in every situation."><meta property="og:author" content="Louis Fortier-Dubois"><meta property="og:image" content="/_astro/blog5.D2v2pRWS_1kkOi7.webp"><meta property="article:published_time" content="2023-12-15T18:00:00.000Z"><link rel="sitemap" href="../../sitemap-index.xml"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><meta name="generator" content="Astro v5.10.1"><link rel="canonical" href="../../index.htm"><title>Autotune for GPU Kernels: Ensuring Consistent Peak Performance</title><script type="module">try{const t=window._paq=window._paq||[];t.push(["trackPageView"]),t.push(["enableLinkTracking"]),function(){t.push(["setTrackerUrl","https://burndev.matomo.cloud/"+"matomo.php"]),t.push(["setSiteId","1"]);const o=document,e=o.createElement("script"),c=o.getElementsByTagName("script")[0];e.async=!0,e.src="https://cdn.matomo.cloud/burndev.matomo.cloud/matomo.js",c?.parentNode?.insertBefore(e,c)}()}catch{}</script><script type="text/partytown" src="../../gtag/js?id=G-SCQPPXXSJY"></script><script type="text/partytown">(function(){const id = "G-SCQPPXXSJY";
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag("config", id);
+  })();</script><link rel="stylesheet" href="../../_astro/_blog_.DvB2Xm2x.css">
+<link rel="stylesheet" href="../../_astro/_blog_.CLbeXEfv.css"><script>!(function(w,p,f,c){if(!window.crossOriginIsolated && !navigator.serviceWorker) return;c=w[p]=Object.assign(w[p]||{},{"lib":"/~partytown/","debug":false});c[f]=(c[f]||[]).concat(["dataLayer.push"])})(window,'partytown','forward');/* Partytown 0.11.1 - MIT QwikDev */
+const t={preserveBehavior:!1},e=e=>{if("string"==typeof e)return[e,t];const[n,r=t]=e;return[n,{...t,...r}]},n=Object.freeze((t=>{const e=new Set;let n=[];do{Object.getOwnPropertyNames(n).forEach((t=>{"function"==typeof n[t]&&e.add(t)}))}while((n=Object.getPrototypeOf(n))!==Object.prototype);return Array.from(e)})());!function(t,r,o,i,a,s,c,l,d,p,u=t,f){function h(){f||(f=1,"/"==(c=(s.lib||"/~partytown/")+(s.debug?"debug/":""))[0]&&(d=r.querySelectorAll('script[type="text/partytown"]'),i!=t?i.dispatchEvent(new CustomEvent("pt1",{detail:t})):(l=setTimeout(v,(null==s?void 0:s.fallbackTimeout)||1e4),r.addEventListener("pt0",w),a?y(1):o.serviceWorker?o.serviceWorker.register(c+(s.swPath||"partytown-sw.js"),{scope:c}).then((function(t){t.active?y():t.installing&&t.installing.addEventListener("statechange",(function(t){"activated"==t.target.state&&y()}))}),console.error):v())))}function y(e){p=r.createElement(e?"script":"iframe"),t._pttab=Date.now(),e||(p.style.display="block",p.style.width="0",p.style.height="0",p.style.border="0",p.style.visibility="hidden",p.setAttribute("aria-hidden",!0)),p.src=c+"partytown-"+(e?"atomics.js?v=0.11.1":"sandbox-sw.html?"+t._pttab),r.querySelector(s.sandboxParent||"body").appendChild(p)}function v(n,o){for(w(),i==t&&(s.forward||[]).map((function(n){const[r]=e(n);delete t[r.split(".")[0]]})),n=0;n<d.length;n++)(o=r.createElement("script")).innerHTML=d[n].innerHTML,o.nonce=s.nonce,r.head.appendChild(o);p&&p.parentNode.removeChild(p)}function w(){clearTimeout(l)}s=t.partytown||{},i==t&&(s.forward||[]).map((function(r){const[o,{preserveBehavior:i}]=e(r);u=t,o.split(".").map((function(e,r,o){var a;u=u[o[r]]=r+1<o.length?u[o[r]]||(a=o[r+1],n.includes(a)?[]:{}):(()=>{let e=null;if(i){const{methodOrProperty:n,thisObject:r}=((t,e)=>{let n=t;for(let t=0;t<e.length-1;t+=1)n=n[e[t]];return{thisObject:n,methodOrProperty:e.length>0?n[e[e.length-1]]:void 0}})(t,o);"function"==typeof n&&(e=(...t)=>n.apply(r,...t))}return function(){let n;return e&&(n=e(arguments)),(t._ptf=t._ptf||[]).push(o,arguments),n}})()}))})),"complete"==r.readyState?h():(t.addEventListener("DOMContentLoaded",h),t.addEventListener("load",h))}(window,document,navigator,top,window.crossOriginIsolated);;(e=>{e.addEventListener("astro:before-swap",e=>{let r=document.body.querySelector("iframe[src*='/~partytown/']");if(r)e.newDocument.body.append(r)})})(document);</script></head> <body class="flex flex-col text-primary-content default:sections:mx-auto [&#38;>nav]:order-last default:sections:max-w-[1500px] bg-[#0D1117]"> <script type="module" src="../../_astro/Layout.astro_astro_type_script_index_0_lang.W5886xPT.js"></script> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="ZeT78n" data-solid-render-id="s1" component-url="/_astro/Navbar.xVaj7tQm.js" component-export="Navbar" renderer-url="/_astro/client.C-0b9Jot.js" props="{&quot;links&quot;:[0,{&quot;home&quot;:[0,{&quot;href&quot;:[0,&quot;/&quot;],&quot;title&quot;:[0,&quot;Home&quot;]}],&quot;getStarted&quot;:[0,{&quot;href&quot;:[0,&quot;/get-started&quot;],&quot;title&quot;:[0,&quot;Get Started&quot;],&quot;description&quot;:[0,&quot;Begin your journey&quot;]}],&quot;learn&quot;:[0,{&quot;href&quot;:[0,&quot;/learn&quot;],&quot;title&quot;:[0,&quot;Learn&quot;]}],&quot;blog&quot;:[0,{&quot;href&quot;:[0,&quot;/blog&quot;],&quot;title&quot;:[0,&quot;Blog&quot;]}],&quot;benchmarks&quot;:[0,{&quot;href&quot;:[0,&quot;/benchmarks/community-benchmarks&quot;],&quot;title&quot;:[0,&quot;Benchmarks&quot;]}]}]}" ssr="" client="load" opts="{&quot;name&quot;:&quot;Navbar&quot;,&quot;value&quot;:true}" await-children=""><nav data-hk="s10000" class="fixed left-1/2 top-[10px] z-30 h-[70px] w-[90%] max-w-[1200px] -translate-x-1/2 rounded-[100px] border border-white/10 bg-[#1E212A99] px-[30px] py-[20px] text-center shadow-[0px_10px_15px_3px_#5865F21A] backdrop-blur-2xl"><div class="flex flex-1 items-center justify-between gap-4"><div class="flex"><details class="group block hover:cursor-pointer lg:invisible lg:hidden" id="navbar-menu"><summary class="list-none px-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 20 21" class="inline-block h-7 w-8 stroke-current group-open:hidden"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></summary><div class="absolute left-[-10%] top-[-16px] h-[calc(100vh+16px)] w-[110vw] bg-[#1E212A99]/95 backdrop-blur-2xl"><div class="pt-10 pl-[calc(10%+30px)]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" class="h-7 w-8 stroke-current group-open:block"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></div><ul class="mt-6 flex-col justify-evenly whitespace-nowrap"><li data-hk="s100010" class="border-white p-4 text-3xl"><a data-hk="s1000110" title="Home" href="../../index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a></li><li data-hk="s100012" class="border-white p-4 text-3xl"><a data-hk="s1000130" title="Get Started" href="../../get-started/index.htm" aria-description="Begin your journey" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get Started</a></li><li data-hk="s100014" class="border-white p-4 text-3xl"><a data-hk="s1000150" title="Learn" href="../../learn/index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a></li><li data-hk="s100016" class="border-white p-4 text-3xl"><a data-hk="s1000170" title="Blog" href="../index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a></li><li data-hk="s100018" class="border-white p-4 text-3xl"><a data-hk="s1000190" title="Benchmarks" href="../../benchmarks/community-benchmarks/index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a></li></ul></div></details><div class="hidden lg:block"><astro-slot name="left"><div> <img src="../../_astro/burn-flame-white.D0NuVaYR_Z1ywDjw.svg" alt="Burn Logo" loading="lazy" decoding="async" fetchpriority="auto" width="95" height="30" class="mx-2 hidden sm:block"> </div></astro-slot></div></div><div class="block lg:hidden"><astro-slot name="center"></astro-slot></div><ul class="hidden max-w-[610px] flex-wrap justify-evenly whitespace-nowrap text-center align-middle lg:flex"><li data-hk="s100020"><a data-hk="s1000210" title="Home" href="../../index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Home</a></li><li data-hk="s100022"><a data-hk="s1000230" title="Get Started" href="../../get-started/index.htm" aria-description="Begin your journey" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Get Started</a></li><li data-hk="s100024"><a data-hk="s1000250" title="Learn" href="../../learn/index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Learn</a></li><li data-hk="s100026"><a data-hk="s1000270" title="Blog" href="../index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Blog</a></li><li data-hk="s100028"><a data-hk="s1000290" title="Benchmarks" href="../../benchmarks/community-benchmarks/index.htm" aria-description="" class="h-full px-3 p-1 text-btn primary-button font-bold text-light bg-transparent hover:bg-transparent hover:text-white block rounded-[5px] text-center  ">Benchmarks</a></li></ul><!--$--><astro-slot name="right"><div class="flex flex-row gap-2 pr-3"> <a href="https://github.com/tracel-ai/burn" class="h-[30px]"> <svg fill="currentColor" width="30" height="30" viewbox="0 0 16 16">
+  <path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8"></path>
+</svg> </a> <a href="https://discord.gg/uPEBbYYDB6"> <svg width="30" height="30" viewbox="0 0 1024 1024">
+  <circle cx="512" cy="512" r="512" style="fill:#5865f2"></circle>
+  <path d="M689 349a422 422 0 0 0-104-32 2 2 0 0 0-1 0 294 294 0 0 0-13 27 390 390 0 0 0-118 0 270 270 0 0 0-13-27 2 2 0 0 0-1 0 421 421 0 0 0-105 32 1 1 0 0 0 0 1c-67 99-85 195-76 291a2 2 0 0 0 1 1 425 425 0 0 0 128 65 2 2 0 0 0 1-1 303 303 0 0 0 27-42 2 2 0 0 0-1-3 280 280 0 0 1-40-19 2 2 0 0 1 0-2l8-6a2 2 0 0 1 1-1c84 39 175 39 257 0a2 2 0 0 1 2 0l8 7a2 2 0 0 1 0 2 262 262 0 0 1-40 19 2 2 0 0 0-1 3 341 341 0 0 0 26 42 2 2 0 0 0 2 1 423 423 0 0 0 128-65 2 2 0 0 0 1-1c10-110-18-206-76-291a1 1 0 0 0-1-1zM427 583c-25 0-46-23-46-52s20-51 46-51 47 23 46 51c0 29-20 52-46 52zm170 0c-25 0-46-23-46-52s21-51 46-51c26 0 47 23 46 51 0 29-20 52-46 52z" style="fill:#fff"></path>
+</svg> </a> <a href="https://tracel.ai"> <svg width="30" height="30" viewbox="0 0 30 30" fill="none">
+        <g clip-path="url(#clip0_218_3200)">
+          <path d="M23.6061 10.3233C23.3784 9.98679 23.0518 9.71955 22.6658 9.58098L21.0524 8.98712L17.994 7.85878C17.7664 7.7697 17.519 7.73011 17.2715 7.73011C16.2125 7.71031 15.3415 8.55162 15.3217 9.61068C15.3217 10.0561 15.4602 10.4916 15.7473 10.8479C16.0739 10.551 16.4797 10.353 16.9251 10.2837L19.3896 9.70965C19.6767 9.64037 19.9637 9.61068 20.2507 9.61068C20.6763 9.61068 21.1019 9.68986 21.4978 9.83832L21.6067 9.87791C21.6067 9.87791 21.3197 9.9472 21.0029 10.0165L20.5477 10.1254L17.0043 10.9568C16.6183 11.0162 16.2718 11.1844 15.9848 11.4418C15.8759 11.5407 15.777 11.6496 15.6978 11.7684V11.7882L15.6681 11.8179C15.5988 11.9267 15.5394 12.0356 15.4899 12.1544C15.3711 12.4315 15.3217 12.7384 15.3513 13.0353V20.3299C15.3513 20.5675 15.3909 20.7951 15.48 21.0129L15.5394 21.1316C15.5394 21.1316 15.5394 21.1514 15.5592 21.1613C15.5592 21.1613 15.5691 21.1811 15.579 21.2009C15.7275 21.4879 15.9353 21.7255 16.2026 21.9135C16.2322 21.9333 16.2718 21.963 16.3015 21.9828C16.5886 22.161 16.9152 22.2501 17.2517 22.26H17.4992C17.6476 22.2402 17.806 22.2006 17.9446 22.1511H17.9643L18.0138 22.1214H18.0435C18.0435 22.1214 18.0831 22.1016 18.1029 22.0917C18.2019 22.0422 18.3009 21.9828 18.3998 21.9135H18.4097C18.5285 21.8245 18.6473 21.7156 18.7463 21.6067C18.7661 21.5869 18.776 21.5671 18.7958 21.5473C18.8947 21.4286 18.9739 21.2999 19.0432 21.1712C19.1521 20.9535 19.2115 20.7159 19.2313 20.4685V14.0548L22.4777 13.2926C23.032 13.1442 23.5071 12.7681 23.7743 12.2534L23.7842 12.2237C23.7842 12.2039 23.804 12.1841 23.804 12.1643V12.1445C23.804 12.1445 23.8238 12.1049 23.8337 12.0851V12.0653V12.0554V12.0356C23.8337 12.0356 23.8535 11.996 23.8535 11.9663C23.8535 11.9663 23.8733 11.8971 23.8733 11.8674C23.9525 11.5605 23.9525 11.2438 23.8733 10.9469C23.8238 10.7192 23.7248 10.5015 23.5962 10.3134L23.6061 10.3233Z" fill="white"></path>
+          <path d="M10.2738 9.70968L12.7384 10.2837C13.1739 10.353 13.5896 10.551 13.9162 10.8479C14.5793 10.0264 14.4507 8.81888 13.6193 8.15573C13.2728 7.8786 12.8373 7.73013 12.382 7.73013C12.1346 7.73013 11.8871 7.76972 11.6595 7.8588L8.6011 8.97725L6.98778 9.57111C6.60176 9.70968 6.27514 9.96702 6.04749 10.3134C5.74066 10.7687 5.64169 11.3329 5.78025 11.8674C5.78025 11.8674 5.80005 11.9268 5.80005 11.9565C5.80005 11.9565 5.80995 12.0158 5.81984 12.0356V12.0554L5.83964 12.0851C5.83964 12.1049 5.85944 12.1247 5.85944 12.1445C5.85944 12.1445 5.86933 12.194 5.87923 12.2039V12.2336L5.88913 12.2435C5.96831 12.4019 6.06729 12.5503 6.18606 12.679C6.4434 12.9759 6.78982 13.1937 7.17583 13.2828L10.4223 14.0449V20.4487C10.4421 20.706 10.5015 20.9436 10.6103 21.1613C10.6796 21.2999 10.7588 21.4187 10.8578 21.5375C10.8677 21.5573 10.8875 21.577 10.9073 21.5968C11.0063 21.7057 11.1151 21.8146 11.2438 21.8938H11.2537C11.3428 21.973 11.4418 22.0323 11.5506 22.0818C11.5704 22.0917 11.6001 22.1016 11.6199 22.1115H11.6397L11.6892 22.1313H11.7189C11.8674 22.1907 12.0158 22.2303 12.1643 22.2501H12.2534H12.2732H12.4117C12.7483 22.2501 13.0749 22.1412 13.3619 21.973L13.4312 21.9235L13.4609 21.9037C13.7281 21.7255 13.9459 21.4781 14.0943 21.191C14.0943 21.191 14.0943 21.1613 14.1042 21.1514C14.1042 21.1514 14.1141 21.1317 14.124 21.1218L14.1834 21.003C14.2626 20.7852 14.3022 20.5477 14.3022 20.32V13.0254C14.3319 12.7186 14.2824 12.4217 14.1636 12.1445C14.1141 12.0257 14.0548 11.9169 13.9855 11.808L13.9657 11.7783H13.9558C13.8766 11.6397 13.7776 11.5309 13.6687 11.4319C13.3817 11.1745 13.0254 11.0063 12.6493 10.9469L9.10589 10.1155L8.65059 10.0165L8.04683 9.87794L8.15571 9.83835C8.82875 9.5909 9.55129 9.55131 10.2441 9.71958L10.2738 9.70968Z" fill="white"></path>
+          <path d="M14.9951 0C6.71066 0 0 6.71066 0 14.9951C0 23.2794 6.71066 29.9901 14.9951 29.9901C23.2794 29.9901 29.9901 23.2794 29.9901 14.9951C29.9901 6.71066 23.2794 0 14.9951 0ZM8.67041 10.0165L9.1257 10.1155L12.6691 10.9469C13.0551 11.0063 13.4015 11.1745 13.6886 11.4319C13.7974 11.5308 13.8964 11.6397 13.9756 11.7585H13.9855L14.0053 11.7981C14.0746 11.907 14.1339 12.0158 14.1834 12.1346C14.3022 12.4117 14.3517 12.7186 14.322 13.0155V20.3101C14.322 20.5477 14.2824 20.7753 14.2032 20.9931L14.1438 21.1118C14.1438 21.1118 14.134 21.1316 14.1241 21.1415L14.1142 21.1613C13.9657 21.4583 13.7479 21.7057 13.4807 21.8938L13.451 21.9136L13.3817 21.963C13.0947 22.1412 12.7681 22.2303 12.4315 22.2402H12.1841C12.0356 22.2204 11.8773 22.1808 11.7387 22.1313H11.709L11.6595 22.1016H11.6298C11.6298 22.1016 11.5803 22.0818 11.5605 22.0719C11.4616 22.0224 11.3626 21.9631 11.2636 21.8938H11.2537C11.1349 21.8047 11.0162 21.6958 10.9172 21.5869C10.8974 21.5671 10.8875 21.5473 10.8677 21.5275C10.7687 21.4088 10.6895 21.2801 10.6203 21.1514C10.5114 20.9337 10.452 20.6961 10.4322 20.4487V14.035L7.18575 13.2728C6.79974 13.1739 6.45332 12.966 6.19598 12.6691C6.0772 12.5404 5.97823 12.3919 5.89904 12.2336L5.88915 12.194C5.88915 12.1742 5.87925 12.1643 5.86935 12.1445C5.86935 12.1445 5.84955 12.095 5.84955 12.0653L5.82976 12.0455V12.0257C5.82976 12.0257 5.80996 11.9861 5.80996 11.9565C5.80996 11.9565 5.79017 11.8872 5.79017 11.8575C5.6516 11.323 5.75058 10.7588 6.05741 10.3035C6.28505 9.96701 6.61168 9.69977 6.99769 9.5612L8.61102 8.96734L11.6694 7.84889C11.8971 7.75982 12.1445 7.72022 12.392 7.72022C12.8373 7.72022 13.2728 7.85879 13.6292 8.14583C14.4507 8.80897 14.5892 10.0165 13.9261 10.838C13.5995 10.5411 13.1937 10.3431 12.7483 10.2738L10.2837 9.69977C9.59089 9.53151 8.86836 9.581 8.19532 9.81854L8.08644 9.85813L8.6902 9.9967L8.67041 10.0165ZM23.8733 11.8773C23.8733 11.8773 23.8634 11.9367 23.8535 11.9663C23.8535 11.9663 23.8436 12.0257 23.8337 12.0455V12.0653V12.095C23.8337 12.1148 23.8139 12.1346 23.8139 12.1544V12.1742C23.8139 12.1742 23.7941 12.2138 23.7842 12.2336V12.2534H23.7743C23.5071 12.7681 23.0419 13.1442 22.4777 13.2926L19.2313 14.0548V20.4586C19.2115 20.7159 19.1521 20.9535 19.0432 21.1712C18.9739 21.3098 18.8948 21.4286 18.7958 21.5473C18.7859 21.5671 18.7661 21.5869 18.7463 21.6067C18.6473 21.7156 18.5384 21.8245 18.4098 21.9037H18.3999C18.3108 21.9828 18.2118 22.0422 18.1029 22.0917C18.0831 22.0917 18.0633 22.1115 18.0436 22.1115H18.0238L17.9743 22.1313H17.9545C17.806 22.1907 17.6575 22.2303 17.5091 22.2402H17.4299H17.4101H17.2715C16.935 22.2402 16.6084 22.1313 16.3213 21.963C16.2917 21.9433 16.2521 21.9235 16.2224 21.8938C15.965 21.7156 15.7473 21.4682 15.5988 21.1811C15.5988 21.1712 15.5889 21.1514 15.579 21.1415C15.579 21.1415 15.5592 21.1217 15.5592 21.1118L15.4998 20.9931C15.4108 20.7753 15.3712 20.5378 15.3712 20.3101V13.0155C15.3514 12.7087 15.391 12.4117 15.5097 12.1346C15.5592 12.0158 15.6186 11.907 15.6879 11.7981L15.7077 11.7684V11.7486C15.7968 11.6298 15.8957 11.521 16.0046 11.422C16.2917 11.1646 16.648 10.9964 17.0241 10.937L20.5675 10.1056L21.0228 9.9967C21.3296 9.91752 21.6166 9.85813 21.6265 9.85813L21.5177 9.81854C21.1118 9.67008 20.6961 9.59089 20.2705 9.59089C19.9835 9.59089 19.6866 9.62059 19.4094 9.68987L16.9449 10.2639C16.5094 10.3332 16.0937 10.5312 15.7671 10.8281C15.4899 10.4817 15.3415 10.0462 15.3415 9.59089C15.3613 8.53184 16.2323 7.69053 17.2913 7.71033C17.5388 7.71033 17.7862 7.74992 18.0139 7.839L21.0723 8.96734L22.6856 9.5612C23.0716 9.69977 23.3982 9.95711 23.6259 10.3035C23.7545 10.5015 23.8535 10.7093 23.903 10.937C23.9723 11.2339 23.9723 11.5506 23.903 11.8476L23.8733 11.8773Z" fill="#00AA92"></path>
+        </g>
+      </svg> </a> </div></astro-slot><!--/--></div></nav><!--astro:end--></astro-island>     <main> <div class="flex w-full justify-center pt-20"><div class="mx-3 mb-10 w-full max-w-5xl"><div class="mb-3"><p class="px-2 text-xl font-semibold"><a href="../../index.htm" class="hover:text-[#edc567]">home</a><span><span> · </span><a href="../index.htm" class="hover:text-[#edc567]">blog</a></span><span><span> · </span><a href="index.htm" class="hover:text-[#edc567]">autotune-for-gpu-kernels</a></span></p></div><article class="blog rounded-lg bg-white/5 pt-4"><div><h1 class="!text-[30px] sm:!text-[48px] font-bold !leading-normal px-3 sm:px-8">Autotune for GPU Kernels: Ensuring Consistent Peak Performance</h1><div class="px-3 pb-4 sm:px-8"><img class="mr-3 h-48 w-full rounded-lg object-cover object-top" src="../../_astro/blog5.D2v2pRWS_1kkOi7.webp" alt="Space digital art generated by stable diffusion."></div><div class="flex px-3 sm:px-8"><div class="flex"><div class="i-mdi-clipboard-text-clock size-5"></div><span class="px-2 font-normal">Fri, Dec 15, 2023</span></div><!--$--><a class="flex pl-2" href="https://x.com/louisfd94" target="_blank"><div class="i-mdi-account-edit size-5"></div><span class="px-2 font-normal">Louis Fortier-Dubois</span></a><!--/--></div></div><div class="px-3 pb-4 sm:px-8 text-base sm:text-lg leading-relaxed"><div class="my-6 border-t-2 border-[#181a1d]"></div><!--$--> <div> <h2>Introduction</h2> <p>
+At the lowest level of abstraction of a deep learning framework lie
+          the kernels. <i>Kernel</i> is a fancy word to describe an algorithm that
+          accomplishes a task of relative simplicity on a tensor and that can be
+          used in a broad range of contexts, like for instance a matrix multiplication
+          (referred to as Matmul hereafter). These algorithms being the most basic
+          building blocks, they often find themselves in the hot loop of an AI model
+          and it's primordial that they execute as fast as possible. That is why
+          their computation is often delegated to the GPU, which is usually faster
+          on highly parallelizable problems like tensor operations, provided their
+          excentricities are respected.
+</p> <p>
+Indeed, there are many types of GPUs, all with their own cache size,
+          number of registers, etc. As a result, some kernel implementations may
+          run better on some GPUs than others  <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-1">1</a><!--/-->]</span>. Add to that the fact
+          that some kernels are better on some tensor shapes, as we will see
+          with the Reduction algorithm.
+</p> <p>
+Selecting the appropriate kernel for a given task, depending on the
+          device and the shape, can quickly become a cumbersome task. Hardcoding
+          the choice may pose two significant issues: first, it may not scale
+          well in the future, and second, it might be inaccurate due to
+          unforeseen factors not taken into consideration.
+</p> <p>
+This is why, in Mabor, we have chosen to automate the kernel selection
+          process so that the best kernel is always selected, regardless of the
+          device it runs on, the shape of the input, or any other consideration
+          that is relevant for a specific kernel. We call this process Autotune.
+</p> <p>
+After defining Autotune and explaining how we integrated it in Mabor,
+          we will look at how it simplifies the kernel selection for two common
+          GPU operations: Reduction and Matmul.
+</p> <h2>What's Autotune?</h2> <p>
+You may recognize the word <i>Autotune</i> from the music industry, where
+          Autotune was at first a software by Antares  <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-2">2</a><!--/-->]</span> that can adjust a singer's pitch
+          to a precise note in real time. It had such a high impact that the word
+          is now often used for any such pitch-correcting algorithm. If you have
+          a shaky voice -like me-, you will find Autotune to be a life saver when
+          singing. In computer science, Autotune is also a correcting process happening
+          at runtime. Instead of adjusting to a specific voice, it adjusts to a specific
+          machine -your laptop, for instance. And instead of fixing the pitch, it
+          fixes the execution time.
+</p> <p>
+It's particularly relevant in deep learning simply because compute
+          efficiency is such a big deal in that field, although in theory it
+          could be used in any system where high performance is key. To be
+          clear, it is not about tuning hyperparameters or anything that can
+          change an AI model's accuracy or training convergence. It's only about
+          selecting the fastest kernel among kernels that would all output the
+          same result anyway.
+</p> <p>
+Now, how does it work? It's actually rather simple: the first time you
+          encounter an autotunable operation on a specific input when running
+          your model on your machine, it will actually launch the operation on
+          all kernels that are registered for Autotune, benchmark their
+          execution time, and keep the fastest one in a cache for subsequent
+          calls to that operation in similar settings.
+</p> <p>
+As you can guess, any autotuning strategy adds some overhead for the
+          first calls, the goal being to save as much time as possible in the
+          long run. We've picked a straightforward strategy that is guaranteed
+          to adapt directly to any hardware, as being portable is one of our
+          main objectives. Also, we want Autotune to work with automatic kernel
+          fusion, which creates never seen before kernels just-in-time for
+          highly specialized task. Tuning by hand is just not possible in this
+          dynamic context.
+</p> <h2>Autotune in Mabor</h2> <p>
+In a previous blogpost  <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-3">3</a><!--/-->]</span>, I presented
+          Mabor-Compute's architecture and I mentioned that Autotune was a part
+          of it. As Mabor-Compute is a reusable basis for all of our in-house
+          backend, it means that Autotune will by default be part of our future
+          backends. At the moment, we use it only on our WGPU backend, but it
+          will be trivial to enhance our envisaged CUDA backend with it.
+</p> <p>
+The subtlety of Autotune lies in the key used to cache kernels. If it
+          summarizes the setting in which the kernel is needed in a way that is
+          too precise, then there will be cache misses. For instance, an
+          operation on matrices of shapes <i>231x231</i> or
+<i>233x233</i> has an extremely high probability of being optimal with
+          the same kernel, so we should not run benchmarks for both. But if we encouter
+          the shape <i>32x1024</i> afterwards, it may behave very differently.
+</p> <p>
+More subtle yet, if we meet the shape <i>512x512</i> (512 is a power of
+          2, therefore a very "round" number in computer science), then maybe some
+          kernel will be very fast; but then on a <i>512x511</i>
+matrix, the same kernel may need to add some padding first to transform
+          it into a round <i>512x512</i> matrix with zeros at the end of each row.
+          Adding those zeros means shifting all rows, which is a very costly operation.
+</p> <p>
+This is of course very dependant of the nature of the operation. As we
+          will see, the padding problem appears in Matmul but not in Reduction.
+          In Mabor, we therefore chose to make the key a custom trait
+          implementation, customizable for every operation in every backend.
+          Here are for instance our keys for the operations we will look at in
+          the next sections:
+</p> <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium"> <pre class="astro-code material-theme-darker" style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#F78C6C">  pub</span><span style="color:#C792EA"> struct</span><span style="color:#FFCB6B"> ReduceAutotuneKey</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">      reduce_dim_length</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic"> // Dimension on which we reduce (closest power of 2)</span></span>
+<span class="line"><span style="color:#EEFFFF">      reduce_dim_stride</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic"> // Stride of reduce dimension (for data locality)</span></span>
+<span class="line"><span style="color:#EEFFFF">      others_product</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic">    // Product of all other dimensions (closest power of 2)</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span></code></pre> </div> <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium"> <pre class="astro-code material-theme-darker" style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"></span>
+<span class="line"><span style="color:#F78C6C">  pub</span><span style="color:#C792EA"> struct</span><span style="color:#FFCB6B"> MatmulAutotuneKey</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#EEFFFF">      round</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> bool</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic">            // True when all matmul dims are multiples of tile size</span></span>
+<span class="line"><span style="color:#EEFFFF">      broadcast</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> bool</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic">        // True when there are differences in inputs batch size</span></span>
+<span class="line"><span style="color:#EEFFFF">      anchored_m</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic">      // M dimension (closest power of 2)</span></span>
+<span class="line"><span style="color:#EEFFFF">      anchored_k</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic">      // K dimension (closest power of 2)</span></span>
+<span class="line"><span style="color:#EEFFFF">      anchored_n</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic">      // N dimension (closest power of 2)</span></span>
+<span class="line"><span style="color:#EEFFFF">      anchored_batch</span><span style="color:#89DDFF">:</span><span style="color:#FFCB6B"> usize</span><span style="color:#89DDFF">,</span><span style="color:#545454;font-style:italic">  // Number of batches (closest power of 2), topped at 256</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#EEFFFF">  </span></span></code></pre> </div> <p>
+Since the cache is always local in our current implementation, we do
+          not bother keeping the device information in the key, although it may
+          be included in the future.
+</p> <p>
+Of note, we do not force Autotune to run all benchmarks on the actual
+          input for which we request a kernel. Rather, we choose a random input
+          on some shape that is representative of the key. For instance, we know
+          that the execution time of our Matmul kernels always scales linearly
+          with the batch size. If we need to run thousands of batches in the
+          model, running Autotune on that batch size would take way more time
+          than actually necessary, for the same information gain.
+</p> <p>
+Also, if for instance all inputs between <i>512x512</i> and
+<i>1024x1024</i> shared the same key, should we run benchmarks on
+<i>1024x1024</i> which would likely take longer, or on <i>512x512</i> 
+for shorter Autotune time, but at the risk of results being not too reliable
+          at the higher end of the interval? We believe a representant, such as the
+          median size <i>768x768</i> would be a great choice. We haven't yet explored
+          the idea of a median representant yet in Mabor, but it would certainly be
+          interesting to measure how much more precise Autotune would become.
+</p> <h2>Tensor Operations on GPU</h2> <p>
+Remember how I argued that Autotune was a necessity: tensor operation
+          kernels, in particular GPU ones, have execution speeds which highly
+          depend on the system in use and input tensor shapes. In my personal
+          experience, I find the impact of the tensor shape to be
+          understandable, but the impact of the device less predictable -that's
+          why I'm so happy to leave it in the hands of Autotune.
+</p> <p>
+Using Reduction and Matmul as examples, we will see how GPU concepts
+          related to input specifications have an impact on what is the right
+          kernel to choose.
+</p> <p>
+Since comparing devices is not the objective here, but rather the
+          impact of input shape, all benchmarks I will present are run on my
+          personal laptop (MacBook Pro's Apple M2 Pro 19-Core integrated
+          graphics card, with Metal 3 API), using Mabor's WGPU backend.
+</p> <h3>Dividing the Workload</h3> <p>
+We will look at some fundamental concepts of GPU computing, using the
+          WebGPU nomenclature, which differ somewhat from that of CUDA. First,
+          the computation is divided into a <i>grid</i>, which is a collection
+          of  <i>workgroups</i> which are themselves collections of <i>invocations</i>
+.
+</p> <div class="flex justify-center"> <img class="w-full center my-6 border-2 bg-white rounded" src="../../_astro/grid.D3CWoybU.svg"> </div> <p>
+The grid is an arbitrarily long collection of workgroups. Typically,
+          if a tensor has <i>n</i> elements and one workgroup is able to process  <i>m</i> of them, then the grid consists of <i>n/m</i> workgroups. The
+          grid's role is to ensure that the whole computation is carried, despite
+          the fact that workgroups have limited sizes. The grid does not guarantee
+          any order nor parallelism between workgroup computations, therefore we
+          must consider all workgroups to work in silos.
+</p> <p>
+It's <i>within</i> a workgroup that things get interesting. A workgroup
+          is a fixed-size collection of invocations, which are essentially threads
+          (in Mabor we often launch 1024 invocations per workgroup). These threads
+          all work at the same time on the GPU and can share data through a shared
+          memory which leverages the GPU cache. They can also be synchronized with
+          a barrier if needed.
+</p> <h3>Important Considerations of GPU Algorithm Design</h3> <p>
+When writing a GPU kernel, for instance using the WGSL (Web GPU
+          Shading Language) <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-4">4</a><!--/-->]</span> as we do in our
+          WGPU backend, you write only the code for one invocation. By using its  <i>workgroup id</i> in the grid and <i>invocation id</i> in the workgroup,
+          you can compute what specific tensor input and output elements this invocation
+          should be working on.
+</p> <p>
+Some important GPU concepts can have a high impact on the execution
+          speed in different settings:
+</p> <ul class="list-disc px-8"> <li>
+The <i>shared memory</i> allows for communication across threads, but
+            not across workgroups. Therefore, if some elements of the input tensor
+            must interact together, they should be managed by the same workgroup.
+            This memory is also closer than the global memory where the input lies,
+            so if a value must be fetched several times (by different threads of
+            the same workgroup), it's probably worth saving it in shared memory.
+</li> <br> <li>
+One must <i>avoid concurrency errors</i>, both across invocations of
+            a workgroup and across the grid, when writing results. While CUDA
+            offers atomic write primitives <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-5">5</a><!--/-->]</span> 
+which forbids two threads to add to a value at the same time, Web GPU
+            does not afford us with this luxury, making it more delicate for threads
+            to collaborate on the same output cells.
+</li> <br> <li> <i>Memory coalescing</i> is something that can happen in GPUs, which
+            I personally find magical: if several threads of adjacent IDs access
+            the memory in adjacent spaces at the same time, the GPU can perform a
+            single memory reading transaction for all of them. When writing GPU kernels,
+            maximizing memory coalescing should be a goal. However, verifying its
+            occurrence can be subtle, and it is precisely the type of aspect that
+            can vary across different devices.
+</li> <br> <li>
+Somewhat related to that is the concept of <i>branch divergence</i>,
+            which must be minimized. Branch divergence occurs when threads
+            within a workgroup do not take the same path in the code, usually
+            because of an <code>if</code> statement. The best example I can give
+            is the one I mentioned earlier when I said a kernel can be very good
+            on  <i>512x512</i> shapes but poor on <i>512x511</i>. Suppose we have 64
+            threads working in parallel. If they operate in the middle of the
+            matrix, there is no issue. However, when positioned on the edge, in
+            the rounded case, the 64 threads will operate on indices 448 to 511,
+            whereas in the truncated shape, they should cover indices 448 to 510
+            (a total of 63 values). The 64th thread can either: do a computation
+            anyway on the data that follows, which will very likely lead to
+            corrupted data, or go through an if to <i>not</i> do the computation
+            like the others. This typically breaks all hopes for good memory coalescing
+            within that workgroup, and threads have to wait for each other to be
+            synchronized again. This is why it may (or may not) be best to pad the
+            511 elements row with a zero to reach a round number and avoid the need
+            for <code>if</code> statements.
+</li> </ul> <h2>Reduction</h2> <p>
+In the textbook 1-dimensional case, reducing means computing one value
+          from a whole vector, leveraging the associativity of an underlying
+          binary operation. Many variations exist (sum, product, maximum, etc.)
+          but often share the same algorithmic structures. For instance, [12, 3,
+          5, 4, 15, 2] can be reduced to 41 in the sum case, or to 15 for the
+          maximum. Many different strategies exist, some with a simple for loop
+          on all values, and some that use recursivity to leverage parallelism
+          in a divide-and-conquer fashion  <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-6">6</a><!--/-->]</span>.
+</p> <p>
+In the N-dimensional case, we typically reduce one dimension, going
+          for instance from a <i>MxKxN</i> tensor to a <i>1xKxN</i> one when the
+          reduce dimension is 0. In that case, we reduce M values together, KxN times.
+          We will call the M values that must be reduced together a  <i>reduce column</i>. In the figure below, the green block is the
+          ouptputted <i>KxN</i> tensor, and the purple block is one of the reduce
+          columns and consists of M elements. For visualization I've included only
+          one reduce column, but there are in fact one for each element of the output
+          tensor.
+</p> <div class="flex justify-center"> <img class="w-96 my-6 border-2 bg-white rounded" src="../../_astro/reduce_explained.C4jkYmFi.svg"> </div> <p>
+What is important here is that in the 0th dimension, the <i>M</i> values
+          of a reduce column fundamentally need to interact together. Therefore,
+          those values cannot be spread across different workgroups, since they would
+          not be able to share information. On the other hand, each of the  <i>KxN</i> reduce columns can be treated totally independantly from one
+          another.
+</p> <h3>One Invocation per Reduce Column</h3> <p>
+Our first reduce kernel always gives the responsibility of computing a
+          whole reduce column to only one <i>invocation</i>, which only executes
+          a for loop on the whole reduce column. This may be a lot of computing
+          for one thread when M is large, but this maximizes parallelization
+          across the threads, who can all work in a well-vectorized way. Also,
+          there is no risk of concurrency error as each output value is managed
+          by only one thread.
+</p> <div class="flex justify-center"> <img class="w-96 my-6 border-2 bg-white rounded" src="../../_astro/reduce_invocation.DLeo_-9F.svg"> </div> <p>
+In the above, workgroups are separated by solid lines and invocations
+          by dashed lines.
+</p> <h3>One Workgroup per Reduce Column</h3> <p>
+Our second reduce kernel rather gives the responsability of a reduce
+          column to one <i>workgroup</i>. For large M, threads can work together
+          through the shared memory to compute one reduce column much more
+          quickly. Again, in the figure below, workgroups are separated by solid
+          lines and invocations by dashed lines.
+</p> <div class="flex justify-center"> <img class="w-96 my-6 border-2 bg-white rounded" src="../../_astro/reduce_workgroup.BvOgUaKM.svg"> </div> <p>There are however two caveats:</p> <ul class="list-disc px-8"> <li>
+If the other dimensions are large, the grid must consist of a lot of
+            workgroups. Launching many workgroups is much slower than launching
+            many threads.
+</li> <li>
+When computing a reduce column, threads can use a divide-and-conquer
+            method. However, as the column gets reduced, more and more threads
+            become idle, likely causing branch divergence.
+</li> </ul> <h3>Autotuning Reduction</h3> <p>
+Let's see what Autotune says about it. The following benchmarks
+          consider two very different scenarios of reduction. In both examples,
+          the first line is the Autotune key, the following two give the median
+          computation time over a few executions, and the last line gives the
+          selected, fastest kernel.
+</p> <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium"> <pre class="astro-code material-theme-darker" style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span></span></span>
+<span class="line"><span>  Reduce - reduce_dim_length: 2048 reduce_dim_stride: 1024 others_product: 1024</span></span>
+<span class="line"><span>  OneColumnPerInvocationReduce&#x3C;f32, 3> => 8.98ms</span></span>
+<span class="line"><span>  OneColumnPerWorkgroupReduce&#x3C;f32, 3> => 3.88ms</span></span>
+<span class="line"><span>  Fastest: OneColumnPerWorkgroupReduce&#x3C;f32, 3></span></span>
+<span class="line"><span>  </span></span></code></pre> </div> <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium"> <pre class="astro-code material-theme-darker" style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span></span></span>
+<span class="line"><span>  Reduce - reduce_dim_length: 32 reduce_dim_stride: 1 others_product: 65536</span></span>
+<span class="line"><span>  OneColumnPerInvocationReduce&#x3C;f32, 3> => 1.36ms</span></span>
+<span class="line"><span>  OneColumnPerWorkgroupReduce&#x3C;f32, 3> => 19.01ms</span></span>
+<span class="line"><span>  Fastest: OneColumnPerInvocationReduce&#x3C;f32, 3></span></span>
+<span class="line"><span>  </span></span></code></pre> </div> <p>
+In the first example, the reduce dimension is much larger than the
+          product of all others, therefore it makes sense to use one workgroup
+          on each column. The difference in time is also due to the large
+          reduce_dim_stride which forbids memory coalescing to occur. In the
+          second example, assigning one column per workgroup would mean creating
+          tens of thousands of workgroups, each with too many threads, and is
+          therefore very slow in comparison to creating 65536 threads who work
+          independantly.
+</p> <h2>Matmul</h2> <p>
+Let's move on to our second operation. The point here is not to
+          explain matrix multiplication in detail but to understand its
+          complexity with regards to its inputs. On 2-dimensional input tensors
+          (which are simply matrices), the result of a matrix A of size <i>MxN</i> times a matrix B of size
+<i>KxN</i> is an <i>MxN</i> output matrix C. In C, all values are the sum
+          of K multiplications of an element of A with an element of B. On N-dimensional
+          tensors, all other dimensions than the last two are simply batch dimensions,
+          which can be seen as other unrelated instances of the kernel. For that
+          reason, we will assume 2-dimensional tensors in the following explanations.
+</p> <p>
+The computation of one output element depends on many elements of the
+          inputs. This makes it impossible to make several threads work on a
+          single output element without just repeating work. For that reason,
+          all our kernels have each thread responsible of one output element
+          (contrarily to our second reduce kernel).
+</p> <p>
+Since all the pair-wise multiplications (one specific element of A
+          with one element of B) are uniquely used - we cannot hope to reuse
+          intermediate computation results several times. Therefore the
+          algorithm must necessarily take at least <i>(size of C)xK = MxNxK</i> computation
+          steps.
+</p> <h2>Naive Approach (with Memory Coalescing)</h2> <p>
+The naive approach simply consists in launching one invocation per
+          output element. Then, each thread iteratively reads values from a row
+          of A and from a column of B like in the figure below. The secret
+          ingredient of this kernel is memory coalescing. Conceptually, if
+          threads of the same workgroup with ids 0, 1, 2 and 3 read from memory
+          cells i, i+1, i+2, i+3 at the same time, these read operations can be
+          done all at once. Repeat this pattern everywhere and you get a pretty
+          efficient kernel, considering its simplicity.
+</p> <div class="flex justify-center"> <img class="w-96 my-6 border-2 bg-white rounded" src="../../_astro/matmul.BgeCl15k.svg"> </div> <p>However, this approach does not use the GPU cache intelligently.</p> <h3>Padded Tiling 2D Approach</h3> <p>
+The tiling approach is all about saving time through the use of shared
+          memory, which normally lies in the GPU cache and is way faster to
+          access than the inputs. Like mentioned earlier, all pair-wise
+          multiplications are unique, but a single element of A (or B) is used
+          by many threads, many of which in the same workgroup. We can leverage
+          this.
+</p> <p>
+In the tiling 2D kernel, we divide both input matrices into fixed-size
+          tiles, and we also prepare one tile-size shared memory per input
+          matrix. Working in synchronization with other invocations from its
+          workgroup, a thread first contributes to fill the shared memory with
+          the current input tile, then achieves all the partial computations
+          needed for the output element it is responsible of, helping itself to
+          values in the shared memory that have been loaded by his sibling
+          threads. Then the process is repeated for all the tiles along the
+          inner product dimension, to complete the computation of the output
+          value.
+</p> <p>
+I'm leaving out a lot of details as this gets very technical; more
+          details and schemas can be found in  <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-7">7</a><!--/-->]</span>. The important thing
+          to realize is that we add steps for loading values from the global
+          memory to the GPU cache, relying on thread synchronization within a
+          workgroup, in order to gain some data locality when performing the
+          actual additions and multiplications.
+</p> <p>
+As I said, the tiles have fixed sizes, which are configurable, but the
+          optimal number depends on the GPU architecture. Let's say we fix it to
+          64. Then any input size that is not a multiple of 64 will cause
+          problems, because the last threads in the last tile may wrongly read
+          from the row after theirs.
+</p> <p>
+Hence the need for padding. If the last threads just read zeros
+          instead of the values of the following row, they can do their
+          computation like the other threads but with a value of zero, which
+          will benignly add zero to the output.
+</p> <h3>Unpadded Tiling 2D Approach</h3> <p>
+Padding can be extremely costly because it changes the data layout: A
+          new tensor allocation must occur where all rows must be shifted in
+          order to insert zeros in between. In the following picture, we get
+          from a  <i>3x3</i> tensor to a <i>4x4</i> one while keeping contiguousness. Then,
+          after the Matmul, the shifting must be undone to retrieve the original
+          output shape.
+</p> <div class="flex justify-center"> <img class="w-full my-6 border-2 bg-white rounded" src="../../_astro/offset.BfULzGCR.svg"> </div> <p>
+Couldn't we just prevent threads that are out of bound to do any
+          computation, using an <code>if</code> statement? In a GPU kernel, it would
+          not necessarily be the fastest way because an <code>if</code> will almost
+          certainly create branch divergence. Still, that's what we do in our unpadded
+          version of the tiling 2D algorithm. To be more precise, the conditional
+          statement is at the stage where we load data to the shared memory, so that
+          the <code>if</code> is only for reading and writing to global memory, while
+          all computations operate without branching.
+</p> <h3>Autotuning Matmul</h3> <p>
+Now let's see what benchmarks have to say about which kernel is the
+          best. While running the text classification training of Mabor  <span class="reference px-1">[<!--$--><a class="hover:text-[#69b8e1]" href="#reference-8">8</a><!--/-->]</span>, I selected three
+          examples from the autotune log. Again, the first line is the key and
+          the last one is the winning kernel.
+</p> <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium"> <pre class="astro-code material-theme-darker" style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span></span></span>
+<span class="line"><span>  Matmul - Round:false Broadcast:false m:1024 k:256 n:256 batch:32</span></span>
+<span class="line"><span>  NaiveMemoryCoalescingMatmul&#x3C;f32, 3> => 12.58ms</span></span>
+<span class="line"><span>  PaddedTiling2DMatmul&#x3C;f32, 3> => 6.29ms</span></span>
+<span class="line"><span>  UnpaddedTiling2DMatmul&#x3C;f32, 3> => 3.93ms</span></span>
+<span class="line"><span>  Fastest: UnpaddedTiling2DMatmul&#x3C;f32, 3></span></span>
+<span class="line"><span>  </span></span></code></pre> </div> <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium"> <pre class="astro-code material-theme-darker" style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span></span></span>
+<span class="line"><span>  Matmul - Round:true Broadcast:true m:256 k:1024 n:4 batch:32</span></span>
+<span class="line"><span>  NaiveMemoryCoalescingMatmul&#x3C;f32, 3> => 21.59ms</span></span>
+<span class="line"><span>  PaddedTiling2DMatmul&#x3C;f32, 3> => 5.04ms</span></span>
+<span class="line"><span>  UnpaddedTiling2DMatmul&#x3C;f32, 3> => 5.16ms</span></span>
+<span class="line"><span>  Fastest: PaddedTiling2Dmatmul&#x3C;f32, 3></span></span>
+<span class="line"><span>  </span></span></code></pre> </div> <div class="my-[8px] border-2 rounded border-[#212121] font-mono font-medium"> <pre class="astro-code material-theme-darker" style="background-color:#212121;color:#EEFFFF; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span></span></span>
+<span class="line"><span>  Matmul - Round:false Broadcast:false m:256 k:128 n:4 batch:32</span></span>
+<span class="line"><span>  NaiveMemoryCoalescingMatmul&#x3C;f32, 3> => 1.34ms</span></span>
+<span class="line"><span>  PaddedTiling2DMatmul&#x3C;f32, 3> => 1.43ms</span></span>
+<span class="line"><span>  UnpaddedTiling2DMatmul&#x3C;f32, 3> => 1.35ms</span></span>
+<span class="line"><span>  Fastest: NaiveMemoryCoalescingMatmul&#x3C;f32, 3></span></span>
+<span class="line"><span>  </span></span></code></pre> </div> <p>
+In the first example, the unpadded tiling version wins by a large
+          margin. This is actually a common behaviour on my computer. For the
+          padded version to win, it helps if the matrix is round, like in
+          example 2. Still, it is won by a small margin. Finally, the third
+          example shows the naive version winning, which typically happens on
+          smaller inputs, a sign that the tiling algorithm overhead can be
+          overkill.
+</p> <h2>Conclusion</h2> <p>
+In theory, it would be feasible to design an algorithm that chooses
+          the right kernel as a function of the input size. However, the speed
+          of a kernel for all input sizes can be hard to predict. Furthermore,
+          some kernels are parameterizable, which means there are actually much
+          more than two or three versions of an operation. But most of all, the
+          GPU device on which the kernel runs adds many uncertainties: when run
+          on some new device, what will be the GPU cache size? Will specialized
+          accelerators be available? How many cores will work in parallel? How
+          will memory coalescing actually occur?
+</p> <p>
+Selecting the right kernel for an extensive AI model computation is an
+          important decision that can save so much compute. But a perfect
+          algorithm that answers the right thing on all machines would be too
+          complex to be handcrafted. Autotune allows to write new kernels for
+          specific scenarios without minding about the logistics of running that
+          kernel.
+</p> <p>
+One may worry about the induced overhead of running all kernels at the
+          beginning. For applications where cold start is crucial, for instance
+          in cloud applications where new instances spawn very often on the same
+          machine to do similar jobs, our Autotune mechanism will rely on
+          cached, pre-computed benchmarks. That way, using Autotune ensures peak
+          performance in all settings.
+</p> </div> <!--/--><!--$--><div><h2>References</h2><!--$--><div><div id="reference-1"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="https://www.youtube.com/watch?v=pdJQ8iVTwj8" target="_blank">1</a>]</span><span class="font-light font-serif">Lex Fridman Podcast: Chris Lattner - Future of Programming and AI</span></div><div id="reference-2"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="https://antarestech.com" target="_blank">2</a>]</span><span class="font-light font-serif">Antares</span></div><div id="reference-3"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="../creating-high-performance-asynchronous-backends-with-burn-compute/index.htm" target="_blank">3</a>]</span><span class="font-light font-serif">Creating High-Performance Asynchronous Backends with Mabor-Compute</span></div><div id="reference-4"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="https://www.w3.org/TR/WGSL/" target="_blank">4</a>]</span><span class="font-light font-serif">WebGPU Shading Language</span></div><div id="reference-5"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/" target="_blank">5</a>]</span><span class="font-light font-serif">CUDA C Programming Guide</span></div><div id="reference-6"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="https://www.diderot.one/courses/89/books/351/chapter/4547" target="_blank">6</a>]</span><span class="font-light font-serif">Diderot: Divide and Conquer</span></div><div id="reference-7"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="https://siboehm.com/articles/22/CUDA-MMM" target="_blank">7</a>]</span><span class="font-light font-serif">How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance: a Worklog</span></div><div id="reference-8"><span class="pr-2 font-light font-serif leading-7 tracking-wide">[<a class="text-[#69b8e1] hover:font-bold" href="https://github.com/tracel-ai/burn/tree/main/examples/text-classification" target="_blank">8</a>]</span><span class="font-light font-serif">Text classification on AG News in Mabor</span></div></div><!--/--></div><!--/--></div></article></div></div> </main>   <dialog class="items-center text-balance rounded-2xl border bg-transparent p-8 text-center backdrop-blur-md backdrop:bg-black/70 max-sm:mx-6 overflow-hidden" id="stay-connected-dialog"> <h2 class="text-v2h2">Join the mailing list</h2> <p class="py-4 font-mono text-body"> Join our community! We&#39;d love to keep you in the loop with our newsletter. </p> <script>(()=>{var a=(s,i,o)=>{let r=async()=>{await(await s())()},t=typeof i.value=="object"?i.value:void 0,c={rootMargin:t==null?void 0:t.rootMargin},n=new IntersectionObserver(e=>{for(let l of e)if(l.isIntersecting){n.disconnect(),r();break}},c);for(let e of o.children)n.observe(e)};(self.Astro||(self.Astro={})).visible=a;window.dispatchEvent(new Event("astro:visible"));})();</script><astro-island uid="Z1fPhRT" data-solid-render-id="s0" component-url="/_astro/EmailCollector.BqSZQ7nP.js" component-export="EmailCollector" renderer-url="/_astro/client.C-0b9Jot.js" props="{&quot;website&quot;:[0,&quot;burn&quot;],&quot;inputId&quot;:[0,&quot;stay-connected&quot;],&quot;title&quot;:[0,&quot;Stay connected&quot;],&quot;submitTitle&quot;:[0,&quot;submit email&quot;],&quot;inputLabel&quot;:[0,&quot;email address&quot;],&quot;placeholder&quot;:[0,&quot;your em@il&quot;],&quot;bgAlt&quot;:[0,&quot;stay connected background&quot;],&quot;subscribed&quot;:[0,&quot;subscribed&quot;],&quot;unsubscribed&quot;:[0,&quot;unsubscribed&quot;],&quot;firebaseConfig&quot;:[0,{&quot;apiKey&quot;:[0,&quot;AIzaSyDtXjGAc35AxrqEa8Fdmz3E1sKIX7MfgzU&quot;],&quot;authDomain&quot;:[0,&quot;tracel-website.firebaseapp.com&quot;],&quot;projectId&quot;:[0,&quot;tracel-website&quot;],&quot;storageBucket&quot;:[0,&quot;tracel-website.appspot.com&quot;],&quot;messagingSenderId&quot;:[0,&quot;278977725843&quot;],&quot;appId&quot;:[0,&quot;1:278977725843:web:be459a460a35c455cb9466&quot;]}]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;EmailCollector&quot;,&quot;value&quot;:true}" await-children=""><form data-hk="s00000" name="stay-connected"><span class="flex items-center rounded-lg gap-2"><div class="relative w-full"><input class="w-full h-12 flex-1 rounded-md bg-black/20 pl-2 pr-6 text-xs transition-border-duration-700 placeholder:text-primary-content/40 focus:outline-2 border border-primary-content" id="stay-connected" placeholder="your em@il" name="email" autocomplete="email" type="email" aria-label="email address" required=""><output class="absolute right-5 top-1/2 -translate-y-1/2" name="subscribeStatus" for="stay-connected"><svg width="16px" viewbox="2 -11 9 10" xmlns="http://www.w3.org/2000/svg"><title>unsubscribed</title><text x="0" y="0" class="fill-green-700"></text></svg></output></div><button class="primary-button rounded-md px-2 text-xl h-12 w-20 border border-white" title="submit email" type="submit">⇥</button></span></form><!--astro:end--></astro-island> <form class="absolute right-0 top-0" method="dialog"> <button class="rounded-md p-4" title="dismiss">
+✕
+</button> </form> </dialog> <script>(function(){const id = "stay-connected";
+
+  /* eslint-env browser */
+  const setupModal = () => {
+    if (location.hash === `#${id}`) {
+      const dialog = document.getElementById(`${id}-dialog`);
+      dialog.addEventListener(
+        "close",
+        () => {
+          history.pushState(
+            "",
+            document.title,
+            window.location.pathname + window.location.search,
+          );
+        },
+        { once: true },
+      );
+
+      dialog.addEventListener("click", (e) => {
+        const dialogDimensions = dialog.getBoundingClientRect();
+        if (
+          e.clientX < dialogDimensions.left ||
+          e.clientX > dialogDimensions.right ||
+          e.clientY < dialogDimensions.top ||
+          e.clientY > dialogDimensions.bottom
+        ) {
+          dialog.close();
+        }
+      });
+
+      dialog.showModal();
+    }
+  };
+
+  document.addEventListener("readystatechange", (e) => {
+    if (e.target.readyState === "interactive") {
+      setupModal();
+      window.addEventListener("popstate", setupModal);
+    }
+  });
+})();</script>  <div class="flex w-full flex-col items-center gap-8 py-10 text-mid">  <div class="w-full max-w-[1360px] px-8 md:px-20"> <div class="grid w-full grid-cols-1 gap-8 md:gap-20 [@media(min-width:400px)]:grid-cols-2 [@media(min-width:768px)]:grid-cols-4"> <div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left"> <h3 class="text-nowrap text-h3 text-light">Resources</h3> <a href="../../index.htm" class="text-body text-grey-accent hover:text-light"> Home </a><a href="../../get-started/index.htm" class="text-body text-grey-accent hover:text-light"> Get Started </a><a href="../../benchmarks/community-benchmarks/index.htm" class="text-body text-grey-accent hover:text-light"> Benchmarks </a><a href="../index.htm" class="text-body text-grey-accent hover:text-light"> Blog </a><a href="../../learn/index.htm" class="text-body text-grey-accent hover:text-light"> Learn </a><a href="../../docs/burn/index.htm" class="text-body text-grey-accent hover:text-light"> Docs </a> </div><div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left"> <h3 class="text-nowrap text-h3 text-light">Community</h3> <a href="https://github.com/tracel-ai/burn" class="text-body text-grey-accent hover:text-light"> Github </a><a href="https://discord.gg/uPEBbYYDB6" class="text-body text-grey-accent hover:text-light"> Discord </a><a href="#stay-connected" class="text-body text-grey-accent hover:text-light"> Mailing list </a><a href="https://tracel.ai" class="text-body text-grey-accent hover:text-light"> Tracel </a> </div><div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left"> <h3 class="text-nowrap text-h3 text-light">Projects</h3> <a href="https://crates.io/crates/burn" class="text-body text-grey-accent hover:text-light"> Mabor Crate </a><a href="https://github.com/tracel-ai/burn" class="text-body text-grey-accent hover:text-light"> Mabor GitHub </a><a href="https://crates.io/crates/cubecl" class="text-body text-grey-accent hover:text-light"> CubeCL Crate </a><a href="https://github.com/tracel-ai/cubecl" class="text-body text-grey-accent hover:text-light"> CubeCL GitHub </a> </div><div class="flex w-full flex-col text-center [@media(min-width:400px)]:text-left"> <h3 class="text-nowrap text-h3 text-light">Company</h3> <a href="https://tracel.ai/" class="text-body text-grey-accent hover:text-light"> Tracel AI </a><a href="https://www.linkedin.com/company/tracel-technologies" class="text-body text-grey-accent hover:text-light"> LinkedIn </a><a href="https://x.com/tracel_ai" class="text-body text-grey-accent hover:text-light"> X </a> </div> </div> </div> <p class="mt-6 text-center font-mono text-b2 text-mid md:flex"> Copyright 2025 © Mabor | Tracel Inc. All rights reserved. Design by Perdomo </p> </div> </body></html>

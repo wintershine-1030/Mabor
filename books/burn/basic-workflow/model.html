@@ -1,0 +1,569 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Model - The Mabor Book 🔥</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async="" src="../../../ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Mabor Book 🔥</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="model"><a class="header" href="#model">Model</a></h1>
+<p>The first step is to create a project and add the different Mabor dependencies. Start by creating a
+new project with Cargo:</p>
+<pre><code class="language-console">cargo new guide
+</code></pre>
+<p>As <a href="../getting-started.html#creating-a-burn-application">mentioned previously</a>, this will initialize
+your <code>guide</code> project directory with a <code>Cargo.toml</code> and a <code>src/main.rs</code> file.</p>
+<p>In the <code>Cargo.toml</code> file, add the <code>mabor</code> dependency with <code>train</code>, <code>vision</code> and <code>wgpu</code> features.
+Since we disable the default features, we also want to enable <code>std</code>, <code>tui</code> (for the dashboard) and
+<code>fusion</code> for wgpu. Then run <code>cargo build</code> to build the project and import all the dependencies.</p>
+<pre><code class="language-toml">[package]
+name = "guide"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Disable autotune default for convolutions
+mabor = { version = "~0.18", features = ["std", "tui", "train", "vision", "wgpu", "fusion"], default-features = false }
+# mabor = { version = "~0.18", features = ["train", "vision", "wgpu"] }
+</code></pre>
+<p>Our goal will be to create a basic convolutional neural network used for image classification. We
+will keep the model simple by using two convolution layers followed by two linear layers, some
+pooling and ReLU activations. We will also use dropout to improve training performance.</p>
+<p>Let us start by defining our model struct in a new file <code>src/model.rs</code>.</p>
+<pre><code class="language-rust   ignore">use mabor::{
+    nn::{
+        conv::{Conv2d, Conv2dConfig},
+        pool::{AdaptiveAvgPool2d, AdaptiveAvgPool2dConfig},
+        Dropout, DropoutConfig, Linear, LinearConfig, Relu,
+    },
+    prelude::*,
+};
+
+#[derive(Module, Debug)]
+pub struct Model&lt;B: Backend&gt; {
+    conv1: Conv2d&lt;B&gt;,
+    conv2: Conv2d&lt;B&gt;,
+    pool: AdaptiveAvgPool2d,
+    dropout: Dropout,
+    linear1: Linear&lt;B&gt;,
+    linear2: Linear&lt;B&gt;,
+    activation: Relu,
+}</code></pre>
+<p>There are two major things going on in this code sample.</p>
+<ol>
+<li>
+<p>You can create a deep learning module with the <code>#[derive(Module)]</code> attribute on top of a struct.
+This will generate the necessary code so that the struct implements the <code>Module</code> trait. This
+trait will make your module both trainable and (de)serializable while adding related
+functionalities. Like other attributes often used in Rust, such as <code>Clone</code>, <code>PartialEq</code> or
+<code>Debug</code>, each field within the struct must also implement the <code>Module</code> trait.</p>
+<details>
+<summary><strong>🦀 Trait</strong></summary>
+<p>Traits are a powerful and flexible Rust language feature. They provide a way to define shared
+behavior for a particular type, which can be shared with other types.</p>
+<p>A type's behavior consists of the methods called on that type. Since all <code>Module</code>s should
+implement the same functionality, it is defined as a trait. Implementing a trait on a particular
+type usually requires the user to implement the defined behaviors of the trait for their types,
+though that is not the case here as explained above with the <code>derive</code> attribute. Check out the
+<a href="#derive-attribute">explainer below</a> to learn why.</p>
+<p>For more details on traits, take a look at the
+<a href="https://doc.rust-lang.org/book/ch10-02-traits.html">associated chapter</a> in the Rust Book.</p>
+</details><br>
+<details id="derive-attribute">
+<summary><strong>🦀 Derive Macro</strong></summary>
+<p>The <code>derive</code> attribute allows traits to be implemented easily by generating code that will
+implement a trait with its own default implementation on the type that was annotated with the
+<code>derive</code> syntax.</p>
+<p>This is accomplished through a feature of Rust called
+<a href="https://doc.rust-lang.org/reference/procedural-macros.html">procedural macros</a>, which allow us
+to run code at compile time that operates over Rust syntax, both consuming and producing Rust
+syntax. Using the attribute <code>#[my_macro]</code>, you can effectively extend the provided code. You will
+see that the derive macro is very frequently employed to recursively implement traits, where the
+implementation consists of the composition of all fields.</p>
+<p>In this example, we want to derive the <a href="../building-blocks/module.html"><code>Module</code></a> and <code>Debug</code>
+traits.</p>
+<pre><code class="language-rust  ignore">#[derive(Module, Debug)]
+pub struct MyCustomModule&lt;B: Backend&gt; {
+    linear1: Linear&lt;B&gt;,
+    linear2: Linear&lt;B&gt;,
+    activation: Relu,
+}</code></pre>
+<p>The basic <code>Debug</code> implementation is provided by the compiler to format a value using the <code>{:?}</code>
+formatter. For ease of use, the <code>Module</code> trait implementation is automatically handled by Mabor so
+you don't have to do anything special. It essentially acts as parameter container.</p>
+<p>For more details on derivable traits, take a look at the Rust
+<a href="https://doc.rust-lang.org/book/appendix-03-derivable-traits.html">appendix</a>,
+<a href="https://doc.rust-lang.org/reference/attributes/derive.html">reference</a> or
+<a href="https://doc.rust-lang.org/rust-by-example/trait/derive.html">example</a>.</p>
+</details><br>
+</li>
+<li>
+<p>Note that the struct is generic over the <a href="../building-blocks/backend.html"><code>Backend</code></a> trait. The
+backend trait abstracts the underlying low level implementations of tensor operations, allowing
+your new model to run on any backend. Contrary to other frameworks, the backend abstraction isn't
+determined by a compilation flag or a device type. This is important because you can extend the
+functionalities of a specific backend (see
+<a href="../advanced/backend-extension/index.htm">backend extension section</a>), and it allows for an innovative
+<a href="../building-blocks/autodiff.html">autodiff system</a>. You can also change backend during runtime,
+for instance to compute training metrics on a cpu backend while using a gpu one only to train the
+model. In our example, the backend in use will be determined later on.</p>
+<details>
+<summary><strong>🦀 Trait Bounds</strong></summary>
+<p>Trait bounds provide a way for generic items to restrict which types are used as their
+parameters. The trait bounds stipulate what functionality a type implements. Therefore, bounding
+restricts the generic to types that conform to the bounds. It also allows generic instances to
+access the methods of traits specified in the bounds.</p>
+<p>For a simple but concrete example, check out the
+<a href="https://doc.rust-lang.org/rust-by-example/generics/bounds.html">Rust By Example on bounds</a>.</p>
+<p>In Mabor, the <code>Backend</code> trait enables you to run tensor operations using different implementations
+as it abstracts tensor, device and element types. The
+<a href="../getting-started.html#writing-a-code-snippet">getting started example</a> illustrates the advantage
+of having a simple API that works for different backend implementations. While it used the WGPU
+backend, you could easily swap it with any other supported backend.</p>
+<pre><code class="language-rust  ignore">// Choose from any of the supported backends.
+// type Backend = Candle&lt;f32, i64&gt;;
+// type Backend = LibTorch&lt;f32&gt;;
+// type Backend = NdArray&lt;f32&gt;;
+type Backend = Wgpu;
+
+// Creation of two tensors.
+let tensor_1 = Tensor::&lt;Backend, 2&gt;::from_data([[2., 3.], [4., 5.]], &amp;device);
+let tensor_2 = Tensor::&lt;Backend, 2&gt;::ones_like(&amp;tensor_1);
+
+// Print the element-wise addition (done with the selected backend) of the two tensors.
+println!("{}", tensor_1 + tensor_2);</code></pre>
+<p>For more details on trait bounds, check out the Rust
+<a href="https://doc.rust-lang.org/book/ch10-02-traits.html#trait-bound-syntax">trait bound section</a> or
+<a href="https://doc.rust-lang.org/reference/items/traits.html#trait-bounds">reference</a>.</p>
+</details><br>
+</li>
+</ol>
+<p>Note that each time you create a new file in the <code>src</code> directory you also need to explicitly add
+this module to the <code>main.rs</code> file. For instance after creating the <code>model.rs</code>, you need to add the
+following at the top of the main file:</p>
+<pre><code class="language-rust   ignore">mod model;
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">}</span></code></pre>
+<p>Next, we need to instantiate the model for training.</p>
+<pre><code class="language-rust   ignore"><span class="boring">use mabor::{
+</span><span class="boring">    nn::{
+</span><span class="boring">        conv::{Conv2d, Conv2dConfig},
+</span><span class="boring">        pool::{AdaptiveAvgPool2d, AdaptiveAvgPool2dConfig},
+</span><span class="boring">        Dropout, DropoutConfig, Linear, LinearConfig, Relu,
+</span><span class="boring">    },
+</span><span class="boring">    prelude::*,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">#[derive(Module, Debug)]
+</span><span class="boring">pub struct Model&lt;B: Backend&gt; {
+</span><span class="boring">    conv1: Conv2d&lt;B&gt;,
+</span><span class="boring">    conv2: Conv2d&lt;B&gt;,
+</span><span class="boring">    pool: AdaptiveAvgPool2d,
+</span><span class="boring">    dropout: Dropout,
+</span><span class="boring">    linear1: Linear&lt;B&gt;,
+</span><span class="boring">    linear2: Linear&lt;B&gt;,
+</span><span class="boring">    activation: Relu,
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[derive(Config, Debug)]
+pub struct ModelConfig {
+    num_classes: usize,
+    hidden_size: usize,
+    #[config(default = "0.5")]
+    dropout: f64,
+}
+
+impl ModelConfig {
+    /// Returns the initialized model.
+    pub fn init&lt;B: Backend&gt;(&amp;self, device: &amp;B::Device) -&gt; Model&lt;B&gt; {
+        Model {
+            conv1: Conv2dConfig::new([1, 8], [3, 3]).init(device),
+            conv2: Conv2dConfig::new([8, 16], [3, 3]).init(device),
+            pool: AdaptiveAvgPool2dConfig::new([8, 8]).init(),
+            activation: Relu::new(),
+            linear1: LinearConfig::new(16 * 8 * 8, self.hidden_size).init(device),
+            linear2: LinearConfig::new(self.hidden_size, self.num_classes).init(device),
+            dropout: DropoutConfig::new(self.dropout).init(),
+        }
+    }
+}</code></pre>
+<p>At a glance, you can view the model configuration by printing the model instance:</p>
+<pre><code class="language-rust   ignore">#![recursion_limit = "256"]
+mod model;
+
+use crate::model::ModelConfig;
+use mabor::backend::Wgpu;
+
+fn main() {
+    type MyBackend = Wgpu&lt;f32, i32&gt;;
+
+    let device = Default::default();
+    let model = ModelConfig::new(10, 512).init::&lt;MyBackend&gt;(&amp;device);
+
+    println!("{model}");
+}</code></pre>
+<p>Output:</p>
+<pre><code class="language-rust   ignore">Model {
+  conv1: Conv2d {stride: [1, 1], kernel_size: [3, 3], dilation: [1, 1], groups: 1, padding: Valid, params: 80}
+  conv2: Conv2d {stride: [1, 1], kernel_size: [3, 3], dilation: [1, 1], groups: 1, padding: Valid, params: 1168}
+  pool: AdaptiveAvgPool2d {output_size: [8, 8]}
+  dropout: Dropout {prob: 0.5}
+  linear1: Linear {d_input: 1024, d_output: 512, bias: true, params: 524800}
+  linear2: Linear {d_input: 512, d_output: 10, bias: true, params: 5130}
+  activation: Relu
+  params: 531178
+}</code></pre>
+<details>
+<summary><strong>🦀 References</strong></summary>
+<p>In the previous example, the <code>init()</code> method signature uses <code>&amp;</code> to indicate that the parameter types
+are references: <code>&amp;self</code>, a reference to the current receiver (<code>ModelConfig</code>), and
+<code>device: &amp;B::Device</code>, a reference to the backend device.</p>
+<pre><code class="language-rust  ignore">pub fn init&lt;B: Backend&gt;(&amp;self, device: &amp;B::Device) -&gt; Model&lt;B&gt; {
+    Model {
+        // ...
+    }
+}</code></pre>
+<p>References in Rust allow us to point to a resource to access its data without owning it. The idea of
+ownership is quite core to Rust and is worth
+<a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">reading up on</a>.</p>
+<p>In a language like C, memory management is explicit and up to the programmer, which means it is easy
+to make mistakes. In a language like Java or Python, memory management is automatic with the help of
+a garbage collector. This is very safe and straightforward, but also incurs a runtime cost.</p>
+<p>In Rust, memory management is rather unique. Aside from simple types that implement
+<a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a> (e.g.,
+<a href="https://doc.rust-lang.org/rust-by-example/primitives.html">primitives</a> like integers, floats,
+booleans and <code>char</code>), every value is <em>owned</em> by some variable called the <em>owner</em>. Ownership can be
+transferred from one variable to another and sometimes a value can be <em>borrowed</em>. Once the <em>owner</em>
+variable goes out of scope, the value is <em>dropped</em>, which means that any memory it allocated can be
+freed safely.</p>
+<p>Because the method does not own the <code>self</code> and <code>device</code> variables, the values the references point
+to will not be dropped when the reference stops being used (i.e., the scope of the method).</p>
+<p>For more information on references and borrowing, be sure to read the
+<a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">corresponding chapter</a> in the
+Rust Book.</p>
+</details><br>
+<p>When creating a custom neural network module, it is often a good idea to create a config alongside
+the model struct. This allows you to define default values for your network, thanks to the <code>Config</code>
+attribute. The benefit of this attribute is that it makes the configuration serializable, enabling
+you to painlessly save your model hyperparameters, enhancing your experimentation process. Note that
+a constructor will automatically be generated for your configuration, which will take in as input
+values the parameters which do not have default values:
+<code>let config = ModelConfig::new(num_classes, hidden_size);</code>. The default values can be overridden
+easily with builder-like methods: (e.g <code>config.with_dropout(0.2);</code>)</p>
+<p>The first implementation block is related to the initialization method. As we can see, all fields
+are set using the configuration of the corresponding neural network's underlying module. In this
+specific case, we have chosen to expand the tensor channels from 1 to 8 with the first layer, then
+from 8 to 16 with the second layer, using a kernel size of 3 on all dimensions. We also use the
+adaptive average pooling module to reduce the dimensionality of the images to an 8 by 8 matrix,
+which we will flatten in the forward pass to have a 1024 (16 * 8 * 8) resulting tensor.</p>
+<p>Now let's see how the forward pass is defined.</p>
+<pre><code class="language-rust   ignore"><span class="boring">use mabor::{
+</span><span class="boring">    nn::{
+</span><span class="boring">        conv::{Conv2d, Conv2dConfig},
+</span><span class="boring">        pool::{AdaptiveAvgPool2d, AdaptiveAvgPool2dConfig},
+</span><span class="boring">        Dropout, DropoutConfig, Linear, LinearConfig, Relu,
+</span><span class="boring">    },
+</span><span class="boring">    prelude::*,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">#[derive(Module, Debug)]
+</span><span class="boring">pub struct Model&lt;B: Backend&gt; {
+</span><span class="boring">    conv1: Conv2d&lt;B&gt;,
+</span><span class="boring">    conv2: Conv2d&lt;B&gt;,
+</span><span class="boring">    pool: AdaptiveAvgPool2d,
+</span><span class="boring">    dropout: Dropout,
+</span><span class="boring">    linear1: Linear&lt;B&gt;,
+</span><span class="boring">    linear2: Linear&lt;B&gt;,
+</span><span class="boring">    activation: Relu,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[derive(Config, Debug)]
+</span><span class="boring">pub struct ModelConfig {
+</span><span class="boring">    num_classes: usize,
+</span><span class="boring">    hidden_size: usize,
+</span><span class="boring">    #[config(default = "0.5")]
+</span><span class="boring">    dropout: f64,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl ModelConfig {
+</span><span class="boring">    /// Returns the initialized model.
+</span><span class="boring">    pub fn init&lt;B: Backend&gt;(&amp;self, device: &amp;B::Device) -&gt; Model&lt;B&gt; {
+</span><span class="boring">        Model {
+</span><span class="boring">            conv1: Conv2dConfig::new([1, 8], [3, 3]).init(device),
+</span><span class="boring">            conv2: Conv2dConfig::new([8, 16], [3, 3]).init(device),
+</span><span class="boring">            pool: AdaptiveAvgPool2dConfig::new([8, 8]).init(),
+</span><span class="boring">            activation: Relu::new(),
+</span><span class="boring">            linear1: LinearConfig::new(16 * 8 * 8, self.hidden_size).init(device),
+</span><span class="boring">            linear2: LinearConfig::new(self.hidden_size, self.num_classes).init(device),
+</span><span class="boring">            dropout: DropoutConfig::new(self.dropout).init(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl&lt;B: Backend&gt; Model&lt;B&gt; {
+    /// # Shapes
+    ///   - Images [batch_size, height, width]
+    ///   - Output [batch_size, num_classes]
+    pub fn forward(&amp;self, images: Tensor&lt;B, 3&gt;) -&gt; Tensor&lt;B, 2&gt; {
+        let [batch_size, height, width] = images.dims();
+
+        // Create a channel at the second dimension.
+        let x = images.reshape([batch_size, 1, height, width]);
+
+
+        let x = self.conv1.forward(x); // [batch_size, 8, _, _]
+        let x = self.dropout.forward(x);
+        let x = self.conv2.forward(x); // [batch_size, 16, _, _]
+        let x = self.dropout.forward(x);
+        let x = self.activation.forward(x);
+
+        let x = self.pool.forward(x); // [batch_size, 16, 8, 8]
+        let x = x.reshape([batch_size, 16 * 8 * 8]);
+        let x = self.linear1.forward(x);
+        let x = self.dropout.forward(x);
+        let x = self.activation.forward(x);
+
+        self.linear2.forward(x) // [batch_size, num_classes]
+    }
+}</code></pre>
+<p>For former PyTorch users, this might feel very intuitive, as each module is directly incorporated
+into the code using an eager API. Note that no abstraction is imposed for the forward method. You
+are free to define multiple forward functions with the names of your liking. Most of the neural
+network modules already built with Mabor use the <code>forward</code> nomenclature, simply because it is
+standard in the field.</p>
+<p>Similar to neural network modules, the <a href="../building-blocks/tensor.html"><code>Tensor</code></a> struct given as a
+parameter also takes the Backend trait as a generic argument, alongside its dimensionality. Even if
+it is not used in this specific example, it is possible to add the kind of the tensor as a third
+generic argument. For example, a 3-dimensional Tensor of different data types(float, int, bool)
+would be defined as following:</p>
+<pre><code class="language-rust   ignore">Tensor&lt;B, 3&gt; // Float tensor (default)
+Tensor&lt;B, 3, Float&gt; // Float tensor (explicit)
+Tensor&lt;B, 3, Int&gt; // Int tensor
+Tensor&lt;B, 3, Bool&gt; // Bool tensor</code></pre>
+<p>Note that the specific element type, such as <code>f16</code>, <code>f32</code> and the likes, will be defined later with
+the backend.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="data.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="data.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
